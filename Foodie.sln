@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodie.ApiGateway", "Foodie.ApiGateway\Foodie.ApiGateway.csproj", "{2DD19919-C899-4CDF-957F-9AF4B137429C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodie.Meals", "Foodie.Meals\Foodie.Meals.csproj", "{D8CDEC5F-E134-453D-823A-8C220904E455}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodie.Identity", "Foodie.Identity\Foodie.Identity.csproj", "{7470CF33-367C-4ADB-B703-AFAEC530C54C}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DD19919-C899-4CDF-957F-9AF4B137429C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD19919-C899-4CDF-957F-9AF4B137429C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD19919-C899-4CDF-957F-9AF4B137429C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD19919-C899-4CDF-957F-9AF4B137429C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8CDEC5F-E134-453D-823A-8C220904E455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8CDEC5F-E134-453D-823A-8C220904E455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8CDEC5F-E134-453D-823A-8C220904E455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8CDEC5F-E134-453D-823A-8C220904E455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7470CF33-367C-4ADB-B703-AFAEC530C54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7470CF33-367C-4ADB-B703-AFAEC530C54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7470CF33-367C-4ADB-B703-AFAEC530C54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7470CF33-367C-4ADB-B703-AFAEC530C54C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
