@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,8 @@ namespace Foodie.ApiGateway
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Foodie.ApiGateway", Version = "v1" });
             });
+
+            services.AddOcelot();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +58,8 @@ namespace Foodie.ApiGateway
             {
                 endpoints.MapControllers();
             });
+
+            app.UseOcelot();
         }
     }
 }
