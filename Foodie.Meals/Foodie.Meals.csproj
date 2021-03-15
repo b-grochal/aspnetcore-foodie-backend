@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Context\" />
     <Folder Include="Handlers\" />
     <Folder Include="Infrastructure\" />
