@@ -22,11 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\" />
+    <Folder Include="Handlers\Restaurants\" />
     <Folder Include="Infrastructure\" />
-    <Folder Include="Responses\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Queries\" />
     <Folder Include="Profiles\" />
   </ItemGroup>
 
