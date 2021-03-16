@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/order-handlers")]
     [ApiController]
     public class OrderHandlersController : ControllerBase
     {
