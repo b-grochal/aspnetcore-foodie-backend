@@ -27,7 +27,6 @@
     <Folder Include="Commands\" />
     <Folder Include="Handlers\" />
     <Folder Include="Queries\" />
-    <Folder Include="Profiles\" />
   </ItemGroup>
 
 </Project>
