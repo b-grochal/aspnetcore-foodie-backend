@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Identity.Commands.Users;
 using Foodie.Identity.Models;
 using Foodie.Identity.Responses.Users;
 using System;
