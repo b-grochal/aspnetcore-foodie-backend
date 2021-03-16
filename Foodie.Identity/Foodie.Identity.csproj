@@ -28,7 +28,6 @@
     <Folder Include="Handlers\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Services\" />
-    <Folder Include="Responses\" />
     <Folder Include="Repositories\" />
     <Folder Include="Queries\" />
     <Folder Include="Profiles\" />
