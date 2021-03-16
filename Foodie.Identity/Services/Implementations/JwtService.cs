@@ -1,4 +1,5 @@
 ﻿using Foodie.Identity.Infrastructure;
+using Foodie.Identity.Services.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Services.Implementations
 {
-    public class JwtService
+    public class JwtService : IJwtService
     {
         private readonly JwtTokenConfiguration jwtTokenConfiguration;
 

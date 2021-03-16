@@ -1,4 +1,5 @@
 ﻿using Foodie.Identity.Models;
+using Foodie.Identity.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Services.Implementations
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly UserManager<ApplicationUser> userManager;
 
