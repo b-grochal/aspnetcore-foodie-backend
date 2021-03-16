@@ -8,4 +8,17 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Context\" />
+    <Folder Include="Handlers\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
+    <Folder Include="Responses\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Queries\" />
+    <Folder Include="Profiles\" />
+  </ItemGroup>
+
 </Project>
