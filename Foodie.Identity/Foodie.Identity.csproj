@@ -26,8 +26,6 @@
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Handlers\" />
-    <Folder Include="Infrastructure\" />
-    <Folder Include="Services\" />
     <Folder Include="Queries\" />
     <Folder Include="Profiles\" />
   </ItemGroup>
