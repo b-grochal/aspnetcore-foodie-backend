@@ -21,11 +21,11 @@ namespace Foodie.Identity.Controllers
         }
 
         // POST api/Auth/Login
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginCommand loginCommand)
         {
-            await mediator.Send(loginCommand);
-            return Ok();
+            var result = await mediator.Send(loginCommand);
+            return Ok(result);
         }
     }
 }
