@@ -37,7 +37,7 @@
       "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ]
     },
     {
-      "DownstreamPathTemplate": "/api/auth/login",
+      "DownstreamPathTemplate": "/api/auth",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
