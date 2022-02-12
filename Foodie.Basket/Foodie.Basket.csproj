@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <Folder Include="Handlers\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>

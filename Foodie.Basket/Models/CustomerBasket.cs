@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 
 namespace Foodie.Basket.Models
 {
-    public class Basket
+    public class CustomerBasket
     {
         public string UserId { get; set; }
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
 
-        public Basket()
+        public CustomerBasket()
         {
                 
         }
 
-        public Basket(string userId)
+        public CustomerBasket(string userId)
         {
             this.UserId = userId;
         }
