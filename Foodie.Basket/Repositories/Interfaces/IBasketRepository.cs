@@ -10,6 +10,6 @@ namespace Foodie.Basket.Repositories.Interfaces
     {
         Task<CustomerBasket> GetBasket(string userId);
         Task<CustomerBasket> UpdateBasket(CustomerBasket basket);
-        Task<bool> DeleteBasketAsync(string userId);
+        Task DeleteBasket(string userId);
     }
 }
