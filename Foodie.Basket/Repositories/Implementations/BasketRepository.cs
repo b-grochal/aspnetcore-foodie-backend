@@ -26,17 +26,17 @@ namespace Foodie.Basket.Repositories.Implementations
 
         public async Task<CustomerBasket> GetBasket(string userId)
         {
-            var redisBasket = await distributedCache.GetAsync(userId);
-            var serializedBasket = Encoding.UTF8.GetString(redisBasket);
-            return JsonSerializer.Deserialize<CustomerBasket>(serializedBasket, new JsonSerializerOptions
+            var redisBasket = await distributedCache.GetStringAsync(userId);
+            return JsonSerializer.Deserialize<CustomerBasket>(redisBasket, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
         }
 
-        public Task<CustomerBasket> UpdateBasket(CustomerBasket basket)
+        public async Task<CustomerBasket> UpdateBasket(CustomerBasket basket)
         {
-            throw new NotImplementedException();
+            await distributedCache.SetStringAsync(basket.UserId, JsonSerializer.Serialize(basket));
+            return await GetBasket(basket.UserId);
         }
     }
 }

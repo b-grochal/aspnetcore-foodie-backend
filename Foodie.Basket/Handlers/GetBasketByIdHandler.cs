@@ -1,4 +1,6 @@
-﻿using Foodie.Basket.Queries;
+﻿using AutoMapper;
+using Foodie.Basket.Queries;
+using Foodie.Basket.Repositories.Interfaces;
 using Foodie.Basket.Responses;
 using MediatR;
 using System;
@@ -11,9 +13,19 @@ namespace Foodie.Basket.Handlers
 {
     public class GetBasketByIdHandler : IRequestHandler<GetBasketByIdQuery, CustomerBasketResponse>
     {
-        public Task<CustomerBasketResponse> Handle(GetBasketByIdQuery request, CancellationToken cancellationToken)
+        private readonly IBasketRepository basketRepository;
+        private readonly IMapper mapper;
+
+        public GetBasketByIdHandler(IBasketRepository basketRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            this.basketRepository = basketRepository;
+            this.mapper = mapper;
+        }
+
+        public async Task<CustomerBasketResponse> Handle(GetBasketByIdQuery request, CancellationToken cancellationToken)
+        {
+            var basket = await basketRepository.GetBasket(request.UserId);
+            return mapper.Map<CustomerBasketResponse>(basket);
         }
     }
 }

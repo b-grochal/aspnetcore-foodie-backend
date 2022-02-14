@@ -1,4 +1,5 @@
 ﻿using Foodie.Basket.Commands;
+using Foodie.Basket.Repositories.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,17 @@ namespace Foodie.Basket.Handlers
 {
     public class DeleteBasketHandler : IRequestHandler<DeleteBasketCommand>
     {
-        public Task<Unit> Handle(DeleteBasketCommand request, CancellationToken cancellationToken)
+        private readonly IBasketRepository basketRepository;
+
+        public DeleteBasketHandler(IBasketRepository basketRepository)
         {
-            throw new NotImplementedException();
+            this.basketRepository = basketRepository;
+        }
+
+        public async Task<Unit> Handle(DeleteBasketCommand request, CancellationToken cancellationToken)
+        {
+            await basketRepository.DeleteBasket(request.UserId);
+            return new Unit();
         }
     }
 }

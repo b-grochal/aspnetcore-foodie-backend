@@ -10,7 +10,7 @@ namespace Foodie.Basket.Commands
     {
         public string UserId{ get; set; }
 
-        public DeleteBasketCommand(int userId)
+        public DeleteBasketCommand(string userId)
         {
             this.UserId = userId;
         }
