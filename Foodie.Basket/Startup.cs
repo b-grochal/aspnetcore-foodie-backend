@@ -1,5 +1,6 @@
 using Foodie.Basket.Repositories.Implementations;
 using Foodie.Basket.Repositories.Interfaces;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,7 @@ namespace Foodie.Basket
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Foodie.Basket", Version = "v1" });
             });
             services.AddAutoMapper(typeof(Startup));
+            services.AddMediatR(typeof(Startup));
 
 
             services.AddStackExchangeRedisCache(options =>

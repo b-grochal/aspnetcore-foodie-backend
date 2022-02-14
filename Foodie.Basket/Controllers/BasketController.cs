@@ -1,4 +1,6 @@
 ﻿using Foodie.Basket.Commands;
+using Foodie.Basket.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,22 +14,39 @@ namespace Foodie.Basket.Controllers
     [ApiController]
     public class BasketController : ControllerBase
     {
+        private readonly IMediator mediator;
+
+        public BasketController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetBasket()
         {
-            throw new NotImplementedException();
+            var query = new GetBasketByIdQuery(GetUserId());
+            var result = await mediator.Send(query);
+            return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateBasket([FromBody] UpdateBasketCommand updateBasketCommand)
         {
-            throw new NotImplementedException();
+            if(GetUserId() != updateBasketCommand.UserId)
+            {
+                return BadRequest();
+            }
+
+            await mediator.Send(updateBasketCommand);
+            return Ok();
         }
 
         [HttpDelete]
-        public async Task DeleteBasket()
+        public async Task<IActionResult> DeleteBasket()
         {
-            throw new NotImplementedException();
+            var command = new DeleteBasketCommand(GetUserId());
+            await mediator.Send(command);
+            return Ok();
         }
 
         [Route("checkout")]
@@ -35,6 +54,11 @@ namespace Foodie.Basket.Controllers
         public async Task<ActionResult> CheckoutAsync([FromBody] CheckoutBasketCommand checkoutBasketCommand)
         {
             throw new NotImplementedException();
+        }
+
+        protected string GetUserId()
+        {
+            return this.User.Claims.First(i => i.Type == "UserId").Value;
         }
     }
 }
