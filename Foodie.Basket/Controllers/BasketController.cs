@@ -1,6 +1,7 @@
 ﻿using Foodie.Basket.Commands;
 using Foodie.Basket.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ namespace Foodie.Basket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles ="User")]
     public class BasketController : ControllerBase
     {
         private readonly IMediator mediator;
