@@ -13,7 +13,8 @@ namespace Foodie.Basket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles ="User")]
+    //[Authorize(Roles ="User")]
+    [Authorize]
     public class BasketController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -34,7 +35,7 @@ namespace Foodie.Basket.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateBasket([FromBody] UpdateBasketCommand updateBasketCommand)
         {
-            if(GetUserId() != updateBasketCommand.UserId)
+            if (GetUserId() != updateBasketCommand.UserId)
             {
                 return BadRequest();
             }
@@ -60,7 +61,7 @@ namespace Foodie.Basket.Controllers
 
         protected string GetUserId()
         {
-            return this.User.Claims.First(i => i.Type == "UserId").Value;
+            return this.User.Claims.First(i => i.Type == "ApplicationUserId").Value;
         }
     }
 }
