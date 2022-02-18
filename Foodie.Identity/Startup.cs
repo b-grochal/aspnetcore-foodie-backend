@@ -1,4 +1,5 @@
 using Foodie.Identity.Context;
+using Foodie.Identity.Grpc;
 using Foodie.Identity.Infrastructure;
 using Foodie.Identity.Models;
 using Foodie.Identity.Repositories.Implementations;
@@ -78,6 +79,8 @@ namespace Foodie.Identity
             services.AddTransient<IApplicationUserRolesRepository, ApplicationUserRolesRepository>();
             services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<IAuthService, AuthService>();
+            
+            services.AddGrpc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,6 +101,7 @@ namespace Foodie.Identity
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGrpcService<IdentityGrpcService>();
                 endpoints.MapControllers();
             });
 
