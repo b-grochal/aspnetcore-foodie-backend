@@ -8,6 +8,7 @@ namespace Foodie.Basket.Commands
 {
     public class CheckoutBasketCommand : IRequest
     {
+        public string ApplicationUserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }

@@ -27,9 +27,13 @@ namespace Foodie.Basket.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBasket()
         {
-            var query = new GetBasketByIdQuery(GetUserId());
-            var result = await mediator.Send(query);
-            return Ok(result);
+            //var query = new GetBasketByIdQuery(GetUserId());
+            //var result = await mediator.Send(query);
+            //return Ok(result);
+            var command = new CheckoutBasketCommand();
+            command.ApplicationUserId = GetUserId();
+            await mediator.Send(command);
+            return Ok();
         }
 
         [HttpPost]
@@ -53,10 +57,13 @@ namespace Foodie.Basket.Controllers
         }
 
         [Route("checkout")]
-        [HttpPost]
+        //[HttpPost]
+        [HttpGet]
         public async Task<ActionResult> CheckoutAsync([FromBody] CheckoutBasketCommand checkoutBasketCommand)
         {
-            throw new NotImplementedException();
+            checkoutBasketCommand.ApplicationUserId = GetUserId();
+            await mediator.Send(checkoutBasketCommand);
+            return Ok();
         }
 
         protected string GetUserId()

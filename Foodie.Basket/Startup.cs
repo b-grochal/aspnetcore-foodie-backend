@@ -75,7 +75,7 @@ namespace Foodie.Basket
 
             services.AddGrpcClient<IdentityService.IdentityServiceClient>(opt =>
             {
-                opt.Address = new Uri("https://localhost:5001");
+                opt.Address = new Uri("https://localhost:44396");
             });
         }
 
