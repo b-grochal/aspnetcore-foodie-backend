@@ -29,5 +29,9 @@
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
+  
+ <ItemGroup>
+    <Protobuf Include="Protos\identity-service.proto" GrpcServices="Server" />
+ </ItemGroup>
 
 </Project>
