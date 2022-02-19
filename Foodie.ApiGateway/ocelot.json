@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44324
+          "Port": 5006
         }
       ],
       "UpstreamPathTemplate": "/foodie/meals",
@@ -25,7 +25,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44324
+          "Port": 5006
         }
       ],
       "UpstreamPathTemplate": "/foodie/meals",
@@ -44,7 +44,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44324
+          "Port": 5006
         }
       ],
       "UpstreamPathTemplate": "/foodie/restaurants",
@@ -63,7 +63,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44324
+          "Port": 5006
         }
       ],
       "UpstreamPathTemplate": "/foodie/restaurants",
@@ -82,7 +82,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44396
+          "Port": 5004
         }
       ],
       "UpstreamPathTemplate": "/foodie/admins",
@@ -101,7 +101,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44396
+          "Port": 5004
         }
       ],
       "UpstreamPathTemplate": "/foodie/login",
@@ -113,7 +113,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44396
+          "Port": 5004
         }
       ],
       "UpstreamPathTemplate": "/foodie/order-handlers",
@@ -132,7 +132,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44396
+          "Port": 5004
         }
       ],
       "UpstreamPathTemplate": "/foodie/users",
@@ -151,7 +151,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44349
+          "Port": 5002
         }
       ],
       "UpstreamPathTemplate": "/foodie/basket",
@@ -170,7 +170,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44349
+          "Port": 5002
         }
       ],
       "UpstreamPathTemplate": "/foodie/basket/checkout",

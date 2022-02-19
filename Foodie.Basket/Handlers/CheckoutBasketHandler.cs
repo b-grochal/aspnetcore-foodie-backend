@@ -21,7 +21,7 @@ namespace Foodie.Basket.Handlers
         public async Task<Unit> Handle(CheckoutBasketCommand request, CancellationToken cancellationToken)
         {
             var identityServiceRequest = new GetApplicationUserRequest { Id = request.ApplicationUserId };
-            var call = identityServiceClient.GetApplicationUser(identityServiceRequest);
+            var call = await identityServiceClient.GetApplicationUserAsync(identityServiceRequest);
             return new Unit();
         }
     }
