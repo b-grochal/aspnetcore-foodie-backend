@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IdentityGrpc;
 
 namespace Foodie.Basket
 {
@@ -71,6 +72,11 @@ namespace Foodie.Basket
             });
 
             services.AddTransient<IBasketRepository, BasketRepository>();
+
+            services.AddGrpcClient<IdentityService.IdentityServiceClient>(opt =>
+            {
+                opt.Address = new Uri("https://localhost:5004");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

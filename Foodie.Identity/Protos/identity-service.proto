@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "IdentityGrpc";
+
+message ApplicationUser {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string userName = 4;
+  string email = 5;
+  string phoneNumber = 6;
+}
+
+service IdentityService {
+  rpc GetApplicationUser(GetApplicationUserRequest) returns (GetApplicationUserResponse);
+}
+
+message GetApplicationUserRequest {
+  string id = 1;
+}
+message GetApplicationUserResponse {
+  ApplicationUser applicationUser= 1;
+  string error = 2;
+}

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Identity.Commands.Admins;
+using Foodie.Identity.Grpc;
 using Foodie.Identity.Models;
 using Foodie.Identity.Responses.Admins;
 using System;
@@ -17,6 +18,8 @@ namespace Foodie.Identity.Profiles
             CreateMap<CreateAdminCommand, ApplicationUser>();
             CreateMap<EditAdminCommand, ApplicationUser>()
                 .ForMember(x => x.Id, opt => opt.Ignore());
+
+            CreateMap<ApplicationUser, IdentityGrpc.ApplicationUser>();
         }
     }
 }
