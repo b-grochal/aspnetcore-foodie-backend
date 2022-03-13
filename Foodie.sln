@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodie.ApiGateway", "Foodie.ApiGateway\Foodie.ApiGateway.csproj", "{2DD19919-C899-4CDF-957F-9AF4B137429C}"
 EndProject
@@ -9,7 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodie.Meals", "Foodie.Meal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodie.Identity", "Foodie.Identity\Foodie.Identity.csproj", "{7470CF33-367C-4ADB-B703-AFAEC530C54C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodie.Basket", "Foodie.Basket\Foodie.Basket.csproj", "{CE0F536E-8C0D-4EC6-B78A-5BC0696DEB70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodie.Basket", "Foodie.Basket\Foodie.Basket.csproj", "{CE0F536E-8C0D-4EC6-B78A-5BC0696DEB70}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{67660AE8-D1A2-4D48-8B32-8FBCD2726286}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AADB11A8-B1CD-4A59-8837-343EE9B20A2B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CCE911F0-7B1E-488F-90C0-29BBC0B9B8BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{EC234EF3-4F40-4108-8F59-45C471AF45BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{76C7F636-0D30-458C-8196-7F041F81F142}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +46,15 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2DD19919-C899-4CDF-957F-9AF4B137429C} = {67660AE8-D1A2-4D48-8B32-8FBCD2726286}
+		{D8CDEC5F-E134-453D-823A-8C220904E455} = {AADB11A8-B1CD-4A59-8837-343EE9B20A2B}
+		{7470CF33-367C-4ADB-B703-AFAEC530C54C} = {AADB11A8-B1CD-4A59-8837-343EE9B20A2B}
+		{CE0F536E-8C0D-4EC6-B78A-5BC0696DEB70} = {AADB11A8-B1CD-4A59-8837-343EE9B20A2B}
+		{67660AE8-D1A2-4D48-8B32-8FBCD2726286} = {CCE911F0-7B1E-488F-90C0-29BBC0B9B8BA}
+		{AADB11A8-B1CD-4A59-8837-343EE9B20A2B} = {CCE911F0-7B1E-488F-90C0-29BBC0B9B8BA}
+		{EC234EF3-4F40-4108-8F59-45C471AF45BD} = {CCE911F0-7B1E-488F-90C0-29BBC0B9B8BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B309CF08-D90B-483E-B205-E73C05DDE90D}
