@@ -27,7 +27,7 @@ namespace Foodie.Meals.Infrastructure
             if (!context.Restaurants.Any())
             {
                 context.Restaurants.AddRange(
-                    new Restaurant { Name = "BurgerKing", Email = "burger@king.com", Address = "Address", PhoneNumber = "123-123-123" }
+                    new Restaurant { Name = "BurgerKing" }
                 );
                 context.SaveChanges();
             }
