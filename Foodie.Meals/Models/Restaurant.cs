@@ -9,9 +9,8 @@ namespace Foodie.Meals.Models
     {
         public int RestaurantId { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
         public ICollection<Meal> Meals { get; set; }
+        public ICollection<Location> Locations { get; set; }
+        public ICollection<Category> Categories { get; set; }
     }
 }
