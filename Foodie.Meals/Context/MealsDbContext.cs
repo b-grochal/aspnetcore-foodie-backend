@@ -16,5 +16,9 @@ namespace Foodie.Meals.Context
 
         public DbSet<Meal> Meals { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
     }
 }
