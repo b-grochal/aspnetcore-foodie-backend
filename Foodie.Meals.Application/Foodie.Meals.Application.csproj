@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -17,7 +17,6 @@
     <Folder Include="Functions\Locations\Commands\DeleteLocation\" />
     <Folder Include="Functions\Locations\Commands\UpdateLocation\" />
     <Folder Include="Functions\Locations\Queries\" />
-    <Folder Include="Functions\Meals\Commands\CreateMeal\" />
     <Folder Include="Functions\Meals\Commands\DeleteMeal\" />
     <Folder Include="Functions\Meals\Commands\UpdateMeal\" />
     <Folder Include="Functions\Meals\Queries\" />
@@ -25,6 +24,17 @@
     <Folder Include="Functions\Restaurants\Commands\DeleteRestaurant\" />
     <Folder Include="Functions\Restaurants\Commands\UpdateRestaurant\" />
     <Folder Include="Functions\Restaurants\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Foodie.Meals.Domain\Foodie.Meals.Domain.csproj" />
   </ItemGroup>
 
 </Project>
