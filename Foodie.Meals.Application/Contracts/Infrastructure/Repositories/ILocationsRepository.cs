@@ -14,5 +14,6 @@ namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
         Task UpdateLocation(Location location);
         Task<City> GetLocation(int locationId);
         Task<IEnumerable<Location>> GetLocations();
+        Task UpdateLocation(City editedLocation);
     }
 }

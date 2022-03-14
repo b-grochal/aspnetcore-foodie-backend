@@ -7,9 +7,6 @@
   <ItemGroup>
     <Folder Include="Functions\Categories\Queries\" />
     <Folder Include="Functions\Cities\Queries\" />
-    <Folder Include="Functions\Locations\Commands\CreateLocation\" />
-    <Folder Include="Functions\Locations\Commands\DeleteLocation\" />
-    <Folder Include="Functions\Locations\Commands\UpdateLocation\" />
     <Folder Include="Functions\Locations\Queries\" />
     <Folder Include="Functions\Meals\Queries\" />
     <Folder Include="Functions\Restaurants\Queries\" />
