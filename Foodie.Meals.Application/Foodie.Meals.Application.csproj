@@ -6,9 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Functions\Categories\Queries\" />
-    <Folder Include="Functions\Cities\Commands\CreateCity\" />
-    <Folder Include="Functions\Cities\Commands\DeleteCity\" />
-    <Folder Include="Functions\Cities\Commands\UpdateCity\" />
     <Folder Include="Functions\Cities\Queries\" />
     <Folder Include="Functions\Locations\Commands\CreateLocation\" />
     <Folder Include="Functions\Locations\Commands\DeleteLocation\" />
