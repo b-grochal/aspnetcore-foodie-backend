@@ -17,7 +17,6 @@
     <Folder Include="Functions\Locations\Commands\DeleteLocation\" />
     <Folder Include="Functions\Locations\Commands\UpdateLocation\" />
     <Folder Include="Functions\Locations\Queries\" />
-    <Folder Include="Functions\Meals\Commands\UpdateMeal\" />
     <Folder Include="Functions\Meals\Queries\" />
     <Folder Include="Functions\Restaurants\Commands\CreateRestaurant\" />
     <Folder Include="Functions\Restaurants\Commands\DeleteRestaurant\" />
