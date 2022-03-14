@@ -12,7 +12,7 @@ namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
         Task CreateCategory(Category category);
         Task DeleteCategory(int categoryId);
         Task UpdateCategory(Category category);
-        Task<City> GetCategory(int categoryId);
+        Task<Category> GetCategory(int categoryId);
         Task<IEnumerable<Category>> GetCategories();
         Task<IEnumerable<Category>> GetCategories(IReadOnlyCollection<int> categoryIds);
     }

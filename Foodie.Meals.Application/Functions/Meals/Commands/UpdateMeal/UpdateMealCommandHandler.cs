@@ -25,7 +25,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal
         {
             var meal = await mealsRepository.GetMeal(request.MealId);
             var editedMeal = mapper.Map(request, meal);
-            await mealsRepository.EditMeal(editedMeal);
+            await mealsRepository.UpdateMeal(editedMeal);
             return new Unit();
         }
     }

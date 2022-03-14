@@ -5,9 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Functions\Categories\Commands\CreateCategory\" />
-    <Folder Include="Functions\Categories\Commands\DeleteCategory\" />
-    <Folder Include="Functions\Categories\Commands\UpdateCategory\" />
     <Folder Include="Functions\Categories\Queries\" />
     <Folder Include="Functions\Cities\Commands\CreateCity\" />
     <Folder Include="Functions\Cities\Commands\DeleteCity\" />
