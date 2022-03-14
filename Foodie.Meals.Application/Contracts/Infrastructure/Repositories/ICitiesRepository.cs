@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
 {
-    public interface IMealsRepository
+    public interface ICitiesRepository
     {
-        Task CreateMeal(Meal meal);
-        Task DeleteMeal(int mealId);
-        Task UpdateMeal(Meal meal);
-        Task<Meal> GetMeal(int mealId);
-        Task<IEnumerable<Meal>> GetMeals();
+        Task CreateCity(City city);
+        Task DeleteCity(int cityId);
+        Task UpdateCity(City city);
+        Task<City> GetCity(int cityId);
+        Task<IEnumerable<City>> GetCities();
     }
 }
