@@ -18,7 +18,6 @@
     <Folder Include="Functions\Locations\Commands\UpdateLocation\" />
     <Folder Include="Functions\Locations\Queries\" />
     <Folder Include="Functions\Meals\Queries\" />
-    <Folder Include="Functions\Restaurants\Commands\UpdateRestaurant\" />
     <Folder Include="Functions\Restaurants\Queries\" />
   </ItemGroup>
 
