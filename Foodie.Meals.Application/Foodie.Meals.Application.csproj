@@ -5,10 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Functions\Categories\Commands\CreateCategory\" />
+    <Folder Include="Functions\Categories\Commands\DeleteCategory\" />
+    <Folder Include="Functions\Categories\Commands\UpdateCategory\" />
     <Folder Include="Functions\Categories\Queries\" />
+    <Folder Include="Functions\Cities\Commands\CreateCity\" />
+    <Folder Include="Functions\Cities\Commands\DeleteCity\" />
+    <Folder Include="Functions\Cities\Commands\UpdateCity\" />
     <Folder Include="Functions\Cities\Queries\" />
+    <Folder Include="Functions\Locations\Commands\CreateLocation\" />
+    <Folder Include="Functions\Locations\Commands\DeleteLocation\" />
+    <Folder Include="Functions\Locations\Commands\UpdateLocation\" />
     <Folder Include="Functions\Locations\Queries\" />
+    <Folder Include="Functions\Meals\Commands\CreateMeal\" />
+    <Folder Include="Functions\Meals\Commands\DeleteMeal\" />
+    <Folder Include="Functions\Meals\Commands\UpdateMeal\" />
     <Folder Include="Functions\Meals\Queries\" />
+    <Folder Include="Functions\Restaurants\Commands\CreateRestaurant\" />
+    <Folder Include="Functions\Restaurants\Commands\DeleteRestaurant\" />
+    <Folder Include="Functions\Restaurants\Commands\UpdateRestaurant\" />
     <Folder Include="Functions\Restaurants\Queries\" />
   </ItemGroup>
 
