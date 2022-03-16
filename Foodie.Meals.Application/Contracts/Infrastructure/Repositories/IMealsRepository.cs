@@ -1,4 +1,5 @@
 ﻿using Foodie.Meals.Domain.Entities;
+using Foodie.Shared.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
         Task DeleteMeal(int mealId);
         Task UpdateMeal(Meal meal);
         Task<Meal> GetMeal(int mealId);
-        Task<IEnumerable<Meal>> GetMeals();
+        Task<List<Meal>> GetMeals();
+        Task<PagedList<Meal>> GetMeals(int pageNumber, int pageSize);
     }
 }

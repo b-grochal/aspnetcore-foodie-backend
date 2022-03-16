@@ -8,7 +8,6 @@
     <Folder Include="Functions\Categories\Queries\" />
     <Folder Include="Functions\Cities\Queries\" />
     <Folder Include="Functions\Locations\Queries\" />
-    <Folder Include="Functions\Meals\Queries\" />
     <Folder Include="Functions\Restaurants\Queries\" />
   </ItemGroup>
 
@@ -21,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Foodie.Meals.Domain\Foodie.Meals.Domain.csproj" />
+    <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
   </ItemGroup>
 
 </Project>
