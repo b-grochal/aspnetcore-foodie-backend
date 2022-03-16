@@ -23,5 +23,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
                 _pageSize = (value > maxPageSize) ? maxPageSize : value;
             }
         }
+        public int RestaurantId { get; set; }
+        public string Name { get; set; }
     }
 }
