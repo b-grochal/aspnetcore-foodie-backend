@@ -14,7 +14,7 @@ namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
         Task DeleteRestaurant(int restaurantId);
         Task UpdateRestaurant(Restaurant restaurant);
         Task<Restaurant> GetRestaurant(int restaurantId);
-        Task<List<Restaurant>> GetRestaurants();
+        Task<IEnumerable<Restaurant>> GetRestaurants();
         Task<PagedList<Restaurant>> GetRestaurants(int pageNumber, int pageSize, int categoryId, string name, string cityName);
     }
 }
