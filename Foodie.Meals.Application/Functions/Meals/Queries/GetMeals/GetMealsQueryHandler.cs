@@ -23,7 +23,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
 
         public async Task<MealsListResponse> Handle(GetMealsQuery request, CancellationToken cancellationToken)
         {
-            var meals = await mealsRepository.GetMeals(request.PageNumber, request.PageSize);
+            var meals = await mealsRepository.GetMeals(request.PageNumber, request.PageSize, request.RestaurantId, request.Name);
 
             return new MealsListResponse
             {
@@ -31,7 +31,9 @@ namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
                 PageSize = meals.PageSize,
                 CurrentPage = meals.CurrentPage,
                 TotalPages = (int)Math.Ceiling(meals.TotalCount / (double)meals.PageSize),
-                Meals = mapper.Map<IEnumerable<MealResponse>>(meals)
+                Meals = mapper.Map<IEnumerable<MealResponse>>(meals),
+                Name = request.Name,
+                RestaurantId = request.RestaurantId
             };
         }
     }

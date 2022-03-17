@@ -8,7 +8,6 @@
     <Folder Include="Functions\Categories\Queries\" />
     <Folder Include="Functions\Cities\Queries\" />
     <Folder Include="Functions\Locations\Queries\" />
-    <Folder Include="Functions\Restaurants\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
