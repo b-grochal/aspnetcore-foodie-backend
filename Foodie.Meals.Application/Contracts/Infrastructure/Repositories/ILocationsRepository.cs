@@ -1,4 +1,5 @@
 ﻿using Foodie.Meals.Domain.Entities;
+using Foodie.Shared.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
         Task UpdateLocation(Location location);
         Task<City> GetLocation(int locationId);
         Task<IEnumerable<Location>> GetLocations();
-        Task UpdateLocation(City editedLocation);
+        Task<PagedList<Location>> GetLocations(int pageNumber, int pageSize, int restaurantId, int cityId);
+
     }
 }
