@@ -1,5 +1,6 @@
 ﻿using Foodie.Meals.Domain.Entities;
 using Foodie.Shared.Extensions;
+using Foodie.Shared.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,8 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
 {
-    public interface IRestaurantsRepository
+    public interface IRestaurantsRepository : IAsyncRepository<Restaurant>
     {
-        Task CreateRestaurant(Restaurant restaurant);
-        Task DeleteRestaurant(int restaurantId);
-        Task UpdateRestaurant(Restaurant restaurant);
-        Task<Restaurant> GetRestaurant(int restaurantId);
-        Task<IEnumerable<Restaurant>> GetRestaurants();
-        Task<PagedList<Restaurant>> GetRestaurants(int pageNumber, int pageSize, int categoryId, string name, string cityName);
+        Task<PagedList<Restaurant>> GetAllAsync(int pageNumber, int pageSize, int categoryId, string name, string cityName);
     }
 }
