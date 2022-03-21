@@ -13,9 +13,14 @@ namespace Foodie.Meals.Infrastructure.Repositories
     {
         public RestaurantsRepository(MealsDbContext dbContext) : base(dbContext) { }
 
-        public Task<PagedList<Restaurant>> GetAllAsync(int pageNumber, int pageSize, int categoryId, string name, string cityName)
+        public PagedList<Restaurant> GetAllAsync(int pageNumber, int pageSize, int? categoryId, string name, string cityName)
         {
-            throw new NotImplementedException();
+            var restaurants = dbContext.Restaurants
+                .Where(r => categoryId == null || r.Categories.Any(c => c.CategoryId == categoryId))
+                .Where(r => name == null || r.Name.Equals(name))
+                .Where(r => cityName == null || r.Locations.Any(l => l.City.Name.Equals(name)));
+
+            return PagedList<Restaurant>.ToPagedList(restaurants, pageNumber, pageSize);
         }
     }
 }

@@ -10,42 +10,42 @@ namespace Foodie.Meals.Infrastructure.Repositories
 {
     public class BaseMealsRepository<T> : IAsyncRepository<T> where T : class
     {
-        protected readonly MealsDbContext _dbContext;
+        protected readonly MealsDbContext dbContext;
 
         public BaseMealsRepository(MealsDbContext dbContext)
         {
-            _dbContext = dbContext;
+            this.dbContext = dbContext;
         }
 
         public async Task<T> CreateAsync(T entity)
         {
-            await _dbContext.Set<T>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await dbContext.Set<T>().AddAsync(entity);
+            await dbContext.SaveChangesAsync();
 
             return entity;
         }
 
         public async Task DeleteAsync(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
-            await _dbContext.SaveChangesAsync();
+            dbContext.Set<T>().Remove(entity);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            return await dbContext.Set<T>().ToListAsync();
 
         }
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            return await dbContext.Set<T>().FindAsync(id);
         }
 
         public async Task UpdateAsync(T entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+            dbContext.Entry(entity).State = EntityState.Modified;
+            await dbContext.SaveChangesAsync();
         }
     }
 }

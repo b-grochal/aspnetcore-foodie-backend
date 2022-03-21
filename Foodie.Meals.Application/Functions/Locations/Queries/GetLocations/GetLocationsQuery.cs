@@ -10,7 +10,7 @@ namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocations
 {
     public class GetLocationsQuery : PagedQuery, IRequest<LocationsListResponse>
     {
-        public int RestaurantId { get; set; }
-        public int CityId { get; set; }
+        public int? RestaurantId { get; set; }
+        public int? CityId { get; set; }
     }
 }

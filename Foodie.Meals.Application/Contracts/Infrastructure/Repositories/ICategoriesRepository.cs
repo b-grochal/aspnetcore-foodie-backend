@@ -12,6 +12,6 @@ namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
     public interface ICategoriesRepository : IAsyncRepository<Category>
     {
         Task<IReadOnlyList<Category>> GetAllAsync(IReadOnlyCollection<int> categoryIds);
-        Task<PagedList<Category>> GetAllAsync(int pageNumber, int pageSize, string name);
+        PagedList<Category> GetAllAsync(int pageNumber, int pageSize, string name);
     }
 }

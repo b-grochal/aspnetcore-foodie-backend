@@ -13,9 +13,13 @@ namespace Foodie.Meals.Infrastructure.Repositories
     {
         public CitiesRepository(MealsDbContext dbContext) : base(dbContext) { }
 
-        public Task<PagedList<City>> GetAllAsync(int pageNumber, int pageSize, string name, string country)
+        public PagedList<City> GetAllAsync(int pageNumber, int pageSize, string name, string country)
         {
-            throw new NotImplementedException();
+            var cities = dbContext.Cities
+                .Where(c => name == null || c.Name.Equals(name))
+                .Where(c => country == null || c.Country.Equals(country));
+
+            return PagedList<City>.ToPagedList(cities, pageNumber, pageSize);
         }
     }
 }

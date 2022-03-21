@@ -1,6 +1,7 @@
 ﻿using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using Foodie.Shared.Extensions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,19 @@ namespace Foodie.Meals.Infrastructure.Repositories
     {
         public CategoriesRepository(MealsDbContext dbContext) : base(dbContext) { }
 
-        public Task<IReadOnlyList<Category>> GetAllAsync(IReadOnlyCollection<int> categoryIds)
+        public async Task<IReadOnlyList<Category>> GetAllAsync(IReadOnlyCollection<int> categoryIds)
         {
-            throw new NotImplementedException();
+            return await dbContext.Categories
+                .Where(c => categoryIds.Contains(c.CategoryId))
+                .ToListAsync();
         }
 
-        public Task<PagedList<Category>> GetAllAsync(int pageNumber, int pageSize, string name)
+        public PagedList<Category> GetAllAsync(int pageNumber, int pageSize, string name)
         {
-            throw new NotImplementedException();
+            var categories = dbContext.Categories
+                .Where(c => name == null || c.Name.Equals(name));
+
+            return PagedList<Category>.ToPagedList(categories, pageNumber, pageSize);
         }
     }
 }
