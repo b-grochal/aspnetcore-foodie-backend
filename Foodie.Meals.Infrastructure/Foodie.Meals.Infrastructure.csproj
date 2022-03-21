@@ -18,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Foodie.Meals.Application\Foodie.Meals.Application.csproj" />
     <ProjectReference Include="..\Foodie.Meals.Domain\Foodie.Meals.Domain.csproj" />
+    <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
   </ItemGroup>
 
 </Project>
