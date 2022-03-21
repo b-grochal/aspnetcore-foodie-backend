@@ -27,14 +27,14 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaura
         public async Task<Unit> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
         {
             var restaurant = mapper.Map<Restaurant>(request);
-            var categories = await categoriesRepository.GetCategories(request.CategoryIds);
+            var categories = await categoriesRepository.GetAllAsync(request.CategoryIds);
 
             foreach(var category in categories)
             {
                 restaurant.Categories.Add(category);
             }
 
-            await restaurantsRepository.CreateRestaurant(restaurant);
+            await restaurantsRepository.CreateAsync(restaurant);
             return new Unit();
         }
     }

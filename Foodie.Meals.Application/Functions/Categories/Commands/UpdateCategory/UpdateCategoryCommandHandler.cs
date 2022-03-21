@@ -23,9 +23,9 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.UpdateCategory
 
         public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var category = await categoriesRepository.GetCategory(request.CategoryId);
+            var category = await categoriesRepository.GetByIdAsync(request.CategoryId);
             var editedCategory = mapper.Map(request, category);
-            await categoriesRepository.UpdateCategory(editedCategory);
+            await categoriesRepository.UpdateAsync(editedCategory);
             return new Unit();
         }
     }

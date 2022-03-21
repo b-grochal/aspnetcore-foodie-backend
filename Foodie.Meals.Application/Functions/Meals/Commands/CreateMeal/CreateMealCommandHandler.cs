@@ -25,7 +25,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.CreateMeal
         public async Task<Unit> Handle(CreateMealCommand request, CancellationToken cancellationToken)
         {
             var meal = mapper.Map<Meal>(request);
-            await mealsRepository.CreateMeal(meal);
+            await mealsRepository.CreateAsync(meal);
             return new Unit();
         }
     }

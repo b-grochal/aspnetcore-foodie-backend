@@ -23,7 +23,7 @@ namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategories
 
         public async Task<CategoriesListResponse> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var categories = await categoriesRepository.GetCategories(request.PageNumber, request.PageSize, request.Name);
+            var categories = await categoriesRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Name);
 
             return new CategoriesListResponse
             {

@@ -23,9 +23,9 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation
 
         public async Task<Unit> Handle(UpdateLocationCommand request, CancellationToken cancellationToken)
         {
-            var location = await locationsRepository.GetLocation(request.LocationId);
+            var location = await locationsRepository.GetByIdAsync(request.LocationId);
             var editedLocation = mapper.Map(request, location);
-            await locationsRepository.UpdateLocation(editedLocation);
+            await locationsRepository.UpdateAsync(editedLocation);
             return new Unit();
         }
     }

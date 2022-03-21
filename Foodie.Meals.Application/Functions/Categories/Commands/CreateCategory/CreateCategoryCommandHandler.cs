@@ -25,7 +25,7 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory
         public async Task<Unit> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = mapper.Map<Category>(request);
-            await categoriesRepository.CreateCategory(category);
+            await categoriesRepository.CreateAsync(category);
             return new Unit();
         }
     }

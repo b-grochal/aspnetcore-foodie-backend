@@ -23,7 +23,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCityById
 
         public async Task<CityDetailsResponse> Handle(GetCityByIdQuery request, CancellationToken cancellationToken)
         {
-            var city = await citiesRepository.GetCity(request.CityId);
+            var city = await citiesRepository.GetByIdAsync(request.CityId);
             return mapper.Map<CityDetailsResponse>(city);
         }
     }

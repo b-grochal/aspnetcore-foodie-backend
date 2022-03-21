@@ -23,9 +23,9 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity
 
         public async Task<Unit> Handle(UpdateCityCommand request, CancellationToken cancellationToken)
         {
-            var city = await citiesRepository.GetCity(request.CityId);
+            var city = await citiesRepository.GetByIdAsync(request.CityId);
             var editedCity = mapper.Map(request, city);
-            await citiesRepository.UpdateCity(editedCity);
+            await citiesRepository.UpdateAsync(editedCity);
             return new Unit();
         }
     }

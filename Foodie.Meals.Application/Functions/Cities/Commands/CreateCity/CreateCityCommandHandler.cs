@@ -25,7 +25,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.CreateCity
         public async Task<Unit> Handle(CreateCityCommand request, CancellationToken cancellationToken)
         {
             var city = mapper.Map<City>(request);
-            await citiesRepository.CreateCity(city);
+            await citiesRepository.CreateAsync(city);
             return new Unit();
         }
     }

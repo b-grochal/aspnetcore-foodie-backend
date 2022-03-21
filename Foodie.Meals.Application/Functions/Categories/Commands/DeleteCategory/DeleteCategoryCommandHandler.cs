@@ -21,7 +21,7 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory
 
         public async Task<Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
-            await categoriesRepository.DeleteCategory(request.CategoryId);
+            await categoriesRepository.DeleteAsync(request.CategoryId);
             return new Unit();
         }
     }

@@ -23,9 +23,9 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal
 
         public async Task<Unit> Handle(UpdateMealCommand request, CancellationToken cancellationToken)
         {
-            var meal = await mealsRepository.GetMeal(request.MealId);
+            var meal = await mealsRepository.GetByIdAsync(request.MealId);
             var editedMeal = mapper.Map(request, meal);
-            await mealsRepository.UpdateMeal(editedMeal);
+            await mealsRepository.UpdateAsync(editedMeal);
             return new Unit();
         }
     }

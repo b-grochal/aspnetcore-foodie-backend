@@ -25,10 +25,10 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
 
         public async Task<Unit> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
         {
-            var restaurant = await restaurantsRepository.GetRestaurant(request.RestaurantId);
+            var restaurant = await restaurantsRepository.GetByIdAsync(request.RestaurantId);
             var editedRestaurant = mapper.Map(request, restaurant);
             
-            var categories = await categoriesRepository.GetCategories(request.CategoryIds);
+            var categories = await categoriesRepository.GetAllAsync(request.CategoryIds);
             editedRestaurant.Categories.Clear();
             
             foreach (var category in categories)
@@ -36,7 +36,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
                 editedRestaurant.Categories.Add(category);
             }
 
-            await restaurantsRepository.UpdateRestaurant(editedRestaurant);
+            await restaurantsRepository.UpdateAsync(editedRestaurant);
             return new Unit();
         }
     }

@@ -23,7 +23,7 @@ namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById
 
         public async Task<LocationDetailsResponse> Handle(GetLocationByIdQuery request, CancellationToken cancellationToken)
         {
-            var location = await locationsRepository.GetLocation(request.LocationId);
+            var location = await locationsRepository.GetByIdAsync(request.LocationId);
             return mapper.Map<LocationDetailsResponse>(location);
         }
     }

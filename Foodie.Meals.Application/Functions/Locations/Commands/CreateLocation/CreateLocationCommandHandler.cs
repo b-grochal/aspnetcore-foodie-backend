@@ -25,7 +25,7 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation
         public async Task<Unit> Handle(CreateLocationCommand request, CancellationToken cancellationToken)
         {
             var location = mapper.Map<Location>(request);
-            await locationsRepository.CreateLocation(location);
+            await locationsRepository.CreateAsync(location);
             return new Unit();
         }
     }
