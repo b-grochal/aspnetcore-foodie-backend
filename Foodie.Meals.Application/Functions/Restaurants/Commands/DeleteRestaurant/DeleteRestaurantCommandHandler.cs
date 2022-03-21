@@ -20,7 +20,8 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaura
 
         public async Task<Unit> Handle(DeleteRestaurantCommand request, CancellationToken cancellationToken)
         {
-            await restaurantRepository.DeleteAsync(request.RestaurantId);
+            var restaurantToDelete = await restaurantRepository.GetByIdAsync(request.RestaurantId);
+            await restaurantRepository.DeleteAsync(restaurantToDelete);
             return new Unit();
         }
     }
