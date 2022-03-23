@@ -61,7 +61,8 @@ namespace Foodie.Meals.Application.Mapper
 
             CreateMap<Location, LocationDetailsResponse>();
 
-            CreateMap<Location, RestaurantLocationResponse>();
+            CreateMap<Location, RestaurantLocationResponse>()
+                .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name));
 
             // Meals
             CreateMap<CreateMealCommand, Meal>();
