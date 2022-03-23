@@ -24,7 +24,7 @@ namespace Foodie.Meals.Controllers
             this.mediator = mediator;
         }
 
-        // POST api/Meals
+        // POST api/meals
         [HttpPost]
         public async Task<IActionResult> CreateMeal([FromBody] CreateMealCommand createMealCommand)
         {
@@ -32,20 +32,20 @@ namespace Foodie.Meals.Controllers
             return Ok();
         }
 
-        // PUT api/Meals/5
+        // PUT api/meals/5
         [HttpPut("{mealId}")]
-        public async Task<IActionResult> UpdateMeal(int mealId, [FromBody] UpdateMealCommand editMealCommand)
+        public async Task<IActionResult> UpdateMeal(int mealId, [FromBody] UpdateMealCommand updateMealCommand)
         {
-            if (mealId != editMealCommand.MealId)
+            if (mealId != updateMealCommand.MealId)
             {
                 return BadRequest();
             }
 
-            await mediator.Send(editMealCommand);
+            await mediator.Send(updateMealCommand);
             return Ok();
         }
 
-        // DELETE api/Meals/5
+        // DELETE api/meals/5
         [HttpDelete("{mealId}")]
         public async Task<IActionResult> DeleteMeal(int mealId)
         {
@@ -54,7 +54,7 @@ namespace Foodie.Meals.Controllers
             return Ok();
         }
 
-        // GET api/Meals/5
+        // GET api/meals/5
         [HttpGet("{mealId}")]
         public async Task<IActionResult> GetMeal(int mealId)
         {
@@ -63,7 +63,7 @@ namespace Foodie.Meals.Controllers
             return Ok(result);
         }
 
-        // GET api/Meals
+        // GET api/meals
         [HttpGet]
         public async Task<IActionResult> GetMeals([FromQuery] GetMealsQuery getMealsQuery)
         {

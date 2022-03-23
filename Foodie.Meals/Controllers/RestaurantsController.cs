@@ -24,7 +24,7 @@ namespace Foodie.Meals.Controllers
             this.mediator = mediator;
         }
 
-        // POST api/Restaurants
+        // POST api/restaurants
         [HttpPost]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand createRestaurantCommand)
         {
@@ -32,20 +32,20 @@ namespace Foodie.Meals.Controllers
             return Ok();
         }
 
-        // PUT api/Restaurants/5
+        // PUT api/restaurants/5
         [HttpPut("{restaurantId}")]
-        public async Task<IActionResult> UpdateRestaurant(int mealId, [FromBody] UpdateRestaurantCommand editRestaurantCommand)
+        public async Task<IActionResult> UpdateRestaurant(int restaurantId, [FromBody] UpdateRestaurantCommand updateRestaurantCommand)
         {
-            if (mealId != editRestaurantCommand.RestaurantId)
+            if (restaurantId != updateRestaurantCommand.RestaurantId)
             {
                 return BadRequest();
             }
 
-            await mediator.Send(editRestaurantCommand);
+            await mediator.Send(updateRestaurantCommand);
             return Ok();
         }
 
-        // DELETE api/Restaurants/5
+        // DELETE api/restaurants/5
         [HttpDelete("{restaurantId}")]
         public async Task<IActionResult> DeleteRestaurant(int restaurantId)
         {
@@ -54,7 +54,7 @@ namespace Foodie.Meals.Controllers
             return Ok();
         }
 
-        // GET api/Restaurants/5
+        // GET api/restaurants/5
         [HttpGet("{restaurantId}")]
         public async Task<IActionResult> GetRestaurant(int restaurantId)
         {
@@ -63,7 +63,7 @@ namespace Foodie.Meals.Controllers
             return Ok(result);
         }
 
-        // GET api/Restaurants
+        // GET api/restaurants
         [HttpGet]
         public async Task<IActionResult> GetRestaurants([FromQuery] GetRestaurantsQuery getRestaurantsQuery)
         {
