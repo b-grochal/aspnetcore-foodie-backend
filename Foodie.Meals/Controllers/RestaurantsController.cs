@@ -1,5 +1,8 @@
-﻿using Foodie.Meals.Commands.Restaurants;
-using Foodie.Meals.Queries.Restaurants;
+﻿using Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaurant;
+using Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaurant;
+using Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaurant;
+using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantById;
+using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +34,7 @@ namespace Foodie.Meals.Controllers
 
         // PUT api/Restaurants/5
         [HttpPut("{restaurantId}")]
-        public async Task<IActionResult> EditRestaurant(int mealId, [FromBody] EditRestaurantCommand editRestaurantCommand)
+        public async Task<IActionResult> UpdateRestaurant(int mealId, [FromBody] UpdateRestaurantCommand editRestaurantCommand)
         {
             if (mealId != editRestaurantCommand.RestaurantId)
             {
@@ -62,10 +65,9 @@ namespace Foodie.Meals.Controllers
 
         // GET api/Restaurants
         [HttpGet]
-        public async Task<IActionResult> GetAllRestaurants()
+        public async Task<IActionResult> GetRestaurants([FromQuery] GetRestaurantsQuery getRestaurantsQuery)
         {
-            var query = new GetAllRestaurantsQuery();
-            var result = await mediator.Send(query);
+            var result = await mediator.Send(getRestaurantsQuery);
             return Ok(result);
         }
     }

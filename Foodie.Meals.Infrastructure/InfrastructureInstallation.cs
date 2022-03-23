@@ -16,8 +16,6 @@ namespace Foodie.Meals.Infrastructure
     {
         public static IServiceCollection AddEUniversityInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
             services.AddDbContext<MealsDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DBConnection")));
 
