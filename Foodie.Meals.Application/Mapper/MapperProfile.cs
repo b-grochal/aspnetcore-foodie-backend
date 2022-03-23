@@ -18,6 +18,8 @@ using Foodie.Meals.Application.Functions.Meals.Queries.GetMeals;
 using Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantById;
+using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations;
+using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
 using Foodie.Meals.Domain.Entities;
 using System;
@@ -59,6 +61,8 @@ namespace Foodie.Meals.Application.Mapper
 
             CreateMap<Location, LocationDetailsResponse>();
 
+            CreateMap<Location, RestaurantLocationResponse>();
+
             // Meals
             CreateMap<CreateMealCommand, Meal>();
 
@@ -67,6 +71,8 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<Meal, MealResponse>();
 
             CreateMap<Meal, MealDetailsResponse>();
+
+            CreateMap<Meal, RestaurantMealResponse>();
 
             // Restaurants
             CreateMap<CreateRestaurantCommand, Restaurant>();

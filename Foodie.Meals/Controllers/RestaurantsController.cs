@@ -2,6 +2,8 @@
 using Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantById;
+using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations;
+using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -68,6 +70,24 @@ namespace Foodie.Meals.Controllers
         public async Task<IActionResult> GetRestaurants([FromQuery] GetRestaurantsQuery getRestaurantsQuery)
         {
             var result = await mediator.Send(getRestaurantsQuery);
+            return Ok(result);
+        }
+
+        // GET api/restaurants/5/meals
+        [HttpGet]
+        public async Task<IActionResult> GetRestaurantMeals(int restaurantId)
+        {
+            var query = new GetRestaurantMealsQuery(restaurantId);
+            var result = await mediator.Send(query);
+            return Ok(result);
+        }
+
+        // GET api/restaurants/5/locations
+        [HttpGet]
+        public async Task<IActionResult> GetRestaurantLocations(int restaurantId, int? cityId)
+        {
+            var query = new GetRestaurantLocationsQuery(restaurantId, cityId);
+            var result = await mediator.Send(query);
             return Ok(result);
         }
     }

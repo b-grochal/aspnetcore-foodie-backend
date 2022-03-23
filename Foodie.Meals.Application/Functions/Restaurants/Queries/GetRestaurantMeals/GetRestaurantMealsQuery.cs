@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById
 {
-    public class GetRestaurantMealsByIdQuery : IRequest<IEnumerable<RestaurantMealResponse>>
+    public class GetRestaurantMealsQuery : IRequest<IEnumerable<RestaurantMealResponse>>
     {
         public int RestaurantId { get; }
 
-        public GetRestaurantMealsByIdQuery(int restaurantId)
+        public GetRestaurantMealsQuery(int restaurantId)
         {
             this.RestaurantId = restaurantId;
         }

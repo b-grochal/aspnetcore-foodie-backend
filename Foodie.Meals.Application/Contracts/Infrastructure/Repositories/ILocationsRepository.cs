@@ -12,5 +12,6 @@ namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
     public interface ILocationsRepository : IAsyncRepository<Location>
     {
         PagedList<Location> GetAllAsync(int pageNumber, int pageSize, int? restaurantId, int? cityId);
+        Task<IReadOnlyList<Location>> GetAllAsync(int restaurantId, int? cityId);
     }
 }

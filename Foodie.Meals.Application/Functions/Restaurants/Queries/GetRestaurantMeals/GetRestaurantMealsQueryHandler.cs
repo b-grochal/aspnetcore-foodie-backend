@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById
 {
-    public class GetRestaurantMealsByIdQueryHandler : IRequestHandler<GetRestaurantMealsByIdQuery, IEnumerable<RestaurantMealResponse>>
+    public class GetRestaurantMealsQueryHandler : IRequestHandler<GetRestaurantMealsQuery, IEnumerable<RestaurantMealResponse>>
     {
         private readonly IMealsRepository mealsRepository;
         private readonly IMapper mapper;
 
-        public GetRestaurantMealsByIdQueryHandler(IMealsRepository mealsRepository, IMapper mapper)
+        public GetRestaurantMealsQueryHandler(IMealsRepository mealsRepository, IMapper mapper)
         {
             this.mealsRepository = mealsRepository;
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<RestaurantMealResponse>> Handle(GetRestaurantMealsByIdQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<RestaurantMealResponse>> Handle(GetRestaurantMealsQuery request, CancellationToken cancellationToken)
         {
             var meals = await mealsRepository.GetAllAsync(request.RestaurantId);
             return mapper.Map<IEnumerable<RestaurantMealResponse>>(meals);
