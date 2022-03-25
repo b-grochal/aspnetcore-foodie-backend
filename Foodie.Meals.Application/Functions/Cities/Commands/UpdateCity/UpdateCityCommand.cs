@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Foodie.Shared.Commands;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity
 {
-    public class UpdateCityCommand : IRequest
+    public class UpdateCityCommand : AuditableUpdateCommand, IRequest
     {
         public int CityId { get; set; }
         public string Name { get; set; }

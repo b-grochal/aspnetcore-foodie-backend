@@ -5,6 +5,7 @@ using Foodie.Meals.Application.Functions.Cities.Queries.GetCities;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCityById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Meals.API.Controllers
@@ -22,6 +23,7 @@ namespace Foodie.Meals.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCity([FromBody] CreateCityCommand createCityCommand)
         {
+            createCityCommand.CreatedBy = GetUserEmail();
             await mediator.Send(createCityCommand);
             return Ok();
         }
@@ -35,6 +37,7 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
+            updateCityCommand.LastModifiedBy = GetUserEmail();
             await mediator.Send(updateCityCommand);
             return Ok();
         }
@@ -63,6 +66,11 @@ namespace Foodie.Meals.API.Controllers
         {
             var result = await mediator.Send(getCitiesQuery);
             return Ok(result);
+        }
+
+        private string GetUserEmail()
+        {
+            return User.FindFirstValue(ClaimTypes.Email);
         }
     }
 }

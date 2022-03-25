@@ -35,7 +35,8 @@ namespace Foodie.Meals.Application.Mapper
         public MapperProfile()
         {
             // Categories
-            CreateMap<CreateCategoryCommand, Category>();
+            CreateMap<CreateCategoryCommand, Category>()
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
 
             CreateMap<UpdateCategoryCommand, Category>();
 
@@ -44,7 +45,8 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<Category, CategoryDetailsResponse>();
 
             // Cities
-            CreateMap<CreateCityCommand, City>();
+            CreateMap<CreateCityCommand, City>()
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
 
             CreateMap<UpdateCityCommand, City>();
 
@@ -53,7 +55,8 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<City, CityDetailsResponse>();
 
             // Locations
-            CreateMap<CreateLocationCommand, Location>();
+            CreateMap<CreateLocationCommand, Location>()
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
 
             CreateMap<UpdateLocationCommand, Location>();
 
@@ -65,7 +68,8 @@ namespace Foodie.Meals.Application.Mapper
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name));
 
             // Meals
-            CreateMap<CreateMealCommand, Meal>();
+            CreateMap<CreateMealCommand, Meal>()
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
 
             CreateMap<UpdateMealCommand, Meal>();
 
@@ -76,7 +80,8 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<Meal, RestaurantMealResponse>();
 
             // Restaurants
-            CreateMap<CreateRestaurantCommand, Restaurant>();
+            CreateMap<CreateRestaurantCommand, Restaurant>()
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
 
             CreateMap<UpdateRestaurantCommand, Restaurant>();
 

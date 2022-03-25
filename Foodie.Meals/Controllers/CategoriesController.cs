@@ -5,6 +5,7 @@ using Foodie.Meals.Application.Functions.Categories.Queries.GetCategories;
 using Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Meals.API.Controllers
@@ -22,6 +23,7 @@ namespace Foodie.Meals.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand createCategoryCommand)
         {
+            createCategoryCommand.CreatedBy = GetUserEmail();
             await mediator.Send(createCategoryCommand);
             return Ok();
         }
@@ -35,6 +37,7 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
+            updateCategoryCommand.LastModifiedBy = GetUserEmail();
             await mediator.Send(updateCategoryCommand);
             return Ok();
         }
@@ -63,6 +66,11 @@ namespace Foodie.Meals.API.Controllers
         {
             var result = await mediator.Send(getCategoriesQuery);
             return Ok(result);
+        }
+
+        private string GetUserEmail()
+        {
+            return User.FindFirstValue(ClaimTypes.Email);
         }
     }
 }

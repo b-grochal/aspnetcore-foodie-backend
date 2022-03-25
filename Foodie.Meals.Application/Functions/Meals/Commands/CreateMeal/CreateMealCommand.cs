@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Foodie.Shared.Commands;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Meals.Commands.CreateMeal
 {
-    public class CreateMealCommand : IRequest
+    public class CreateMealCommand : AuditableCreateCommand, IRequest
     {
         public string Name { get; set; }
         public string Description { get; set; }

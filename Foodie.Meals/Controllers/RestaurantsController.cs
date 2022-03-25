@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Meals.Controllers
@@ -30,6 +31,7 @@ namespace Foodie.Meals.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand createRestaurantCommand)
         {
+            createRestaurantCommand.CreatedBy = GetUserEmail();
             await mediator.Send(createRestaurantCommand);
             return Ok();
         }
@@ -43,6 +45,7 @@ namespace Foodie.Meals.Controllers
                 return BadRequest();
             }
 
+            updateRestaurantCommand.LastModifiedBy = GetUserEmail();
             await mediator.Send(updateRestaurantCommand);
             return Ok();
         }
@@ -89,6 +92,11 @@ namespace Foodie.Meals.Controllers
             var query = new GetRestaurantLocationsQuery(restaurantId, cityId);
             var result = await mediator.Send(query);
             return Ok(result);
+        }
+
+        private string GetUserEmail()
+        {
+            return User.FindFirstValue(ClaimTypes.Email);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Foodie.Shared.Commands;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation
 {
-    public class CreateLocationCommand : IRequest
+    public class CreateLocationCommand : AuditableCreateCommand, IRequest
     {
         public string Address { get; set; }
         public string PhoneNumber { get; set; }

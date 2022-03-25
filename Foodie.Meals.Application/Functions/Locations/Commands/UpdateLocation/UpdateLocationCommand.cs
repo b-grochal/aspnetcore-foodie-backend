@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Foodie.Shared.Commands;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation
 {
-    public class UpdateLocationCommand : IRequest
+    public class UpdateLocationCommand : AuditableUpdateCommand, IRequest
     {
         public int LocationId { get; set; }
         public string Address { get; set; }
