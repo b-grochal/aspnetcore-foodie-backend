@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foodie.Shared.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Domain.Entities
 {
-    public class Location
+    public class Location : AuditableEntity
     {
         public int LocationId { get; set; }
         public string Address { get; set; }
