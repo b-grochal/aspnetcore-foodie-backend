@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity
         public async Task<Unit> Handle(UpdateCityCommand request, CancellationToken cancellationToken)
         {
             var city = await citiesRepository.GetByIdAsync(request.CityId);
+
+            if (city == null)
+                throw new CityNotFoundException(request.CityId);
+
             var editedCity = mapper.Map(request, city);
             await citiesRepository.UpdateAsync(editedCity);
             return new Unit();
