@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation
         public async Task<Unit> Handle(UpdateLocationCommand request, CancellationToken cancellationToken)
         {
             var location = await locationsRepository.GetByIdAsync(request.LocationId);
+
+            if (location == null)
+                throw new LocationNotFoundException(request.LocationId);
+
             var editedLocation = mapper.Map(request, location);
             await locationsRepository.UpdateAsync(editedLocation);
             return new Unit();
