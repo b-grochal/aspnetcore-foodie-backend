@@ -1,4 +1,5 @@
 ﻿using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,10 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal
         public async Task<Unit> Handle(DeleteMealCommand request, CancellationToken cancellationToken)
         {
             var mealToDelete = await mealsRepository.GetByIdAsync(request.MealId);
+
+            if (mealToDelete == null)
+                throw new MealNotFoundException(request.MealId);
+
             await mealsRepository.DeleteAsync(mealToDelete);
             return new Unit();
         }
