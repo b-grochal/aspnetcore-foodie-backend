@@ -1,6 +1,7 @@
 ﻿using Foodie.Meals.API.Models;
 using Foodie.Shared.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -10,10 +11,12 @@ namespace Foodie.Meals.API.Middlewares
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate next;
+        private readonly ILogger<ExceptionMiddleware> logger;
 
-        public ExceptionMiddleware(RequestDelegate next)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             this.next = next;
+            this.logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
@@ -24,6 +27,7 @@ namespace Foodie.Meals.API.Middlewares
             }
             catch (Exception ex)
             {
+                logger.LogError($"Exception occured: {ex}");
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
