@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,10 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory
         public async Task<Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
             var categoryToDelete = await categoriesRepository.GetByIdAsync(request.CategoryId);
+
+            if (categoryToDelete == null)
+                throw new CategoryNotFoundException(request.CategoryId);
+
             await categoriesRepository.DeleteAsync(categoryToDelete);
             return new Unit();
         }

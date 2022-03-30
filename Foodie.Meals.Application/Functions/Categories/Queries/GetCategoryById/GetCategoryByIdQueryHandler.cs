@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById
         public async Task<CategoryDetailsResponse> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
             var category = await categoriesRepository.GetByIdAsync(request.CategoryId);
+
+            if (category == null)
+                throw new CategoryNotFoundException(request.CategoryId);
+
             return mapper.Map<CategoryDetailsResponse>(category);
         }
     }
