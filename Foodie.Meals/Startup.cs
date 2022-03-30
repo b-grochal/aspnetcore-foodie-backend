@@ -1,4 +1,6 @@
 using Foodie.Meals.API.Middlewares;
+using Foodie.Meals.Application;
+using Foodie.Meals.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,17 +30,14 @@ namespace Foodie.Meals
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MealsDbContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:DBConnection"]));
+            services.AddMealsApplication();
+            services.AddMealsInfrastructure(Configuration);
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Foodie.Meals", Version = "v1" });
             });
-            services.AddMediatR(typeof(Startup));
-            services.AddAutoMapper(typeof(Startup));
-
-            services.AddTransient<IRestaurantsRepository, RestaurantsRepository>();
-            services.AddTransient<IMealsRepository, MealsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,8 +62,6 @@ namespace Foodie.Meals
             {
                 endpoints.MapControllers();
             });
-
-            DatabaseManagement.PreparePopulation(app);
         }
     }
 }

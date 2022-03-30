@@ -11,7 +11,7 @@ namespace Foodie.Meals.Application
 {
     public static class ApplicationInstalation
     {
-        public static IServiceCollection AddEUniversityApplication(this IServiceCollection services)
+        public static IServiceCollection AddMealsApplication(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
