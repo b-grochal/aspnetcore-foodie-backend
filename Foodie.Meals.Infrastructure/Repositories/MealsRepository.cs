@@ -21,7 +21,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public PagedList<Meal> GetAllAsync(int pageNumber, int pageSize, int? restaurantId, string name)
+        public async Task<PagedList<Meal>> GetAllAsync(int pageNumber, int pageSize, int? restaurantId, string name)
         {
             var meals = dbContext.Meals
                 .Where(m => restaurantId == null || m.RestaurantId == restaurantId)

@@ -13,7 +13,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
     {
         public RestaurantsRepository(MealsDbContext dbContext) : base(dbContext) { }
 
-        public PagedList<Restaurant> GetAllAsync(int pageNumber, int pageSize, int? categoryId, string name, string cityName)
+        public async Task<PagedList<Restaurant>> GetAllAsync(int pageNumber, int pageSize, int? categoryId, string name, string cityName)
         {
             var restaurants = dbContext.Restaurants
                 .Where(r => categoryId == null || r.Categories.Any(c => c.CategoryId == categoryId))
