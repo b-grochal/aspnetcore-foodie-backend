@@ -33,7 +33,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
                 TotalPages = (int)Math.Ceiling(meals.TotalCount / (double)meals.PageSize),
                 Meals = mapper.Map<IEnumerable<MealResponse>>(meals),
                 Name = request.Name,
-                RestaurantId = request.RestaurantId
+                RestaurantId = request.RestaurantId.Value
             };
         }
     }

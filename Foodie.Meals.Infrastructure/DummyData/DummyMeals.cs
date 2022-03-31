@@ -18,42 +18,54 @@ namespace Foodie.Meals.Infrastructure.DummyData
                     Name = "Longer",
                     Description = "Longer",
                     Price = 12,
-                    RestaurantId = DummySeed.KfcRestaurant
+                    RestaurantId = DummySeed.KfcRestaurant,
+                    CreatedBy = "Seed",
+                    CreatedDate = DateTimeOffset.Now,
                 },
                 new Meal()
                 {
                     Name = "Zinger",
                     Description = "Zinger",
                     Price = 10,
-                    RestaurantId = DummySeed.KfcRestaurant
+                    RestaurantId = DummySeed.KfcRestaurant,
+                    CreatedBy = "Seed",
+                    CreatedDate = DateTimeOffset.Now,
                 },
                 new Meal()
                 {
                     Name = "Pizza Texas",
                     Description = "Pizza Texas",
                     Price = 12,
-                    RestaurantId = DummySeed.PizzaHutRestaurant
+                    RestaurantId = DummySeed.PizzaHutRestaurant,
+                    CreatedBy = "Seed",
+                    CreatedDate = DateTimeOffset.Now,
                 },
                 new Meal()
                 {
                     Name = "Pizza Carbonara",
                     Description = "Pizza Carbonara",
                     Price = 12,
-                    RestaurantId = DummySeed.PizzaHutRestaurant
+                    RestaurantId = DummySeed.PizzaHutRestaurant,
+                    CreatedBy = "Seed",
+                    CreatedDate = DateTimeOffset.Now,
                 },
                 new Meal()
                 {
                     Name = "Big Mac",
                     Description = "Big Mac",
                     Price = 15,
-                    RestaurantId = DummySeed.McDonaldsRestaurant
+                    RestaurantId = DummySeed.McDonaldsRestaurant,
+                    CreatedBy = "Seed",
+                    CreatedDate = DateTimeOffset.Now,
                 },
                 new Meal()
                 {
                     Name = "McRoyal",
                     Description = "McRoyal",
                     Price = 10,
-                    RestaurantId = DummySeed.McDonaldsRestaurant
+                    RestaurantId = DummySeed.McDonaldsRestaurant,
+                    CreatedBy = "Seed",
+                    CreatedDate = DateTimeOffset.Now,
                 },
             };
         }

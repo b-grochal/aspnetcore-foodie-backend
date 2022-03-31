@@ -34,7 +34,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants
                 Restaurants = mapper.Map<IEnumerable<RestaurantResponse>>(restaurants),
                 Name = request.Name,
                 CityName = request.CityName,
-                CategoryId = request.CategoryId
+                CategoryId = request.CategoryId.Value
             };
         }
     }

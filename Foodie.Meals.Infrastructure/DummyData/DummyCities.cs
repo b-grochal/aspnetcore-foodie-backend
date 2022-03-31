@@ -17,19 +17,25 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 {
                     CityId = DummySeed.LasVegasCity,
                     Name = "Las Vegas",
-                    Country = "USA"
+                    Country = "USA",
+                    CreatedBy = "Seed",
+                    CreatedDate = DateTimeOffset.Now,
                 },
                 new City
                 {
                     CityId = DummySeed.LosAngelesCity,
                     Name = "Los Angeles",
-                    Country = "USA"
+                    Country = "USA",
+                    CreatedBy = "Seed",
+                    CreatedDate = DateTimeOffset.Now,
                 },
                 new City
                 {
                     CityId = DummySeed.NewYorkCity,
                     Name = "New York",
-                    Country = "USA"
+                    Country = "USA",
+                    CreatedBy = "Seed",
+                    CreatedDate = DateTimeOffset.Now,
                 }
             };
         }
