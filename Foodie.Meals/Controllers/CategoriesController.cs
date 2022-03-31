@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CategoriesController : Controller
     {
         private readonly IMediator mediator;

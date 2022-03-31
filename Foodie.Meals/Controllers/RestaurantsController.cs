@@ -77,7 +77,7 @@ namespace Foodie.Meals.Controllers
         }
 
         // GET api/restaurants/5/meals
-        [HttpGet]
+        [HttpGet("{restaurantId}/meals")]
         public async Task<IActionResult> GetRestaurantMeals(int restaurantId)
         {
             var query = new GetRestaurantMealsQuery(restaurantId);
@@ -86,7 +86,7 @@ namespace Foodie.Meals.Controllers
         }
 
         // GET api/restaurants/5/locations
-        [HttpGet]
+        [HttpGet("{restaurantId}/locations")]
         public async Task<IActionResult> GetRestaurantLocations(int restaurantId, int? cityId)
         {
             var query = new GetRestaurantLocationsQuery(restaurantId, cityId);
