@@ -32,8 +32,8 @@ namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocations
                 CurrentPage = locations.CurrentPage,
                 TotalPages = (int)Math.Ceiling(locations.TotalCount / (double)locations.PageSize),
                 Locations = mapper.Map<IEnumerable<LocationResponse>>(locations),
-                RestaurantId = request.RestaurantId.Value,
-                CityId = request.CityId.Value
+                RestaurantId = request.RestaurantId,
+                CityId = request.CityId
             };
         }
     }

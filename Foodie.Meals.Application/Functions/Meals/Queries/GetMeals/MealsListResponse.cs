@@ -10,7 +10,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
     public class MealsListResponse : PagedResponse
     {
         public IEnumerable<MealResponse> Meals { get; set; }
-        public int RestaurantId { get; set; }
+        public int? RestaurantId { get; set; }
         public string Name { get; set; }
     }
 }
