@@ -63,11 +63,6 @@ namespace Foodie.Meals.Infrastructure
 
             foreach (var restaurant in DummyRestaurants.Get())
             {
-                foreach(var category in DummyCategories.Get())
-                {
-                    restaurant.Categories.Add(category);
-                }
-
                 modelBuilder.Entity<Restaurant>().HasData(restaurant);
             }
         }

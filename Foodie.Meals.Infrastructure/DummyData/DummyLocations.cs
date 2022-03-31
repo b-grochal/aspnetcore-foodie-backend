@@ -15,6 +15,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
             {
                 new Location
                 {
+                    LocationId = DummySeed.KfcLasVegasLocation,
                     Address = "Kfc Las Vegas",
                     PhoneNumber = "123-123-213",
                     Email = "kfc.lasvegas@email.com",
@@ -25,6 +26,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Location
                 {
+                    LocationId = DummySeed.KfcLosAngelesLocation,
                     Address = "Kfc Los Angeles",
                     PhoneNumber = "123-123-213",
                     Email = "kfc.losangeles@email.com",
@@ -35,6 +37,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Location
                 {
+                    LocationId = DummySeed.KfcNewYorkLocation,
                     Address = "Kfc New York",
                     PhoneNumber = "123-123-213",
                     Email = "kfc.newyork@email.com",
@@ -45,6 +48,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Location
                 {
+                    LocationId = DummySeed.PizzaHutLasVegasLocation,
                     Address = "Pizza Hut Las Vegas",
                     PhoneNumber = "123-123-213",
                     Email = "pizzahut.lasvegas@email.com",
@@ -55,6 +59,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Location
                 {
+                    LocationId = DummySeed.PizzaHutLosAngelesLocation,
                     Address = "Pizza Hut Los Angeles",
                     PhoneNumber = "123-123-213",
                     Email = "pizzahut.losangeles@email.com",
@@ -65,6 +70,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Location
                 {
+                    LocationId = DummySeed.McDonaldsLasVegasLocation,
                     Address = "McDonald's Las Vegas",
                     PhoneNumber = "123-123-213",
                     Email = "mcdonalds.lasvegas@email.com",

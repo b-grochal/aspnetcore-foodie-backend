@@ -15,6 +15,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
             {
                 new Meal()
                 {
+                    MealId = DummySeed.LongerMeal,
                     Name = "Longer",
                     Description = "Longer",
                     Price = 12,
@@ -24,6 +25,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Meal()
                 {
+                    MealId = DummySeed.ZingerMeal,
                     Name = "Zinger",
                     Description = "Zinger",
                     Price = 10,
@@ -33,6 +35,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Meal()
                 {
+                    MealId = DummySeed.PizzaTexasMeal,
                     Name = "Pizza Texas",
                     Description = "Pizza Texas",
                     Price = 12,
@@ -42,6 +45,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Meal()
                 {
+                    MealId = DummySeed.PizzaCarbonaraMeal,
                     Name = "Pizza Carbonara",
                     Description = "Pizza Carbonara",
                     Price = 12,
@@ -51,6 +55,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Meal()
                 {
+                    MealId = DummySeed.BigMacMeal,
                     Name = "Big Mac",
                     Description = "Big Mac",
                     Price = 15,
@@ -60,6 +65,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Meal()
                 {
+                    MealId = DummySeed.McRoyalMeal,
                     Name = "McRoyal",
                     Description = "McRoyal",
                     Price = 10,
