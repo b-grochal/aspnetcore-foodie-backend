@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaurant
 {
-    public class UpdateRestaurantCommandHandler : IRequestHandler<UpdateRestaurantCommand>
+    public class UpdateRestaurantCommandHandler : IRequestHandler<UpdateRestaurantCommand, UpdateRestaurantCommandResponse>
     {
         private readonly IRestaurantsRepository restaurantsRepository;
         private readonly ICategoriesRepository categoriesRepository;
@@ -24,7 +24,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
             this.mapper =  mapper;
         }
 
-        public async Task<Unit> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateRestaurantCommandResponse> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
         {
             var restaurant = await restaurantsRepository.GetByIdAsync(request.RestaurantId);
 
@@ -32,17 +32,18 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
                 throw new RestaurantNotFoundException(request.RestaurantId);
 
             var editedRestaurant = mapper.Map(request, restaurant);
-            
+
             var categories = await categoriesRepository.GetAllAsync(request.CategoryIds);
             editedRestaurant.Categories.Clear();
-            
+
             foreach (var category in categories)
             {
                 editedRestaurant.Categories.Add(category);
             }
 
             await restaurantsRepository.UpdateAsync(editedRestaurant);
-            return new Unit();
+
+            return mapper.Map<UpdateRestaurantCommandResponse>(editedRestaurant);
         }
     }
 }

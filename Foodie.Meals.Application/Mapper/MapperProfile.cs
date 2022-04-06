@@ -107,11 +107,11 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<CreateRestaurantCommand, Restaurant>()
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
 
-            CreateMap<Restaurant, CreateReastaurantCommandResponse>();
+            CreateMap<Restaurant, CreateRestaurantCommandResponse>();
 
             CreateMap<UpdateRestaurantCommand, Restaurant>();
 
-            CreateMap<Restaurant, UpdateReastaurantCommandResponse>();
+            CreateMap<Restaurant, UpdateRestaurantCommandResponse>();
 
             CreateMap<Restaurant, RestaurantResponse>();
 

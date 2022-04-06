@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaurant
 {
-    public class DeleteRestaurantCommandHandler : IRequestHandler<DeleteRestaurantCommand>
+    public class DeleteRestaurantCommandHandler : IRequestHandler<DeleteRestaurantCommand, DeleteRestaurantCommandResponse>
     {
         private readonly IRestaurantsRepository restaurantRepository;
 
@@ -19,7 +19,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaura
             this.restaurantRepository = restaurantRepository;
         }
 
-        public async Task<Unit> Handle(DeleteRestaurantCommand request, CancellationToken cancellationToken)
+        public async Task<DeleteRestaurantCommandResponse> Handle(DeleteRestaurantCommand request, CancellationToken cancellationToken)
         {
             var restaurantToDelete = await restaurantRepository.GetByIdAsync(request.RestaurantId);
 
@@ -27,7 +27,11 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaura
                 throw new RestaurantNotFoundException(request.RestaurantId);
 
             await restaurantRepository.DeleteAsync(restaurantToDelete);
-            return new Unit();
+
+            return new DeleteRestaurantCommandResponse
+            {
+                RestaurantId = request.RestaurantId
+            };
         }
     }
 }

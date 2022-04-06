@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaurant
 {
-    public class CreateRestaurantCommandHandler : IRequestHandler<CreateRestaurantCommand>
+    public class CreateRestaurantCommandHandler : IRequestHandler<CreateRestaurantCommand, CreateRestaurantCommandResponse>
     {
         private readonly IRestaurantsRepository restaurantsRepository;
         private readonly ICategoriesRepository categoriesRepository;
@@ -24,18 +24,18 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaura
             this.mapper = mapper;
         }
 
-        public async Task<Unit> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
+        public async Task<CreateRestaurantCommandResponse> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
         {
             var restaurant = mapper.Map<Restaurant>(request);
             var categories = await categoriesRepository.GetAllAsync(request.CategoryIds);
 
-            foreach(var category in categories)
+            foreach (var category in categories)
             {
                 restaurant.Categories.Add(category);
             }
 
             await restaurantsRepository.CreateAsync(restaurant);
-            return new Unit();
+            return mapper.Map<CreateRestaurantCommandResponse>(restaurant);
         }
     }
 }
