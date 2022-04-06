@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal
 {
-    public class UpdateMealCommandHandler : IRequestHandler<UpdateMealCommand>
+    public class UpdateMealCommandHandler : IRequestHandler<UpdateMealCommand, UpdateMealCommandResponse>
     {
         private readonly IMealsRepository mealsRepository;
         private readonly IMapper mapper;
@@ -22,7 +22,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal
             this.mapper = mapper;
         }
 
-        public async Task<Unit> Handle(UpdateMealCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateMealCommandResponse> Handle(UpdateMealCommand request, CancellationToken cancellationToken)
         {
             var meal = await mealsRepository.GetByIdAsync(request.MealId);
 
@@ -31,7 +31,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal
 
             var editedMeal = mapper.Map(request, meal);
             await mealsRepository.UpdateAsync(editedMeal);
-            return new Unit();
+            return mapper.Map<UpdateMealCommandResponse>(editedMeal);
         }
     }
 }

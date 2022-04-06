@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal
 {
-    public class DeleteMealCommandHandler : IRequestHandler<DeleteMealCommand>
+    public class DeleteMealCommandHandler : IRequestHandler<DeleteMealCommand, DeleteMealCommandResponse>
     {
         private readonly IMealsRepository mealsRepository;
 
@@ -19,7 +19,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal
             this.mealsRepository = mealsRepository;
         }
 
-        public async Task<Unit> Handle(DeleteMealCommand request, CancellationToken cancellationToken)
+        public async Task<DeleteMealCommandResponse> Handle(DeleteMealCommand request, CancellationToken cancellationToken)
         {
             var mealToDelete = await mealsRepository.GetByIdAsync(request.MealId);
 
@@ -27,7 +27,10 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal
                 throw new MealNotFoundException(request.MealId);
 
             await mealsRepository.DeleteAsync(mealToDelete);
-            return new Unit();
+            return new DeleteMealCommandResponse
+            {
+                MealId = request.MealId
+            };
         }
     }
 }
