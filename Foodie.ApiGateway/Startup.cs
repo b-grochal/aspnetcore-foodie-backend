@@ -103,8 +103,6 @@ namespace Foodie.ApiGateway
             };
 
             app.UseOcelot(configration).Wait();
-
-            //app.UseOcelot();
         }
     }
 }
