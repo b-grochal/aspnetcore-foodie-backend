@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Exceptions;
+using Foodie.Shared.Extensions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -34,12 +35,8 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
             var editedRestaurant = mapper.Map(request, restaurant);
 
             var categories = await categoriesRepository.GetAllAsync(request.CategoryIds);
-            editedRestaurant.Categories.Clear();
 
-            foreach (var category in categories)
-            {
-                editedRestaurant.Categories.Add(category);
-            }
+            editedRestaurant.Categories.AddIfNotExists(categories);
 
             await restaurantsRepository.UpdateAsync(editedRestaurant);
 
