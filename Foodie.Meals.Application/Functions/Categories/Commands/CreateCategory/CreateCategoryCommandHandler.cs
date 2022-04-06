@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory
 {
-    public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand>
+    public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreateCategoryCommandResponse>
     {
         private readonly ICategoriesRepository categoriesRepository;
         private readonly IMapper mapper;
@@ -22,11 +22,11 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory
             this.mapper = mapper;
         }
 
-        public async Task<Unit> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<CreateCategoryCommandResponse> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = mapper.Map<Category>(request);
             await categoriesRepository.CreateAsync(category);
-            return new Unit();
+            return mapper.Map<CreateCategoryCommandResponse>(category);
         }
     }
 }

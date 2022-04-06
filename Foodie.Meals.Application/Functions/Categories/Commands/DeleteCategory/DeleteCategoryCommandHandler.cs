@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory
 {
-    public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand>
+    public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, DeleteCategoryCommandResponse>
     {
         private readonly ICategoriesRepository categoriesRepository;
 
@@ -20,7 +20,7 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory
             this.categoriesRepository = categoriesRepository;
         }
 
-        public async Task<Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<DeleteCategoryCommandResponse> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
             var categoryToDelete = await categoriesRepository.GetByIdAsync(request.CategoryId);
 
@@ -28,7 +28,11 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory
                 throw new CategoryNotFoundException(request.CategoryId);
 
             await categoriesRepository.DeleteAsync(categoryToDelete);
-            return new Unit();
+
+            return new DeleteCategoryCommandResponse 
+            { 
+                CategoryId = request.CategoryId 
+            };
         }
     }
 }

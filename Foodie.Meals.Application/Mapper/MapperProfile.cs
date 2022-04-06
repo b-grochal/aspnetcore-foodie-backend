@@ -38,7 +38,11 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<CreateCategoryCommand, Category>()
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
 
+            CreateMap<Category, CreateCategoryCommandResponse>();
+
             CreateMap<UpdateCategoryCommand, Category>();
+
+            CreateMap<Category, UpdateCategoryCommandResponse>();
 
             CreateMap<Category, CategoryResponse>();
 
@@ -47,6 +51,8 @@ namespace Foodie.Meals.Application.Mapper
             // Cities
             CreateMap<CreateCityCommand, City>()
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
+
+            CreateMap<City, CreateCityCommandResponse>();
 
             CreateMap<UpdateCityCommand, City>();
 
