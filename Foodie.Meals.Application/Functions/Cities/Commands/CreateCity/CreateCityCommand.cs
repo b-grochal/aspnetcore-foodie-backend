@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Cities.Commands.CreateCity
 {
-    public class CreateCityCommand : AuditableCreateCommand, IRequest
+    public class CreateCityCommand : AuditableCreateCommand, IRequest<CreateCityCommandResponse>
     {
         public string Name { get; set; }
         public string Country { get; set; }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity
 {
-    public class UpdateCityCommandHandler : IRequestHandler<UpdateCityCommand>
+    public class UpdateCityCommandHandler : IRequestHandler<UpdateCityCommand, UpdateCityCommandResponse>
     {
         private readonly ICitiesRepository citiesRepository;
         private readonly IMapper mapper;
@@ -22,7 +22,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity
             this.mapper = mapper;
         }
 
-        public async Task<Unit> Handle(UpdateCityCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateCityCommandResponse> Handle(UpdateCityCommand request, CancellationToken cancellationToken)
         {
             var city = await citiesRepository.GetByIdAsync(request.CityId);
 
@@ -31,7 +31,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity
 
             var editedCity = mapper.Map(request, city);
             await citiesRepository.UpdateAsync(editedCity);
-            return new Unit();
+            return mapper.Map<UpdateCityCommandResponse>(editedCity);
         }
     }
 }

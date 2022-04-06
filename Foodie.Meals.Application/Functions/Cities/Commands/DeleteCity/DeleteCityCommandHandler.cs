@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity
 {
-    public class DeleteCityCommandHandler : IRequestHandler<DeleteCityCommand>
+    public class DeleteCityCommandHandler : IRequestHandler<DeleteCityCommand, DeleteCityCommandResponse>
     {
         private readonly ICitiesRepository citiesRepository;
         private readonly IMapper mapper;
@@ -22,7 +22,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity
             this.mapper = mapper;
         }
 
-        public async Task<Unit> Handle(DeleteCityCommand request, CancellationToken cancellationToken)
+        public async Task<DeleteCityCommandResponse> Handle(DeleteCityCommand request, CancellationToken cancellationToken)
         {
             var cityToDelete = await citiesRepository.GetByIdAsync(request.CityId);
 
@@ -30,7 +30,11 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity
                 throw new CityNotFoundException(request.CityId);
 
             await citiesRepository.DeleteAsync(cityToDelete);
-            return new Unit();
+
+            return new DeleteCityCommandResponse
+            {
+                CityId = request.CityId
+            };
         }
     }
 }
