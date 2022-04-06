@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById
+namespace Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation
 {
-    public class LocationDetailsResponse
+    public class CreateLocationCommandResponse
     {
         public int LocationId { get; set; }
         public string Address { get; set; }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation
 {
-    public class CreateLocationCommandHandler : IRequestHandler<CreateLocationCommand>
+    public class CreateLocationCommandHandler : IRequestHandler<CreateLocationCommand, CreateLocationCommandResponse>
     {
         private readonly ILocationsRepository locationsRepository;
         private readonly IMapper mapper;
@@ -22,11 +22,11 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation
             this.mapper = mapper;
         }
 
-        public async Task<Unit> Handle(CreateLocationCommand request, CancellationToken cancellationToken)
+        public async Task<CreateLocationCommandResponse> Handle(CreateLocationCommand request, CancellationToken cancellationToken)
         {
             var location = mapper.Map<Location>(request);
             await locationsRepository.CreateAsync(location);
-            return new Unit();
+            return mapper.Map<CreateLocationCommandResponse>(location);
         }
     }
 }

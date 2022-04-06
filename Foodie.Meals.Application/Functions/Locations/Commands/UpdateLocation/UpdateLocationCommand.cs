@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation
 {
-    public class UpdateLocationCommand : AuditableUpdateCommand, IRequest
+    public class UpdateLocationCommand : AuditableUpdateCommand, IRequest<UpdateLocationCommandResponse>
     {
         public int LocationId { get; set; }
         public string Address { get; set; }

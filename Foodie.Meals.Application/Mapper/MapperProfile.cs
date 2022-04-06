@@ -66,15 +66,23 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<CreateLocationCommand, Location>()
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
 
-            CreateMap<Location, CreateLocationCommandResponse>();
+            CreateMap<Location, CreateLocationCommandResponse>()
+                .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
+                .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
 
             CreateMap<UpdateLocationCommand, Location>();
 
-            CreateMap<Location, UpdateLocationCommandResponse>();
+            CreateMap<Location, UpdateLocationCommandResponse>()
+                .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
+                .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
 
-            CreateMap<Location, LocationResponse>();
+            CreateMap<Location, LocationResponse>()
+                .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
+                .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
 
-            CreateMap<Location, LocationDetailsResponse>();
+            CreateMap<Location, LocationDetailsResponse>()
+                .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
+                .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
 
             CreateMap<Location, RestaurantLocationResponse>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name));

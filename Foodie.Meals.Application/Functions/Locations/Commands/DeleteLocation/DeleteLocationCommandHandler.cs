@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Commands.DeleteLocation
 {
-    public class DeleteLocationCommandHandler : IRequestHandler<DeleteLocationCommand>
+    public class DeleteLocationCommandHandler : IRequestHandler<DeleteLocationCommand, DeleteLocationCommandResponse>
     {
         private readonly ILocationsRepository locationsRepository;
 
@@ -19,7 +19,7 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.DeleteLocation
             this.locationsRepository = locationsRepository;
         }
 
-        public async Task<Unit> Handle(DeleteLocationCommand request, CancellationToken cancellationToken)
+        public async Task<DeleteLocationCommandResponse> Handle(DeleteLocationCommand request, CancellationToken cancellationToken)
         {
             var locationToDelete = await locationsRepository.GetByIdAsync(request.LocationId);
 
@@ -27,7 +27,11 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.DeleteLocation
                 throw new LocationNotFoundException(request.LocationId);
 
             await locationsRepository.DeleteAsync(locationToDelete);
-            return new Unit();
+            
+            return new DeleteLocationCommandResponse
+            {
+                LocationId = request.LocationId
+            };
         }
     }
 }
