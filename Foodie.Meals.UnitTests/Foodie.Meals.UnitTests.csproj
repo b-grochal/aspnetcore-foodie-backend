@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="Moq" Version="4.17.2" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,10 +23,13 @@
   <ItemGroup>
     <Folder Include="Handlers\Cities\" />
     <Folder Include="Handlers\Restaurants\" />
-    <Folder Include="Mocks\" />
     <Folder Include="Handlers\Categories\" />
     <Folder Include="Handlers\Locations\" />
     <Folder Include="Handlers\Meals\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Foodie.Meals.Application\Foodie.Meals.Application.csproj" />
   </ItemGroup>
 
 </Project>
