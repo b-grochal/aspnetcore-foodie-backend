@@ -23,6 +23,13 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             return this;
         }
 
+        public MockCategoriesRepository VerifyCreateAsync(Times times)
+        {
+            Verify(r => r.CreateAsync(It.IsAny<Category>()), times);
+
+            return this;
+        }
+
         public MockCategoriesRepository MockUpdateAsync()
         {
             Setup(r => r.UpdateAsync(It.IsAny<Category>())).Returns(Task.CompletedTask);
@@ -30,9 +37,23 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             return this;
         }
 
+        public MockCategoriesRepository VerifyUpdateAsync(Times times)
+        {
+            Verify(r => r.UpdateAsync(It.IsAny<Category>()), times);
+
+            return this;
+        }
+
         public MockCategoriesRepository MockDeleteAsync()
         {
             Setup(r => r.DeleteAsync(It.IsAny<Category>())).Returns(Task.CompletedTask);
+
+            return this;
+        }
+
+        public MockCategoriesRepository VerifyDeleteAsync(Times times)
+        {
+            Verify(r => r.DeleteAsync(It.IsAny<Category>()), times);
 
             return this;
         }
@@ -51,12 +72,26 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             return this;
         }
 
+        public MockCategoriesRepository VerifyGetByIdAsync(Times times)
+        {
+            Verify(r => r.GetByIdAsync(It.IsAny<int>()), times);
+
+            return this;
+        }
+
         public MockCategoriesRepository MockGetByIdAsyncWithNullResult()
         {
             Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((int categoryId) =>
             {
                 return null;
             });
+
+            return this;
+        }
+
+        public MockCategoriesRepository VerifyGetByIdAsyncWithNullResult(Times times)
+        {
+            Verify(r => r.GetByIdAsync(It.IsAny<int>()), times);
 
             return this;
         }
@@ -68,17 +103,17 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 new Category
                 {
                     CategoryId = 1,
-                    Name = "Pizza"
+                    Name = "Test category"
                 },
                 new Category
                 {
                     CategoryId= 2,
-                    Name = "Kebab"
+                    Name = "Test category"
                 },
                 new Category
                 {
                     CategoryId = 3,
-                    Name = "Burger"
+                    Name = "Test category"
                 }
             };
 
@@ -87,57 +122,51 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             return this;
         }
 
+        public MockCategoriesRepository VerifyGetAllAsync(Times times)
+        {
+            Verify(r => r.GetAllAsync(), times);
+
+            return this;
+        }
+
         public MockCategoriesRepository MockGetAllAsyncWithPagingParameters()
         {
-            var categories = new List<Category>
-            {
-                new Category
-                {
-                    CategoryId = 1,
-                    Name = "Pizza"
-                },
-                new Category
-                {
-                    CategoryId= 2,
-                    Name = "Kebab"
-                },
-                new Category
-                {
-                    CategoryId = 3,
-                    Name = "Burger"
-                }
-            };
-
             Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync((int pageNumber, int pageSize, string name) =>
             {
-                var filteredCategories = categories.Where(c => c.Name == null || c.Name == name).ToList();
-                return new PagedList<Category>(filteredCategories, filteredCategories.Count, pageNumber, pageSize);
+                var categories = new List<Category>
+                {
+                    new Category
+                    {
+                        CategoryId = 1,
+                        Name = "Pizza"
+                    },
+                    new Category
+                    {
+                        CategoryId= 2,
+                        Name = "Kebab"
+                    },
+                    new Category
+                    {
+                        CategoryId = 3,
+                        Name = "Burger"
+                    }
+                };
+
+                return new PagedList<Category>(categories, categories.Count, pageNumber, pageSize);
             });
+
+            return this;
+        }
+
+        public MockCategoriesRepository VerifyGetAllAsyncWithPagingParameters(Times times)
+        {
+            Verify(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()), times);
 
             return this;
         }
 
         public MockCategoriesRepository MockGetAllAsyncWithListOfIdsParameter()
         {
-            var categories = new List<Category>
-            {
-                new Category
-                {
-                    CategoryId = 1,
-                    Name = "Pizza"
-                },
-                new Category
-                {
-                    CategoryId= 2,
-                    Name = "Kebab"
-                },
-                new Category
-                {
-                    CategoryId = 3,
-                    Name = "Burger"
-                }
-            };
-
             Setup(r => r.GetAllAsync(It.IsAny<IReadOnlyCollection<int>>())).ReturnsAsync((IReadOnlyCollection<int> categoryIds) =>
             {
                 var categories = new List<Category>();
@@ -149,6 +178,13 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
                 return categories;
             });
+
+            return this;
+        }
+
+        public MockCategoriesRepository VerfiryGetAllAsyncWithListOfIdsParameter(Times times)
+        {
+            Verify(r => r.GetAllAsync(It.IsAny<IReadOnlyCollection<int>>()), times);
 
             return this;
         }
