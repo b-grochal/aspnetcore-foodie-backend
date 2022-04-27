@@ -19,7 +19,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
     {
         public MockMediatorForCategories MockSendingCreateCategoryCommand()
         {
-            Setup(m => m.Send(It.IsAny<CreateCategoryCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((CreateCategoryCommand createCategoryCommand) =>
+            Setup(m => m.Send(It.IsAny<CreateCategoryCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((CreateCategoryCommand createCategoryCommand, CancellationToken cancellationToken) =>
             {
                 return new CreateCategoryCommandResponse
                 {
@@ -40,7 +40,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
 
         public MockMediatorForCategories MockSendingUpdateCategoryCommand()
         {
-            Setup(m => m.Send(It.IsAny<UpdateCategoryCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((UpdateCategoryCommand updateCategoryCommand) =>
+            Setup(m => m.Send(It.IsAny<UpdateCategoryCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((UpdateCategoryCommand updateCategoryCommand, CancellationToken cancellationToken) =>
             {
                 return new UpdateCategoryCommandResponse
                 {
@@ -61,7 +61,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
 
         public MockMediatorForCategories MockSendingDeleteCategoryCommand()
         {
-            Setup(m => m.Send(It.IsAny<DeleteCategoryCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((DeleteCategoryCommand deleteCategoryCommand) =>
+            Setup(m => m.Send(It.IsAny<DeleteCategoryCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((DeleteCategoryCommand deleteCategoryCommand, CancellationToken cancellationToken) =>
             {
                 return new DeleteCategoryCommandResponse
                 {
@@ -81,7 +81,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
 
         public MockMediatorForCategories MockSendingGetCategoryByIdQuery()
         {
-            Setup(m => m.Send(It.IsAny<GetCategoryByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCategoryByIdQuery getCategoryByIdQuery) =>
+            Setup(m => m.Send(It.IsAny<GetCategoryByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCategoryByIdQuery getCategoryByIdQuery, CancellationToken cancellationToken) =>
             {
                 return new CategoryDetailsResponse
                 {
@@ -102,7 +102,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
 
         public MockMediatorForCategories MockSendingGetCategoriesQuery()
         {
-            Setup(m => m.Send(It.IsAny<GetCategoriesQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCategoriesQuery getCategoriesQuery) =>
+            Setup(m => m.Send(It.IsAny<GetCategoriesQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCategoriesQuery getCategoriesQuery, CancellationToken cancellationToken) =>
             {
                 return new CategoriesListResponse
                 {

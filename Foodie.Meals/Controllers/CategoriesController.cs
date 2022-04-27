@@ -26,8 +26,8 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand createCategoryCommand)
         {
             createCategoryCommand.CreatedBy = GetUserEmail();
-            await mediator.Send(createCategoryCommand);
-            return Ok();
+            var result = await mediator.Send(createCategoryCommand);
+            return Ok(result);
         }
 
         // PUT api/categories/5
@@ -40,8 +40,8 @@ namespace Foodie.Meals.API.Controllers
             }
 
             updateCategoryCommand.LastModifiedBy = GetUserEmail();
-            await mediator.Send(updateCategoryCommand);
-            return Ok();
+            var result = await mediator.Send(updateCategoryCommand);
+            return Ok(result);
         }
 
         // DELETE api/categories/5
@@ -49,8 +49,8 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> DeleteCategory(int categoryId)
         {
             var command = new DeleteCategoryCommand(categoryId);
-            await mediator.Send(command);
-            return Ok();
+            var result = await mediator.Send(command);
+            return Ok(result);
         }
 
         // GET api/categories/5
