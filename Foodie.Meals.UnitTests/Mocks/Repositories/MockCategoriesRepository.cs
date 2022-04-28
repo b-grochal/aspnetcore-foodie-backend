@@ -65,7 +65,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 return new Category
                 {
                     CategoryId = categoryId,
-                    Name = "Pizza"
+                    Name = "Test category"
                 };
             });
 
@@ -103,17 +103,17 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 new Category
                 {
                     CategoryId = 1,
-                    Name = "Test category"
+                    Name = "Test category 1"
                 },
                 new Category
                 {
                     CategoryId= 2,
-                    Name = "Test category"
+                    Name = "Test category 2"
                 },
                 new Category
                 {
                     CategoryId = 3,
-                    Name = "Test category"
+                    Name = "Test category 3"
                 }
             };
 
@@ -138,17 +138,17 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                     new Category
                     {
                         CategoryId = 1,
-                        Name = "Pizza"
+                        Name = "Test category 1"
                     },
                     new Category
                     {
                         CategoryId= 2,
-                        Name = "Kebab"
+                        Name = "Test categpry 2"
                     },
                     new Category
                     {
                         CategoryId = 3,
-                        Name = "Burger"
+                        Name = "Test category 3"
                     }
                 };
 
@@ -173,7 +173,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
                 foreach (var categoryId in categoryIds)
                 {
-                    categories.Add(new Category { CategoryId = categoryId, Name = "Test Category" });
+                    categories.Add(new Category { CategoryId = categoryId, Name = "Test category" });
                 }
 
                 return categories;

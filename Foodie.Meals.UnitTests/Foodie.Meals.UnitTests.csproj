@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Cities\" />
     <Folder Include="Handlers\Restaurants\" />
     <Folder Include="Handlers\Locations\" />
     <Folder Include="Handlers\Meals\" />
