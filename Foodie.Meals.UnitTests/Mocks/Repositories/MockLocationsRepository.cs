@@ -227,6 +227,8 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                         RestaurantId = restaurantId
                     }
                 };
+
+                return locations;
             });
 
             return this;
