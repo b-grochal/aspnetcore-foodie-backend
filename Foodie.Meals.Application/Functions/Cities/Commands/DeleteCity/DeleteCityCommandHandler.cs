@@ -14,12 +14,10 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity
     public class DeleteCityCommandHandler : IRequestHandler<DeleteCityCommand, DeleteCityCommandResponse>
     {
         private readonly ICitiesRepository citiesRepository;
-        private readonly IMapper mapper;
 
-        public DeleteCityCommandHandler(ICitiesRepository citiesRepository, IMapper mapper)
+        public DeleteCityCommandHandler(ICitiesRepository citiesRepository)
         {
             this.citiesRepository = citiesRepository;
-            this.mapper = mapper;
         }
 
         public async Task<DeleteCityCommandResponse> Handle(DeleteCityCommand request, CancellationToken cancellationToken)

@@ -1,9 +1,13 @@
 ﻿using AutoMapper;
+using Foodie.Meals.Application.Functions.Cities.Commands.CreateCity;
 using Foodie.Meals.Application.Mapper;
+using Foodie.Meals.UnitTests.Mocks.Repositories;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -24,18 +28,18 @@ namespace Foodie.Meals.UnitTests.Handlers.Cities
         }
 
         [Fact]
-        public async void CreateCategoryCommandHandler_HandleCreatingNewCategory_ShouldReturnNewCreatedCategory()
+        public async void CreateCityCommandHandler_HandleCreatingNewCity_ShouldReturnNewCreatedCity()
         {
-            var categoriesRepository = new MockCategoriesRepository()
+            var citiesRepository = new MockCitiesRepository()
                 .MockCreateAsync();
 
-            var command = new CreateCategoryCommand { Name = "Test category" };
-            var commandHandler = new CreateCategoryCommandHandler(categoriesRepository.Object, this.mapper);
+            var command = new CreateCityCommand{ Name = "Test category", Country = "Test country" };
+            var commandHandler = new CreateCityCommandHandler(citiesRepository.Object, this.mapper);
 
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
-            Assert.IsType<CreateCategoryCommandResponse>(result);
-            categoriesRepository.VerifyCreateAsync(Times.Once());
+            Assert.IsType<CreateCityCommandResponse>(result);
+            citiesRepository.VerifyCreateAsync(Times.Once());
         }
     }
 }
