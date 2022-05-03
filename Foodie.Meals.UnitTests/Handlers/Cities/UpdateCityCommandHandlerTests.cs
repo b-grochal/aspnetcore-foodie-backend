@@ -14,11 +14,11 @@ using Xunit;
 
 namespace Foodie.Meals.UnitTests.Handlers.Cities
 {
-    public class UpdateCategoryCommandHandlerTests
+    public class UpdateCityCommandHandlerTests
     {
         private readonly IMapper mapper;
 
-        public UpdateCategoryCommandHandlerTests()
+        public UpdateCityCommandHandlerTests()
         {
             var mapperConfiguration = new MapperConfiguration(c =>
             {
