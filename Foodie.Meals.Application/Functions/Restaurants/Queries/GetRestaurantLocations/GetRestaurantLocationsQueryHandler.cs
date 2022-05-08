@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations
 {
-    public class GetRestaurantsLocationsQueryHandler : IRequestHandler<GetRestaurantLocationsQuery, IEnumerable<RestaurantLocationResponse>>
+    public class GetRestaurantLocationsQueryHandler : IRequestHandler<GetRestaurantLocationsQuery, IEnumerable<RestaurantLocationResponse>>
     {
         private readonly ILocationsRepository locationsRepository;
         private readonly IMapper mapper;
 
-        public GetRestaurantsLocationsQueryHandler(ILocationsRepository locationsRepository, IMapper mapper)
+        public GetRestaurantLocationsQueryHandler(ILocationsRepository locationsRepository, IMapper mapper)
         {
             this.locationsRepository = locationsRepository;
             this.mapper = mapper;

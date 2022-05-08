@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.UnitTests.Mocks.Repositories
 {
-    public class MockResturantsRepository : Mock<IRestaurantsRepository>
+    public class MockRestaurantsRepository : Mock<IRestaurantsRepository>
     {
-        public MockResturantsRepository MockCreateAsync()
+        public MockRestaurantsRepository MockCreateAsync()
         {
             Setup(r => r.CreateAsync(It.IsAny<Restaurant>())).ReturnsAsync((Restaurant restaurant) =>
             {
@@ -23,63 +23,64 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             return this;
         }
 
-        public MockResturantsRepository VerifyCreateAsync(Times times)
+        public MockRestaurantsRepository VerifyCreateAsync(Times times)
         {
             Verify(r => r.CreateAsync(It.IsAny<Restaurant>()), times);
 
             return this;
         }
 
-        public MockResturantsRepository MockUpdateAsync()
+        public MockRestaurantsRepository MockUpdateAsync()
         {
             Setup(r => r.UpdateAsync(It.IsAny<Restaurant>())).Returns(Task.CompletedTask);
 
             return this;
         }
 
-        public MockResturantsRepository VerifyUpdateAsync(Times times)
+        public MockRestaurantsRepository VerifyUpdateAsync(Times times)
         {
             Verify(r => r.UpdateAsync(It.IsAny<Restaurant>()), times);
 
             return this;
         }
 
-        public MockResturantsRepository MockDeleteAsync()
+        public MockRestaurantsRepository MockDeleteAsync()
         {
             Setup(r => r.DeleteAsync(It.IsAny<Restaurant>())).Returns(Task.CompletedTask);
 
             return this;
         }
 
-        public MockResturantsRepository VerifyDeleteAsync(Times times)
+        public MockRestaurantsRepository VerifyDeleteAsync(Times times)
         {
             Verify(r => r.DeleteAsync(It.IsAny<Restaurant>()), times);
 
             return this;
         }
 
-        public MockResturantsRepository MockGetByIdAsync()
+        public MockRestaurantsRepository MockGetByIdAsync()
         {
             Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((int restaurantId) =>
             {
                 return new Restaurant
                 {
                     RestaurantId = restaurantId,
-                    Name = "Test restaurant" 
+                    Name = "Test restaurant",
+                    Categories = new List<Category>()
                 };
             });
 
             return this;
         }
 
-        public MockResturantsRepository VerifyGetByIdAsync(Times times)
+        public MockRestaurantsRepository VerifyGetByIdAsync(Times times)
         {
             Verify(r => r.GetByIdAsync(It.IsAny<int>()), times);
 
             return this;
         }
 
-        public MockResturantsRepository MockGetByIdAsyncWithNullResult()
+        public MockRestaurantsRepository MockGetByIdAsyncWithNullResult()
         {
             Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((int reastaurantId) =>
             {
@@ -89,14 +90,14 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             return this;
         }
 
-        public MockResturantsRepository VerifyGetByIdAsyncWithNullResult(Times times)
+        public MockRestaurantsRepository VerifyGetByIdAsyncWithNullResult(Times times)
         {
             Verify(r => r.GetByIdAsync(It.IsAny<int>()), times);
 
             return this;
         }
 
-        public MockResturantsRepository MockGetAllAsync()
+        public MockRestaurantsRepository MockGetAllAsync()
         {
             var restaurants = new List<Restaurant>
             {
@@ -122,14 +123,14 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             return this;
         }
 
-        public MockResturantsRepository VerifyGetAllAsync(Times times)
+        public MockRestaurantsRepository VerifyGetAllAsync(Times times)
         {
             Verify(r => r.GetAllAsync(), times);
 
             return this;
         }
 
-        public MockResturantsRepository MockGetAllAsyncWithPagingParameters()
+        public MockRestaurantsRepository MockGetAllAsyncWithPagingParameters()
         {
             Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int?>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((int pageNumber, int pageSize, int? categoryId, string name, string cityName) =>
             {
@@ -158,7 +159,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             return this;
         }
 
-        public MockResturantsRepository VerifyGetAllAsyncWithPagingParameters(Times times)
+        public MockRestaurantsRepository VerifyGetAllAsyncWithPagingParameters(Times times)
         {
             Verify(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int?>(), It.IsAny<string>(), It.IsAny<string>()), times);
 

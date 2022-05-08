@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Foodie.Meals.Application.Functions.Categories.Queries.GetCategories;
+using Foodie.Meals.Application.Functions.Meals.Queries.GetMeals;
 using Foodie.Meals.Application.Mapper;
 using Foodie.Meals.UnitTests.Mocks.Repositories;
 using Moq;
@@ -11,13 +11,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Foodie.Meals.UnitTests.Handlers.Categories
+namespace Foodie.Meals.UnitTests.Handlers.Meals
 {
-    public class GetCategoriesQueryHandlerTests
+    public class GetMealsQueryHandlerTests
     {
         private readonly IMapper mapper;
 
-        public GetCategoriesQueryHandlerTests()
+        public GetMealsQueryHandlerTests()
         {
             var mapperConfiguration = new MapperConfiguration(c =>
             {
@@ -28,24 +28,26 @@ namespace Foodie.Meals.UnitTests.Handlers.Categories
         }
 
         [Fact]
-        public async void GetCategoriesQueryHandler_HandleFetchingAllCategories_ShouldSucessfullyFetchCategories()
+        public async void GetMealsQueryHandler_HandleFetchingAllMeals_ShouldSucessfullyFetchMeals()
         {
-            var categoriesRepository = new MockCategoriesRepository()
+            var mealsRepository = new MockMealsRepository()
                 .MockGetAllAsyncWithPagingParameters();
 
-            var query = new GetCategoriesQuery
+            var query = new GetMealsQuery
             {
-                Name = "Test name"
+                Name = "Test name",
+                RestaurantId = 1
             };
 
-            var queryHandler = new GetCategoriesQueryHandler(categoriesRepository.Object, this.mapper);
+            var queryHandler = new GetMealsQueryHandler(mealsRepository.Object, this.mapper);
 
             var result = await queryHandler.Handle(query, CancellationToken.None);
 
-            Assert.IsType<CategoriesListResponse>(result);
+            Assert.IsType<MealsListResponse>(result);
             Assert.Equal(query.Name, result.Name);
+            Assert.Equal(query.RestaurantId, result.RestaurantId);
             Assert.Equal(query.PageSize, result.PageSize);
-            categoriesRepository.VerifyGetAllAsyncWithPagingParameters(Times.Once());
+            mealsRepository.VerifyGetAllAsyncWithPagingParameters(Times.Once());
         }
     }
 }

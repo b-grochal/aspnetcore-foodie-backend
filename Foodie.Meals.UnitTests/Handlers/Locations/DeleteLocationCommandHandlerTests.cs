@@ -33,7 +33,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Locations
         }
 
         [Fact]
-        public async void DeleteCityCommandHandler_HandleDeletingNonExistingCity_ShouldThrowCityNotFoundException()
+        public async void DeleteLocationCommandHandler_HandleDeletingNonExistingLocation_ShouldThrowLocationNotFoundException()
         {
             var locationsRepository = new MockLocationsRepository()
                 .MockDeleteAsync()

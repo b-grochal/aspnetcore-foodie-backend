@@ -28,6 +28,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaura
         {
             var restaurant = mapper.Map<Restaurant>(request);
             var categories = await categoriesRepository.GetAllAsync(request.CategoryIds);
+            restaurant.Categories = new List<Category>();
 
             foreach (var category in categories)
             {

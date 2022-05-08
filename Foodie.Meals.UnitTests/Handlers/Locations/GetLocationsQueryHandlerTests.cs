@@ -28,7 +28,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Locations
         }
 
         [Fact]
-        public async void GetLocationsQueryHandler_HandleFetchingAllLocationsWithoutParameters_ShouldSucessfullyFetchLocations()
+        public async void GetLocationsQueryHandler_HandleFetchingAllLocations_ShouldSucessfullyFetchLocations()
         {
             var locationsRepository = new MockLocationsRepository()
                 .MockGetAllAsyncWithPagingParameters();

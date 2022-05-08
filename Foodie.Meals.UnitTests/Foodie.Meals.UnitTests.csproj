@@ -21,11 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Restaurants\" />
-    <Folder Include="Handlers\Meals\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Foodie.Meals.Application\Foodie.Meals.Application.csproj" />
     <ProjectReference Include="..\Foodie.Meals\Foodie.Meals.API.csproj" />
   </ItemGroup>

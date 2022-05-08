@@ -28,7 +28,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Cities
         }
 
         [Fact]
-        public async void GetCitiesQueryHandler_HandleFetchingAllCitiesWithoutParameters_ShouldSucessfullyFetchCities()
+        public async void GetCitiesQueryHandler_HandleFetchingAllCities_ShouldSucessfullyFetchCities()
         {
             var citiesRepository = new MockCitiesRepository()
                 .MockGetAllAsyncWithPagingParameters();
