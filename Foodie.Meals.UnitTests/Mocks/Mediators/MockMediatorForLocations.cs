@@ -16,7 +16,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
 {
     public class MockMediatorForLocations : Mock<IMediator>
     {
-        public MockMediatorForLocations MockSendingCreateLocationsCommand()
+        public MockMediatorForLocations MockSendingCreateLocationCommand()
         {
             Setup(m => m.Send(It.IsAny<CreateLocationCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((CreateLocationCommand createLocationCommand, CancellationToken cancellationToken) =>
             {

@@ -26,8 +26,8 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> CreateLocation([FromBody] CreateLocationCommand createLocationCommand)
         {
             createLocationCommand.CreatedBy = GetUserEmail();
-            await mediator.Send(createLocationCommand);
-            return Ok();
+            var result = await mediator.Send(createLocationCommand);
+            return Ok(result);
         }
 
         // PUT api/locations/5
@@ -40,8 +40,8 @@ namespace Foodie.Meals.API.Controllers
             }
 
             updateLocationCommand.LastModifiedBy = GetUserEmail();
-            await mediator.Send(updateLocationCommand);
-            return Ok();
+            var result = await mediator.Send(updateLocationCommand);
+            return Ok(result);
         }
 
         // DELETE api/locations/5
@@ -49,8 +49,8 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> DeleteLocation(int locationId)
         {
             var command = new DeleteLocationCommand(locationId);
-            await mediator.Send(command);
-            return Ok();
+            var result = await mediator.Send(command);
+            return Ok(result);
         }
 
         // GET api/locations/5
