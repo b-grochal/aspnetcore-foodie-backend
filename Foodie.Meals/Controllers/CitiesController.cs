@@ -26,8 +26,8 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> CreateCity([FromBody] CreateCityCommand createCityCommand)
         {
             createCityCommand.CreatedBy = GetUserEmail();
-            await mediator.Send(createCityCommand);
-            return Ok();
+            var result = await mediator.Send(createCityCommand);
+            return Ok(result);
         }
 
         // PUT api/cities/5
@@ -40,8 +40,8 @@ namespace Foodie.Meals.API.Controllers
             }
 
             updateCityCommand.LastModifiedBy = GetUserEmail();
-            await mediator.Send(updateCityCommand);
-            return Ok();
+            var result = await mediator.Send(updateCityCommand);
+            return Ok(result);
         }
 
         // DELETE api/cities/5
@@ -49,8 +49,8 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> DeleteCity(int cityId)
         {
             var command = new DeleteCityCommand(cityId);
-            await mediator.Send(command);
-            return Ok();
+            var result = await mediator.Send(command);
+            return Ok(result);
         }
 
         // GET api/cities/5
