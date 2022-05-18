@@ -99,7 +99,7 @@ namespace Foodie.Meals.UnitTests.Controllers
         public async Task LocationsController_DeleteLocation_ShouldReturnOkObjectResult()
         {
             var mediator = new MockMediatorForLocations()
-                .MockSendingUpdateLocationCommand();
+                .MockSendingDeleteLocationCommand();
             var locationsController = new LocationsController(mediator.Object);
             var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Email, "test@email.com") }, "TestAuthentication"));
             locationsController.ControllerContext = new ControllerContext();

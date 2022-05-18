@@ -36,7 +36,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Restaurants
             var categoriesRepository = new MockCategoriesRepository()
                 .MockGetAllAsyncWithListOfIdsParameter();
 
-            var command = new CreateRestaurantCommand { Name = "Test meal", CategoryIds = new List<int> { 1,2,3 } };
+            var command = new CreateRestaurantCommand { Name = "Test restaurant", CategoryIds = new List<int> { 1,2,3 } };
             var commandHandler = new CreateRestaurantCommandHandler(restaurantsRepository.Object, categoriesRepository.Object, this.mapper);
 
             var result = await commandHandler.Handle(command, CancellationToken.None);

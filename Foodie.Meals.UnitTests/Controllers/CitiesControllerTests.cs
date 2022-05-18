@@ -90,7 +90,7 @@ namespace Foodie.Meals.UnitTests.Controllers
         public async Task CitiesController_DeleteCity_ShouldReturnOkObjectResult()
         {
             var mediator = new MockMediatorForCities()
-                .MockSendingUpdateCityCommand();
+                .MockSendingDeleteCityCommand();
             var citiesController = new CitiesController(mediator.Object);
             var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Email, "test@email.com") }, "TestAuthentication"));
             citiesController.ControllerContext = new ControllerContext();

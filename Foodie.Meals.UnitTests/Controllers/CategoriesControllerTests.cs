@@ -89,7 +89,7 @@ namespace Foodie.Meals.UnitTests.Controllers
         public async Task CategoriesController_DeleteCategory_ShouldReturnOkObjectResult()
         {
             var mediator = new MockMediatorForCategories()
-                .MockSendingUpdateCategoryCommand();
+                .MockSendingDeleteCategoryCommand();
             var categoriesController = new CategoriesController(mediator.Object);
             var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Email, "test@email.com") }, "TestAuthentication"));
             categoriesController.ControllerContext = new ControllerContext();
@@ -106,7 +106,7 @@ namespace Foodie.Meals.UnitTests.Controllers
         public async Task CategoriesController_GetCategory_ShouldReturnOkObjectResult()
         {
             var mediator = new MockMediatorForCategories()
-                .MockSendingUpdateCategoryCommand();
+                .MockSendingGetCategoryByIdQuery();
             var categoriesController = new CategoriesController(mediator.Object);
             var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Email, "test@email.com") }, "TestAuthentication"));
             categoriesController.ControllerContext = new ControllerContext();
@@ -123,7 +123,7 @@ namespace Foodie.Meals.UnitTests.Controllers
         public async Task CategoriesController_GetCategories_ShouldReturnOkObjectResult()
         {
             var mediator = new MockMediatorForCategories()
-                .MockSendingUpdateCategoryCommand();
+                .MockSendingGetCategoriesQuery();
             var categoriesController = new CategoriesController(mediator.Object);
             var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Email, "test@email.com") }, "TestAuthentication"));
             categoriesController.ControllerContext = new ControllerContext();
