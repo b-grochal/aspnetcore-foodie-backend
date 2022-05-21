@@ -30,8 +30,8 @@ namespace Foodie.Meals.Controllers
         public async Task<IActionResult> CreateMeal([FromBody] CreateMealCommand createMealCommand)
         {
             createMealCommand.CreatedBy = GetUserEmail();
-            await mediator.Send(createMealCommand);
-            return Ok();
+            var result = await mediator.Send(createMealCommand);
+            return Ok(result);
         }
 
         // PUT api/meals/5
@@ -44,8 +44,8 @@ namespace Foodie.Meals.Controllers
             }
 
             updateMealCommand.LastModifiedBy = GetUserEmail();
-            await mediator.Send(updateMealCommand);
-            return Ok();
+            var result = await mediator.Send(updateMealCommand);
+            return Ok(result);
         }
 
         // DELETE api/meals/5
@@ -53,8 +53,8 @@ namespace Foodie.Meals.Controllers
         public async Task<IActionResult> DeleteMeal(int mealId)
         {
             var command = new DeleteMealCommand(mealId);
-            await mediator.Send(command);
-            return Ok();
+            var result = await mediator.Send(command);
+            return Ok(result);
         }
 
         // GET api/meals/5
