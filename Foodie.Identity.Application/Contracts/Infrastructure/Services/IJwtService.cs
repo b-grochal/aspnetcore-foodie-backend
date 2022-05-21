@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Domain.Entities
+namespace Foodie.Identity.Application.Contracts.Infrastructure.Services
 {
-    public class Admin : ApplicationUser
+    internal interface IJwtService
     {
     }
 }
