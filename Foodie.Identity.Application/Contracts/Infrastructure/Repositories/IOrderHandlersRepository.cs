@@ -10,7 +10,7 @@ namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
     public interface IOrderHandlersRepository
     {
         Task CreateAsync(OrderHandler orderHandler);
-        Task DeleteAsync(string id);
+        Task DeleteAsync(OrderHandler orderHandler);
         Task UpdateAsync(OrderHandler orderHandler);
         Task<OrderHandler> GetByIdAsync(string id);
         Task<IReadOnlyList<OrderHandler>> GetAllAsync();
