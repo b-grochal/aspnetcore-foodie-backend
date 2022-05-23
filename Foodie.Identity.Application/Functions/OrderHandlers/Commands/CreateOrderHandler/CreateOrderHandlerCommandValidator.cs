@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
+namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler
 {
-    public class CreateAdminCommandValidator : AbstractValidator<CreateAdminCommand>
+    public class CreateOrderHandlerCommandValidator : AbstractValidator<CreateOrderHandlerCommand>
     {
-        public CreateAdminCommandValidator()
+        public CreateOrderHandlerCommandValidator()
         {
             RuleFor(c => c.FirstName)
             .NotEmpty()

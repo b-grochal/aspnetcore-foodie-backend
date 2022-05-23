@@ -12,6 +12,7 @@
     <Folder Include="Functions\Admins\Commands\DeleteAdmin\" />
     <Folder Include="Functions\Admins\Commands\UpdateAdmin\" />
     <Folder Include="Functions\Admins\Queries\" />
+    <Folder Include="Functions\OrderHandlers\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
+namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler
 {
-    public class CreateAdminCommand : AuditableCreateCommand, IRequest<CreateAdminCommandResponse>
+    public class CreateOrderHandlerCommand : AuditableCreateCommand, IRequest<CreateOrderHandlerCommandResponse>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
