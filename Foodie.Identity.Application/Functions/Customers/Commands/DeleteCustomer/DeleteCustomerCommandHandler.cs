@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Application.Functions.Customers.DeleteCustomer
+namespace Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustomer
 {
     internal class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, DeleteCustomerCommandResponse>
     {

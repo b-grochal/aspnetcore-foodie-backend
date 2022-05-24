@@ -1,12 +1,13 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Application.Functions.Customers.CreateCustomer
+namespace Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer
 {
-    public class CreateCustomerCommandResponse
+    public class UpdateCustomerCommand : IRequest<UpdateCustomerCommandResponse>
     {
         public string CustomerId { get; set; }
         public string FirstName { get; set; }

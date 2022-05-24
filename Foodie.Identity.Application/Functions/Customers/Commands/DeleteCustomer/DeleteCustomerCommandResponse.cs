@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Application.Functions.Customers.DeleteCustomer
+namespace Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustomer
 {
     public class DeleteCustomerCommandResponse
     {
