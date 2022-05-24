@@ -1,4 +1,5 @@
 ﻿using Foodie.Identity.Domain.Entities;
+using Foodie.Shared.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
         Task UpdateAsync(Admin admin);
         Task<Admin> GetByIdAsync(string id);
         Task<IReadOnlyList<Admin>> GetAllAsync();
+        Task<PagedList<Admin>> GetAllAsync(int pageNumber, int pageSize, string email);
     }
 }
