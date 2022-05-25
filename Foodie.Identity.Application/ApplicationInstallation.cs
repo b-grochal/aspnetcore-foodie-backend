@@ -8,9 +8,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Application
+namespace Foodie.Identity.Application
 {
-    public static class ApplicationInstalation
+    public static class ApplicationInstallation
     {
         public static IServiceCollection AddMealsApplication(this IServiceCollection services)
         {
