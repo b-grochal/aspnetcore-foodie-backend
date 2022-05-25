@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Contracts.Infrastructure.Services
 {
-    internal interface IJwtService
+    public interface IJwtService
     {
+        string GenerateToken(string applicationUserId, string applicationUserRole);
     }
 }

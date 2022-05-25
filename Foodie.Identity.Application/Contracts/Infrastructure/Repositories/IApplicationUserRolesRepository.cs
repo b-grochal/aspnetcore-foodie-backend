@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
 {
-    internal interface IApplicationUserRolesRepository
+    public interface IApplicationUserRolesRepository
     {
+        Task<string> GetApplicationUserRole(string id);
     }
 }
