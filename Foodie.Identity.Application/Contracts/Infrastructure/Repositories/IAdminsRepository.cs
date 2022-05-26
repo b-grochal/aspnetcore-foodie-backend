@@ -10,11 +10,11 @@ namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
 {
     public interface IAdminsRepository
     {
-        Task CreateAsync(Admin admin);
-        Task DeleteAsync(Admin admin);
-        Task UpdateAsync(Admin admin);
-        Task<Admin> GetByIdAsync(string id);
-        Task<IReadOnlyList<Admin>> GetAllAsync();
-        Task<PagedList<Admin>> GetAllAsync(int pageNumber, int pageSize, string email);
+        Task CreateAsync(OrderHandler admin);
+        Task DeleteAsync(OrderHandler admin);
+        Task UpdateAsync(OrderHandler admin);
+        Task<OrderHandler> GetByIdAsync(string id);
+        Task<IReadOnlyList<OrderHandler>> GetAllAsync();
+        Task<PagedList<OrderHandler>> GetAllAsync(int pageNumber, int pageSize, string email);
     }
 }

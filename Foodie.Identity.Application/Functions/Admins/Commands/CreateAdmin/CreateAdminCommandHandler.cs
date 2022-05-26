@@ -24,7 +24,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
 
         public async Task<CreateAdminCommandResponse> Handle(CreateAdminCommand request, CancellationToken cancellationToken)
         {
-            var admin = mapper.Map<Admin>(request);
+            var admin = mapper.Map<OrderHandler>(request);
             await adminsRepository.CreateAsync(admin);
             return mapper.Map<CreateAdminCommandResponse>(admin);
         }

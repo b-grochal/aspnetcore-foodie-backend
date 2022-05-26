@@ -1,5 +1,4 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Domain.Entities;
+﻿using Foodie.Identity.Domain.Entities;
 using Foodie.Shared.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,49 +10,49 @@ using System.Threading.Tasks;
 
 namespace Foode.Identity.Infrastructure.Repositories
 {
-    public class AdminsRepository : IAdminsRepository
+    public class OrderHandlersRepository
     {
         private readonly UserManager<OrderHandler> userManager;
         private readonly IdentityDbContext identityDbContext;
 
-        public AdminsRepository(UserManager<OrderHandler> userManager, IdentityDbContext identityDbContext)
+        public OrderHandlersRepository(UserManager<OrderHandler> userManager, IdentityDbContext identityDbContext)
         {
             this.userManager = userManager;
             this.identityDbContext = identityDbContext;
         }
 
-        public async Task CreateAsync(OrderHandler admin)
+        public async Task CreateAsync(OrderHandler orderHandler)
         {
-            await userManager.CreateAsync(admin);
-            await userManager.AddToRoleAsync(admin, ApplicationUserRoles.Admin);
+            await userManager.CreateAsync(orderHandler);
+            await userManager.AddToRoleAsync(orderHandler, ApplicationUserRoles.OrderHandler);
         }
 
-        public async Task DeleteAsync(OrderHandler admin)
+        public async Task DeleteAsync(OrderHandler orderHandler)
         {
-            await userManager.DeleteAsync(admin);
+            await userManager.DeleteAsync(orderHandler);
         }
 
         public async Task<IReadOnlyList<OrderHandler>> GetAllAsync()
         {
-            return await identityDbContext.Admins.ToListAsync();
+            return await identityDbContext.OrderHandlers.ToListAsync();
         }
 
         public async Task<PagedList<OrderHandler>> GetAllAsync(int pageNumber, int pageSize, string email)
         {
-            var admins = identityDbContext.Admins
+            var orderHandlers = identityDbContext.OrderHandlers
                 .Where(c => email == null || c.Email.Equals(email));
 
-            return PagedList<OrderHandler>.ToPagedList(admins, pageNumber, pageSize);
+            return PagedList<OrderHandler>.ToPagedList(orderHandlers, pageNumber, pageSize);
         }
 
         public async Task<OrderHandler> GetByIdAsync(string id)
         {
-            return await identityDbContext.Admins.FindAsync(id);
+            return await identityDbContext.OrderHandlers.FindAsync(id);
         }
 
-        public async Task UpdateAsync(OrderHandler admin)
+        public async Task UpdateAsync(OrderHandler orderHandler)
         {
-            await userManager.UpdateAsync(admin);
+            await userManager.UpdateAsync(orderHandler);
         }
     }
 }
