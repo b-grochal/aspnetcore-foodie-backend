@@ -26,21 +26,21 @@ namespace Foodie.Identity.Application.Mapper
         public MapperProfile()
         {
             // Admins
-            CreateMap<CreateAdminCommand, OrderHandler>();
+            CreateMap<CreateAdminCommand, Admin>();
 
-            CreateMap<OrderHandler, CreateAdminCommandResponse>()
+            CreateMap<Admin, CreateAdminCommandResponse>()
                 .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
 
-            CreateMap<UpdateAdminCommand, OrderHandler>()
+            CreateMap<UpdateAdminCommand, Admin>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AdminId));
 
-            CreateMap<OrderHandler, UpdateAdminCommandResponse>()
+            CreateMap<Admin, UpdateAdminCommandResponse>()
                 .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
 
-            CreateMap<OrderHandler, GetAdminByIdQueryResponse>()
+            CreateMap<Admin, GetAdminByIdQueryResponse>()
                 .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
 
-            CreateMap<OrderHandler, AdminDto>()
+            CreateMap<Admin, AdminDto>()
                 .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
 
             // Customers

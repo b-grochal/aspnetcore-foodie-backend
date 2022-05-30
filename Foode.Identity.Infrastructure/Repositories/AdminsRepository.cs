@@ -13,45 +13,45 @@ namespace Foode.Identity.Infrastructure.Repositories
 {
     public class AdminsRepository : IAdminsRepository
     {
-        private readonly UserManager<OrderHandler> userManager;
+        private readonly UserManager<Admin> userManager;
         private readonly IdentityDbContext identityDbContext;
 
-        public AdminsRepository(UserManager<OrderHandler> userManager, IdentityDbContext identityDbContext)
+        public AdminsRepository(UserManager<Admin> userManager, IdentityDbContext identityDbContext)
         {
             this.userManager = userManager;
             this.identityDbContext = identityDbContext;
         }
 
-        public async Task CreateAsync(OrderHandler admin)
+        public async Task CreateAsync(Admin admin)
         {
             await userManager.CreateAsync(admin);
             await userManager.AddToRoleAsync(admin, ApplicationUserRoles.Admin);
         }
 
-        public async Task DeleteAsync(OrderHandler admin)
+        public async Task DeleteAsync(Admin admin)
         {
             await userManager.DeleteAsync(admin);
         }
 
-        public async Task<IReadOnlyList<OrderHandler>> GetAllAsync()
+        public async Task<IReadOnlyList<Admin>> GetAllAsync()
         {
             return await identityDbContext.Admins.ToListAsync();
         }
 
-        public async Task<PagedList<OrderHandler>> GetAllAsync(int pageNumber, int pageSize, string email)
+        public async Task<PagedList<Admin>> GetAllAsync(int pageNumber, int pageSize, string email)
         {
             var admins = identityDbContext.Admins
                 .Where(c => email == null || c.Email.Equals(email));
 
-            return PagedList<OrderHandler>.ToPagedList(admins, pageNumber, pageSize);
+            return PagedList<Admin>.ToPagedList(admins, pageNumber, pageSize);
         }
 
-        public async Task<OrderHandler> GetByIdAsync(string id)
+        public async Task<Admin> GetByIdAsync(string id)
         {
             return await identityDbContext.Admins.FindAsync(id);
         }
 
-        public async Task UpdateAsync(OrderHandler admin)
+        public async Task UpdateAsync(Admin admin)
         {
             await userManager.UpdateAsync(admin);
         }

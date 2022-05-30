@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Domain.Entities
 {
-    public class OrderHandler : ApplicationUser
+    public class Admin : ApplicationUser
     {
     }
 }

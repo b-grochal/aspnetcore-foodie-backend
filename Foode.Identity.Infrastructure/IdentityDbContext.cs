@@ -13,8 +13,8 @@ namespace Foode.Identity.Infrastructure
 {
     public class IdentityDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<OrderHandler> Admins { get; set; }
-        public DbSet<OrderHandler> OrderHandlers { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Admin> OrderHandlers { get; set; }
         public DbSet<Customer> Customers { get; set; }
 
         public IdentityDbContext(DbContextOptions options) : base(options) { }
@@ -40,8 +40,8 @@ namespace Foode.Identity.Infrastructure
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<OrderHandler>().ToTable("Admins");
-            modelBuilder.Entity<OrderHandler>().ToTable("OrderHandlers");
+            modelBuilder.Entity<Admin>().ToTable("Admins");
+            modelBuilder.Entity<Admin>().ToTable("OrderHandlers");
             modelBuilder.Entity<Customer>().ToTable("Customer");
         }
     }
