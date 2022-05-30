@@ -1,4 +1,5 @@
-﻿using Foodie.Identity.Domain.Entities;
+﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Identity.Domain.Entities;
 using Foodie.Shared.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foode.Identity.Infrastructure.Repositories
 {
-    public class CustomersRepository
+    public class CustomersRepository : ICustomersRepository
     {
         private readonly UserManager<Customer> userManager;
         private readonly IdentityDbContext identityDbContext;
