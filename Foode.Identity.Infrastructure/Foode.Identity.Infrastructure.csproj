@@ -22,8 +22,4 @@
     <ProjectReference Include="..\Foodie.Identity\Foodie.Identity.API.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DummyData\" />
-  </ItemGroup>
-
 </Project>

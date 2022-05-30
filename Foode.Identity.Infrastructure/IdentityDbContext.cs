@@ -41,8 +41,25 @@ namespace Foode.Identity.Infrastructure
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Admin>().ToTable("Admins");
-            modelBuilder.Entity<Admin>().ToTable("OrderHandlers");
             modelBuilder.Entity<Customer>().ToTable("Customer");
+            modelBuilder.Entity<OrderHandler>().ToTable("OrderHandlers");
+
+            foreach (var role in DummyRoles.Get())
+            {
+                modelBuilder.Entity<IdentityRole<int>>().HasData(role);
+            }
+
+            foreach (var teacher in DummyTeachers.Get())
+            {
+                teacher.PasswordHash = passwordHasher.HashPassword(teacher, "P@ssw0rd");
+                teacher.SecurityStamp = Guid.NewGuid().ToString();
+                modelBuilder.Entity<IdentityTeacher>().HasData(teacher);
+            }
+
+            foreach (var userRole in DummyUserRoles.Get())
+            {
+                modelBuilder.Entity<IdentityUserRole<int>>().HasData(userRole);
+            }
         }
     }
 }
