@@ -3,6 +3,7 @@ using Foode.Identity.Infrastructure.Services;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Foode.Identity.Infrastructure
 {
     public static class InfrastructureInstallation
     {
-        public static IServiceCollection AddMealsInfrastructure(this IServiceCollection services, Microsoft.Extensions.Configuration.IConfiguration configuration)
+        public static IServiceCollection AddIdentityInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<IdentityDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DbConnection")));

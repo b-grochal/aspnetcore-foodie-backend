@@ -1,5 +1,5 @@
 ﻿using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Identity.Infrastructure;
+using Foodie.Shared.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;

@@ -13,45 +13,45 @@ namespace Foode.Identity.Infrastructure.Repositories
 {
     public class OrderHandlersRepository : IOrderHandlersRepository
     {
-        private readonly UserManager<Admin> userManager;
+        private readonly UserManager<OrderHandler> userManager;
         private readonly IdentityDbContext identityDbContext;
 
-        public OrderHandlersRepository(UserManager<Admin> userManager, IdentityDbContext identityDbContext)
+        public OrderHandlersRepository(UserManager<OrderHandler> userManager, IdentityDbContext identityDbContext)
         {
             this.userManager = userManager;
             this.identityDbContext = identityDbContext;
         }
 
-        public async Task CreateAsync(Admin orderHandler)
+        public async Task CreateAsync(OrderHandler orderHandler)
         {
             await userManager.CreateAsync(orderHandler);
             await userManager.AddToRoleAsync(orderHandler, ApplicationUserRoles.OrderHandler);
         }
 
-        public async Task DeleteAsync(Admin orderHandler)
+        public async Task DeleteAsync(OrderHandler orderHandler)
         {
             await userManager.DeleteAsync(orderHandler);
         }
 
-        public async Task<IReadOnlyList<Admin>> GetAllAsync()
+        public async Task<IReadOnlyList<OrderHandler>> GetAllAsync()
         {
             return await identityDbContext.OrderHandlers.ToListAsync();
         }
 
-        public async Task<PagedList<Admin>> GetAllAsync(int pageNumber, int pageSize, string email)
+        public async Task<PagedList<OrderHandler>> GetAllAsync(int pageNumber, int pageSize, string email)
         {
             var orderHandlers = identityDbContext.OrderHandlers
                 .Where(c => email == null || c.Email.Equals(email));
 
-            return PagedList<Admin>.ToPagedList(orderHandlers, pageNumber, pageSize);
+            return PagedList<OrderHandler>.ToPagedList(orderHandlers, pageNumber, pageSize);
         }
 
-        public async Task<Admin> GetByIdAsync(string id)
+        public async Task<OrderHandler> GetByIdAsync(string id)
         {
             return await identityDbContext.OrderHandlers.FindAsync(id);
         }
 
-        public async Task UpdateAsync(Admin orderHandler)
+        public async Task UpdateAsync(OrderHandler orderHandler)
         {
             await userManager.UpdateAsync(orderHandler);
         }

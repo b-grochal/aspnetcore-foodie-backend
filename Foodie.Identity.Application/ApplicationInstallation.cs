@@ -12,7 +12,7 @@ namespace Foodie.Identity.Application
 {
     public static class ApplicationInstallation
     {
-        public static IServiceCollection AddMealsApplication(this IServiceCollection services)
+        public static IServiceCollection AddIdentityApplication(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());

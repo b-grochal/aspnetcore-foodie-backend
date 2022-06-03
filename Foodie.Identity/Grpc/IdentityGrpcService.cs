@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Foodie.Identity.Repositories.Interfaces;
+using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Grpc.Core;
 using IdentityGrpc;
 
@@ -11,12 +11,12 @@ namespace Foodie.Identity.Grpc
 {
     public class IdentityGrpcService : IdentityService.IdentityServiceBase
     {
-        private readonly IApplicationUsersRepository applicationUsersRepository;
+        private readonly ICustomersRepository customersRepository;
         private readonly IMapper mapper;
 
-        public IdentityGrpcService(IApplicationUsersRepository applicationUsersRepository, IMapper mapper)
+        public IdentityGrpcService(ICustomersRepository customersRepository, IMapper mapper)
         {
-            this.applicationUsersRepository = applicationUsersRepository;
+            this.customersRepository = customersRepository;
             this.mapper = mapper;
         }
 
@@ -26,7 +26,7 @@ namespace Foodie.Identity.Grpc
             {
                 if (request.Id != null)
                 {
-                    var applicationUser = await applicationUsersRepository.GetApplicationUser(request.Id);
+                    var applicationUser = await customersRepository.GetByIdAsync(request.Id);
                     return new GetApplicationUserResponse
                     {
                         ApplicationUser = mapper.Map<ApplicationUser>(applicationUser)
