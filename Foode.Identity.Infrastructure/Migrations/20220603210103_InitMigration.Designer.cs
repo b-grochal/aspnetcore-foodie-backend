@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foode.Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20220603200652_InitMigration")]
+    [Migration("20220603210103_InitMigration")]
     partial class InitMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,49 +116,30 @@ namespace Foode.Identity.Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("Roles");
 
                     b.HasData(
                         new
                         {
                             Id = "fe10688b-b67d-4027-84e6-23c256af188d",
-                            ConcurrencyStamp = "646eee7f-1759-4e4f-b0f2-6cdd7d0af0f4",
+                            ConcurrencyStamp = "2b0cdbbc-30f1-458a-8b62-3dec7e4b59ed",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "35d96949-978e-4f88-851b-bbb750e6d0ad",
-                            ConcurrencyStamp = "65c551ee-ea3e-4199-9237-56c4b4357e02",
+                            ConcurrencyStamp = "06043069-b3bf-45da-9997-7de796fd03ff",
                             Name = "OrderHandler",
                             NormalizedName = "ORDERHANDLER"
                         },
                         new
                         {
                             Id = "65cff553-91da-46e6-81b5-c6adb8852b5c",
-                            ConcurrencyStamp = "0c3c9cf9-6616-4367-8aea-e39cd91cd25c",
+                            ConcurrencyStamp = "2f748d26-cab0-416d-ae6f-3e381358c64b",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<string>", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -293,7 +274,7 @@ namespace Foode.Identity.Infrastructure.Migrations
                         {
                             Id = "f175aa8f-1cf3-427f-8be5-def2bed3c564",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2c422324-7e68-48d9-b5c4-25963aed26ac",
+                            ConcurrencyStamp = "a510d288-8c8f-4664-a1fa-1e19b4daeec8",
                             Email = "michsco123@foodie.com",
                             EmailConfirmed = true,
                             FirstName = "Michael",
@@ -301,10 +282,10 @@ namespace Foode.Identity.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MICHSCO123@FOODIE.COM",
                             NormalizedUserName = "MICHSCO123",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJatnt+2l+FNUgSwahuNQW+OWA56jndqCZkLa72nJ4vmKN1aivtEmyGGfC8Y7k5E5Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAS2JM6Z8qoraoea0kLZD8S3jZ6HR1vPurB0VSWwPyIN0C/nwRSRidEvzc5iSotqSA==",
                             PhoneNumber = "123-456-789",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "10bc74ef-4143-4672-a88c-1453c7095a9d",
+                            SecurityStamp = "48765042-f487-407e-868c-363b4db13bdc",
                             TwoFactorEnabled = false,
                             UserName = "michsco123"
                         });
@@ -321,7 +302,7 @@ namespace Foode.Identity.Infrastructure.Migrations
                         {
                             Id = "6a1ab648-6be8-44f1-87b7-394c34547589",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7586ee3e-42b1-4208-bbc3-a44100b28576",
+                            ConcurrencyStamp = "dc896b10-2f3e-4ccd-a76b-0c2966703acb",
                             Email = "jimhal123@foodie.com",
                             EmailConfirmed = true,
                             FirstName = "Jim",
@@ -329,10 +310,10 @@ namespace Foode.Identity.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JIMHAL@FOODIE.COM",
                             NormalizedUserName = "JIMHAL123",
-                            PasswordHash = "AQAAAAEAACcQAAAAENH85A4eLaFXNBu78lGJI+HvfIzfCvsl0mRy9lShDK4/a0JZXLF7i5vR0/IwCuA8bQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGTsn6dwuVfzdK2raB+It4LPVHZh40qjJcSTV6whvt2m3lKA6nCvM8M/Wc8+VKQhdw==",
                             PhoneNumber = "123-456-789",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "6c7d3523-d4cd-4dad-95fb-44bc13baa319",
+                            SecurityStamp = "6893d7e2-5a6e-499a-bfc6-dca98ba0b814",
                             TwoFactorEnabled = false,
                             UserName = "jimhal123"
                         });
@@ -349,7 +330,7 @@ namespace Foode.Identity.Infrastructure.Migrations
                         {
                             Id = "51d8f926-867b-49c5-a3ba-56a76203a6a5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "771e9626-b631-4272-b884-40491b205ce0",
+                            ConcurrencyStamp = "8f08030c-651a-4704-a6ff-03efefbd0f7c",
                             Email = "dwigsch123@foodie.com",
                             EmailConfirmed = true,
                             FirstName = "Dwight",
@@ -357,10 +338,10 @@ namespace Foode.Identity.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "DWIGSCH@FOODIE.COM",
                             NormalizedUserName = "DWIGSCH123",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG0EaGiua6l+5emHXg95w7IxrT3QfHey6Qpge0DAjWdrq2FkTIwWbTcpxQ6xs6SRbA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIYY/a4po9Vk8ELvcILjS1H118OOGt4MAw2oW7/KVPzK7eLfuLAc8kkTgAvo0j7TIg==",
                             PhoneNumber = "123-456-789",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "9e3b6843-59f9-4622-a6ff-5e13031a98ed",
+                            SecurityStamp = "f2d73ea5-21ca-4bb6-b20f-ec0df3ef5281",
                             TwoFactorEnabled = false,
                             UserName = "dwigsch123"
                         });

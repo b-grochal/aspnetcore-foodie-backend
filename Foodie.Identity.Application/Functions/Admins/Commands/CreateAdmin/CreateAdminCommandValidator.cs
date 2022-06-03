@@ -36,7 +36,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
             RuleFor(c => c.ConfirmPassword)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty")
-            .Equal(c => c.Email)
+            .Equal(c => c.Password)
             .WithMessage("Passwords do not match");
         }
     }

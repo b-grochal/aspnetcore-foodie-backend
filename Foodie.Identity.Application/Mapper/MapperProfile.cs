@@ -26,7 +26,8 @@ namespace Foodie.Identity.Application.Mapper
         public MapperProfile()
         {
             // Admins
-            CreateMap<CreateAdminCommand, Admin>();
+            CreateMap<CreateAdminCommand, Admin>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
 
             CreateMap<Admin, CreateAdminCommandResponse>()
                 .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));

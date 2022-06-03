@@ -24,8 +24,9 @@ namespace Foode.Identity.Infrastructure.Repositories
 
         public async Task CreateAsync(Admin admin)
         {
-            await userManager.CreateAsync(admin);
-            await userManager.AddToRoleAsync(admin, ApplicationUserRoles.Admin);
+            var x = await userManager.CreateAsync(admin);
+            var y = await userManager.AddToRoleAsync(admin, ApplicationUserRoles.Admin);
+            var z = await identityDbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Admin admin)

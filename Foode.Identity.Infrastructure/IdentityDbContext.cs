@@ -49,7 +49,7 @@ namespace Foode.Identity.Infrastructure
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("ApplicationUserClaims");
             modelBuilder.Entity<IdentityUserRole<string>>().ToTable("ApplicationUserRoles");
             modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
-            modelBuilder.Entity<IdentityRole<string>>().ToTable("Roles");
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
             modelBuilder.Entity<Admin>().ToTable("Admins");
             modelBuilder.Entity<Customer>().ToTable("Customer");
             modelBuilder.Entity<OrderHandler>().ToTable("OrderHandlers");
