@@ -1,8 +1,10 @@
 using Foode.Identity.Infrastructure;
+using Foodie.Identity.API.Behaviours;
 using Foodie.Identity.API.Middlewares;
 using Foodie.Identity.Application;
 using Foodie.Identity.Grpc;
 using Foodie.Shared.Configuration;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,8 +33,10 @@ namespace Foodie.Identity
             var jwtTokenConfiguration = Configuration.GetSection("JwtTokenConfiguration").Get<JwtTokenConfiguration>();
             services.AddSingleton(jwtTokenConfiguration);
             services.AddIdentityApplication();
-
             services.AddIdentityInfrastructure(Configuration);
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
