@@ -13,10 +13,10 @@ namespace Foode.Identity.Infrastructure.Repositories
 {
     public class CustomersRepository : ICustomersRepository
     {
-        private readonly UserManager<Customer> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly IdentityDbContext identityDbContext;
 
-        public CustomersRepository(UserManager<Customer> userManager, IdentityDbContext identityDbContext)
+        public CustomersRepository(UserManager<ApplicationUser> userManager, IdentityDbContext identityDbContext)
         {
             this.userManager = userManager;
             this.identityDbContext = identityDbContext;

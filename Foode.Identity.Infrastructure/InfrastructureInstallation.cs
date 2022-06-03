@@ -2,6 +2,8 @@
 using Foode.Identity.Infrastructure.Services;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+using Foodie.Identity.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,14 +19,15 @@ namespace Foode.Identity.Infrastructure
     {
         public static IServiceCollection AddIdentityInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IdentityDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DbConnection")));
+            services.AddDbContext<IdentityDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DbConnection")));
+            services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<IdentityDbContext>();
 
-            services.AddScoped<IAdminsRepository, AdminsRepository>();
-            services.AddScoped<ICustomersRepository, CustomersRepository>();
-            services.AddScoped<IOrderHandlersRepository, OrderHandlersRepository>();
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IJwtService, JwtService>();
+            services.AddTransient<IAdminsRepository, AdminsRepository>();
+            services.AddTransient<ICustomersRepository, CustomersRepository>();
+            services.AddTransient<IOrderHandlersRepository, OrderHandlersRepository>();
+            services.AddTransient<IApplicationUserRolesRepository, ApplicationUserRolesRepository>();
+            services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IJwtService, JwtService>();
 
             return services;
         }
