@@ -10,7 +10,7 @@ namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
 {
     public interface ICustomersRepository
     {
-        Task CreateAsync(Customer customer);
+        Task CreateAsync(Customer customer, string password);
         Task DeleteAsync(Customer customer);
         Task UpdateAsync(Customer customer);
         Task<Customer> GetByIdAsync(string id);

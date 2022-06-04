@@ -22,16 +22,17 @@ namespace Foode.Identity.Infrastructure.Repositories
             this.identityDbContext = identityDbContext;
         }
 
-        public async Task CreateAsync(Admin admin)
+        public async Task CreateAsync(Admin admin, string password)
         {
-            var x = await userManager.CreateAsync(admin);
-            var y = await userManager.AddToRoleAsync(admin, ApplicationUserRoles.Admin);
-            var z = await identityDbContext.SaveChangesAsync();
+            await userManager.CreateAsync(admin, password);
+            await userManager.AddToRoleAsync(admin, ApplicationUserRoles.Admin);
+            await identityDbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Admin admin)
         {
             await userManager.DeleteAsync(admin);
+            await identityDbContext.SaveChangesAsync();
         }
 
         public async Task<IReadOnlyList<Admin>> GetAllAsync()
@@ -55,6 +56,7 @@ namespace Foode.Identity.Infrastructure.Repositories
         public async Task UpdateAsync(Admin admin)
         {
             await userManager.UpdateAsync(admin);
+            await identityDbContext.SaveChangesAsync();
         }
     }
 }

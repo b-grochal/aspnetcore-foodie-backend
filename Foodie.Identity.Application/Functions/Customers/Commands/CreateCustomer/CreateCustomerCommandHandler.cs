@@ -25,7 +25,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
         public async Task<CreateCustomerCommandResponse> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = mapper.Map<Customer>(request);
-            await customersRepository.CreateAsync(customer);
+            await customersRepository.CreateAsync(customer, request.Password);
             return mapper.Map<CreateCustomerCommandResponse>(customer);
         }
     }
