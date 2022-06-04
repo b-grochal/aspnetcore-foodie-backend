@@ -1,5 +1,8 @@
-﻿using Foodie.Identity.Commands.OrderHandlers;
-using Foodie.Identity.Queries.OrderHandlers;
+﻿using Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler;
+using Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrderHandler;
+using Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHandler;
+using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlerById;
+using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlers;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,37 +24,37 @@ namespace Foodie.Identity.Controllers
             this.mediator = mediator;
         }
 
-        // POST api/OrderHandlers
+        // POST api/order-handlers
         [HttpPost]
         public async Task<IActionResult> CreateOrderHandler([FromBody] CreateOrderHandlerCommand createOrderHandlerCommand)
         {
-            await mediator.Send(createOrderHandlerCommand);
-            return Ok();
+            var result = await mediator.Send(createOrderHandlerCommand);
+            return Ok(result);
         }
 
-        // PUT api/OrderHandlers/5
+        // PUT api/order-handlers/5
         [HttpPut("{orderHandlerId}")]
-        public async Task<IActionResult> EditOrderHandler(string orderHandlerId, [FromBody] EditOrderHandlerCommand editOrderHandlerCommand)
+        public async Task<IActionResult> UpdateOrderHandler(string orderHandlerId, [FromBody] UpdateOrderHandlerCommand updateOrderHandlerCommand)
         {
-            if (orderHandlerId != editOrderHandlerCommand.Id)
+            if (orderHandlerId != updateOrderHandlerCommand.OrderHandlerId)
             {
                 return BadRequest();
             }
 
-            await mediator.Send(editOrderHandlerCommand);
-            return Ok();
+            var result = await mediator.Send(updateOrderHandlerCommand);
+            return Ok(result);
         }
 
-        // DELETE api/OrderHandlers/5
+        // DELETE api/order-handlers/5
         [HttpDelete("{orderHandlerId}")]
         public async Task<IActionResult> DeleteOrderHandler(string orderHandlerId)
         {
             var command = new DeleteOrderHandlerCommand(orderHandlerId);
-            await mediator.Send(command);
-            return Ok();
+            var result = await mediator.Send(command);
+            return Ok(result);
         }
 
-        // GET api/OrderHandlers/5
+        // GET api/order-handlers/5
         [HttpGet("{orderHandlerId}")]
         public async Task<IActionResult> GetOrderHandler(string orderHandlerId)
         {
@@ -60,12 +63,11 @@ namespace Foodie.Identity.Controllers
             return Ok(result);
         }
 
-        // GET api/OrderHandlers
+        // GET api/order-handlers
         [HttpGet]
-        public async Task<IActionResult> GetAllOrderHandlers()
+        public async Task<IActionResult> GetOrderHandlers([FromQuery] GetOrderHandlersQuery getOrderHandlersQuery)
         {
-            var query = new GetAllOrderHandlersQuery();
-            var result = await mediator.Send(query);
+            var result = await mediator.Send(getOrderHandlersQuery);
             return Ok(result);
         }
     }

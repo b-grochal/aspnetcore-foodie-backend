@@ -1,5 +1,8 @@
-﻿using Foodie.Identity.Commands.Admins;
-using Foodie.Identity.Queries.Admins;
+﻿using Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin;
+using Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin;
+using Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin;
+using Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById;
+using Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,37 +24,37 @@ namespace Foodie.Identity.Controllers
             this.mediator = mediator;
         }
 
-        // POST api/Admins
+        // POST api/admins
         [HttpPost]
         public async Task<IActionResult> CreateAdmin([FromBody] CreateAdminCommand createAdminCommand)
         {
-            await mediator.Send(createAdminCommand);
-            return Ok();
+            var result = await mediator.Send(createAdminCommand);
+            return Ok(result);
         }
 
-        // PUT api/Admin/5
+        // PUT api/admins/5
         [HttpPut("{adminId}")]
-        public async Task<IActionResult> EditAdmin(string adminId, [FromBody] EditAdminCommand editAdminCommand)
+        public async Task<IActionResult> UpdateAdmin(string adminId, [FromBody] UpdateAdminCommand updateAdminCommand)
         {
-            if (adminId != editAdminCommand.Id)
+            if (adminId != updateAdminCommand.AdminId)
             {
                 return BadRequest();
             }
 
-            await mediator.Send(editAdminCommand);
-            return Ok();
+            var result = await mediator.Send(updateAdminCommand);
+            return Ok(result);
         }
 
-        // DELETE api/Admins/5
+        // DELETE api/admins/5
         [HttpDelete("{adminId}")]
         public async Task<IActionResult> DeleteAdmin(string adminId)
         {
             var command = new DeleteAdminCommand(adminId);
-            await mediator.Send(command);
-            return Ok();
+            var result = await mediator.Send(command);
+            return Ok(result);
         }
 
-        // GET api/Admins/5
+        // GET api/admins/5
         [HttpGet("{adminId}")]
         public async Task<IActionResult> GetAdmin(string adimnId)
         {
@@ -60,12 +63,11 @@ namespace Foodie.Identity.Controllers
             return Ok(result);
         }
 
-        // GET api/Admins
+        // GET api/admins
         [HttpGet]
-        public async Task<IActionResult> GetAllAdmins()
+        public async Task<IActionResult> GetAdmins([FromQuery] GetAdminsQuery getAdminsQuery)
         {
-            var query = new GetAllAdminsQuery();
-            var result = await mediator.Send(query);
+            var result = await mediator.Send(getAdminsQuery);
             return Ok(result);
         }
     }

@@ -17,7 +17,7 @@ namespace Foodie.Meals.Infrastructure
         public static IServiceCollection AddMealsInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MealsDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DBConnection")));
+            options.UseSqlServer(configuration.GetConnectionString("DbConnection")));
 
             services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             services.AddScoped<ICitiesRepository, CitiesRepository>();

@@ -1,30 +1,20 @@
-using Foodie.Identity.Context;
+using Foode.Identity.Infrastructure;
+using Foodie.Identity.API.Behaviours;
+using Foodie.Identity.API.Middlewares;
+using Foodie.Identity.Application;
 using Foodie.Identity.Grpc;
-using Foodie.Identity.Infrastructure;
-using Foodie.Identity.Models;
-using Foodie.Identity.Repositories.Implementations;
-using Foodie.Identity.Repositories.Interfaces;
-using Foodie.Identity.Services.Implementations;
-using Foodie.Identity.Services.Interfaces;
+using Foodie.Shared.Configuration;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Identity
 {
@@ -42,8 +32,11 @@ namespace Foodie.Identity
         {
             var jwtTokenConfiguration = Configuration.GetSection("JwtTokenConfiguration").Get<JwtTokenConfiguration>();
             services.AddSingleton(jwtTokenConfiguration);
-            services.AddDbContext<IdentityContext>(options => options.UseSqlServer(Configuration["ConnectionString:DBConnection"]));
-            services.AddIdentityCore<ApplicationUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+            services.AddIdentityApplication();
+            services.AddIdentityInfrastructure(Configuration);
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -71,14 +64,6 @@ namespace Foodie.Identity
                     ClockSkew = TimeSpan.FromMinutes(1)
                 };
             });
-
-            services.AddMediatR(typeof(Startup));
-            services.AddAutoMapper(typeof(Startup));
-
-            services.AddTransient<IApplicationUsersRepository, ApplicationUsersRepository>();
-            services.AddTransient<IApplicationUserRolesRepository, ApplicationUserRolesRepository>();
-            services.AddTransient<IJwtService, JwtService>();
-            services.AddTransient<IAuthService, AuthService>();
             
             services.AddGrpc();
         }
@@ -86,6 +71,8 @@ namespace Foodie.Identity
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionMiddleware>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -104,8 +91,6 @@ namespace Foodie.Identity
                 endpoints.MapGrpcService<IdentityGrpcService>();
                 endpoints.MapControllers();
             });
-
-            DatabaseManagement.PreparePopulation(app);
         }
     }
 }

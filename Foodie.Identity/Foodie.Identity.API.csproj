@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.19.4" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.42.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.ClientFactory" Version="2.42.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.44.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.4" />
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.7.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Foode.Identity.Infrastructure\Foode.Identity.Infrastructure.csproj" />
+    <ProjectReference Include="..\Foodie.Identity.Application\Foodie.Identity.Application.csproj" />
+  </ItemGroup>
+  
+ <ItemGroup>
+    <Protobuf Include="Protos\identity-service.proto" GrpcServices="Server" />
+ </ItemGroup>
+
+</Project>

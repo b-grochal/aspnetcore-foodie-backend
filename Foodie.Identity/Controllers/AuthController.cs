@@ -1,4 +1,5 @@
-﻿using Foodie.Identity.Commands.Auth;
+﻿using Foodie.Identity.Application.Functions.Auth.Commands.SignIn;
+using Foodie.Identity.Application.Functions.Auth.Commands.SignUp;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +21,19 @@ namespace Foodie.Identity.Controllers
             this.mediator = mediator;
         }
 
-        // POST api/Auth/Login
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginCommand loginCommand)
+        // POST api/auth/sign-in
+        [HttpPost("sign-in")]
+        public async Task<IActionResult> SignIn([FromBody] SignInCommand signInCommand)
         {
-            var result = await mediator.Send(loginCommand);
+            var result = await mediator.Send(signInCommand);
+            return Ok(result);
+        }
+
+        // POST api/auth/sign-up
+        [HttpPost("sign-up")]
+        public async Task<IActionResult> SignUp([FromBody] SignUpCommand signUpCommand)
+        {
+            var result = await mediator.Send(signUpCommand);
             return Ok(result);
         }
     }
