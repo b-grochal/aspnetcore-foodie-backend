@@ -1,6 +1,5 @@
-﻿using Foodie.Basket.Commands;
-using Foodie.Basket.Queries;
-using MediatR;
+﻿using Foodie.Basket.Models;
+using Foodie.Basket.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,52 +16,49 @@ namespace Foodie.Basket.Controllers
     [Authorize]
     public class BasketController : ControllerBase
     {
-        private readonly IMediator mediator;
+        private readonly IBasketRepository basketRepository;
 
-        public BasketController(IMediator mediator)
+        public BasketController(IBasketRepository basketRepository)
         {
-            this.mediator = mediator;
+            this.basketRepository = basketRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetBasket()
         {
-            //var query = new GetBasketByIdQuery(GetUserId());
-            //var result = await mediator.Send(query);
-            //return Ok(result);
-            var command = new CheckoutBasketCommand();
-            command.ApplicationUserId = GetUserId();
-            await mediator.Send(command);
-            return Ok();
+            var result = await basketRepository.GetBasket(GetUserId());
+            return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateBasket([FromBody] UpdateBasketCommand updateBasketCommand)
+        public async Task<IActionResult> UpdateBasket([FromBody] CustomerBasket customerBasket)
         {
-            if (GetUserId() != updateBasketCommand.UserId)
+            if (GetUserId() != customerBasket.CustomerId)
             {
                 return BadRequest();
             }
 
-            await mediator.Send(updateBasketCommand);
-            return Ok();
+            var result = await basketRepository.UpdateBasket(customerBasket);
+            return Ok(result);
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteBasket()
         {
-            var command = new DeleteBasketCommand(GetUserId());
-            await mediator.Send(command);
+            await basketRepository.DeleteBasket(GetUserId());
             return Ok();
         }
 
         [Route("checkout")]
         //[HttpPost]
         [HttpGet]
-        public async Task<ActionResult> CheckoutAsync([FromBody] CheckoutBasketCommand checkoutBasketCommand)
+        public async Task<ActionResult> CheckoutAsync([FromBody] BasketCheckout basketCheckout)
         {
-            checkoutBasketCommand.ApplicationUserId = GetUserId();
-            await mediator.Send(checkoutBasketCommand);
+            //var identityServiceRequest = new GetApplicationUserRequest { Id = request.ApplicationUserId };
+            //var call = await identityServiceClient.GetApplicationUserAsync(identityServiceRequest);
+
+            //checkoutBasketCommand.ApplicationUserId = GetUserId();
+            //await mediator.Send(checkoutBasketCommand);
             return Ok();
         }
 

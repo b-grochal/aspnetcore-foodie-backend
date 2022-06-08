@@ -1,7 +1,5 @@
-using Foodie.Basket.Infrastructure;
 using Foodie.Basket.Repositories.Implementations;
 using Foodie.Basket.Repositories.Interfaces;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IdentityGrpc;
+using Foodie.Shared.Configuration;
 
 namespace Foodie.Basket
 {
@@ -61,10 +60,6 @@ namespace Foodie.Basket
                     ClockSkew = TimeSpan.FromMinutes(1)
                 };
             });
-
-            services.AddAutoMapper(typeof(Startup));
-            services.AddMediatR(typeof(Startup));
-
 
             services.AddStackExchangeRedisCache(options =>
             {
