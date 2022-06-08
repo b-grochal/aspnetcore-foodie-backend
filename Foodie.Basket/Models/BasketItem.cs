@@ -10,8 +10,7 @@ namespace Foodie.Basket.Models
         public int BasketItemId { get; set; }
         public int MealId { get; set; }
         public string MealName { get; set; }
-        public decimal MealPrice { get; set; }
+        public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
-        public string RestaurantName { get; set; }
     }
 }

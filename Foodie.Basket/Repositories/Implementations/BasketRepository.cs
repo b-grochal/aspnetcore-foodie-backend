@@ -19,14 +19,14 @@ namespace Foodie.Basket.Repositories.Implementations
             this.distributedCache = distributedCache;
         }
 
-        public async Task DeleteBasket(string userId)
+        public async Task DeleteBasket(string customerId)
         {
-            await distributedCache.RemoveAsync(userId);
+            await distributedCache.RemoveAsync(customerId);
         }
 
-        public async Task<CustomerBasket> GetBasket(string userId)
+        public async Task<CustomerBasket> GetBasket(string customerId)
         {
-            var redisBasket = await distributedCache.GetStringAsync(userId);
+            var redisBasket = await distributedCache.GetStringAsync(customerId);
             return JsonSerializer.Deserialize<CustomerBasket>(redisBasket, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -35,8 +35,8 @@ namespace Foodie.Basket.Repositories.Implementations
 
         public async Task<CustomerBasket> UpdateBasket(CustomerBasket basket)
         {
-            await distributedCache.SetStringAsync(basket.UserId, JsonSerializer.Serialize(basket));
-            return await GetBasket(basket.UserId);
+            await distributedCache.SetStringAsync(basket.CustomerId, JsonSerializer.Serialize(basket));
+            return await GetBasket(basket.CustomerId);
         }
     }
 }

@@ -7,7 +7,9 @@ namespace Foodie.Basket.Models
 {
     public class CustomerBasket
     {
-        public string UserId { get; set; }
+        public string CustomerId { get; set; }
+        public int RestaurantId { get; set; }
+        public int LocationId { get; set; }
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
 
         public CustomerBasket()
@@ -17,7 +19,7 @@ namespace Foodie.Basket.Models
 
         public CustomerBasket(string userId)
         {
-            this.UserId = userId;
+            this.CustomerId = userId;
         }
     }
 }

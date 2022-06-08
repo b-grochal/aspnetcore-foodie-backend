@@ -8,8 +8,8 @@ namespace Foodie.Basket.Repositories.Interfaces
 {
     public interface IBasketRepository
     {
-        Task<CustomerBasket> GetBasket(string userId);
-        Task<CustomerBasket> UpdateBasket(CustomerBasket basket);
+        Task<Models.CustomerBasket> GetBasket(string userId);
+        Task<Models.CustomerBasket> UpdateBasket(Models.CustomerBasket basket);
         Task DeleteBasket(string userId);
     }
 }
