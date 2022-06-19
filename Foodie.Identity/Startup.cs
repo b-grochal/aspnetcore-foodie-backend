@@ -64,7 +64,8 @@ namespace Foodie.Identity
                     ClockSkew = TimeSpan.FromMinutes(1)
                 };
             });
-            
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddGrpc();
         }
 
