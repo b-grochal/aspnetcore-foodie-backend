@@ -2,7 +2,7 @@
 
 option csharp_namespace = "IdentityGrpc";
 
-message ApplicationUser {
+message Customer {
   string id = 1;
   string firstName = 2;
   string lastName = 3;
@@ -12,13 +12,13 @@ message ApplicationUser {
 }
 
 service IdentityService {
-  rpc GetApplicationUser(GetApplicationUserRequest) returns (GetApplicationUserResponse);
+  rpc GetCustomer(GetCustomerRequest) returns (GetCustomerResponse);
 }
 
-message GetApplicationUserRequest {
+message GetCustomerRequest {
   string id = 1;
 }
-message GetApplicationUserResponse {
-  ApplicationUser applicationUser= 1;
+message GetCustomerResponse {
+  Customer customer= 1;
   string error = 2;
 }

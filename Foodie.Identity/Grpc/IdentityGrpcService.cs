@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Grpc.Core;
 using IdentityGrpc;
+using System;
+using System.Threading.Tasks;
 
-namespace Foodie.Identity.Grpc
+namespace Foodie.Identity.API.Grpc
 {
     public class IdentityGrpcService : IdentityService.IdentityServiceBase
     {
@@ -20,21 +18,21 @@ namespace Foodie.Identity.Grpc
             this.mapper = mapper;
         }
 
-        public override async Task<GetApplicationUserResponse> GetApplicationUser(GetApplicationUserRequest request, ServerCallContext context)
+        public override async Task<GetCustomerResponse> GetCustomer(GetCustomerRequest request, ServerCallContext context)
         {
             try
             {
                 if (request.Id != null)
                 {
-                    var applicationUser = await customersRepository.GetByIdAsync(request.Id);
-                    return new GetApplicationUserResponse
+                    var customer = await customersRepository.GetByIdAsync(request.Id);
+                    return new GetCustomerResponse
                     {
-                        ApplicationUser = mapper.Map<ApplicationUser>(applicationUser)
+                        Customer = mapper.Map<Customer>(customer)
                     };
                 }
                 else
                 {
-                    return new GetApplicationUserResponse
+                    return new GetCustomerResponse
                     {
                         Error = "ID is null or empty"
                     };
@@ -42,7 +40,7 @@ namespace Foodie.Identity.Grpc
             }
             catch (Exception ex)
             {
-                return new GetApplicationUserResponse
+                return new GetCustomerResponse
                 {
                     Error = $"{ex.Message}"
                 };

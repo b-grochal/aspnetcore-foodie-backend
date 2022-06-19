@@ -1,8 +1,8 @@
 using Foode.Identity.Infrastructure;
 using Foodie.Identity.API.Behaviours;
+using Foodie.Identity.API.Grpc;
 using Foodie.Identity.API.Middlewares;
 using Foodie.Identity.Application;
-using Foodie.Identity.Grpc;
 using Foodie.Shared.Configuration;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -64,7 +64,8 @@ namespace Foodie.Identity
                     ClockSkew = TimeSpan.FromMinutes(1)
                 };
             });
-            
+
+            services.AddAutoMapper(typeof(Startup));
             services.AddGrpc();
         }
 
