@@ -16,11 +16,11 @@ namespace Foodie.Orders.Domain.SeedWork
         {
             get
             {
-                return Id;
+                return id;
             }
             protected set
             {
-                Id = value;
+                id = value;
             }
         }
 
