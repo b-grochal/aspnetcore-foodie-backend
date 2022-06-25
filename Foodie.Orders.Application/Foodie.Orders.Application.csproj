@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Foodie.Orders.Domain\Foodie.Orders.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Functions\" />
+  </ItemGroup>
+
 </Project>

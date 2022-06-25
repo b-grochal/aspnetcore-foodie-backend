@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Orders.Application.Contracts.Infrastructure.Repositories
+namespace Foodie.Orders.Application.Contracts.Infrastructure.Context
 {
     public interface IUnitOfWork : IDisposable
     {
