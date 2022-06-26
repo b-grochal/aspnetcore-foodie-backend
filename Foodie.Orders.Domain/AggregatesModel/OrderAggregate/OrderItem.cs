@@ -10,9 +10,9 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
 {
     public class OrderItem : Entity
     {
-        private string productName;
-        private decimal unitPrice;
-        private int units;
+        private string _mealName;
+        private decimal _unitPrice;
+        private int _units;
 
         public int ProductId { get; private set; }
 
@@ -25,18 +25,18 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
                 throw new OrderingDomainException("Invalid number of units");
             }
 
-            this.ProductId = productId;
+            ProductId = productId;
 
-            this.productName = productName;
-            this.unitPrice = unitPrice;
-            this.units = units;
+            _mealName = productName;
+            _unitPrice = unitPrice;
+            _units = units;
         }
 
-        public int GetUnits() => units;
+        public int GetUnits() => _units;
 
-        public decimal GetUnitPrice() => unitPrice;
+        public decimal GetUnitPrice() => _unitPrice;
 
-        public string GetOrderItemProductName() => productName;
+        public string GetOrderItemProductName() => _mealName;
 
         public void AddUnits(int units)
         {
@@ -45,7 +45,7 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
                 throw new OrderingDomainException("Invalid units");
             }
 
-            this.units += units;
+            _units += units;
         }
     }
 }
