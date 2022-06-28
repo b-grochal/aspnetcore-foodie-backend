@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.32.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.4" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
@@ -18,6 +18,9 @@
   <ItemGroup>
     <Protobuf Include="..\Foodie.Identity\Protos\identity-service.proto" GrpcServices="Client">
       <Link>Protos\identity-service.proto</Link>
+    </Protobuf>
+    <Protobuf Include="..\Foodie.Meals\Protos\meals-service.proto" GrpcServices="Client">
+      <Link>Protos\meals-service.proto</Link>
     </Protobuf>
   </ItemGroup>
 

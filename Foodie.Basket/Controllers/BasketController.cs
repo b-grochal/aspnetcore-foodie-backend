@@ -1,6 +1,7 @@
 ﻿using Foodie.Basket.Models;
 using Foodie.Basket.Repositories.Interfaces;
 using IdentityGrpc;
+using MealsGrpc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,13 @@ namespace Foodie.Basket.Controllers
     {
         private readonly IBasketRepository basketRepository;
         private readonly IdentityService.IdentityServiceClient identityServiceClient;
+        private readonly MealsService.MealsServiceClient mealsServiceClient;
 
-        public BasketController(IBasketRepository basketRepository, IdentityService.IdentityServiceClient identityServiceClient)
+        public BasketController(IBasketRepository basketRepository, IdentityService.IdentityServiceClient identityServiceClient, MealsService.MealsServiceClient mealsServiceClient)
         {
             this.basketRepository = basketRepository;
             this.identityServiceClient = identityServiceClient;
+            this.mealsServiceClient = mealsServiceClient;
         }
 
         [HttpGet]
@@ -57,8 +60,11 @@ namespace Foodie.Basket.Controllers
         [HttpGet]
         public async Task<ActionResult> CheckoutAsync()
         {
-            var identityServiceRequest = new GetCustomerRequest { Id = "6a1ab648-6be8-44f1-87b7-394c34547589" };
-            var call = identityServiceClient.GetCustomer(identityServiceRequest);
+            //var identityServiceRequest = new GetCustomerRequest { Id = "6a1ab648-6be8-44f1-87b7-394c34547589" };
+            //var call = identityServiceClient.GetCustomer(identityServiceRequest);
+
+            var mealsServiceRequest = new GetLocationRequest { Id = 1 };
+            var call = await mealsServiceClient.GetLocationAsync(mealsServiceRequest);
 
             //checkoutBasketCommand.ApplicationUserId = GetUserId();
             //await mediator.Send(checkoutBasketCommand);
