@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option csharp_namespace = "MealsGrpc";
+
+message Location {
+  int32 locationId = 1;
+  string address = 2;
+  string phoneNumber = 3;
+  string email = 4;
+  int32 restaurantId = 5;
+  string restaurantName = 6;
+  int32 cityId = 7;
+  string cityName = 8;
+  string cityCountry = 9;
+}
+
+service MealsService {
+  rpc GetLocation(GetLocationRequest) returns (GetLocationResponse);
+}
+
+message GetLocationRequest {
+  int32 id = 1;
+}
+message GetLocationResponse {
+  Location location = 1;
+  string error = 2;
+}

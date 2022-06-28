@@ -1,4 +1,5 @@
 using Foodie.Meals.API.Behaviours;
+using Foodie.Meals.API.Grpc;
 using Foodie.Meals.API.Middlewares;
 using Foodie.Meals.Application;
 using Foodie.Meals.Infrastructure;
@@ -42,6 +43,9 @@ namespace Foodie.Meals
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Foodie.Meals", Version = "v1" });
             });
+
+            services.AddAutoMapper(typeof(Startup));
+            services.AddGrpc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +70,7 @@ namespace Foodie.Meals
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGrpcService<MealsGrpcService>();
                 endpoints.MapControllers();
             });
         }
