@@ -1,3 +1,5 @@
+using Foodie.Orders.Application.IntegrationEventsHandlers;
+using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +23,15 @@ namespace Foodie.Orders.API
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddMassTransit(x =>
+                    {
+                        x.AddConsumer<CustomerCheckoutIntegrationEventHandler>();
+                        x.SetKebabCaseEndpointNameFormatter();
+                        x.UsingRabbitMq((context, cfg) => cfg.ConfigureEndpoints(context));
+                    });
                 });
     }
 }

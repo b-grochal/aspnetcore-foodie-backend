@@ -1,4 +1,5 @@
-﻿using Foodie.Orders.Domain.SeedWork;
+﻿using Foodie.Orders.Application.Contracts.Infrastructure.Context;
+using Foodie.Orders.Domain.SeedWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;

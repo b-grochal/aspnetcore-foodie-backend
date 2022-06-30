@@ -5,11 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Foodie.EventBus\Foodie.EventBus.csproj" />
     <ProjectReference Include="..\Foodie.Orders.Domain\Foodie.Orders.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Functions\Orders\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.0.3" />
   </ItemGroup>
 
 </Project>

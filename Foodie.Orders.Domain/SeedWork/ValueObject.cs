@@ -47,4 +47,5 @@ namespace Foodie.Orders.Domain.SeedWork
         {
             return this.MemberwiseClone() as ValueObject;
         }
+    }
 }
