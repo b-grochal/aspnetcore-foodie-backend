@@ -107,7 +107,7 @@ namespace Foodie.Basket.Controllers
                 UserLastName = customer.LastName,
                 UserPhoneNumber = customer.PhoneNumber,
                 UserEmail = customer.Email,
-                AddressStreet = "TEST ADDRESS", //
+                AddressStreet = "TEST ADDRESS", // Address from BasketCheckout parameter
                 AddressCity = location.CityName,
                 AddressCountry = location.CityCountry,
                 RestaurantId = location.RestaurantId,

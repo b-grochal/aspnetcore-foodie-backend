@@ -51,7 +51,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodie.Orders.Domain", "Foo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodie.Orders.Application", "Foodie.Orders.Application\Foodie.Orders.Application.csproj", "{7711B130-0A41-44B4-8956-BAFD337E8E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodie.EventBus", "Foodie.EventBus\Foodie.EventBus.csproj", "{69F91A83-D643-48A9-9A51-8688FC0B4412}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodie.EventBus", "Foodie.EventBus\Foodie.EventBus.csproj", "{69F91A83-D643-48A9-9A51-8688FC0B4412}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodie.Orders.API", "Foodie.Orders.API\Foodie.Orders.API.csproj", "{DC6E3DF7-8A32-4CF4-926F-09296B0FFB48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +121,10 @@ Global
 		{69F91A83-D643-48A9-9A51-8688FC0B4412}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69F91A83-D643-48A9-9A51-8688FC0B4412}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69F91A83-D643-48A9-9A51-8688FC0B4412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6E3DF7-8A32-4CF4-926F-09296B0FFB48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6E3DF7-8A32-4CF4-926F-09296B0FFB48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6E3DF7-8A32-4CF4-926F-09296B0FFB48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6E3DF7-8A32-4CF4-926F-09296B0FFB48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -147,6 +153,7 @@ Global
 		{AFBB8703-CA04-4B78-B017-7BC6CA774B61} = {AD0E341A-26B9-4BB9-9807-1EC40A593483}
 		{7711B130-0A41-44B4-8956-BAFD337E8E6F} = {AD0E341A-26B9-4BB9-9807-1EC40A593483}
 		{69F91A83-D643-48A9-9A51-8688FC0B4412} = {EC234EF3-4F40-4108-8F59-45C471AF45BD}
+		{DC6E3DF7-8A32-4CF4-926F-09296B0FFB48} = {AD0E341A-26B9-4BB9-9807-1EC40A593483}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B309CF08-D90B-483E-B205-E73C05DDE90D}
