@@ -34,12 +34,36 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
             _orderItems = new List<OrderItemDTO>();
         }
 
+        public CreateOrderCommand(string userId, string userFirstName, string userLastName, string userPhoneNumber, string userEmail, string addressStreet, string addressCity,
+            string addressCountry, int restaurantId, string restaurantName, int locationId, string locationAddress, 
+            string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry, List<OrderItemDTO> orderItems) : this()
+        {
+            UserId = userId;
+            UserFirstName = userFirstName;
+            UserLastName = userLastName;
+            UserPhoneNumber = userPhoneNumber;
+            UserEmail = userEmail;
+            AddressStreet = addressStreet;
+            AddressCity = addressCity;
+            AddressCountry = addressCountry;
+            RestaurantId = restaurantId;
+            RestaurantName = restaurantName;
+            LocationId = locationId;
+            LocationAddress = locationAddress;
+            LocationPhoneNumber = locationPhoneNumber;
+            LocationEmail = locationEmail;
+            CityId = cityId;
+            CityName = cityName;
+            LocationCountry = locationCountry;
+            _orderItems = orderItems;
+        }
+
         public record OrderItemDTO
         {
             public int MealId { get; init; }
             public string MealName { get; init; }
             public decimal UnitPrice { get; init; }
-            public int Units { get; init; }
+            public int Quantity { get; init; }
         }
     }
 }

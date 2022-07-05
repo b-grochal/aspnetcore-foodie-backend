@@ -47,7 +47,7 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
 
             if (existingOrderForProduct != null)
             {
-                existingOrderForProduct.AddUnits(units);
+                existingOrderForProduct.AddQuantity(units);
             }
             else
             {
@@ -97,7 +97,7 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
 
         public decimal GetTotal()
         {
-            return _orderItems.Sum(o => o.GetUnits() * o.GetUnitPrice());
+            return _orderItems.Sum(o => o.GetQuantity() * o.GetUnitPrice());
         }
 
     }

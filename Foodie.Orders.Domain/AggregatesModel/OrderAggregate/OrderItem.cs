@@ -12,15 +12,15 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
     {
         private string _mealName;
         private decimal _unitPrice;
-        private int _units;
+        private int _quantity;
 
         public int ProductId { get; private set; }
 
         protected OrderItem() { }
 
-        public OrderItem(int productId, string productName, decimal unitPrice, int units = 1)
+        public OrderItem(int productId, string productName, decimal unitPrice, int quantity = 1)
         {
-            if (units <= 0)
+            if (quantity <= 0)
             {
                 throw new OrderingDomainException("Invalid number of units");
             }
@@ -29,23 +29,23 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
 
             _mealName = productName;
             _unitPrice = unitPrice;
-            _units = units;
+            _quantity = quantity;
         }
 
-        public int GetUnits() => _units;
+        public int GetQuantity() => _quantity;
 
         public decimal GetUnitPrice() => _unitPrice;
 
         public string GetOrderItemProductName() => _mealName;
 
-        public void AddUnits(int units)
+        public void AddQuantity(int quantity)
         {
-            if (units < 0)
+            if (quantity < 0)
             {
-                throw new OrderingDomainException("Invalid units");
+                throw new OrderingDomainException("Invalid quantity");
             }
 
-            _units += units;
+            _quantity += quantity;
         }
     }
 }
