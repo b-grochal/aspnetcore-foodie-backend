@@ -30,7 +30,7 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
             _orderItems = new List<OrderItem>();
         }
 
-        public Order(string userId, string userEmail, Address address, int? buyerId) : this()
+        public Order(string userId, string userEmail, Address address, int? buyerId = null) : this()
         {
             _buyerId = buyerId;
             _orderStatusId = OrderStatus.Started.Id;
@@ -42,7 +42,7 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
 
         public void AddOrderItem(int productId, string productName, decimal unitPrice, int units = 1)
         {
-            var existingOrderForProduct = _orderItems.Where(o => o.ProductId == productId)
+            var existingOrderForProduct = _orderItems.Where(o => o.MealId == productId)
                 .SingleOrDefault();
 
             if (existingOrderForProduct != null)
