@@ -1,4 +1,5 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.EventBus.IntegrationEvents.Basket;
+using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.AggregatesModel.OrderAggregate;
 using MassTransit;
 using MediatR;
@@ -26,11 +27,25 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
 
         public async Task<Unit> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            await _publishEndpoint.
+            await _publishEndpoint.Publish<OrderStartedIntegrationEvent>(new
+            {
+                UserId = request.UserId
+            });
 
             var address = new Address(request.AddressStreet, request.AddressCity, request.AddressCountry);
-            var order = new Order(request.UserId, request.UserEmail, address);
-            throw new NotImplementedException();
+            var order = new Order(request.UserId, request.UserFirstName, request.UserLastName, request.UserPhoneNumber, request.UserEmail, request.RestaurantId, request.RestaurantName, 
+                request.LocationId, request.LocationAddress, request.LocationPhoneNumber, request.LocationEmail, request.CityId, request.CityName, request.LocationCountry, address);
+
+            foreach(var item in request.OrderItems)
+            {
+                order.AddOrderItem(item.MealId, item.MealName, item.UnitPrice, item.Quantity);
+            }
+
+            await _ordersRepository.Add(order);
+
+            await _ordersRepository.UnitOfWork.SaveEntitiesAsync();
+
+            return Unit.Value;
         }
     }
 }

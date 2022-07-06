@@ -43,18 +43,18 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
                 locationAddress, locationPhoneNumber, locationEmail, cityId, cityName, locationCountry);
         }
 
-        public void AddOrderItem(int productId, string productName, decimal unitPrice, int units = 1)
+        public void AddOrderItem(int mealId, string mealName, decimal unitPrice, int quantity = 1)
         {
-            var existingOrderForProduct = _orderItems.Where(o => o.MealId == productId)
+            var existingOrderForProduct = _orderItems.Where(o => o.MealId == mealId)
                 .SingleOrDefault();
 
             if (existingOrderForProduct != null)
             {
-                existingOrderForProduct.AddQuantity(units);
+                existingOrderForProduct.AddQuantity(quantity);
             }
             else
             {
-                var orderItem = new OrderItem(productId, productName, unitPrice, units);
+                var orderItem = new OrderItem(mealId, mealName, unitPrice, quantity);
                 _orderItems.Add(orderItem);
             }
         }
