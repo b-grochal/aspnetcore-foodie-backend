@@ -41,7 +41,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
                 order.AddOrderItem(item.MealId, item.MealName, item.UnitPrice, item.Quantity);
             }
 
-            await _ordersRepository.Add(order);
+            await _ordersRepository.CreateAsync(order);
 
             await _ordersRepository.UnitOfWork.SaveEntitiesAsync();
 
