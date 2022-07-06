@@ -30,14 +30,17 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
             _orderItems = new List<OrderItem>();
         }
 
-        public Order(string userId, string userEmail, Address address, int? buyerId = null) : this()
+        public Order(string userId, string userFirstName, string userLastName, string userPhoneNumber, string userEmail, int restaurantId, string restaurantName, int locationId, string locationAddress,
+            string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry, Address address, int? buyerId = null, int? contractorId = null) : this()
         {
             _buyerId = buyerId;
+            _contractorId = contractorId;
             _orderStatusId = OrderStatus.Started.Id;
             _orderDate = DateTime.UtcNow;
             Address = address;
 
-            AddOrderStartedDomainEvent(userId, userEmail);
+            AddOrderStartedDomainEvent(userId, userFirstName, userLastName, userPhoneNumber, userEmail, restaurantId, restaurantName, locationId, 
+                locationAddress, locationPhoneNumber, locationEmail, cityId, cityName, locationCountry);
         }
 
         public void AddOrderItem(int productId, string productName, decimal unitPrice, int units = 1)
@@ -56,9 +59,11 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
             }
         }
 
-        private void AddOrderStartedDomainEvent(string userId, string userName)
+        private void AddOrderStartedDomainEvent(string userId, string userFirstName, string userLastName, string userPhoneNumber, string userEmail, int restaurantId, string restaurantName, int locationId,
+                string locationAddress, string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry)
         {
-            var orderStartedDomainEvent = new OrderStartedDomainEvent(this, userId, userName);
+            var orderStartedDomainEvent = new OrderStartedDomainEvent(userId, userFirstName, userLastName, userPhoneNumber, userEmail, restaurantId, restaurantName, locationId,
+                locationAddress, locationPhoneNumber, locationEmail, cityId, cityName, locationCountry, this);
             AddDomainEvent(orderStartedDomainEvent);
         }
 
