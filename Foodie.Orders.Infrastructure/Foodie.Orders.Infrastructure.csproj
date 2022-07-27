@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Foodie.Orders.Application\Foodie.Orders.Application.csproj" />
     <ProjectReference Include="..\Foodie.Orders.Domain\Foodie.Orders.Domain.csproj" />
   </ItemGroup>
 
