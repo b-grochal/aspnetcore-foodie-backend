@@ -2,6 +2,7 @@
 using Foodie.Orders.Domain.AggregatesModel.BuyerAggregate;
 using Foodie.Orders.Domain.AggregatesModel.ContractorAggregate;
 using Foodie.Orders.Domain.AggregatesModel.OrderAggregate;
+using Foodie.Orders.Infrastructure.Configurations;
 using Foodie.Orders.Infrastructure.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Orders.Infrastructure
+namespace Foodie.Orders.Infrastructure.Contexts
 {
     public class OrdersDbContext : DbContext, IUnitOfWork 
     {
@@ -32,7 +33,7 @@ namespace Foodie.Orders.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
         }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
