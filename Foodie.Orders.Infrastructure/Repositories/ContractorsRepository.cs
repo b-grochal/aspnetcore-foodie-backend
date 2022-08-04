@@ -1,6 +1,8 @@
 ﻿using Foodie.Orders.Application.Contracts.Infrastructure.Context;
 using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.AggregatesModel.ContractorAggregate;
+using Foodie.Orders.Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +13,22 @@ namespace Foodie.Orders.Infrastructure.Repositories
 {
     public class ContractorsRepository : IContractorsRepository
     {
+        private readonly OrdersDbContext _ordersDbContext;
         public IUnitOfWork UnitOfWork => throw new NotImplementedException();
 
-        public Task<Contractor> CreateAsync(Contractor contractor)
+        public ContractorsRepository(OrdersDbContext ordersDbContext)
         {
-            throw new NotImplementedException();
+            _ordersDbContext = ordersDbContext;
         }
 
-        public Task<Contractor> GetByIdAsync(int id)
+        public Contractor Create(Contractor contractor)
         {
-            throw new NotImplementedException();
+            return _ordersDbContext.Contractors.Add(contractor).Entity;
         }
 
-        public Task UpdateAsync(Contractor contractor)
+        public void Update(Contractor contractor)
         {
-            throw new NotImplementedException();
+            _ordersDbContext.Entry(contractor).State = EntityState.Modified;
         }
     }
 }

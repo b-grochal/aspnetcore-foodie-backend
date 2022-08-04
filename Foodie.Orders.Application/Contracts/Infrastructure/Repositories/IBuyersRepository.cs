@@ -9,8 +9,7 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Repositories
 {
     public interface IBuyersRepository : IRepository<Buyer>
     {
-        Task<Buyer> CreateAsync(Buyer buyer);
-        Task UpdateAsync(Buyer buyer);
-        Task<Buyer> GetByIdAsync(int id);
+        Buyer Create(Buyer buyer);
+        void Update(Buyer buyer);
     }
 }

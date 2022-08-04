@@ -9,8 +9,7 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Repositories
 {
     public interface IContractorsRepository : IRepository<Contractor>
     {
-        Task<Contractor> CreateAsync(Contractor contractor);
-        Task UpdateAsync(Contractor contractor);
-        Task<Contractor> GetByIdAsync(int id);
+        Contractor Create(Contractor contractor);
+        void Update(Contractor contractor);
     }
 }

@@ -26,11 +26,6 @@ namespace Foodie.Orders.Infrastructure.Repositories
             return _ordersDbContext.Orders.Add(order).Entity;
         }
 
-        public Task<Order> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update(Order order)
         {
             _ordersDbContext.Entry(order).State = EntityState.Modified;

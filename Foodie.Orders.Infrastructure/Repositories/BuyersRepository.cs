@@ -1,6 +1,8 @@
 ﻿using Foodie.Orders.Application.Contracts.Infrastructure.Context;
 using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.AggregatesModel.BuyerAggregate;
+using Foodie.Orders.Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +13,22 @@ namespace Foodie.Orders.Infrastructure.Repositories
 {
     public class BuyersRepository : IBuyersRepository
     {
+        private readonly OrdersDbContext _ordersDbContext;
         public IUnitOfWork UnitOfWork => throw new NotImplementedException();
 
-        public Task<Buyer> CreateAsync(Buyer buyer)
+        public BuyersRepository(OrdersDbContext ordersDbContext)
         {
-            throw new NotImplementedException();
+            _ordersDbContext = ordersDbContext;
         }
 
-        public Task<Buyer> GetByIdAsync(int id)
+        public Buyer Create(Buyer buyer)
         {
-            throw new NotImplementedException();
+            return _ordersDbContext.Buyers.Add(buyer).Entity;
         }
 
-        public Task UpdateAsync(Buyer buyer)
+        public void Update(Buyer buyer)
         {
-            throw new NotImplementedException();
+            _ordersDbContext.Entry(buyer).State = EntityState.Modified;
         }
     }
 }
