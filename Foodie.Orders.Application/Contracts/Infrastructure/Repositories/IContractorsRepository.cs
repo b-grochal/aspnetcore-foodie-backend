@@ -11,5 +11,6 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Repositories
     {
         Contractor Create(Contractor contractor);
         void Update(Contractor contractor);
+        Task<Contractor> GetByIdAsync(int id);
     }
 }

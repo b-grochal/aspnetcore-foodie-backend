@@ -30,5 +30,10 @@ namespace Foodie.Orders.Infrastructure.Repositories
         {
             _ordersDbContext.Entry(contractor).State = EntityState.Modified;
         }
+
+        public Task<Contractor> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

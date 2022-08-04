@@ -11,5 +11,6 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Repositories
     {
         Buyer Create(Buyer buyer);
         void Update(Buyer buyer);
+        Task<Buyer> GetByIdAsync(int id);
     }
 }

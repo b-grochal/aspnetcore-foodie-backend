@@ -11,5 +11,6 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Repositories
     {
         Order Create(Order order);
         void Update(Order order);
+        Task<Order> GetByIdAsync(int id);
     }
 }
