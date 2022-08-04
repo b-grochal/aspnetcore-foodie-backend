@@ -9,8 +9,8 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Repositories
 {
     public interface IOrdersRepository : IRepository<Order>
     {
-        Task<Order> CreateAsync(Order order);
-        Task UpdateAsync(Order order);
+        Order Create(Order order);
+        void Update(Order order);
         Task<Order> GetByIdAsync(int id);
     }
 }
