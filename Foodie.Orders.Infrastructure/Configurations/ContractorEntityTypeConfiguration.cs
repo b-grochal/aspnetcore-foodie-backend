@@ -13,7 +13,7 @@ namespace Foodie.Orders.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Contractor> contractorConfiguration)
         {
-            contractorConfiguration.ToTable("contractors");
+            contractorConfiguration.ToTable("Contractors");
             contractorConfiguration.HasKey(c => c.Id);
             contractorConfiguration.Ignore(c => c.DomainEvents);
 

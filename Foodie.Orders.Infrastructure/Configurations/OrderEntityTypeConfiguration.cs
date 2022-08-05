@@ -15,7 +15,7 @@ namespace Foodie.Orders.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Order> orderConfiguration)
         {
-            orderConfiguration.ToTable("orders");
+            orderConfiguration.ToTable("Orders");
             orderConfiguration.HasKey(o => o.Id);
             orderConfiguration.Ignore(o => o.DomainEvents);
 

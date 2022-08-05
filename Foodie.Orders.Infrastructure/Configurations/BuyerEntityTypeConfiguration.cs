@@ -13,7 +13,7 @@ namespace Foodie.Orders.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Buyer> buyerConfiguration)
         {
-            buyerConfiguration.ToTable("buyers");
+            buyerConfiguration.ToTable("Buyers");
             buyerConfiguration.HasKey(b => b.Id);
             buyerConfiguration.Ignore(b => b.DomainEvents);
 

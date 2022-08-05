@@ -13,7 +13,7 @@ namespace Foodie.Orders.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<OrderItem> orderItemConfiguration)
         {
-            orderItemConfiguration.ToTable("orderItems");
+            orderItemConfiguration.ToTable("OrderItems");
             orderItemConfiguration.HasKey(o => o.Id);
             orderItemConfiguration.Ignore(b => b.DomainEvents);
 
