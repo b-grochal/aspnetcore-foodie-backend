@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
 {
-    internal interface IOrderQueries
+    public interface IOrderQueries
     {
-        Task<Order> GetByIdAsync(int id);
-        Task<IEnumerable<Order>> GetAllAsync(string userId);
+        Task<OrderDto> GetByIdAsync(int id);
+        Task<IEnumerable<OrderDto>> GetAllAsync(string buyerEmail, string orderStatusName, int pageNumber, int pageSize);
     }
 }
