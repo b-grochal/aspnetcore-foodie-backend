@@ -10,6 +10,6 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
     public interface IOrderQueries
     {
         Task<OrderDetailsDto> GetByIdAsync(int id);
-        Task<IEnumerable<OrderDto>> GetAllAsync(string buyerEmail, string orderStatusName, int pageNumber, int pageSize);
+        Task<IEnumerable<OrderDto>> GetAllAsync(string buyerEmail, string orderStatusName, string contractorName, int pageNumber, int pageSize);
     }
 }
