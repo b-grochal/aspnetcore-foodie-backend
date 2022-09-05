@@ -39,6 +39,7 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
         public string ContractorEmail { get; set; }
         public string ContractorCity { get; set; }
         public string ContractorCountry { get; set; }
+        public IList<OrderItemDto> OrderItems { get; set; }
     }
 
     public record OrderItemDto
