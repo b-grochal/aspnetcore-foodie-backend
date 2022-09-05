@@ -28,7 +28,7 @@ namespace Foodie.Orders.Infrastructure.Configurations
             orderConfiguration
             .Property<int?>("_contractorId")
             .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("BuyerId")
+            .HasColumnName("ContractorId")
             .IsRequired(false);
 
             orderConfiguration
