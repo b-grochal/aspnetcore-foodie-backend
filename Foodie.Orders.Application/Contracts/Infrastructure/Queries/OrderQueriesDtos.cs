@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
 {
-    public record OrderDto
+    public record OrderQueryDto
     {
         public int OrderId { get; set; }
         public DateTimeOffset OrderDate { get; set; }
@@ -18,7 +18,7 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
         public string ContactorName { get; set; }
     }
 
-    public record OrderDetailsDto
+    public record OrderDetailsQueryDto
     {
         public int OrderId { get; set; }
         public DateTimeOffset OrderDate { get; set; }
@@ -39,10 +39,10 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
         public string ContractorEmail { get; set; }
         public string ContractorCity { get; set; }
         public string ContractorCountry { get; set; }
-        public IList<OrderItemDto> OrderItems { get; set; }
+        public IList<OrderItemQueryDto> OrderItems { get; set; }
     }
 
-    public record OrderItemDto
+    public record OrderItemQueryDto
     {
         public int OrderItemId { get; set; }
         public string Name { get; set; }

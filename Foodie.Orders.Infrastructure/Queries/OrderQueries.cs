@@ -19,7 +19,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             _dapperContext = dapperContext;
         }
 
-        public async Task<IEnumerable<OrderDto>> GetAllAsync(string buyerEmail, string orderStatusName, string contractorName, int pageNumber, int pageSize)
+        public async Task<IEnumerable<OrderQueryDto>> GetAllAsync(string buyerEmail, string orderStatusName, string contractorName, int pageNumber, int pageSize)
         {
             var builder = new SqlBuilder();
 
@@ -42,10 +42,10 @@ namespace Foodie.Orders.Infrastructure.Queries
             using var connection = _dapperContext.CreateConnection();
             connection.Open();
 
-            return await connection.QueryAsync<OrderDto>(selector.RawSql);
+            return await connection.QueryAsync<OrderQueryDto>(selector.RawSql);
         }
 
-        public async Task<OrderDetailsDto> GetByIdAsync(int id)
+        public async Task<OrderDetailsQueryDto> GetByIdAsync(int id)
         {
             var builder = new SqlBuilder();
 
@@ -66,7 +66,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             using var connection = _dapperContext.CreateConnection();
             connection.Open();
 
-            var sqlQueryResult = await connection.QueryAsync<OrderDetailsDto, OrderItemDto, OrderDetailsDto>(selector.RawSql,
+            var sqlQueryResult = await connection.QueryAsync<OrderDetailsQueryDto, OrderItemQueryDto, OrderDetailsQueryDto>(selector.RawSql,
                 map: (orderDetails, orderItem) =>
                 {
                     orderDetails.OrderItems.Add(orderItem);

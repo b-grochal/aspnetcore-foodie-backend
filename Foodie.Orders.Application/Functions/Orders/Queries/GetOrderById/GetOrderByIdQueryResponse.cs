@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById
 {
-    public class OrderDetailsResponse
+    public class GetOrderByIdQueryResponse
     {
     }
 }
