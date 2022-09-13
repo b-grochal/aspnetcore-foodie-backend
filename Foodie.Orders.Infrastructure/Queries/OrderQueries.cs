@@ -2,6 +2,7 @@
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries;
 using Foodie.Orders.Domain.AggregatesModel.OrderAggregate;
 using Foodie.Orders.Infrastructure.Contexts;
+using Foodie.Shared.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             _dapperContext = dapperContext;
         }
 
-        public async Task<IEnumerable<OrderQueryDto>> GetAllAsync(string buyerEmail, string orderStatusName, string contractorName, int pageNumber, int pageSize)
+        public async Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, string buyerEmail, string orderStatusName, string contractorName)
         {
             var builder = new SqlBuilder();
 
@@ -42,7 +43,8 @@ namespace Foodie.Orders.Infrastructure.Queries
             using var connection = _dapperContext.CreateConnection();
             connection.Open();
 
-            return await connection.QueryAsync<OrderQueryDto>(selector.RawSql);
+            var orders = await connection.QueryAsync<OrderQueryDto>(selector.RawSql);
+            return PagedList<OrderQueryDto>.ToPagedList(orders, pageNumber, pageSize);
         }
 
         public async Task<OrderDetailsQueryDto> GetByIdAsync(int id)
