@@ -1,5 +1,7 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Orders.Application.Contracts.Infrastructure.Queries;
+using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Infrastructure.Contexts;
+using Foodie.Orders.Infrastructure.Queries;
 using Foodie.Orders.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,7 @@ namespace Foodie.Orders.Infrastructure
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IBuyersRepository, BuyersRepository>();
             services.AddScoped<IContractorsRepository, ContractorsRepository>();
+            services.AddScoped<IOrderQueries, OrderQueries>();
 
             return services;
         }
