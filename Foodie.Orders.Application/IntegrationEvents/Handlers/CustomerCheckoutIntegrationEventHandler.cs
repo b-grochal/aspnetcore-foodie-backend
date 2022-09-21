@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder.CreateOrderCommand;
 
-namespace Foodie.Orders.Application.IntegrationEventsHandlers
+namespace Foodie.Orders.Application.IntegrationEvents.Handlers
 {
     public class CustomerCheckoutIntegrationEventHandler : IConsumer<CustomerCheckoutIntegrationEvent>
     {

@@ -26,14 +26,20 @@ namespace Foodie.Orders.Infrastructure.Repositories
             return _ordersDbContext.Contractors.Add(contractor).Entity;
         }
 
-        public void Update(Contractor contractor)
+        public Contractor Update(Contractor contractor)
         {
-            _ordersDbContext.Entry(contractor).State = EntityState.Modified;
+            //_ordersDbContext.Entry(contractor).State = EntityState.Modified;
+            return _ordersDbContext.Contractors.Update(contractor).Entity;
         }
 
         public Task<Contractor> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<Contractor> GetByRestaurantIdAsync(int restaurantId)
+        {
+            return await _ordersDbContext.Contractors.FirstOrDefaultAsync(x => x.RestaurantId== restaurantId);
         }
     }
 }

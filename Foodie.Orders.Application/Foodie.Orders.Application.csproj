@@ -17,4 +17,12 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DomainEventsHandlers\OrderStatusChangedToInProgress\" />
+    <Folder Include="DomainEventsHandlers\OrderStatusChangedToInDelivery\" />
+    <Folder Include="DomainEventsHandlers\OrderDelivered\" />
+    <Folder Include="DomainEventsHandlers\OrderCancelled\" />
+    <Folder Include="IntegrationEvents\Events\" />
+  </ItemGroup>
+
 </Project>
