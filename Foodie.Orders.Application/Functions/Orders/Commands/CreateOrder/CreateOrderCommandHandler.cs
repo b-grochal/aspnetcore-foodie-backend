@@ -1,4 +1,5 @@
 ﻿using Foodie.EventBus.IntegrationEvents.Basket;
+using Foodie.EventBus.IntegrationEvents.Orders;
 using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.AggregatesModel.OrderAggregate;
 using MassTransit;

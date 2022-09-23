@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.EventBus.IntegrationEvents.Basket
+namespace Foodie.EventBus.IntegrationEvents.Orders
 {
     public interface OrderStartedIntegrationEvent : IntegrationEvent
     {
