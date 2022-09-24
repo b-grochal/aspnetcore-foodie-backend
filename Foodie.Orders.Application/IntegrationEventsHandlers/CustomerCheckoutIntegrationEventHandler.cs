@@ -15,9 +15,9 @@ namespace Foodie.Orders.Application.IntegrationEventsHandlers
     {
         private readonly IMediator _medaitor;
 
-        public CustomerCheckoutIntegrationEventHandler()
+        public CustomerCheckoutIntegrationEventHandler(IMediator mediator)
         {
-           
+            _medaitor = mediator;
         }
 
         public async Task Consume(ConsumeContext<CustomerCheckoutIntegrationEvent> context)
