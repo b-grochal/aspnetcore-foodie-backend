@@ -16,7 +16,7 @@ namespace Foodie.Orders.Infrastructure.Contexts
         public DapperContext(IConfiguration configuration)
         {
             _configuration = configuration;
-            _connectionString = _configuration.GetConnectionString("SqlConnection");
+            _connectionString = _configuration.GetConnectionString("DbConnection");
         }
         public IDbConnection CreateConnection()
             => new SqlConnection(_connectionString);
