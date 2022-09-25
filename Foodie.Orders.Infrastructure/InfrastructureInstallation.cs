@@ -20,6 +20,7 @@ namespace Foodie.Orders.Infrastructure
         {
             services.AddDbContext<OrdersDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DbConnection")));
+            services.AddSingleton<DapperContext>();
 
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IBuyersRepository, BuyersRepository>();

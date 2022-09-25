@@ -23,7 +23,7 @@ namespace Foodie.Orders.Infrastructure.Repositories
 
         public Buyer Create(Buyer buyer)
         {
-            return _ordersDbContext.Buyers.AddAsync(buyer).Entity;
+            return _ordersDbContext.Buyers.Add(buyer).Entity;
         }
 
         public Buyer Update(Buyer buyer)

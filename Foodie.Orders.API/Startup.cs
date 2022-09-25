@@ -1,3 +1,4 @@
+using Foodie.Orders.Application;
 using Foodie.Orders.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +28,9 @@ namespace Foodie.Orders.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOrdersApplication();
             services.AddOrdersInfrastructure(Configuration);
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
