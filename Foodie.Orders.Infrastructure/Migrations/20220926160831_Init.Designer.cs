@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foodie.Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20220805165835_Init")]
+    [Migration("20220926160831_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,14 +97,12 @@ namespace Foodie.Orders.Infrastructure.Migrations
                         .UseIdentityColumn();
 
                     b.Property<int?>("_buyerId")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int")
                         .HasColumnName("BuyerId");
 
                     b.Property<int?>("_contractorId")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("int")
-                        .HasColumnName("BuyerId");
+                        .HasColumnName("ContractorId");
 
                     b.Property<DateTime>("_orderDate")
                         .HasColumnType("datetime2")
@@ -164,16 +162,17 @@ namespace Foodie.Orders.Infrastructure.Migrations
             modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.OrderStatus", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasDefaultValue(1);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderStatus");
+                    b.ToTable("OrderStatuses");
                 });
 
             modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.Order", b =>

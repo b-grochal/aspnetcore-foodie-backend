@@ -30,6 +30,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             builder.InnerJoin("Buyers b on o.BuyerId = b.Id");
             builder.InnerJoin("Contractors c on o.ContractorId = c.Id");
             builder.InnerJoin("OrderStatuses os on o.OrderStatusId = os.Id");
+            builder.OrderBy("o.Id");
             
             if (buyerEmail != null)
                 builder.Where("b.Email = @buyerEmail", new { buyerEmail });
@@ -41,9 +42,10 @@ namespace Foodie.Orders.Infrastructure.Queries
                 builder.Where("os.Name= @orderStatusName", new { orderStatusName });
 
             using var connection = _dapperContext.CreateConnection();
+            
             connection.Open();
 
-            var orders = await connection.QueryAsync<OrderQueryDto>(selector.RawSql);
+            var orders = await connection.QueryAsync<OrderQueryDto>(selector.RawSql, selector.Parameters);
             return PagedList<OrderQueryDto>.ToPagedList(orders, pageNumber, pageSize);
         }
 

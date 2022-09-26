@@ -160,16 +160,17 @@ namespace Foodie.Orders.Infrastructure.Migrations
             modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.OrderStatus", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasDefaultValue(1);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderStatus");
+                    b.ToTable("OrderStatuses");
                 });
 
             modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.Order", b =>

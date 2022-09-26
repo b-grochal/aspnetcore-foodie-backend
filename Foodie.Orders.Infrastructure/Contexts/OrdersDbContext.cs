@@ -37,6 +37,7 @@ namespace Foodie.Orders.Infrastructure.Contexts
             modelBuilder.ApplyConfiguration(new OrderItemEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new BuyerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ContractorEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderStatusEntityTypeConfiguration());
         }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)

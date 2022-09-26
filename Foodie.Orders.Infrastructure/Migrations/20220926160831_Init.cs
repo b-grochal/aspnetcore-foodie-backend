@@ -46,16 +46,15 @@ namespace Foodie.Orders.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderStatus",
+                name: "OrderStatuses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderStatus", x => x.Id);
+                    table.PrimaryKey("PK_OrderStatuses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,6 +68,7 @@ namespace Foodie.Orders.Infrastructure.Migrations
                     Address_Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OrderStatusId = table.Column<int>(type: "int", nullable: false),
                     BuyerId = table.Column<int>(type: "int", nullable: true),
+                    ContractorId = table.Column<int>(type: "int", nullable: true),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -81,15 +81,15 @@ namespace Foodie.Orders.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Orders_Contractors_BuyerId",
-                        column: x => x.BuyerId,
+                        name: "FK_Orders_Contractors_ContractorId",
+                        column: x => x.ContractorId,
                         principalTable: "Contractors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Orders_OrderStatus_OrderStatusId",
+                        name: "FK_Orders_OrderStatuses_OrderStatusId",
                         column: x => x.OrderStatusId,
-                        principalTable: "OrderStatus",
+                        principalTable: "OrderStatuses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -129,6 +129,11 @@ namespace Foodie.Orders.Infrastructure.Migrations
                 column: "BuyerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_ContractorId",
+                table: "Orders",
+                column: "ContractorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_OrderStatusId",
                 table: "Orders",
                 column: "OrderStatusId");
@@ -149,7 +154,7 @@ namespace Foodie.Orders.Infrastructure.Migrations
                 name: "Contractors");
 
             migrationBuilder.DropTable(
-                name: "OrderStatus");
+                name: "OrderStatuses");
         }
     }
 }
