@@ -20,7 +20,7 @@ namespace Foodie.Orders.Infrastructure.Configurations
             orderItemConfiguration.Property<int>("OrderId")
                 .IsRequired();
 
-            orderItemConfiguration.Property<int>("ProductId")
+            orderItemConfiguration.Property<int>("MealId")
                 .IsRequired();
 
             orderItemConfiguration

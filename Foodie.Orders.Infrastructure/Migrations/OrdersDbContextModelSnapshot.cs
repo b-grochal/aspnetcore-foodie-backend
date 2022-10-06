@@ -134,9 +134,6 @@ namespace Foodie.Orders.Infrastructure.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<string>("_name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
