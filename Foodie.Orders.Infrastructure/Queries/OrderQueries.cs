@@ -64,15 +64,26 @@ namespace Foodie.Orders.Infrastructure.Queries
             builder.InnerJoin("Buyers b on o.BuyerId = b.Id");
             builder.InnerJoin("Contractors c on o.ContractorId = c.Id");
             builder.InnerJoin("OrderStatuses os on o.OrderStatusId = os.Id");
-            builder.InnerJoin("OrderItems oi on o.OrderId = oi.OrderId");
+            builder.InnerJoin("OrderItems oi on o.Id = oi.OrderId");
             builder.Where("o.Id = @id", new { id });
 
             using var connection = _dapperContext.CreateConnection();
             connection.Open();
 
-            var sqlQueryResult = await connection.QueryAsync<OrderDetailsQueryDto, OrderItemQueryDto, OrderDetailsQueryDto>(selector.RawSql,
+            var ordersMap = new Dictionary<int, OrderDetailsQueryDto>();
+            var sqlQueryResult = await connection.QueryAsync<OrderDetailsQueryDto, OrderItemQueryDto, OrderDetailsQueryDto>(selector.RawSql, param: selector.Parameters,
                 map: (orderDetails, orderItem) =>
                 {
+                    if (ordersMap.TryGetValue(orderDetails.OrderId, out OrderDetailsQueryDto existingOrder))
+                    {
+                        orderDetails = existingOrder;
+                    }
+                    else
+                    {
+                        orderDetails.OrderItems = new List<OrderItemQueryDto>();
+                        ordersMap.Add(orderDetails.OrderId, orderDetails);
+                    }
+
                     orderDetails.OrderItems.Add(orderItem);
                     return orderDetails;
                 },
