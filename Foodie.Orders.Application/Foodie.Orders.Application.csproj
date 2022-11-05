@@ -22,7 +22,6 @@
     <Folder Include="DomainEventsHandlers\OrderStatusChangedToInDelivery\" />
     <Folder Include="DomainEventsHandlers\OrderDelivered\" />
     <Folder Include="DomainEventsHandlers\OrderCancelled\" />
-    <Folder Include="Functions\Buyers\Queries\GetBuyers\" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries;
+using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Buyers;
+using Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyerById;
+using Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyers;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrders;
 using System;
@@ -18,6 +21,10 @@ namespace Foodie.Orders.Application.Mapper
             CreateMap<OrderDetailsQueryDto, GetOrderByIdQueryResponse>();
             CreateMap<OrderItemQueryDto, OrderItemDto>();
             CreateMap<OrderQueryDto, OrderDto>();
+
+            // Buyers
+            CreateMap<BuyerDetailsQueryDto, GetBuyerByIdQueryResponse>();
+            CreateMap<BuyerQueryDto, BuyerDto>();
         }
     }
 }
