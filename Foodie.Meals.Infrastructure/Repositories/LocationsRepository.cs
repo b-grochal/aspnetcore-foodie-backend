@@ -30,7 +30,14 @@ namespace Foodie.Meals.Infrastructure.Repositories
                 .Where(l => cityId == null || l.CityId == cityId);
 
             return await locations.ToListAsync();
+        }
 
+        public async Task<Location> GetByIdWithRelatedDataAsync(int id)
+        {
+            return await dbContext.Locations
+                .Include(l => l.City)
+                .Include(l => l.Restaurant)
+                .FirstOrDefaultAsync(l => l.LocationId == id);
         }
     }
 }

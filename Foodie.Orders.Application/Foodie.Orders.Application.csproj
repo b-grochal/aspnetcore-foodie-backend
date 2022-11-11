@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Foodie.EventBus\Foodie.EventBus.csproj" />
+    <ProjectReference Include="..\Foodie.Orders.Domain\Foodie.Orders.Domain.csproj" />
+    <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="MassTransit" Version="8.0.3" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DomainEventsHandlers\OrderStatusChangedToInProgress\" />
+    <Folder Include="DomainEventsHandlers\OrderStatusChangedToInDelivery\" />
+    <Folder Include="DomainEventsHandlers\OrderDelivered\" />
+    <Folder Include="DomainEventsHandlers\OrderCancelled\" />
+  </ItemGroup>
+
+</Project>

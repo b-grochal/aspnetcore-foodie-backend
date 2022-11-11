@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IdentityGrpc;
 using Foodie.Shared.Configuration;
+using MealsGrpc;
 
 namespace Foodie.Basket
 {
@@ -71,6 +72,11 @@ namespace Foodie.Basket
             services.AddGrpcClient<IdentityService.IdentityServiceClient>(opt =>
             {
                 opt.Address = new Uri("https://localhost:5004");
+            });
+
+            services.AddGrpcClient<MealsService.MealsServiceClient>(opt =>
+            {
+                opt.Address = new Uri("https://localhost:5006");
             });
         }
 
