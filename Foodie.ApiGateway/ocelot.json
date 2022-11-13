@@ -285,6 +285,18 @@
       ],
       "UpstreamPathTemplate": "/foodie/contractors",
       "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/my-orders",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5055
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/my-orders",
+      "UpstreamHttpMethod": [ "GET" ]
     }
   ]
 }

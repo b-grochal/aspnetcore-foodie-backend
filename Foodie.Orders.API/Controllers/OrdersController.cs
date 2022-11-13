@@ -2,11 +2,14 @@
 using Foodie.Orders.Application.Functions.Orders.Commands.SetDeliveredOrderStatus;
 using Foodie.Orders.Application.Functions.Orders.Commands.SetInDeliveryOrderStatus;
 using Foodie.Orders.Application.Functions.Orders.Commands.SetInProgressOrderStatus;
+using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderById;
+using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrders;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrders;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Foodie.Orders.API.Controllers
@@ -73,6 +76,28 @@ namespace Foodie.Orders.API.Controllers
         {
             var result = await _mediator.Send(getOrdersQuery);
             return Ok(result);
+        }
+
+        // GET api/my-orders/5
+        [HttpGet("~/api/my-orders/{customersOrderId}")]
+        public async Task<IActionResult> GetCustomersOrder(int customersOrderId)
+        {
+            var query = new GetCustomersOrderByIdQuery(customersOrderId, GetUserId());
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        // GET api/my-orders
+        [HttpGet("~/api/my-orders")]
+        public async Task<IActionResult> GetCustomersOrders([FromQuery] GetCustomersOrdersQuery getOrdersQuery)
+        {
+            var result = await _mediator.Send(getOrdersQuery);
+            return Ok(result);
+        }
+
+        protected string GetUserId()
+        {
+            return this.User.Claims.First(i => i.Type == "ApplicationUserId").Value;
         }
     }
 }
