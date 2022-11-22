@@ -3,6 +3,8 @@ using Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustomer;
 using Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerById;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,7 @@ namespace Foodie.Identity.Controllers
 
         // POST api/customers
         [HttpPost]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)
         {
             var result = await mediator.Send(createCustomerCommand);
@@ -34,6 +37,7 @@ namespace Foodie.Identity.Controllers
 
         // PUT api/customers/5
         [HttpPut("{customerId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateCustomer(string customerId, [FromBody] UpdateCustomerCommand updateUserCommand)
         {
             if (customerId != updateUserCommand.CustomerId)
@@ -47,6 +51,7 @@ namespace Foodie.Identity.Controllers
 
         // DELETE api/customers/5
         [HttpDelete("{customerId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> DeleteCustomer(string customerId)
         {
             var command = new DeleteCustomerCommand(customerId);
@@ -56,6 +61,7 @@ namespace Foodie.Identity.Controllers
 
         // GET api/customers/5
         [HttpGet("{customerId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> GetCustomer(string customerId)
         {
             var query = new GetCustomerByIdQuery(customerId);
@@ -65,6 +71,7 @@ namespace Foodie.Identity.Controllers
 
         // GET api/customers
         [HttpGet]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> GetCustomers([FromQuery] GetCustomersQuery getCustomersQuery)
         {
             var result = await mediator.Send(getCustomersQuery);

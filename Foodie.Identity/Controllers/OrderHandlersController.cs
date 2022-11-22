@@ -3,6 +3,8 @@ using Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrderHa
 using Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHandler;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlerById;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlers;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,7 @@ namespace Foodie.Identity.Controllers
 
         // POST api/order-handlers
         [HttpPost]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateOrderHandler([FromBody] CreateOrderHandlerCommand createOrderHandlerCommand)
         {
             var result = await mediator.Send(createOrderHandlerCommand);
@@ -34,6 +37,7 @@ namespace Foodie.Identity.Controllers
 
         // PUT api/order-handlers/5
         [HttpPut("{orderHandlerId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateOrderHandler(string orderHandlerId, [FromBody] UpdateOrderHandlerCommand updateOrderHandlerCommand)
         {
             if (orderHandlerId != updateOrderHandlerCommand.OrderHandlerId)
@@ -47,6 +51,7 @@ namespace Foodie.Identity.Controllers
 
         // DELETE api/order-handlers/5
         [HttpDelete("{orderHandlerId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> DeleteOrderHandler(string orderHandlerId)
         {
             var command = new DeleteOrderHandlerCommand(orderHandlerId);
@@ -56,6 +61,7 @@ namespace Foodie.Identity.Controllers
 
         // GET api/order-handlers/5
         [HttpGet("{orderHandlerId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> GetOrderHandler(string orderHandlerId)
         {
             var query = new GetOrderHandlerByIdQuery(orderHandlerId);
@@ -65,6 +71,7 @@ namespace Foodie.Identity.Controllers
 
         // GET api/order-handlers
         [HttpGet]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> GetOrderHandlers([FromQuery] GetOrderHandlersQuery getOrderHandlersQuery)
         {
             var result = await mediator.Send(getOrderHandlersQuery);
