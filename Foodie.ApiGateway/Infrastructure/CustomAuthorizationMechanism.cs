@@ -13,7 +13,7 @@ namespace Foodie.ApiGateway.Infrastructure
     {
         public static bool Authorize(HttpContext ctx)
         {
-            if (ctx.Items.DownstreamRoute().AuthenticationOptions.AuthenticationProviderKey == null)
+            if (string.IsNullOrEmpty(ctx.Items.DownstreamRoute().AuthenticationOptions.AuthenticationProviderKey))
             {
                 return true;
             }
