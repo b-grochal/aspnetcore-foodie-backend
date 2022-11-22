@@ -3,6 +3,8 @@ using Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin;
 using Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin;
 using Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById;
 using Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,7 @@ namespace Foodie.Identity.Controllers
 
         // POST api/admins
         [HttpPost]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateAdmin([FromBody] CreateAdminCommand createAdminCommand)
         {
             var result = await mediator.Send(createAdminCommand);
@@ -34,6 +37,7 @@ namespace Foodie.Identity.Controllers
 
         // PUT api/admins/5
         [HttpPut("{adminId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateAdmin(string adminId, [FromBody] UpdateAdminCommand updateAdminCommand)
         {
             if (adminId != updateAdminCommand.AdminId)
@@ -47,6 +51,7 @@ namespace Foodie.Identity.Controllers
 
         // DELETE api/admins/5
         [HttpDelete("{adminId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> DeleteAdmin(string adminId)
         {
             var command = new DeleteAdminCommand(adminId);
@@ -56,6 +61,7 @@ namespace Foodie.Identity.Controllers
 
         // GET api/admins/5
         [HttpGet("{adminId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> GetAdmin(string adimnId)
         {
             var query = new GetAdminByIdQuery(adimnId);
@@ -65,6 +71,7 @@ namespace Foodie.Identity.Controllers
 
         // GET api/admins
         [HttpGet]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> GetAdmins([FromQuery] GetAdminsQuery getAdminsQuery)
         {
             var result = await mediator.Send(getAdminsQuery);

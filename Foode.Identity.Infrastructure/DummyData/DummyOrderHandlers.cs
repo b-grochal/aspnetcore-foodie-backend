@@ -21,7 +21,7 @@ namespace Foode.Identity.Infrastructure.DummyData
                     UserName = "dwigsch123",
                     NormalizedUserName = "DWIGSCH123",
                     Email = "dwigsch123@foodie.com",
-                    NormalizedEmail = "DWIGSCH@FOODIE.COM",
+                    NormalizedEmail = "DWIGSCH123@FOODIE.COM",
                     EmailConfirmed = true,
                     PhoneNumber = "123-456-789",
                     PhoneNumberConfirmed = true
