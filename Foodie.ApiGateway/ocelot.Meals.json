@@ -13,7 +13,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/categories",
+      "DownstreamPathTemplate": "/api/categories/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -21,7 +21,19 @@
           "Port": 5006
         }
       ],
-      "UpstreamPathTemplate": "/foodie/categories",
+      "UpstreamPathTemplate": "/foodie/categories/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/categories/{categoryId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/categories/{categoryId}",
       "UpstreamHttpMethod": [ "PUT", "POST", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
@@ -44,7 +56,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/cities",
+      "DownstreamPathTemplate": "/api/cities/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -52,7 +64,19 @@
           "Port": 5006
         }
       ],
-      "UpstreamPathTemplate": "/foodie/cities",
+      "UpstreamPathTemplate": "/foodie/cities/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/cities/{cityId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/cities/{cityId}",
       "UpstreamHttpMethod": [ "PUT", "POST", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
@@ -72,7 +96,31 @@
         }
       ],
       "UpstreamPathTemplate": "/foodie/locations",
-      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ],
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/locations/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/locations/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/locations/{locationId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/locations/{locationId}",
+      "UpstreamHttpMethod": [ "PUT", "POST", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
         "AllowedScopes": []
@@ -94,7 +142,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/meals",
+      "DownstreamPathTemplate": "/api/meals/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -102,7 +150,19 @@
           "Port": 5006
         }
       ],
-      "UpstreamPathTemplate": "/foodie/meals",
+      "UpstreamPathTemplate": "/foodie/meals/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/meals/{mealId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/meals/{mealId}",
       "UpstreamHttpMethod": [ "PUT", "POST", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
@@ -125,7 +185,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/restaurants",
+      "DownstreamPathTemplate": "/api/restaurants/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -133,7 +193,19 @@
           "Port": 5006
         }
       ],
-      "UpstreamPathTemplate": "/foodie/restaurants",
+      "UpstreamPathTemplate": "/foodie/restaurants/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/restaurants/{restaurantId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/restaurants/{restaurantId}",
       "UpstreamHttpMethod": [ "PUT", "POST", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",

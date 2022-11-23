@@ -3,6 +3,8 @@ using Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory;
 using Foodie.Meals.Application.Functions.Categories.Commands.UpdateCategory;
 using Foodie.Meals.Application.Functions.Categories.Queries.GetCategories;
 using Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -23,6 +25,7 @@ namespace Foodie.Meals.API.Controllers
 
         // POST api/categories
         [HttpPost]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand createCategoryCommand)
         {
             createCategoryCommand.CreatedBy = GetUserEmail();
@@ -32,6 +35,7 @@ namespace Foodie.Meals.API.Controllers
 
         // PUT api/categories/5
         [HttpPut("{categoryId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody] UpdateCategoryCommand updateCategoryCommand)
         {
             if (categoryId != updateCategoryCommand.CategoryId)
@@ -46,6 +50,7 @@ namespace Foodie.Meals.API.Controllers
 
         // DELETE api/categories/5
         [HttpDelete("{categoryId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> DeleteCategory(int categoryId)
         {
             var command = new DeleteCategoryCommand(categoryId);
