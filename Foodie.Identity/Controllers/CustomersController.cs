@@ -17,6 +17,7 @@ namespace Foodie.Identity.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Roles(RolesDictionary.Admin)]
     public class CustomersController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -28,7 +29,6 @@ namespace Foodie.Identity.Controllers
 
         // POST api/customers
         [HttpPost]
-        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)
         {
             var result = await mediator.Send(createCustomerCommand);
@@ -37,7 +37,6 @@ namespace Foodie.Identity.Controllers
 
         // PUT api/customers/5
         [HttpPut("{customerId}")]
-        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateCustomer(string customerId, [FromBody] UpdateCustomerCommand updateUserCommand)
         {
             if (customerId != updateUserCommand.CustomerId)
@@ -51,7 +50,6 @@ namespace Foodie.Identity.Controllers
 
         // DELETE api/customers/5
         [HttpDelete("{customerId}")]
-        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> DeleteCustomer(string customerId)
         {
             var command = new DeleteCustomerCommand(customerId);
@@ -61,7 +59,6 @@ namespace Foodie.Identity.Controllers
 
         // GET api/customers/5
         [HttpGet("{customerId}")]
-        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> GetCustomer(string customerId)
         {
             var query = new GetCustomerByIdQuery(customerId);
@@ -71,7 +68,6 @@ namespace Foodie.Identity.Controllers
 
         // GET api/customers
         [HttpGet]
-        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> GetCustomers([FromQuery] GetCustomersQuery getCustomersQuery)
         {
             var result = await mediator.Send(getCustomersQuery);

@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/basket",
+      "DownstreamPathTemplate": "/api/my-basket",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,18 +9,18 @@
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/foodie/basket",
+      "UpstreamPathTemplate": "/foodie/my-basket",
       "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "Role": "User, Admin"
+        "Role": "Customer"
       }
     },
     {
-      "DownstreamPathTemplate": "/api/basket/checkout",
+      "DownstreamPathTemplate": "/api/my-basket/checkout",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -28,14 +28,14 @@
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/foodie/basket/checkout",
-      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamPathTemplate": "/foodie/my-basket/checkout",
+      "UpstreamHttpMethod": [ "POST" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
         "AllowedScopes": []
       },
       "RouteClaimsRequirement": {
-        "Role": "User, Admin"
+        "Role": "Customer"
       }
     }
   ]

@@ -17,6 +17,7 @@ namespace Foodie.Identity.Controllers
 {
     [Route("api/order-handlers")]
     [ApiController]
+    [Roles(RolesDictionary.Admin)]
     public class OrderHandlersController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -28,7 +29,6 @@ namespace Foodie.Identity.Controllers
 
         // POST api/order-handlers
         [HttpPost]
-        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateOrderHandler([FromBody] CreateOrderHandlerCommand createOrderHandlerCommand)
         {
             var result = await mediator.Send(createOrderHandlerCommand);
@@ -37,7 +37,6 @@ namespace Foodie.Identity.Controllers
 
         // PUT api/order-handlers/5
         [HttpPut("{orderHandlerId}")]
-        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateOrderHandler(string orderHandlerId, [FromBody] UpdateOrderHandlerCommand updateOrderHandlerCommand)
         {
             if (orderHandlerId != updateOrderHandlerCommand.OrderHandlerId)
@@ -51,7 +50,6 @@ namespace Foodie.Identity.Controllers
 
         // DELETE api/order-handlers/5
         [HttpDelete("{orderHandlerId}")]
-        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> DeleteOrderHandler(string orderHandlerId)
         {
             var command = new DeleteOrderHandlerCommand(orderHandlerId);
@@ -61,7 +59,6 @@ namespace Foodie.Identity.Controllers
 
         // GET api/order-handlers/5
         [HttpGet("{orderHandlerId}")]
-        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> GetOrderHandler(string orderHandlerId)
         {
             var query = new GetOrderHandlerByIdQuery(orderHandlerId);
@@ -71,7 +68,6 @@ namespace Foodie.Identity.Controllers
 
         // GET api/order-handlers
         [HttpGet]
-        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> GetOrderHandlers([FromQuery] GetOrderHandlersQuery getOrderHandlersQuery)
         {
             var result = await mediator.Send(getOrderHandlersQuery);

@@ -63,7 +63,7 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/users",
+      "DownstreamPathTemplate": "/api/customers",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -71,7 +71,7 @@
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/foodie/users",
+      "UpstreamPathTemplate": "/foodie/customers",
       "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
