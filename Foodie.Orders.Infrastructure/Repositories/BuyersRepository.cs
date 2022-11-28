@@ -14,7 +14,7 @@ namespace Foodie.Orders.Infrastructure.Repositories
     public class BuyersRepository : IBuyersRepository
     {
         private readonly OrdersDbContext _ordersDbContext;
-        public IUnitOfWork UnitOfWork => throw new NotImplementedException();
+        public IUnitOfWork UnitOfWork => _ordersDbContext;
 
         public BuyersRepository(OrdersDbContext ordersDbContext)
         {

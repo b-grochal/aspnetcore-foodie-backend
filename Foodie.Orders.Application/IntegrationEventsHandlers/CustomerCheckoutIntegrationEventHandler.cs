@@ -34,7 +34,8 @@ namespace Foodie.Orders.Application.IntegrationEventsHandlers
             var createOrderCommand = new CreateOrderCommand(message.UserId, message.UserFirstName, message.UserLastName, message.UserPhoneNumber, message.UserEmail, message.AddressStreet, message.AddressCity,
                 message.AddressCountry, message.RestaurantId, message.RestaurantName, message.LocationId, message.LocationAddress, message.LocationPhoneNumber, message.LocationEmail, message.CityId, message.CityName,
                 message.LocationCountry, orderItems);
-            Console.WriteLine("Handling CustomerCheckoutIntegrationEvent");
+
+            await _medaitor.Send(createOrderCommand);
         }
     }
 }
