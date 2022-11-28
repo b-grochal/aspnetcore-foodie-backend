@@ -1,4 +1,5 @@
 ﻿using Foodie.Orders.Domain.AggregatesModel.BuyerAggregate;
+using Foodie.Orders.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -16,6 +17,9 @@ namespace Foodie.Orders.Infrastructure.Configurations
             buyerConfiguration.ToTable("Buyers");
             buyerConfiguration.HasKey(b => b.Id);
             buyerConfiguration.Ignore(b => b.DomainEvents);
+
+            buyerConfiguration.Property(o => o.Id)
+            .UseHiLo("BuyersSequence");
 
             buyerConfiguration.Property(b => b.UserId)
                 .HasMaxLength(200)

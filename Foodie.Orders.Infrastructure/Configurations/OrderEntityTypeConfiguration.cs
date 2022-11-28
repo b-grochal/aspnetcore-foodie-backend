@@ -1,6 +1,7 @@
 ﻿using Foodie.Orders.Domain.AggregatesModel.BuyerAggregate;
 using Foodie.Orders.Domain.AggregatesModel.ContractorAggregate;
 using Foodie.Orders.Domain.AggregatesModel.OrderAggregate;
+using Foodie.Orders.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -18,6 +19,9 @@ namespace Foodie.Orders.Infrastructure.Configurations
             orderConfiguration.ToTable("Orders");
             orderConfiguration.HasKey(o => o.Id);
             orderConfiguration.Ignore(o => o.DomainEvents);
+
+            orderConfiguration.Property(o => o.Id)
+            .UseHiLo("OrdersSequence");
 
             orderConfiguration
             .Property<int?>("_buyerId")
@@ -43,7 +47,13 @@ namespace Foodie.Orders.Infrastructure.Configurations
             .HasColumnName("OrderStatusId")
             .IsRequired();
 
-            orderConfiguration.OwnsOne(o => o.Address);
+            orderConfiguration
+            .OwnsOne(o => o.Address, a =>
+            {
+                a.Property<int>("OrderId")
+                .UseHiLo("OrdersSequence");
+                a.WithOwner();
+            });
 
             var navigation = orderConfiguration.Metadata.FindNavigation(nameof(Order.OrderItems));
             navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
