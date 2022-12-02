@@ -22,7 +22,7 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
 
         public async Task Handle(OrderStartedDomainEvent orderStartedDomainEvent, CancellationToken cancellationToken)
         {
-            var contractor = await _contractorsRepository.GetByIdAsync(orderStartedDomainEvent.RestaurantId);
+            var contractor = await _contractorsRepository.GetByParametersAsync(orderStartedDomainEvent.RestaurantId, orderStartedDomainEvent.LocationId, orderStartedDomainEvent.CityId);
             bool contractorOriginallyExisted = (contractor == null) ? false : true;
 
             if (!contractorOriginallyExisted)
@@ -33,6 +33,8 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
             var contractorUpdated = contractorOriginallyExisted ?
                 _contractorsRepository.Update(contractor) :
                 _contractorsRepository.Create(contractor);
+
+            contractor.AddDomainEvent(new ContractorVerifiedDomainEvent(contractor, orderStartedDomainEvent.Order.Id));
 
             await _contractorsRepository.UnitOfWork
                 .SaveEntitiesAsync(cancellationToken);

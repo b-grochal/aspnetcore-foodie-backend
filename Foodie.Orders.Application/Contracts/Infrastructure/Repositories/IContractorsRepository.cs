@@ -12,6 +12,6 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Repositories
         Contractor Create(Contractor contractor);
         Contractor Update(Contractor contractor);
         Task<Contractor> GetByIdAsync(int id);
-        Task<Contractor> GetByRestaurantIdAsync(int restaurantId);
+        Task<Contractor> GetByParametersAsync(int restaurantId, int locationId, int cityId);
     }
 }
