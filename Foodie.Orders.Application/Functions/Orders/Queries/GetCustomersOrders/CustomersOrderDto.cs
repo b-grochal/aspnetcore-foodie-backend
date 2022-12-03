@@ -13,6 +13,6 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrders
         public int OrderStatusId { get; set; }
         public string OrderStatusName { get; set; }
         public int ContractorId { get; set; }
-        public string ContactorName { get; set; }
+        public string ContractorName { get; set; }
     }
 }

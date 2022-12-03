@@ -6,6 +6,8 @@ using Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyerById;
 using Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyers;
 using Foodie.Orders.Application.Functions.Contractors.Queries.GetContractorById;
 using Foodie.Orders.Application.Functions.Contractors.Queries.GetContractors;
+using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderById;
+using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrders;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrders;
 using System;
@@ -32,6 +34,12 @@ namespace Foodie.Orders.Application.Mapper
             // Contractors
             CreateMap<ContractorDetailsQueryDto, GetContractorByIdQueryResponse>();
             CreateMap<ContractorQueryDto, ContractorDto>();
+
+            // MyOrders
+            CreateMap<OrderQueryDto, CustomersOrderDto>();
+            CreateMap<OrderDetailsQueryDto, GetCustomersOrderByIdQueryResponse>()
+                .ForMember(dest => dest.CustomersOrderItems, opt => opt.MapFrom(src => src.OrderItems));
+            CreateMap<OrderItemQueryDto, CustomersOrderItemDto>();
         }
     }
 }

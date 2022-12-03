@@ -13,7 +13,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/categories/{everything}",
+      "DownstreamPathTemplate": "/api/categories/{categoryId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -21,7 +21,7 @@
           "Port": 5006
         }
       ],
-      "UpstreamPathTemplate": "/foodie/categories/{everything}",
+      "UpstreamPathTemplate": "/foodie/categories/{categoryId}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
