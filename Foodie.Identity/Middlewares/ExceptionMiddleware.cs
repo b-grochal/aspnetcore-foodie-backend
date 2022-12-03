@@ -37,7 +37,6 @@ namespace Foodie.Identity.API.Middlewares
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-
             var message = exception switch
             {
                 NotFoundException => exception.Message,
