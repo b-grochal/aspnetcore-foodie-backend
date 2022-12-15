@@ -1,4 +1,4 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Queries;
+﻿using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Buyers;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Contractors;
 using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;

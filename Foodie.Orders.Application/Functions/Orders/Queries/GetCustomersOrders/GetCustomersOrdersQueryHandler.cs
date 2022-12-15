@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Foodie.Orders.Application.Contracts.Infrastructure.Queries;
+using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
 using MediatR;
 using System;
 using System.Collections.Generic;

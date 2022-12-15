@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
+namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders
 {
     public record OrderQueryDto
     {
