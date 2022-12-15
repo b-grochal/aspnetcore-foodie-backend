@@ -27,9 +27,9 @@ namespace Foodie.Orders.Infrastructure
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IBuyersRepository, BuyersRepository>();
             services.AddScoped<IContractorsRepository, ContractorsRepository>();
-            services.AddScoped<IOrderQueries, OrderQueries>();
+            services.AddScoped<IOrdersQueries, OrderQueries>();
             services.AddScoped<IContractorsQueries, ContractorsQueries>();
-            services.AddScoped<IBuyerQueries, BuyersQueries>();
+            services.AddScoped<IBuyersQueries, BuyersQueries>();
 
             return services;
         }

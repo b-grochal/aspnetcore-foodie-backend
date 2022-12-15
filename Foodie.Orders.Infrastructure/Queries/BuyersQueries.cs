@@ -11,7 +11,7 @@ using static Dapper.SqlBuilder;
 
 namespace Foodie.Orders.Infrastructure.Queries
 {
-    public class BuyersQueries : IBuyerQueries
+    public class BuyersQueries : IBuyersQueries
     {
         private readonly DapperContext _dapperContext;
 

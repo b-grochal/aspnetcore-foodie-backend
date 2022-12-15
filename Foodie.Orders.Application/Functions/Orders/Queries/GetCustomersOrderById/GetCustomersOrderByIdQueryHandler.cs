@@ -12,10 +12,10 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderBy
 {
     public class GetCustomersOrderByIdQueryHandler : IRequestHandler<GetCustomersOrderByIdQuery, GetCustomersOrderByIdQueryResponse>
     {
-        private readonly IOrderQueries _orderQueries;
+        private readonly IOrdersQueries _orderQueries;
         private readonly IMapper _mapper;
 
-        public GetCustomersOrderByIdQueryHandler(IOrderQueries orderQueries, IMapper mapper)
+        public GetCustomersOrderByIdQueryHandler(IOrdersQueries orderQueries, IMapper mapper)
         {
             _orderQueries = orderQueries;
             _mapper = mapper;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
 {
-    public interface IOrderQueries
+    public interface IOrdersQueries
     {
         Task<OrderDetailsQueryDto> GetByIdAsync(int id);
         Task<OrderDetailsQueryDto> GetByIdAsync(int id, string userId);
