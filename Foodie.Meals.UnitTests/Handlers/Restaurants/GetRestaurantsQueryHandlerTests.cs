@@ -44,7 +44,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Restaurants
 
             var result = await queryHandler.Handle(query, CancellationToken.None);
 
-            Assert.IsType<RestaurantsListResponse>(result);
+            Assert.IsType<GetRestaurantsQueryResponse>(result);
             Assert.Equal(query.CategoryId, result.CategoryId);
             Assert.Equal(query.Name, result.Name);
             Assert.Equal(query.CityName, result.CityName);

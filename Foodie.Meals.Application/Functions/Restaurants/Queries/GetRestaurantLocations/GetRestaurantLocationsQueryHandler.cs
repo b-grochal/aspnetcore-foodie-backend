@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations
 {
-    public class GetRestaurantLocationsQueryHandler : IRequestHandler<GetRestaurantLocationsQuery, IEnumerable<RestaurantLocationResponse>>
+    public class GetRestaurantLocationsQueryHandler : IRequestHandler<GetRestaurantLocationsQuery, GetRestaurantLocationsQueryResponse>
     {
         private readonly ILocationsRepository locationsRepository;
         private readonly IMapper mapper;
@@ -21,10 +21,14 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLo
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<RestaurantLocationResponse>> Handle(GetRestaurantLocationsQuery request, CancellationToken cancellationToken)
+        public async Task<GetRestaurantLocationsQueryResponse> Handle(GetRestaurantLocationsQuery request, CancellationToken cancellationToken)
         {
             var locations = await locationsRepository.GetAllAsync(request.RestaurantId, request.CityId);
-            return mapper.Map<IEnumerable<RestaurantLocationResponse>>(locations);
+
+            return new GetRestaurantLocationsQueryResponse
+            {
+                RestaurantLocations = mapper.Map<IEnumerable<RestaurantLocationDto>>(locations)
+            };
         }
     }
 }

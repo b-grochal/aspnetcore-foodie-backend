@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations
 {
-    public class RestaurantLocationResponse
+    public class RestaurantLocationDto
     {
         public int LocationId { get; set; }
         public string Address { get; set; }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCities
 {
-    public class GetCitiesQueryHandler : IRequestHandler<GetCitiesQuery, CitiesListResponse>
+    public class GetCitiesQueryHandler : IRequestHandler<GetCitiesQuery, GetCitiesQueryResponse>
     {
         private readonly ICitiesRepository citiesRepository;
         private readonly IMapper mapper;
@@ -21,17 +21,17 @@ namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCities
             this.mapper = mapper;
         }
 
-        public async Task<CitiesListResponse> Handle(GetCitiesQuery request, CancellationToken cancellationToken)
+        public async Task<GetCitiesQueryResponse> Handle(GetCitiesQuery request, CancellationToken cancellationToken)
         {
             var cities = await citiesRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Name, request.Country);
 
-            return new CitiesListResponse
+            return new GetCitiesQueryResponse
             {
                 TotalCount = cities.TotalCount,
                 PageSize = cities.PageSize,
                 CurrentPage = cities.CurrentPage,
                 TotalPages = (int)Math.Ceiling(cities.TotalCount / (double)cities.PageSize),
-                Cities = mapper.Map<IEnumerable<CityResponse>>(cities),
+                Cities = mapper.Map<IEnumerable<CityDto>>(cities),
                 Name = request.Name,
                 Country = request.Country
             };

@@ -9,11 +9,11 @@ using static Dapper.SqlBuilder;
 
 namespace Foodie.Orders.Infrastructure.Queries
 {
-    public class OrderQueries : IOrdersQueries
+    public class OrdersQueries : IOrdersQueries
     {
         private readonly DapperContext _dapperContext;
 
-        public OrderQueries(DapperContext dapperContext)
+        public OrdersQueries(DapperContext dapperContext)
         {
             _dapperContext = dapperContext;
         }

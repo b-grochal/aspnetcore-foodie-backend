@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById
+namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategories
 {
-    public class CategoryDetailsResponse
+    public class CategoryDto
     {
         public int CategoryId { get; set; }
         public string Name { get; set; }

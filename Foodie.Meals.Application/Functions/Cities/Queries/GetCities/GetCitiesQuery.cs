@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCities
 {
-    public class GetCitiesQuery : PagedQuery, IRequest<CitiesListResponse>
+    public class GetCitiesQuery : PagedQuery, IRequest<GetCitiesQueryResponse>
     {
         public string Name { get; set; }
         public string Country { get; set; }

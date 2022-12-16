@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantById
 {
-    public class GetRestaurantByIdQueryHandler : IRequestHandler<GetRestaurantByIdQuery, RestaurantDetailsResponse>
+    public class GetRestaurantByIdQueryHandler : IRequestHandler<GetRestaurantByIdQuery, GetRestaurantByIdQueryResponse>
     {
         private readonly IRestaurantsRepository restaurantsRepository;
         private readonly IMapper mapper;
@@ -22,14 +22,14 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantBy
             this.mapper = mapper;
         }
 
-        public async Task<RestaurantDetailsResponse> Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken)
+        public async Task<GetRestaurantByIdQueryResponse> Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken)
         {
             var restaurant = await restaurantsRepository.GetByIdAsync(request.RestaurantId);
 
             if (restaurant == null)
                 throw new RestaurantNotFoundException(request.RestaurantId);
 
-            return mapper.Map<RestaurantDetailsResponse>(restaurant);
+            return mapper.Map<GetRestaurantByIdQueryResponse>(restaurant);
         }
     }
 }

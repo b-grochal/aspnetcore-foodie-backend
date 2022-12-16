@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCityById
 {
-    public class GetCityByIdQueryHandler : IRequestHandler<GetCityByIdQuery, CityDetailsResponse>
+    public class GetCityByIdQueryHandler : IRequestHandler<GetCityByIdQuery, GetCityByIdQueryResponse>
     {
         private readonly ICitiesRepository citiesRepository;
         private readonly IMapper mapper;
@@ -22,14 +22,14 @@ namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCityById
             this.mapper = mapper;
         }
 
-        public async Task<CityDetailsResponse> Handle(GetCityByIdQuery request, CancellationToken cancellationToken)
+        public async Task<GetCityByIdQueryResponse> Handle(GetCityByIdQuery request, CancellationToken cancellationToken)
         {
             var city = await citiesRepository.GetByIdAsync(request.CityId);
 
             if (city == null)
                 throw new CityNotFoundException(request.CityId);
 
-            return mapper.Map<CityDetailsResponse>(city);
+            return mapper.Map<GetCityByIdQueryResponse>(city);
         }
     }
 }

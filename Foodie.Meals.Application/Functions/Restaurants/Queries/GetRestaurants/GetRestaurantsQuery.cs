@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants
 {
-    public class GetRestaurantsQuery : PagedQuery, IRequest<RestaurantsListResponse>
+    public class GetRestaurantsQuery : PagedQuery, IRequest<GetRestaurantsQueryResponse>
     {
         public int? CategoryId { get; set; }
         public string Name { get; set; }

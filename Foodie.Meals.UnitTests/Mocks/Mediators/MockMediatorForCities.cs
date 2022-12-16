@@ -84,7 +84,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetCityByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCityByIdQuery getCityByIdQuery, CancellationToken cancellationToken) =>
             {
-                return new CityDetailsResponse
+                return new GetCityByIdQueryResponse
                 {
                     CityId = getCityByIdQuery.CityId,
                     Name = "Test category",
@@ -106,28 +106,28 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetCitiesQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCitiesQuery getCitiesQuery, CancellationToken cancellationToken) =>
             {
-                return new CitiesListResponse
+                return new GetCitiesQueryResponse
                 {
                     Name = getCitiesQuery.Name,
                     Country = getCitiesQuery.Country,
                     PageSize = getCitiesQuery.PageSize,
                     CurrentPage = getCitiesQuery.PageNumber,
                     TotalPages = 2,
-                    Cities = new List<CityResponse>
+                    Cities = new List<CityDto>
                     {
-                        new CityResponse
+                        new CityDto
                         {
                             CityId = 1,
                             Name = "Test city 1",
                             Country = "Test country"
                         },
-                        new CityResponse
+                        new CityDto
                         {
                             CityId = 2,
                             Name = "Test city 2",
                             Country = "Test country"
                         },
-                        new CityResponse
+                        new CityDto
                         {
                             CityId = 3,
                             Name = "Test city 3",

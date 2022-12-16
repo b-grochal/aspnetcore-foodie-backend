@@ -42,7 +42,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Categories
 
             var result = await queryHandler.Handle(query, CancellationToken.None);
 
-            Assert.IsType<CategoriesListResponse>(result);
+            Assert.IsType<GetCategoriesQueryResponse>(result);
             Assert.Equal(query.Name, result.Name);
             Assert.Equal(query.PageSize, result.PageSize);
             categoriesRepository.VerifyGetAllAsyncWithPagingParameters(Times.Once());

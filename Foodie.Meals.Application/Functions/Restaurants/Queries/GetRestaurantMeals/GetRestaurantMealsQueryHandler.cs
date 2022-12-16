@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById
+namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals
 {
-    public class GetRestaurantMealsQueryHandler : IRequestHandler<GetRestaurantMealsQuery, IEnumerable<RestaurantMealResponse>>
+    public class GetRestaurantMealsQueryHandler : IRequestHandler<GetRestaurantMealsQuery, GetRestaurantsMealsQueryResponse>
     {
         private readonly IMealsRepository mealsRepository;
         private readonly IMapper mapper;
@@ -21,10 +21,15 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMe
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<RestaurantMealResponse>> Handle(GetRestaurantMealsQuery request, CancellationToken cancellationToken)
+        public async Task<GetRestaurantsMealsQueryResponse> Handle(GetRestaurantMealsQuery request, CancellationToken cancellationToken)
         {
             var meals = await mealsRepository.GetAllAsync(request.RestaurantId);
-            return mapper.Map<IEnumerable<RestaurantMealResponse>>(meals);
+
+            return new GetRestaurantsMealsQueryResponse
+            {
+                RestaurantMeals = mapper.Map<IEnumerable<RestaurantMealDto>>(meals)
+            };   
+             
         }
     }
 }

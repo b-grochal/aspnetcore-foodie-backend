@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById
 {
-    public class GetLocationByIdQuery : IRequest<LocationDetailsResponse>
+    public class GetLocationByIdQuery : IRequest<GetLocationByIdQueryResponse>
     {
         public int LocationId { get; }
 
