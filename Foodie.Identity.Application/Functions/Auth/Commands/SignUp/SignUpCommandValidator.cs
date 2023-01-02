@@ -36,7 +36,7 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignUp
             RuleFor(c => c.ConfirmPassword)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty")
-            .Equal(c => c.Email)
+            .Equal(c => c.Password)
             .WithMessage("Passwords do not match");
         }
     }

@@ -25,6 +25,9 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
         public async Task<CreateOrderHandlerCommandResponse> Handle(CreateOrderHandlerCommand request, CancellationToken cancellationToken)
         {
             var orderHandler = mapper.Map<OrderHandler>(request);
+            orderHandler.EmailConfirmed = true;
+            orderHandler.PhoneNumberConfirmed = true;
+
             await orderHandlersRepository.CreateAsync(orderHandler, request.Password);
             return mapper.Map<CreateOrderHandlerCommandResponse>(orderHandler);
         }
