@@ -8,13 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
 {
-    public interface IOrderHandlersRepository
+    public interface IOrderHandlersRepository : IBaseApplicationUsersRepository<OrderHandler>
     {
-        Task CreateAsync(OrderHandler orderHandler, string password);
-        Task DeleteAsync(OrderHandler orderHandler);
-        Task UpdateAsync(OrderHandler orderHandler);
-        Task<OrderHandler> GetByIdAsync(string id);
-        Task<IReadOnlyList<OrderHandler>> GetAllAsync();
-        Task<PagedList<OrderHandler>> GetAllAsync(int pageNumber, int pageSize, string email);
     }
 }
