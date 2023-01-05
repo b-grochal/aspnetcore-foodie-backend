@@ -60,9 +60,9 @@ namespace Foodie.Identity.Controllers
 
         // GET api/admins/5
         [HttpGet("{adminId}")]
-        public async Task<IActionResult> GetAdmin(string adimnId)
+        public async Task<IActionResult> GetAdmin(string adminId)
         {
-            var query = new GetAdminByIdQuery(adimnId);
+            var query = new GetAdminByIdQuery(adminId);
             var result = await mediator.Send(query);
             return Ok(result);
         }
