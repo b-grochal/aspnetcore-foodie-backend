@@ -34,21 +34,27 @@ namespace Foodie.Identity.API.Middlewares
 
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            var responseDetails = PrepareResponseDetails(exception);
 
-            var message = exception switch
-            {
-                NotFoundException => exception.Message,
-                BadRequestException => exception.Message,
-                _ => "Internal server error"
-            };
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = responseDetails.StatusCode;
 
             await context.Response.WriteAsync(new ErrorDetails()
             {
-                StatusCode = context.Response.StatusCode,
-                Message = message
+                StatusCode = responseDetails.StatusCode,
+                Message = responseDetails.Message
             }.ToString());
+        }
+
+        private (string Message, int StatusCode) PrepareResponseDetails(Exception exception)
+        {
+            return exception switch
+            {
+                NotFoundException => (exception.Message, (int)HttpStatusCode.InternalServerError),
+                BadRequestException => (exception.Message, (int)HttpStatusCode.InternalServerError),
+                FluentValidation.ValidationException => (exception.Message, (int)HttpStatusCode.BadRequest),
+                _ => ("Internal server error", (int)HttpStatusCode.InternalServerError)
+            };
         }
     }
 }
