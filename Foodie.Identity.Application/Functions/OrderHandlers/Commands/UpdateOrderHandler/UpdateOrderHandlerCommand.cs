@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Foodie.Shared.Commands;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHandler
 {
-    public class UpdateOrderHandlerCommand : IRequest<UpdateOrderHandlerCommandResponse>
+    public class UpdateOrderHandlerCommand : AuditableUpdateCommand, IRequest<UpdateOrderHandlerCommandResponse>
     {
         public string OrderHandlerId { get; set; }
         public string FirstName { get; set; }
