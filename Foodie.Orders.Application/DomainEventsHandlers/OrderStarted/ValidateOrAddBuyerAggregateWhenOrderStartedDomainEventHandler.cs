@@ -34,6 +34,8 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
                 _buyersRepository.Update(buyer) :
                 _buyersRepository.Create(buyer);
 
+            buyer.AddDomainEvent(new BuyerVerifiedDomainEvent(buyer, orderStartedDomainEvent.Order.Id));
+
             await _buyersRepository.UnitOfWork
                 .SaveEntitiesAsync(cancellationToken);
         }

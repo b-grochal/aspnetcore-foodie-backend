@@ -3,6 +3,8 @@ using Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity;
 using Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCities;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCityById;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -23,6 +25,7 @@ namespace Foodie.Meals.API.Controllers
 
         // POST api/cities
         [HttpPost]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateCity([FromBody] CreateCityCommand createCityCommand)
         {
             createCityCommand.CreatedBy = GetUserEmail();
@@ -32,6 +35,7 @@ namespace Foodie.Meals.API.Controllers
 
         // PUT api/cities/5
         [HttpPut("{cityId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateCity(int cityId, [FromBody] UpdateCityCommand updateCityCommand)
         {
             if (cityId != updateCityCommand.CityId)
@@ -46,6 +50,7 @@ namespace Foodie.Meals.API.Controllers
 
         // DELETE api/cities/5
         [HttpDelete("{cityId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> DeleteCity(int cityId)
         {
             var command = new DeleteCityCommand(cityId);

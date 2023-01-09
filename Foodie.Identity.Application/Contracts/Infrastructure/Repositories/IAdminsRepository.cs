@@ -8,13 +8,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
 {
-    public interface IAdminsRepository
+    public interface IAdminsRepository : IBaseApplicationUsersRepository<Admin>
     {
-        Task CreateAsync(Admin admin, string password);
-        Task DeleteAsync(Admin admin);
-        Task UpdateAsync(Admin admin);
-        Task<Admin> GetByIdAsync(string id);
-        Task<IReadOnlyList<Admin>> GetAllAsync();
-        Task<PagedList<Admin>> GetAllAsync(int pageNumber, int pageSize, string email);
     }
 }

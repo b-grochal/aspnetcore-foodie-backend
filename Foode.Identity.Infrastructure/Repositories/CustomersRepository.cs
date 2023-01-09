@@ -11,52 +11,8 @@ using System.Threading.Tasks;
 
 namespace Foode.Identity.Infrastructure.Repositories
 {
-    public class CustomersRepository : ICustomersRepository
+    public class CustomersRepository : BaseApplicationsUsersRepository<Customer>, ICustomersRepository
     {
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly IdentityDbContext identityDbContext;
-
-        public CustomersRepository(UserManager<ApplicationUser> userManager, IdentityDbContext identityDbContext)
-        {
-            this.userManager = userManager;
-            this.identityDbContext = identityDbContext;
-        }
-
-        public async Task CreateAsync(Customer customer, string password)
-        {
-            await userManager.CreateAsync(customer, password);
-            await userManager.AddToRoleAsync(customer, ApplicationUserRoles.Customer);
-            await identityDbContext.SaveChangesAsync();
-        }
-
-        public async Task DeleteAsync(Customer customer)
-        {
-            await userManager.DeleteAsync(customer);
-            await identityDbContext.SaveChangesAsync();
-        }
-
-        public async Task<IReadOnlyList<Customer>> GetAllAsync()
-        {
-            return await identityDbContext.Customers.ToListAsync();
-        }
-
-        public async Task<PagedList<Customer>> GetAllAsync(int pageNumber, int pageSize, string email)
-        {
-            var customers = identityDbContext.Customers
-                .Where(c => email == null || c.Email.Equals(email));
-
-            return PagedList<Customer>.ToPagedList(customers, pageNumber, pageSize);
-        }
-
-        public async Task<Customer> GetByIdAsync(string id)
-        {
-            return await identityDbContext.Customers.FindAsync(id);
-        }
-
-        public async Task UpdateAsync(Customer customer)
-        {
-            await userManager.UpdateAsync(customer);
-            await identityDbContext.SaveChangesAsync();
-        }
+        public CustomersRepository(UserManager<ApplicationUser> userManager, IdentityDbContext identityDbContext) : base(userManager, identityDbContext) { }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById
+namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMealById
 {
-    public class RestaurantMealResponse
+    public class GetMealByIdQueryResponse
     {
         public int MealId { get; set; }
         public string Name { get; set; }

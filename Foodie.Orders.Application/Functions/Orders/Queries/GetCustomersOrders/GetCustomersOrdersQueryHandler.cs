@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Foodie.Orders.Application.Contracts.Infrastructure.Queries;
+using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -12,10 +12,10 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrders
 {
     public class GetCustomersOrdersQueryHandler : IRequestHandler<GetCustomersOrdersQuery, GetCustomersOrdersQueryResponse>
     {
-        private readonly IOrderQueries _orderQueries;
+        private readonly IOrdersQueries _orderQueries;
         private readonly IMapper _mapper;
 
-        public GetCustomersOrdersQueryHandler(IOrderQueries orderQueries, IMapper mapper)
+        public GetCustomersOrdersQueryHandler(IOrdersQueries orderQueries, IMapper mapper)
         {
             _orderQueries = orderQueries;
             _mapper = mapper;

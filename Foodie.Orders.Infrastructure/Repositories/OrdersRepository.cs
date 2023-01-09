@@ -31,9 +31,30 @@ namespace Foodie.Orders.Infrastructure.Repositories
             _ordersDbContext.Entry(order).State = EntityState.Modified;
         }
 
-        public Task<Order> GetByIdAsync(int id)
+        public async Task<Order> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var order = await _ordersDbContext
+                            .Orders
+                            .Include(x => x.Address)
+                            .FirstOrDefaultAsync(o => o.Id == id);
+
+            if (order == null)
+            {
+                order = _ordersDbContext
+                            .Orders
+                            .Local
+                            .FirstOrDefault(o => o.Id == id);
+            }
+
+            if (order != null)
+            {
+                await _ordersDbContext.Entry(order)
+                    .Collection(i => i.OrderItems).LoadAsync();
+                await _ordersDbContext.Entry(order)
+                    .Reference(i => i.OrderStatus).LoadAsync();
+            }
+
+            return order;
         }
     }
 }

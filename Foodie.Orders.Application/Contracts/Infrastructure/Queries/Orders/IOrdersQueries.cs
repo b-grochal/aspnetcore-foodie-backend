@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
+namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders
 {
-    public interface IOrderQueries
+    public interface IOrdersQueries
     {
         Task<OrderDetailsQueryDto> GetByIdAsync(int id);
         Task<OrderDetailsQueryDto> GetByIdAsync(int id, string userId);

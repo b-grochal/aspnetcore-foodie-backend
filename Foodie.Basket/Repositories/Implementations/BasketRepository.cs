@@ -33,10 +33,10 @@ namespace Foodie.Basket.Repositories.Implementations
             });
         }
 
-        public async Task<CustomerBasket> UpdateBasket(CustomerBasket basket)
+        public async Task<CustomerBasket> UpdateBasket(string customerId, CustomerBasket basket)
         {
-            await distributedCache.SetStringAsync(basket.CustomerId, JsonSerializer.Serialize(basket));
-            return await GetBasket(basket.CustomerId);
+            await distributedCache.SetStringAsync(customerId, JsonSerializer.Serialize(basket));
+            return await GetBasket(customerId);
         }
     }
 }

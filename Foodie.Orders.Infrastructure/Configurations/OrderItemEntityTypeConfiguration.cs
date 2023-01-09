@@ -17,6 +17,9 @@ namespace Foodie.Orders.Infrastructure.Configurations
             orderItemConfiguration.HasKey(o => o.Id);
             orderItemConfiguration.Ignore(b => b.DomainEvents);
 
+            orderItemConfiguration.Property(o => o.Id)
+            .UseHiLo("OrderItemsSequence");
+
             orderItemConfiguration.Property<int>("OrderId")
                 .IsRequired();
 

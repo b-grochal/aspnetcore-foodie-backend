@@ -3,7 +3,10 @@ using Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin;
 using Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin;
 using Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById;
 using Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,6 +18,7 @@ namespace Foodie.Identity.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Roles(RolesDictionary.Admin)]
     public class AdminsController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -56,9 +60,9 @@ namespace Foodie.Identity.Controllers
 
         // GET api/admins/5
         [HttpGet("{adminId}")]
-        public async Task<IActionResult> GetAdmin(string adimnId)
+        public async Task<IActionResult> GetAdmin(string adminId)
         {
-            var query = new GetAdminByIdQuery(adimnId);
+            var query = new GetAdminByIdQuery(adminId);
             var result = await mediator.Send(query);
             return Ok(result);
         }

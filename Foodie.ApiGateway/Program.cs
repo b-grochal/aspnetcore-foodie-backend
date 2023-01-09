@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Ocelot.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +21,13 @@ namespace Foodie.ApiGateway
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                })
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    config
-                    .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
-                    .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+                    webBuilder.UseStartup<Startup>().ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                        config
+                        .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                        .AddOcelot(hostingContext.HostingEnvironment);
+                    });
                 });
+                
     }
 }

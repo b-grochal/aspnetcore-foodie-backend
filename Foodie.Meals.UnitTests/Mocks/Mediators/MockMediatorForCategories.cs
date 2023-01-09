@@ -83,7 +83,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetCategoryByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCategoryByIdQuery getCategoryByIdQuery, CancellationToken cancellationToken) =>
             {
-                return new CategoryDetailsResponse
+                return new GetCategoryByIdQueryResponse
                 {
                     CategoryId = getCategoryByIdQuery.CategoryId,
                     Name = "Test category"
@@ -104,25 +104,25 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetCategoriesQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCategoriesQuery getCategoriesQuery, CancellationToken cancellationToken) =>
             {
-                return new CategoriesListResponse
+                return new GetCategoriesQueryResponse
                 {
                     Name = getCategoriesQuery.Name,
                     PageSize = getCategoriesQuery.PageSize,
                     CurrentPage = getCategoriesQuery.PageNumber,
                     TotalPages = 2,
-                    Categories = new List<CategoryResponse>
+                    Categories = new List<CategoryDto>
                     {
-                        new CategoryResponse
+                        new CategoryDto
                         {
                             CategoryId = 1,
                             Name = "Test category 1"
                         },
-                        new CategoryResponse
+                        new CategoryDto
                         {
                             CategoryId = 2,
                             Name = "Test category 2"
                         },
-                        new CategoryResponse
+                        new CategoryDto
                         {
                             CategoryId = 3,
                             Name = "Test category 3"

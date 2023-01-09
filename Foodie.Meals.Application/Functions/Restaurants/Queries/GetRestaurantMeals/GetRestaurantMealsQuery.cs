@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById
+namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals
 {
-    public class GetRestaurantMealsQuery : IRequest<IEnumerable<RestaurantMealResponse>>
+    public class GetRestaurantMealsQuery : IRequest<GetRestaurantsMealsQueryResponse>
     {
         public int RestaurantId { get; }
 

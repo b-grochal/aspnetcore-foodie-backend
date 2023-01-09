@@ -3,6 +3,8 @@ using Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrderHa
 using Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHandler;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlerById;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlers;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +17,7 @@ namespace Foodie.Identity.Controllers
 {
     [Route("api/order-handlers")]
     [ApiController]
+    [Roles(RolesDictionary.Admin)]
     public class OrderHandlersController : ControllerBase
     {
         private readonly IMediator mediator;

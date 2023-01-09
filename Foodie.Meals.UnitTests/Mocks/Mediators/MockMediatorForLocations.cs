@@ -94,7 +94,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetLocationByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetLocationByIdQuery getLocationByIdQuery, CancellationToken cancellationToken) =>
             {
-                return new LocationDetailsResponse
+                return new GetLocationByIdQueryResponse
                 {
                     LocationId = getLocationByIdQuery.LocationId,
                     Address = "Test address",
@@ -121,16 +121,16 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetLocationsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetLocationsQuery getLocationsQuery, CancellationToken cancellationToken) =>
             {
-                return new LocationsListResponse
+                return new GetLocationsQueryResponse
                 {
                     CityId = getLocationsQuery.CityId,
                     RestaurantId = getLocationsQuery.RestaurantId,
                     PageSize = getLocationsQuery.PageSize,
                     CurrentPage = getLocationsQuery.PageNumber,
                     TotalPages = 2,
-                    Locations = new List<LocationResponse>
+                    Locations = new List<LocationDto>
                     {
-                        new LocationResponse
+                        new LocationDto
                         {
                             LocationId = 1,
                             Address = "Test address",
@@ -139,7 +139,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                             CityName = "Test city",
                             RestaurantName = "Test restaurant"
                         },
-                        new LocationResponse
+                        new LocationDto
                         {
                             LocationId = 2,
                             Address = "Test address",
@@ -148,7 +148,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                             CityName = "Test city",
                             RestaurantName = "Test restaurant"
                         },
-                        new LocationResponse
+                        new LocationDto
                         {
                             LocationId = 3,
                             Address = "Test address",

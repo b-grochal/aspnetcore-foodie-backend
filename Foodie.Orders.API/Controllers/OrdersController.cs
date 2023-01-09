@@ -77,27 +77,5 @@ namespace Foodie.Orders.API.Controllers
             var result = await _mediator.Send(getOrdersQuery);
             return Ok(result);
         }
-
-        // GET api/my-orders/5
-        [HttpGet("~/api/my-orders/{customersOrderId}")]
-        public async Task<IActionResult> GetCustomersOrder(int customersOrderId)
-        {
-            var query = new GetCustomersOrderByIdQuery(customersOrderId, GetUserId());
-            var result = await _mediator.Send(query);
-            return Ok(result);
-        }
-
-        // GET api/my-orders
-        [HttpGet("~/api/my-orders")]
-        public async Task<IActionResult> GetCustomersOrders([FromQuery] GetCustomersOrdersQuery getOrdersQuery)
-        {
-            var result = await _mediator.Send(getOrdersQuery);
-            return Ok(result);
-        }
-
-        protected string GetUserId()
-        {
-            return this.User.Claims.First(i => i.Type == "ApplicationUserId").Value;
-        }
     }
 }

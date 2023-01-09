@@ -1,4 +1,4 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Queries;
+﻿using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Buyers;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Contractors;
 using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
@@ -27,9 +27,9 @@ namespace Foodie.Orders.Infrastructure
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IBuyersRepository, BuyersRepository>();
             services.AddScoped<IContractorsRepository, ContractorsRepository>();
-            services.AddScoped<IOrderQueries, OrderQueries>();
+            services.AddScoped<IOrdersQueries, OrdersQueries>();
             services.AddScoped<IContractorsQueries, ContractorsQueries>();
-            services.AddScoped<IBuyerQueries, BuyersQueries>();
+            services.AddScoped<IBuyersQueries, BuyersQueries>();
 
             return services;
         }

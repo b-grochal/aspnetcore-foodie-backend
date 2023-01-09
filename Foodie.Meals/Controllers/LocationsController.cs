@@ -3,6 +3,8 @@ using Foodie.Meals.Application.Functions.Locations.Commands.DeleteLocation;
 using Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation;
 using Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById;
 using Foodie.Meals.Application.Functions.Locations.Queries.GetLocations;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -23,6 +25,7 @@ namespace Foodie.Meals.API.Controllers
 
         // POST api/locations
         [HttpPost]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateLocation([FromBody] CreateLocationCommand createLocationCommand)
         {
             createLocationCommand.CreatedBy = GetUserEmail();
@@ -32,6 +35,7 @@ namespace Foodie.Meals.API.Controllers
 
         // PUT api/locations/5
         [HttpPut("{locationId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateLocation(int locationId, [FromBody] UpdateLocationCommand updateLocationCommand)
         {
             if (locationId != updateLocationCommand.LocationId)
@@ -46,6 +50,7 @@ namespace Foodie.Meals.API.Controllers
 
         // DELETE api/locations/5
         [HttpDelete("{locationId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> DeleteLocation(int locationId)
         {
             var command = new DeleteLocationCommand(locationId);

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCityById
 {
-    public class GetCityByIdQuery : IRequest<CityDetailsResponse>
+    public class GetCityByIdQuery : IRequest<GetCityByIdQueryResponse>
     {
         public int CityId { get; }
 

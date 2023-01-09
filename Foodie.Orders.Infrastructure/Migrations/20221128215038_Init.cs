@@ -7,12 +7,27 @@ namespace Foodie.Orders.Infrastructure.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence(
+                name: "BuyersSequence",
+                incrementBy: 10);
+
+            migrationBuilder.CreateSequence(
+                name: "ContractorsSequence",
+                incrementBy: 10);
+
+            migrationBuilder.CreateSequence(
+                name: "OrderItemsSequence",
+                incrementBy: 10);
+
+            migrationBuilder.CreateSequence(
+                name: "OrdersSequence",
+                incrementBy: 10);
+
             migrationBuilder.CreateTable(
                 name: "Buyers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -28,8 +43,7 @@ namespace Foodie.Orders.Infrastructure.Migrations
                 name: "Contractors",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     RestaurantId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LocationId = table.Column<int>(type: "int", nullable: false),
@@ -61,8 +75,7 @@ namespace Foodie.Orders.Infrastructure.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Address_Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address_City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address_Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -98,8 +111,7 @@ namespace Foodie.Orders.Infrastructure.Migrations
                 name: "OrderItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     MealId = table.Column<int>(type: "int", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -154,6 +166,18 @@ namespace Foodie.Orders.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderStatuses");
+
+            migrationBuilder.DropSequence(
+                name: "BuyersSequence");
+
+            migrationBuilder.DropSequence(
+                name: "ContractorsSequence");
+
+            migrationBuilder.DropSequence(
+                name: "OrderItemsSequence");
+
+            migrationBuilder.DropSequence(
+                name: "OrdersSequence");
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById
 {
-    public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery, CategoryDetailsResponse>
+    public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery, GetCategoryByIdQueryResponse>
     {
         private readonly ICategoriesRepository categoriesRepository;
         private readonly IMapper mapper;
@@ -22,14 +22,14 @@ namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById
             this.mapper = mapper;
         }
 
-        public async Task<CategoryDetailsResponse> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
+        public async Task<GetCategoryByIdQueryResponse> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
             var category = await categoriesRepository.GetByIdAsync(request.CategoryId);
 
             if (category == null)
                 throw new CategoryNotFoundException(request.CategoryId);
 
-            return mapper.Map<CategoryDetailsResponse>(category);
+            return mapper.Map<GetCategoryByIdQueryResponse>(category);
         }
     }
 }

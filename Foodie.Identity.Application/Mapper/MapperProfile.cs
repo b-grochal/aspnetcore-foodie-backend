@@ -45,7 +45,8 @@ namespace Foodie.Identity.Application.Mapper
                 .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
 
             // Customers
-            CreateMap<CreateCustomerCommand, Customer>();
+            CreateMap<CreateCustomerCommand, Customer>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
 
             CreateMap<Customer, CreateCustomerCommandResponse>()
                 .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
@@ -63,7 +64,8 @@ namespace Foodie.Identity.Application.Mapper
                 .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
 
             // Order handlers
-            CreateMap<CreateOrderHandlerCommand, OrderHandler>();
+            CreateMap<CreateOrderHandlerCommand, OrderHandler>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
 
             CreateMap<OrderHandler, CreateOrderHandlerCommandResponse>()
                 .ForMember(dest => dest.OrderHandlerId, opt => opt.MapFrom(src => src.Id));
@@ -81,7 +83,8 @@ namespace Foodie.Identity.Application.Mapper
                 .ForMember(dest => dest.OrderHandlerId, opt => opt.MapFrom(src => src.Id));
 
             // Auth
-            CreateMap<SignUpCommand, Customer>();
+            CreateMap<SignUpCommand, Customer>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
 
             CreateMap<Customer, SignUpCommandResponse>()
                 .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));

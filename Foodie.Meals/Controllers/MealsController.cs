@@ -3,6 +3,8 @@ using Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal;
 using Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal;
 using Foodie.Meals.Application.Functions.Meals.Queries.GetMealById;
 using Foodie.Meals.Application.Functions.Meals.Queries.GetMeals;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +29,7 @@ namespace Foodie.Meals.Controllers
 
         // POST api/meals
         [HttpPost]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateMeal([FromBody] CreateMealCommand createMealCommand)
         {
             createMealCommand.CreatedBy = GetUserEmail();
@@ -36,6 +39,7 @@ namespace Foodie.Meals.Controllers
 
         // PUT api/meals/5
         [HttpPut("{mealId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateMeal(int mealId, [FromBody] UpdateMealCommand updateMealCommand)
         {
             if (mealId != updateMealCommand.MealId)
@@ -50,6 +54,7 @@ namespace Foodie.Meals.Controllers
 
         // DELETE api/meals/5
         [HttpDelete("{mealId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> DeleteMeal(int mealId)
         {
             var command = new DeleteMealCommand(mealId);

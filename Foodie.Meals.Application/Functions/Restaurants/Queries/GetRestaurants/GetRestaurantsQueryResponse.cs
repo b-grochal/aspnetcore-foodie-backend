@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants
 {
-    public class RestaurantsListResponse : PagedResponse
+    public class GetRestaurantsQueryResponse : PagedResponse
     {
-        public IEnumerable<RestaurantResponse> Restaurants{ get; set; }
+        public IEnumerable<RestauranatDto> Restaurants{ get; set; }
         public int? CategoryId { get; set; }
         public string Name { get; set; }
         public string CityName { get; set; }

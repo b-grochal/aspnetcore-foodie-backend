@@ -84,7 +84,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetRestaurantByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetRestaurantByIdQuery getRestaurantByIdQuery, CancellationToken cancellationToken) =>
             {
-                return new RestaurantDetailsResponse
+                return new GetRestaurantByIdQueryResponse
                 {
                     RestaurantId = getRestaurantByIdQuery.RestaurantId,
                     Name = "Test restaurant"
@@ -105,7 +105,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetRestaurantsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetRestaurantsQuery getRestaurantsQuery, CancellationToken cancellationToken) =>
             {
-                return new RestaurantsListResponse
+                return new GetRestaurantsQueryResponse
                 {
                     Name = getRestaurantsQuery.Name,
                     CategoryId = getRestaurantsQuery.CategoryId,
@@ -113,19 +113,19 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                     PageSize = getRestaurantsQuery.PageSize,
                     CurrentPage = getRestaurantsQuery.PageNumber,
                     TotalPages = 2,
-                    Restaurants = new List<RestaurantResponse>
+                    Restaurants = new List<RestauranatDto>
                     {
-                        new RestaurantResponse
+                        new RestauranatDto
                         {
                             RestaurantId = 1,
                             Name = "Test restaurant 1"
                         },
-                        new RestaurantResponse
+                        new RestauranatDto
                         {
                             RestaurantId = 2,
                             Name = "Test restaurant 2"
                         },
-                        new RestaurantResponse
+                        new RestauranatDto
                         {
                             RestaurantId = 3,
                             Name = "Test restaurant 3"
@@ -148,9 +148,9 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetRestaurantLocationsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetRestaurantLocationsQuery getRestaurantLocationsQuery, CancellationToken cancellationToken) =>
             {
-                return new List<RestaurantLocationResponse>
+                return new List<RestaurantLocationDto>
                 {
-                    new RestaurantLocationResponse
+                    new RestaurantLocationDto
                     {
                         LocationId = 1,
                         Address = "Test address",
@@ -158,7 +158,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                         Email = "test@email.com",
                         CityName = "Test city"
                     },
-                    new RestaurantLocationResponse
+                    new RestaurantLocationDto
                     {
                         LocationId = 2,
                         Address = "Test address",
@@ -166,7 +166,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                         Email = "test@email.com",
                         CityName = "Test city"
                     },
-                    new RestaurantLocationResponse
+                    new RestaurantLocationDto
                     {
                         LocationId = 3,
                         Address = "Test address",
@@ -191,23 +191,23 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetRestaurantMealsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetRestaurantMealsQuery getRestaurantMealsQuery, CancellationToken cancellationToken) =>
             {
-                return new List<RestaurantMealResponse>
+                return new List<RestaurantMealDto>
                 {
-                    new RestaurantMealResponse
+                    new RestaurantMealDto
                     {
                         MealId = 1,
                         Name = "Test meal 1",
                         Description = "123-456-789",
                         Price = 123
                     },
-                    new RestaurantMealResponse
+                    new RestaurantMealDto
                     {
                         MealId = 2,
                         Name = "Test meal 2",
                         Description = "123-456-789",
                         Price = 123
                     },
-                    new RestaurantMealResponse
+                    new RestaurantMealDto
                     {
                         MealId = 3,
                         Name = "Test meal 3",

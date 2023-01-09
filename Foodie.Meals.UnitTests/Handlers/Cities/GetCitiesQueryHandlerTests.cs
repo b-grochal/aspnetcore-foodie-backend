@@ -43,7 +43,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Cities
 
             var result = await queryHandler.Handle(query, CancellationToken.None);
 
-            Assert.IsType<CitiesListResponse>(result);
+            Assert.IsType<GetCitiesQueryResponse>(result);
             Assert.Equal(query.Name, result.Name);
             Assert.Equal(query.Country, result.Country);
             Assert.Equal(query.PageSize, result.PageSize);

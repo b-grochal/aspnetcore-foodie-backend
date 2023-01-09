@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById
 {
-    public class LocationDetailsResponse
+    public class GetLocationByIdQueryResponse
     {
         public int LocationId { get; set; }
         public string Address { get; set; }

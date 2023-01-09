@@ -25,6 +25,7 @@ namespace Foode.Identity.Infrastructure.Services
             var authClaims = new[]
                 {
                     new Claim("ApplicationUserId", applicationUserId),
+                    new Claim(ClaimTypes.Role, applicationUserRole),
                     new Claim("Role", applicationUserRole)
                 };
 

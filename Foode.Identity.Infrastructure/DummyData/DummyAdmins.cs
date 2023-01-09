@@ -19,7 +19,7 @@ namespace Foode.Identity.Infrastructure.DummyData
                     FirstName = "Michael",
                     LastName = "Scott",
                     UserName = "michsco123",
-                    NormalizedUserName = "MICHSCO123",
+                    NormalizedUserName = "MICHSCO123@FOODIE.COM",
                     Email = "michsco123@foodie.com",
                     NormalizedEmail = "MICHSCO123@FOODIE.COM",
                     EmailConfirmed = true,

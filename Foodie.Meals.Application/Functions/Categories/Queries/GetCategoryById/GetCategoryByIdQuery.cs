@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById
 {
-    public class GetCategoryByIdQuery : IRequest<CategoryDetailsResponse>
+    public class GetCategoryByIdQuery : IRequest<GetCategoryByIdQueryResponse>
     {
         public int CategoryId { get; }
 

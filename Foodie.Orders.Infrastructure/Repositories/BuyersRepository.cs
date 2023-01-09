@@ -14,7 +14,7 @@ namespace Foodie.Orders.Infrastructure.Repositories
     public class BuyersRepository : IBuyersRepository
     {
         private readonly OrdersDbContext _ordersDbContext;
-        public IUnitOfWork UnitOfWork => throw new NotImplementedException();
+        public IUnitOfWork UnitOfWork => _ordersDbContext;
 
         public BuyersRepository(OrdersDbContext ordersDbContext)
         {
@@ -32,9 +32,9 @@ namespace Foodie.Orders.Infrastructure.Repositories
             return _ordersDbContext.Buyers.Update(buyer).Entity;
         }
 
-        public Task<Buyer> GetByIdAsync(int id)
+        public async Task<Buyer> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _ordersDbContext.Buyers.FindAsync(id);
         }
 
         public async Task<Buyer> GetByUserIdAsync(string userId)

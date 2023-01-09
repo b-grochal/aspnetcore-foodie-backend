@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
+namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders
 {
     public record OrderQueryDto
     {
@@ -15,7 +15,7 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries
         public int BuyerId { get; set; }
         public string BuyerEmail { get; set; }
         public int ContractorId { get; set; }
-        public string ContactorName { get; set; }
+        public string ContractorName { get; set; }
     }
 
     public record OrderDetailsQueryDto

@@ -3,6 +3,8 @@ using Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustomer;
 using Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerById;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +17,7 @@ namespace Foodie.Identity.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Roles(RolesDictionary.Admin)]
     public class CustomersController : ControllerBase
     {
         private readonly IMediator mediator;

@@ -19,12 +19,24 @@ namespace Foodie.Orders.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
+            modelBuilder.HasSequence("BuyersSequence")
+                .IncrementsBy(10);
+
+            modelBuilder.HasSequence("ContractorsSequence")
+                .IncrementsBy(10);
+
+            modelBuilder.HasSequence("OrderItemsSequence")
+                .IncrementsBy(10);
+
+            modelBuilder.HasSequence("OrdersSequence")
+                .IncrementsBy(10);
+
             modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.BuyerAggregate.Buyer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseHiLo("BuyersSequence");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -53,7 +65,7 @@ namespace Foodie.Orders.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseHiLo("ContractorsSequence");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -92,7 +104,7 @@ namespace Foodie.Orders.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseHiLo("OrdersSequence");
 
                     b.Property<int?>("_buyerId")
                         .HasColumnType("int")
@@ -126,7 +138,7 @@ namespace Foodie.Orders.Infrastructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .UseHiLo("OrderItemsSequence");
 
                     b.Property<int>("MealId")
                         .HasColumnType("int");
@@ -191,7 +203,7 @@ namespace Foodie.Orders.Infrastructure.Migrations
                             b1.Property<int>("OrderId")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("int")
-                                .UseIdentityColumn();
+                                .UseHiLo("OrdersSequence");
 
                             b1.Property<string>("City")
                                 .HasColumnType("nvarchar(max)");

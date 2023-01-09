@@ -39,7 +39,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Restaurants
 
             var result = await queryHandler.Handle(query, CancellationToken.None);
 
-            Assert.IsType<List<RestaurantLocationResponse>>(result);
+            Assert.IsType<List<RestaurantLocationDto>>(result);
             locationsRepository.VerifyGetAllAsyncForRestaurant(Times.Once());
         }
     }

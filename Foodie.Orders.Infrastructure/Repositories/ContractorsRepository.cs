@@ -14,7 +14,7 @@ namespace Foodie.Orders.Infrastructure.Repositories
     public class ContractorsRepository : IContractorsRepository
     {
         private readonly OrdersDbContext _ordersDbContext;
-        public IUnitOfWork UnitOfWork => throw new NotImplementedException();
+        public IUnitOfWork UnitOfWork => _ordersDbContext;
 
         public ContractorsRepository(OrdersDbContext ordersDbContext)
         {
@@ -32,14 +32,14 @@ namespace Foodie.Orders.Infrastructure.Repositories
             return _ordersDbContext.Contractors.Update(contractor).Entity;
         }
 
-        public Task<Contractor> GetByIdAsync(int id)
+        public async Task<Contractor> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _ordersDbContext.Contractors.FindAsync(id);
         }
 
-        public async Task<Contractor> GetByRestaurantIdAsync(int restaurantId)
+        public async Task<Contractor> GetByParametersAsync(int restaurantId, int locationId, int cityId)
         {
-            return await _ordersDbContext.Contractors.FirstOrDefaultAsync(x => x.RestaurantId== restaurantId);
+            return await _ordersDbContext.Contractors.FirstOrDefaultAsync(x => x.RestaurantId == restaurantId && x.LocationId == locationId && x.CityId == cityId);
         }
     }
 }

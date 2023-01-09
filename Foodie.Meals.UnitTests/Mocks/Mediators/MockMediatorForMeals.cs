@@ -88,7 +88,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetMealByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetMealByIdQuery getMealByIdQuery, CancellationToken cancellationToken) =>
             {
-                return new MealDetailsResponse
+                return new GetMealByIdQueryResponse
                 {
                     MealId = getMealByIdQuery.MealId,
                     Name = "Test meal",
@@ -111,28 +111,28 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetMealsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetMealsQuery getMealsQuery, CancellationToken cancellationToken) =>
             {
-                return new MealsListResponse
+                return new GetMealsQueryResponse
                 {
                     Name = getMealsQuery.Name,
                     RestaurantId = getMealsQuery.RestaurantId,
                     PageSize = getMealsQuery.PageSize,
                     CurrentPage = getMealsQuery.PageNumber,
                     TotalPages = 2,
-                    Meals = new List<MealResponse>
+                    Meals = new List<MealDto>
                     {
-                        new MealResponse
+                        new MealDto
                         {
                             MealId = 1,
                             Name = "Test meal 1",
                             Price = 123
                         },
-                        new MealResponse
+                        new MealDto
                         {
                             MealId = 2,
                             Name = "Test meal 2",
                             Price = 123
                         },
-                        new MealResponse
+                        new MealDto
                         {
                             MealId = 3,
                             Name = "Test meal 3",

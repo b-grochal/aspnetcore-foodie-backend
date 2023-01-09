@@ -19,7 +19,7 @@ using Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantById;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations;
-using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById;
+using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
 using Foodie.Meals.Domain.Entities;
 using System;
@@ -44,9 +44,9 @@ namespace Foodie.Meals.Application.Mapper
 
             CreateMap<Category, UpdateCategoryCommandResponse>();
 
-            CreateMap<Category, CategoryResponse>();
+            CreateMap<Category, CategoryDto>();
 
-            CreateMap<Category, CategoryDetailsResponse>();
+            CreateMap<Category, GetCategoryByIdQueryResponse>();
 
             // Cities
             CreateMap<CreateCityCommand, City>()
@@ -58,9 +58,9 @@ namespace Foodie.Meals.Application.Mapper
 
             CreateMap<City, UpdateCityCommandResponse>();
 
-            CreateMap<City, CityResponse>();
+            CreateMap<City, CityDto>();
 
-            CreateMap<City, CityDetailsResponse>();
+            CreateMap<City, GetCityByIdQueryResponse>();
 
             // Locations
             CreateMap<CreateLocationCommand, Location>()
@@ -76,15 +76,15 @@ namespace Foodie.Meals.Application.Mapper
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
                 .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
 
-            CreateMap<Location, LocationResponse>()
+            CreateMap<Location, LocationDto>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
                 .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
 
-            CreateMap<Location, LocationDetailsResponse>()
+            CreateMap<Location, GetLocationByIdQueryResponse>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
                 .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
 
-            CreateMap<Location, RestaurantLocationResponse>()
+            CreateMap<Location, RestaurantLocationDto>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name));
 
             // Meals
@@ -97,11 +97,11 @@ namespace Foodie.Meals.Application.Mapper
 
             CreateMap<Meal, UpdateMealCommandResponse>();
 
-            CreateMap<Meal, MealResponse>();
+            CreateMap<Meal, MealDto>();
 
-            CreateMap<Meal, MealDetailsResponse>();
+            CreateMap<Meal, GetMealByIdQueryResponse>();
 
-            CreateMap<Meal, RestaurantMealResponse>();
+            CreateMap<Meal, RestaurantMealDto>();
 
             // Restaurants
             CreateMap<CreateRestaurantCommand, Restaurant>()
@@ -113,9 +113,9 @@ namespace Foodie.Meals.Application.Mapper
 
             CreateMap<Restaurant, UpdateRestaurantCommandResponse>();
 
-            CreateMap<Restaurant, RestaurantResponse>();
+            CreateMap<Restaurant, RestauranatDto>();
 
-            CreateMap<Restaurant, RestaurantDetailsResponse>();
+            CreateMap<Restaurant, GetRestaurantByIdQueryResponse>();
 
         }
     }

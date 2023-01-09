@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations
 {
-    public class GetRestaurantLocationsQuery : IRequest<IEnumerable<RestaurantLocationResponse>>
+    public class GetRestaurantLocationsQuery : IRequest<GetRestaurantLocationsQueryResponse>
     {
         public int RestaurantId { get; }
         public int? CityId { get; }

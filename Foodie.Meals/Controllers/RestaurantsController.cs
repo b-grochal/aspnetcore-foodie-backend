@@ -3,8 +3,10 @@ using Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantById;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations;
-using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById;
+using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
+using Foodie.Shared.Authorization;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +31,7 @@ namespace Foodie.Meals.Controllers
 
         // POST api/restaurants
         [HttpPost]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand createRestaurantCommand)
         {
             createRestaurantCommand.CreatedBy = GetUserEmail();
@@ -38,6 +41,7 @@ namespace Foodie.Meals.Controllers
 
         // PUT api/restaurants/5
         [HttpPut("{restaurantId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateRestaurant(int restaurantId, [FromBody] UpdateRestaurantCommand updateRestaurantCommand)
         {
             if (restaurantId != updateRestaurantCommand.RestaurantId)
@@ -52,6 +56,7 @@ namespace Foodie.Meals.Controllers
 
         // DELETE api/restaurants/5
         [HttpDelete("{restaurantId}")]
+        [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> DeleteRestaurant(int restaurantId)
         {
             var command = new DeleteRestaurantCommand(restaurantId);
