@@ -26,7 +26,7 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
         public async Task<SignInCommandResponse> Handle(SignInCommand request, CancellationToken cancellationToken)
         {
             var applicationUser = await authService.AuthenticateUser(request.Email, request.Password);
-            var role = await applicationUserRolesRepository.GetApplicationUserRole(applicationUser.Id);
+            var role = await applicationUserRolesRepository.GetApplicationUserRole(applicationUser);
 
             return new SignInCommandResponse
             {

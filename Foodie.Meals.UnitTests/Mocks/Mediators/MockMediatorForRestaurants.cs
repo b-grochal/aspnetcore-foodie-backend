@@ -3,7 +3,7 @@ using Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantById;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations;
-using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById;
+using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
 using MediatR;
 using Moq;
