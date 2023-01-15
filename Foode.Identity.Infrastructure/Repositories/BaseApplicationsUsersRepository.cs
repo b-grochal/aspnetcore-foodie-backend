@@ -20,14 +20,14 @@ namespace Foode.Identity.Infrastructure.Repositories
             this.identityDbContext = identityDbContext;
         }
 
-        public async Task CreateAsync(T applicationUser, string password)
+        public async Task<IdentityResult> CreateAsync(T applicationUser, string password)
         {
-            await userManager.CreateAsync(applicationUser, password);
+            return await userManager.CreateAsync(applicationUser, password);
         }
 
-        public async Task DeleteAsync(T applicationUser)
+        public async Task<IdentityResult> DeleteAsync(T applicationUser)
         {
-            await userManager.DeleteAsync(applicationUser);
+            return await userManager.DeleteAsync(applicationUser);
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
@@ -48,9 +48,9 @@ namespace Foode.Identity.Infrastructure.Repositories
             return await identityDbContext.Set<T>().FindAsync(id);
         }
 
-        public async Task UpdateAsync(T applicationUser)
+        public async Task<IdentityResult> UpdateAsync(T applicationUser)
         {
-            await userManager.UpdateAsync(applicationUser);
+            return await userManager.UpdateAsync(applicationUser);
         }
     }
 }
