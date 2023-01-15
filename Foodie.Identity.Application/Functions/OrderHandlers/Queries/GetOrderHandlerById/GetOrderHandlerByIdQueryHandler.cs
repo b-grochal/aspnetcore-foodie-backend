@@ -28,7 +28,7 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHa
             var orderHandler = await orderHandlersRepository.GetByIdAsync(request.OrderHandlerId);
 
             if (orderHandler == null)
-                throw new OrderHandlerNotFoundException(request.OrderHandlerId);
+                throw new ApplicationUserNotFoundException(request.OrderHandlerId);
 
             return mapper.Map<GetOrderHandlerByIdQueryResponse>(orderHandler);
         }

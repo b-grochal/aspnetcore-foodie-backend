@@ -1,4 +1,5 @@
-﻿using Foodie.Identity.API.Models;
+﻿using FluentValidation;
+using Foodie.Identity.API.Models;
 using Foodie.Shared.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -50,9 +51,10 @@ namespace Foodie.Identity.API.Middlewares
         {
             return exception switch
             {
-                NotFoundException => (exception.Message, (int)HttpStatusCode.InternalServerError),
-                BadRequestException => (exception.Message, (int)HttpStatusCode.InternalServerError),
-                FluentValidation.ValidationException => (exception.Message, (int)HttpStatusCode.BadRequest),
+                NotFoundException => (exception.Message, (int)HttpStatusCode.NotFound),
+                BadRequestException => (exception.Message, (int)HttpStatusCode.BadRequest),
+                InternalServerErrorException => (exception.Message, (int)HttpStatusCode.InternalServerError),
+                ValidationException => (exception.Message, (int)HttpStatusCode.BadRequest),
                 _ => ("Internal server error", (int)HttpStatusCode.InternalServerError)
             };
         }

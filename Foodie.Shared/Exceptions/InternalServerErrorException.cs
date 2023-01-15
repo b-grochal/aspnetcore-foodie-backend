@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Foodie.Shared.Exceptions
 {
-    public abstract class InternalServerException : Exception
+    public abstract class InternalServerErrorException : Exception
     {
-        protected InternalServerException(string message) : base(message) { }
+        protected InternalServerErrorException(string message) : base(message) { }
     }
 }

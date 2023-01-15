@@ -23,9 +23,9 @@ namespace Foode.Identity.Infrastructure.Repositories
             return await userManager.AddToRoleAsync(applicationUser, roleName);
         }
 
-        public async Task<string> GetApplicationUserRole(ApplicationUser applicationUser)
+        public async Task<string?> GetApplicationUserRole(ApplicationUser applicationUser)
         {
-            return (await userManager.GetRolesAsync(applicationUser)).First();
+            return (await userManager.GetRolesAsync(applicationUser)).FirstOrDefault();
         }
     }
 }
