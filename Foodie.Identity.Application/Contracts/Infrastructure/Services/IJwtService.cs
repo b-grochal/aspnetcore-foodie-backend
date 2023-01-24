@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foodie.Identity.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Foodie.Identity.Application.Contracts.Infrastructure.Services
 {
     public interface IJwtService
     {
-        string GenerateToken(string applicationUserId, string applicationUserRole);
+        string GenerateToken(ApplicationUser applicationUser, string applicationUserRole);
     }
 }

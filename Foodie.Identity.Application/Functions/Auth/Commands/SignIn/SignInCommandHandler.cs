@@ -31,14 +31,14 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
             if(applicationUser == null)
                 throw new ApplicationUserNotAuthenticatedException(request.Email);
 
-            var role = await applicationUserRolesRepository.GetApplicationUserRole(applicationUser);
+            var applicationUserRole = await applicationUserRolesRepository.GetApplicationUserRole(applicationUser);
 
-            if(string.IsNullOrEmpty(role))
+            if(string.IsNullOrEmpty(applicationUserRole))
                 throw new ApplicationUserRoleNotFoundException(applicationUser.Id);
 
             return new SignInCommandResponse
             {
-                Token = jwtService.GenerateToken(applicationUser.Id, role)
+                Token = jwtService.GenerateToken(applicationUser, applicationUserRole)
             };
         }
     }
