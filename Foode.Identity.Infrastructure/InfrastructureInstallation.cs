@@ -1,5 +1,6 @@
 ﻿using Foode.Identity.Infrastructure.Repositories;
 using Foode.Identity.Infrastructure.Services;
+using Foode.Identity.Infrastructure.Validators;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Domain.Entities;
@@ -21,10 +22,12 @@ namespace Foode.Identity.Infrastructure
             services.Configure<IdentityOptions>(options =>
             {
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
-                options.Password.RequiredLength = 10;
+                options.Password.RequiredLength = 8;
                 options.SignIn.RequireConfirmedEmail = true;
                 options.User.RequireUniqueEmail = true;
             });
+
+            services.AddTransient<IUserValidator<ApplicationUser>, ApplicationUserValidator>();
 
             services.AddTransient<IAdminsRepository, AdminsRepository>();
             services.AddTransient<ICustomersRepository, CustomersRepository>();
