@@ -16,7 +16,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
+                .HasAnnotation("ProductVersion", "5.0.0")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CategoryRestaurant", b =>
@@ -65,28 +65,28 @@ namespace Foodie.Meals.Infrastructure.Migrations
                         {
                             CategoryId = 1,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 176, DateTimeKind.Unspecified).AddTicks(656), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 319, DateTimeKind.Unspecified).AddTicks(4016), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Pasta"
                         },
                         new
                         {
                             CategoryId = 2,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 182, DateTimeKind.Unspecified).AddTicks(3345), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 321, DateTimeKind.Unspecified).AddTicks(5521), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Burger"
                         },
                         new
                         {
                             CategoryId = 3,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 182, DateTimeKind.Unspecified).AddTicks(3428), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 321, DateTimeKind.Unspecified).AddTicks(5556), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Pizza"
                         },
                         new
                         {
                             CategoryId = 4,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 182, DateTimeKind.Unspecified).AddTicks(3442), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 321, DateTimeKind.Unspecified).AddTicks(5561), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Salad"
                         });
                 });
@@ -126,7 +126,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                             CityId = 1,
                             Country = "USA",
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 186, DateTimeKind.Unspecified).AddTicks(2882), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 323, DateTimeKind.Unspecified).AddTicks(103), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Las Vegas"
                         },
                         new
@@ -134,7 +134,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                             CityId = 2,
                             Country = "USA",
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 186, DateTimeKind.Unspecified).AddTicks(2975), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 323, DateTimeKind.Unspecified).AddTicks(145), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Los Angeles"
                         },
                         new
@@ -142,7 +142,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                             CityId = 3,
                             Country = "USA",
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 186, DateTimeKind.Unspecified).AddTicks(2990), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 323, DateTimeKind.Unspecified).AddTicks(150), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "New York"
                         });
                 });
@@ -196,7 +196,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                             Address = "Kfc Las Vegas",
                             CityId = 1,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 187, DateTimeKind.Unspecified).AddTicks(8913), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 323, DateTimeKind.Unspecified).AddTicks(5661), new TimeSpan(0, 1, 0, 0, 0)),
                             Email = "kfc.lasvegas@email.com",
                             PhoneNumber = "123-123-213",
                             RestaurantId = 1
@@ -207,7 +207,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                             Address = "Kfc Los Angeles",
                             CityId = 2,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 187, DateTimeKind.Unspecified).AddTicks(9007), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 323, DateTimeKind.Unspecified).AddTicks(5695), new TimeSpan(0, 1, 0, 0, 0)),
                             Email = "kfc.losangeles@email.com",
                             PhoneNumber = "123-123-213",
                             RestaurantId = 1
@@ -218,7 +218,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                             Address = "Kfc New York",
                             CityId = 3,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 187, DateTimeKind.Unspecified).AddTicks(9022), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 323, DateTimeKind.Unspecified).AddTicks(5700), new TimeSpan(0, 1, 0, 0, 0)),
                             Email = "kfc.newyork@email.com",
                             PhoneNumber = "123-123-213",
                             RestaurantId = 1
@@ -229,7 +229,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                             Address = "Pizza Hut Las Vegas",
                             CityId = 1,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 187, DateTimeKind.Unspecified).AddTicks(9053), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 323, DateTimeKind.Unspecified).AddTicks(5703), new TimeSpan(0, 1, 0, 0, 0)),
                             Email = "pizzahut.lasvegas@email.com",
                             PhoneNumber = "123-123-213",
                             RestaurantId = 2
@@ -240,7 +240,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                             Address = "Pizza Hut Los Angeles",
                             CityId = 2,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 187, DateTimeKind.Unspecified).AddTicks(9064), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 323, DateTimeKind.Unspecified).AddTicks(5706), new TimeSpan(0, 1, 0, 0, 0)),
                             Email = "pizzahut.losangeles@email.com",
                             PhoneNumber = "123-123-213",
                             RestaurantId = 2
@@ -251,7 +251,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                             Address = "McDonald's Las Vegas",
                             CityId = 1,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 187, DateTimeKind.Unspecified).AddTicks(9088), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 323, DateTimeKind.Unspecified).AddTicks(5713), new TimeSpan(0, 1, 0, 0, 0)),
                             Email = "mcdonalds.lasvegas@email.com",
                             PhoneNumber = "123-123-213",
                             RestaurantId = 3
@@ -300,7 +300,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                         {
                             MealId = 1,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 190, DateTimeKind.Unspecified).AddTicks(28), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 324, DateTimeKind.Unspecified).AddTicks(1211), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Longer",
                             Name = "Longer",
                             Price = 12m,
@@ -310,7 +310,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                         {
                             MealId = 2,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 190, DateTimeKind.Unspecified).AddTicks(161), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 324, DateTimeKind.Unspecified).AddTicks(1247), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Zinger",
                             Name = "Zinger",
                             Price = 10m,
@@ -320,7 +320,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                         {
                             MealId = 3,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 190, DateTimeKind.Unspecified).AddTicks(180), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 324, DateTimeKind.Unspecified).AddTicks(1251), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Pizza Texas",
                             Name = "Pizza Texas",
                             Price = 12m,
@@ -330,7 +330,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                         {
                             MealId = 4,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 190, DateTimeKind.Unspecified).AddTicks(193), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 324, DateTimeKind.Unspecified).AddTicks(1254), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Pizza Carbonara",
                             Name = "Pizza Carbonara",
                             Price = 12m,
@@ -340,7 +340,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                         {
                             MealId = 5,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 190, DateTimeKind.Unspecified).AddTicks(427), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 324, DateTimeKind.Unspecified).AddTicks(1257), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Big Mac",
                             Name = "Big Mac",
                             Price = 15m,
@@ -350,7 +350,7 @@ namespace Foodie.Meals.Infrastructure.Migrations
                         {
                             MealId = 6,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 190, DateTimeKind.Unspecified).AddTicks(457), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 324, DateTimeKind.Unspecified).AddTicks(1263), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "McRoyal",
                             Name = "McRoyal",
                             Price = 10m,
@@ -389,21 +389,21 @@ namespace Foodie.Meals.Infrastructure.Migrations
                         {
                             RestaurantId = 1,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 191, DateTimeKind.Unspecified).AddTicks(98), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 324, DateTimeKind.Unspecified).AddTicks(4221), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "KFC"
                         },
                         new
                         {
                             RestaurantId = 2,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 191, DateTimeKind.Unspecified).AddTicks(209), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 324, DateTimeKind.Unspecified).AddTicks(4258), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "Pizza Hut"
                         },
                         new
                         {
                             RestaurantId = 3,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2022, 3, 31, 13, 42, 44, 191, DateTimeKind.Unspecified).AddTicks(226), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 2, 5, 19, 21, 59, 324, DateTimeKind.Unspecified).AddTicks(4263), new TimeSpan(0, 1, 0, 0, 0)),
                             Name = "McDonald's"
                         });
                 });

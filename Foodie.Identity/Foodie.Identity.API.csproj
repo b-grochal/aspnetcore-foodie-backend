@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Foode.Identity.Infrastructure\Foode.Identity.Infrastructure.csproj" />
     <ProjectReference Include="..\Foodie.Identity.Application\Foodie.Identity.Application.csproj" />
-    <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
   </ItemGroup>
   
  <ItemGroup>
