@@ -2,10 +2,12 @@
 using Foodie.Basket.Repositories.Interfaces;
 using Foodie.EventBus.IntegrationEvents.Basket;
 using Foodie.Shared.Authorization;
+using Foodie.Shared.Controllers;
 using Foodie.Shared.Extensions.Attributes;
 using IdentityGrpc;
 using MassTransit;
 using MealsGrpc;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,16 +20,15 @@ using System.Threading.Tasks;
 namespace Foodie.Basket.Controllers
 {
     [Route("api/my-basket")]
-    [ApiController]
     [Roles(RolesDictionary.Customer)]
-    public class MyBasketController : ControllerBase
+    public class MyBasketController : BaseController
     {
         private readonly IBasketRepository basketRepository;
         private readonly IdentityService.IdentityServiceClient identityServiceClient;
         private readonly MealsService.MealsServiceClient mealsServiceClient;
         private readonly IPublishEndpoint publishEndpoint;
 
-        public MyBasketController(IBasketRepository basketRepository, IdentityService.IdentityServiceClient identityServiceClient, MealsService.MealsServiceClient mealsServiceClient, IPublishEndpoint publishEndpoint)
+        public MyBasketController(IBasketRepository basketRepository, IdentityService.IdentityServiceClient identityServiceClient, MealsService.MealsServiceClient mealsServiceClient, IPublishEndpoint publishEndpoint) : base(null)
         {
             this.basketRepository = basketRepository;
             this.identityServiceClient = identityServiceClient;
@@ -38,21 +39,21 @@ namespace Foodie.Basket.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBasket()
         {
-            var result = await basketRepository.GetBasket(GetUserId());
+            var result = await basketRepository.GetBasket(GetApplicationUserClaim(ClaimTypes.NameIdentifier));
             return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateBasket([FromBody] CustomerBasket customerBasket)
         {
-            var result = await basketRepository.UpdateBasket(GetUserId(), customerBasket);
+            var result = await basketRepository.UpdateBasket(GetApplicationUserClaim(ClaimTypes.NameIdentifier), customerBasket);
             return Ok(result);
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteBasket()
         {
-            await basketRepository.DeleteBasket(GetUserId());
+            await basketRepository.DeleteBasket(GetApplicationUserClaim(ClaimTypes.NameIdentifier));
             return Ok();
         }
 
@@ -60,7 +61,7 @@ namespace Foodie.Basket.Controllers
         [HttpPost]
         public async Task<ActionResult> CheckoutAsync([FromBody] BasketCheckout basketCheckout)
         {
-            var customerId = GetUserId();
+            var customerId = GetApplicationUserClaim(ClaimTypes.NameIdentifier);
             var basket = await basketRepository.GetBasket(customerId);
 
             var identityServiceRequest = new GetCustomerRequest { Id = customerId };
@@ -101,11 +102,6 @@ namespace Foodie.Basket.Controllers
             });
 
             return Ok();
-        }
-
-        private string GetUserId()
-        {
-            return this.User.Claims.First(i => i.Type == ClaimTypes.NameIdentifier).Value;
         }
     }
 }

@@ -4,6 +4,7 @@ using Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHa
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlerById;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlers;
 using Foodie.Shared.Authorization;
+using Foodie.Shared.Controllers;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -16,16 +17,10 @@ using System.Threading.Tasks;
 namespace Foodie.Identity.Controllers
 {
     [Route("api/order-handlers")]
-    [ApiController]
     [Roles(RolesDictionary.Admin)]
-    public class OrderHandlersController : ControllerBase
+    public class OrderHandlersController : BaseController
     {
-        private readonly IMediator mediator;
-
-        public OrderHandlersController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
+        public OrderHandlersController(IMediator mediator) : base(mediator) { }
 
         // POST api/order-handlers
         [HttpPost]
