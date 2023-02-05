@@ -146,36 +146,36 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
 
         public MockMediatorForRestaurants MockSendingGetRestaurantLocationsQuery()
         {
-            Setup(m => m.Send(It.IsAny<GetRestaurantLocationsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetRestaurantLocationsQuery getRestaurantLocationsQuery, CancellationToken cancellationToken) =>
-            {
-                return new List<RestaurantLocationDto>
-                {
-                    new RestaurantLocationDto
-                    {
-                        LocationId = 1,
-                        Address = "Test address",
-                        PhoneNumber = "123-456-789",
-                        Email = "test@email.com",
-                        CityName = "Test city"
-                    },
-                    new RestaurantLocationDto
-                    {
-                        LocationId = 2,
-                        Address = "Test address",
-                        PhoneNumber = "123-456-789",
-                        Email = "test@email.com",
-                        CityName = "Test city"
-                    },
-                    new RestaurantLocationDto
-                    {
-                        LocationId = 3,
-                        Address = "Test address",
-                        PhoneNumber = "123-456-789",
-                        Email = "test@email.com",
-                        CityName = "Test city"
-                    },
-                };
-            });
+            //Setup(m => m.Send(It.IsAny<GetRestaurantLocationsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetRestaurantLocationsQuery getRestaurantLocationsQuery, CancellationToken cancellationToken) =>
+            //{
+            //    return new List<RestaurantLocationDto>
+            //    {
+            //        new RestaurantLocationDto
+            //        {
+            //            LocationId = 1,
+            //            Address = "Test address",
+            //            PhoneNumber = "123-456-789",
+            //            Email = "test@email.com",
+            //            CityName = "Test city"
+            //        },
+            //        new RestaurantLocationDto
+            //        {
+            //            LocationId = 2,
+            //            Address = "Test address",
+            //            PhoneNumber = "123-456-789",
+            //            Email = "test@email.com",
+            //            CityName = "Test city"
+            //        },
+            //        new RestaurantLocationDto
+            //        {
+            //            LocationId = 3,
+            //            Address = "Test address",
+            //            PhoneNumber = "123-456-789",
+            //            Email = "test@email.com",
+            //            CityName = "Test city"
+            //        },
+            //    };
+            //});
 
             return this;
         }
@@ -189,33 +189,33 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
 
         public MockMediatorForRestaurants MockSendingGetRestaurantMealsQuery()
         {
-            Setup(m => m.Send(It.IsAny<GetRestaurantMealsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetRestaurantMealsQuery getRestaurantMealsQuery, CancellationToken cancellationToken) =>
-            {
-                return new List<RestaurantMealDto>
-                {
-                    new RestaurantMealDto
-                    {
-                        MealId = 1,
-                        Name = "Test meal 1",
-                        Description = "123-456-789",
-                        Price = 123
-                    },
-                    new RestaurantMealDto
-                    {
-                        MealId = 2,
-                        Name = "Test meal 2",
-                        Description = "123-456-789",
-                        Price = 123
-                    },
-                    new RestaurantMealDto
-                    {
-                        MealId = 3,
-                        Name = "Test meal 3",
-                        Description = "123-456-789",
-                        Price = 123
-                    },
-                };
-            });
+            //Setup(m => m.Send(It.IsAny<GetRestaurantMealsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetRestaurantMealsQuery getRestaurantMealsQuery, CancellationToken cancellationToken) =>
+            //{
+            //    return new List<RestaurantMealDto>
+            //    {
+            //        new RestaurantMealDto
+            //        {
+            //            MealId = 1,
+            //            Name = "Test meal 1",
+            //            Description = "123-456-789",
+            //            Price = 123
+            //        },
+            //        new RestaurantMealDto
+            //        {
+            //            MealId = 2,
+            //            Name = "Test meal 2",
+            //            Description = "123-456-789",
+            //            Price = 123
+            //        },
+            //        new RestaurantMealDto
+            //        {
+            //            MealId = 3,
+            //            Name = "Test meal 3",
+            //            Description = "123-456-789",
+            //            Price = 123
+            //        },
+            //    };
+            //});
 
             return this;
         }

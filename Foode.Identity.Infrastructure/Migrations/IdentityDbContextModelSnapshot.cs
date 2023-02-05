@@ -31,6 +31,12 @@ namespace Foode.Identity.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -40,6 +46,12 @@ namespace Foode.Identity.Infrastructure.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -120,21 +132,21 @@ namespace Foode.Identity.Infrastructure.Migrations
                         new
                         {
                             Id = "fe10688b-b67d-4027-84e6-23c256af188d",
-                            ConcurrencyStamp = "2b0cdbbc-30f1-458a-8b62-3dec7e4b59ed",
+                            ConcurrencyStamp = "9a8d181e-04a3-421e-87d5-26eada1e82fe",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "35d96949-978e-4f88-851b-bbb750e6d0ad",
-                            ConcurrencyStamp = "06043069-b3bf-45da-9997-7de796fd03ff",
+                            ConcurrencyStamp = "83b28632-2eb9-40f4-9f7c-2008ca384154",
                             Name = "OrderHandler",
                             NormalizedName = "ORDERHANDLER"
                         },
                         new
                         {
                             Id = "65cff553-91da-46e6-81b5-c6adb8852b5c",
-                            ConcurrencyStamp = "2f748d26-cab0-416d-ae6f-3e381358c64b",
+                            ConcurrencyStamp = "07e1ab16-458b-4dc7-8354-22c48bee1825",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -272,18 +284,19 @@ namespace Foode.Identity.Infrastructure.Migrations
                         {
                             Id = "f175aa8f-1cf3-427f-8be5-def2bed3c564",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a510d288-8c8f-4664-a1fa-1e19b4daeec8",
+                            ConcurrencyStamp = "5b43015f-d403-49d1-9700-ce0e6cda0a8d",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "michsco123@foodie.com",
                             EmailConfirmed = true,
                             FirstName = "Michael",
                             LastName = "Scott",
                             LockoutEnabled = false,
                             NormalizedEmail = "MICHSCO123@FOODIE.COM",
-                            NormalizedUserName = "MICHSCO123",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAS2JM6Z8qoraoea0kLZD8S3jZ6HR1vPurB0VSWwPyIN0C/nwRSRidEvzc5iSotqSA==",
+                            NormalizedUserName = "MICHSCO123@FOODIE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOUcCoZrRZM/8Kqi0VXhlSHKvVxyfQsDQX3OZQt31y1EaLtvuAABEH+eYZbi4Bo6YQ==",
                             PhoneNumber = "123-456-789",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "48765042-f487-407e-868c-363b4db13bdc",
+                            SecurityStamp = "d435234d-9b8e-41be-aa2b-5824325ab384",
                             TwoFactorEnabled = false,
                             UserName = "michsco123"
                         });
@@ -300,18 +313,19 @@ namespace Foode.Identity.Infrastructure.Migrations
                         {
                             Id = "6a1ab648-6be8-44f1-87b7-394c34547589",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dc896b10-2f3e-4ccd-a76b-0c2966703acb",
+                            ConcurrencyStamp = "5e458756-180b-45fe-8baa-1041d85b7477",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "jimhal123@foodie.com",
                             EmailConfirmed = true,
                             FirstName = "Jim",
                             LastName = "Halpert",
                             LockoutEnabled = false,
-                            NormalizedEmail = "JIMHAL@FOODIE.COM",
-                            NormalizedUserName = "JIMHAL123",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGTsn6dwuVfzdK2raB+It4LPVHZh40qjJcSTV6whvt2m3lKA6nCvM8M/Wc8+VKQhdw==",
+                            NormalizedEmail = "JIMHAL123@FOODIE.COM",
+                            NormalizedUserName = "JIMHAL123@FOODIE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDqLdXtGrvHgwFgLXm5V54cRNAieQzaAkS1vtFCgxtxfsIAkiW0wm4iGBa8BneTAhQ==",
                             PhoneNumber = "123-456-789",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "6893d7e2-5a6e-499a-bfc6-dca98ba0b814",
+                            SecurityStamp = "a50047b6-0455-406a-a617-e05e9a24402d",
                             TwoFactorEnabled = false,
                             UserName = "jimhal123"
                         });
@@ -321,6 +335,9 @@ namespace Foode.Identity.Infrastructure.Migrations
                 {
                     b.HasBaseType("Foodie.Identity.Domain.Entities.ApplicationUser");
 
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
                     b.ToTable("OrderHandlers");
 
                     b.HasData(
@@ -328,20 +345,22 @@ namespace Foode.Identity.Infrastructure.Migrations
                         {
                             Id = "51d8f926-867b-49c5-a3ba-56a76203a6a5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8f08030c-651a-4704-a6ff-03efefbd0f7c",
+                            ConcurrencyStamp = "acabd034-5090-4ee6-8d93-4c7de465f3d6",
+                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "dwigsch123@foodie.com",
                             EmailConfirmed = true,
                             FirstName = "Dwight",
                             LastName = "Schrute",
                             LockoutEnabled = false,
-                            NormalizedEmail = "DWIGSCH@FOODIE.COM",
-                            NormalizedUserName = "DWIGSCH123",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIYY/a4po9Vk8ELvcILjS1H118OOGt4MAw2oW7/KVPzK7eLfuLAc8kkTgAvo0j7TIg==",
+                            NormalizedEmail = "DWIGSCH123@FOODIE.COM",
+                            NormalizedUserName = "DWIGSCH123@FOODIE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFJ8Qk2sPzNlZrkDxGwFqh5qEgYxrm230yksRZwO5bRenqjfFyO5zkhXJElmH/XZeg==",
                             PhoneNumber = "123-456-789",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "f2d73ea5-21ca-4bb6-b20f-ec0df3ef5281",
+                            SecurityStamp = "dbcb9c66-a639-4ad8-9b9b-6942b0e29ab6",
                             TwoFactorEnabled = false,
-                            UserName = "dwigsch123"
+                            UserName = "dwigsch123",
+                            LocationId = 0
                         });
                 });
 
