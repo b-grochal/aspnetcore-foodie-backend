@@ -16,6 +16,7 @@ namespace Foode.Identity.Infrastructure.Services
         public AuthService(UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
+
         }
 
         public async Task<ApplicationUser> AuthenticateUser(string email, string password)
