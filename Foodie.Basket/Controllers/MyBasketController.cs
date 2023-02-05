@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Basket.Controllers
@@ -104,7 +105,7 @@ namespace Foodie.Basket.Controllers
 
         private string GetUserId()
         {
-            return this.User.Claims.First(i => i.Type == "ApplicationUserId").Value;
+            return this.User.Claims.First(i => i.Type == ClaimTypes.NameIdentifier).Value;
         }
     }
 }
