@@ -13,5 +13,6 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrders
         public string BuyerEmail { get; set; }
         public string OrderStatusName { get; set; }
         public string ContractorName { get; set; }
+        public int? LocationId { get; set; }
     }
 }

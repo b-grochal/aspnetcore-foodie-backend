@@ -1,10 +1,7 @@
 ﻿using Foodie.Shared.Queries;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrders
 {
@@ -12,6 +9,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrders
     {
         public string BuyerEmail { get; set; }
         public string OrderStatusName { get; set; }
-        public string ContractorName { get; set; }
+        public string ContractorName { get; set; } // TODO: Change to contractor id
+        public int? LocationId { get; set; }
     }
 }

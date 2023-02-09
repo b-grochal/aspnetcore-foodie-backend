@@ -4,7 +4,10 @@ using Foodie.Orders.Application.Functions.Orders.Commands.SetInDeliveryOrderStat
 using Foodie.Orders.Application.Functions.Orders.Commands.SetInProgressOrderStatus;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrders;
+using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
+using Foodie.Shared.Enums;
+using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -12,7 +15,7 @@ using System.Threading.Tasks;
 namespace Foodie.Orders.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [Roles(RolesDictionary.Admin, RolesDictionary.OrderHandler)]
     public class OrdersController : BaseController
     {
         public OrdersController(IMediator mediator) : base(mediator) { }
@@ -66,6 +69,9 @@ namespace Foodie.Orders.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrders([FromQuery] GetOrdersQuery getOrdersQuery)
         {
+            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
+                getOrdersQuery.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+
             var result = await mediator.Send(getOrdersQuery);
             return Ok(result);
         }

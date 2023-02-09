@@ -18,9 +18,9 @@ namespace Foodie.Orders.Infrastructure.Queries
             _dapperContext = dapperContext;
         }
 
-        public async Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, string buyerEmail, string orderStatusName, string contractorName)
+        public async Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, string buyerEmail, string orderStatusName, string contractorName, int? locationId)
         {
-            var selector = PrepareSqlTemplateForGettingAllOrders(pageNumber, pageSize, buyerEmail, orderStatusName, contractorName);
+            var selector = PrepareSqlTemplateForGettingAllOrders(pageNumber, pageSize, buyerEmail, orderStatusName, contractorName, locationId);
 
             using var connection = _dapperContext.CreateConnection();
             
@@ -100,7 +100,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             return sqlQueryResult.FirstOrDefault();
         }
 
-        private Template PrepareSqlTemplateForGettingAllOrders(int pageNumber, int pageSize, string buyerEmail, string orderStatusName, string contractorName)
+        private Template PrepareSqlTemplateForGettingAllOrders(int pageNumber, int pageSize, string buyerEmail, string orderStatusName, string contractorName, int? locationId)
         {
             var builder = new SqlBuilder();
 
@@ -121,6 +121,9 @@ namespace Foodie.Orders.Infrastructure.Queries
             if (contractorName != null)
                 builder.Where("c.Name like @contractorName", new { contractorName = $"%{contractorName}%" });
 
+            if(locationId.HasValue)
+                builder.Where("c.LocationId = @locationId", new { locationId = locationId.Value });
+
             return selector;
         }
 
@@ -140,7 +143,7 @@ namespace Foodie.Orders.Infrastructure.Queries
                 builder.Where("b.UserId = @userId", new { userId });
 
             if (orderStatusId != null)
-                builder.Where("os.Id= @orderStatusId", new { orderStatusId.Value });
+                builder.Where("os.Id = @orderStatusId", new { orderStatusId.Value });
 
             if (contractorName != null)
                 builder.Where("c.Name like @contractorName", new { contractorName = $"%{contractorName}%" });
