@@ -2,35 +2,27 @@
 using Foodie.Orders.Application.Functions.Orders.Commands.SetDeliveredOrderStatus;
 using Foodie.Orders.Application.Functions.Orders.Commands.SetInDeliveryOrderStatus;
 using Foodie.Orders.Application.Functions.Orders.Commands.SetInProgressOrderStatus;
-using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderById;
-using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrders;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrders;
+using Foodie.Shared.Controllers;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Foodie.Orders.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class OrdersController : BaseController
     {
-        private readonly IMediator _mediator;
-
-        public OrdersController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+        public OrdersController(IMediator mediator) : base(mediator) { }
 
         // PUT api/orders/5/cancel
         [HttpPut("{orderId}/cancel")]
         public async Task<IActionResult> CancelOrder(int orderId)
         {
             var command = new CancelOrderCommand(orderId);
-            await _mediator.Send(command);
+            await mediator.Send(command);
             return Ok();
         }
 
@@ -39,7 +31,7 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> SetDeliveredStatus(int orderId)
         {
             var command = new SetDeliveredOrderStatusCommand(orderId);
-            await _mediator.Send(command);
+            await mediator.Send(command);
             return Ok();
         }
 
@@ -48,7 +40,7 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> SetInDeliveryStatus(int orderId)
         {
             var command = new SetInDeliveryOrderStatusCommand(orderId);
-            await _mediator.Send(command);
+            await mediator.Send(command);
             return Ok();
         }
 
@@ -57,7 +49,7 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> SetInProgressStatus(int orderId)
         {
             var command = new SetInProgressOrderStatusCommand(orderId);
-            await _mediator.Send(command);
+            await mediator.Send(command);
             return Ok();
         }
 
@@ -65,8 +57,8 @@ namespace Foodie.Orders.API.Controllers
         [HttpGet("{orderId}")]
         public async Task<IActionResult> GetOrder(int orderId)
         {
-            var query = new GetOrderByIdQuery(orderId);
-            var result = await _mediator.Send(query);
+            var query = new GetOrderByIdQuery(orderId); 
+            var result = await mediator.Send(query);
             return Ok(result);
         }
 
@@ -74,7 +66,7 @@ namespace Foodie.Orders.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrders([FromQuery] GetOrdersQuery getOrdersQuery)
         {
-            var result = await _mediator.Send(getOrdersQuery);
+            var result = await mediator.Send(getOrdersQuery);
             return Ok(result);
         }
     }

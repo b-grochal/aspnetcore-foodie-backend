@@ -1,14 +1,13 @@
 ﻿using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Domain.Entities;
 using Foodie.Shared.Configuration;
+using Foodie.Shared.Enums;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Foode.Identity.Infrastructure.Services
 {
@@ -25,6 +24,7 @@ namespace Foode.Identity.Infrastructure.Services
         {
             var expirationTime = DateTime.Now.AddMinutes(jwtTokenConfiguration.AccessTokenExpiration);
             var identityClaims = CreateIdentityClaims(applicationUser, applicationUserRole);
+            identityClaims.AddRange(CreateApplicationUserClaims(applicationUser, applicationUserRole));
             var signingCredentials = CreateSigningCredentials();
 
             var token = CreateJwtToken(identityClaims, signingCredentials, expirationTime);
@@ -32,36 +32,30 @@ namespace Foode.Identity.Infrastructure.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private IEnumerable<Claim> CreateIdentityClaims(ApplicationUser applicationUser, string applicationUserRole)
+        private List<Claim> CreateIdentityClaims(ApplicationUser applicationUser, string applicationUserRole)
         {
             return new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, applicationUser.Id),
                 new Claim(ClaimTypes.Name, applicationUser.UserName),
                 new Claim(ClaimTypes.Email, applicationUser.Email),
-                new Claim(ClaimTypes.Role, applicationUserRole),
-                new Claim("Role", applicationUserRole)
+                new Claim(ClaimTypes.Role, applicationUserRole)
             };
         }
 
-        private IEnumerable<Claim> CreateApplicationUserClaims(ApplicationUser applicationUser)
+        private IEnumerable<Claim> CreateApplicationUserClaims(ApplicationUser applicationUser, string applicationUserRole)
         {
-            return applicationUser switch
+            var applicationUserClaims = new List<Claim>
             {
-                Admin admin => new List<Claim>
-                {
-                    new Claim("Admin", "Admin")
-                },
-                OrderHandler orderHandler => new List<Claim>
-                {
-                    new Claim("OrderHandler", "OrderHandler")
-                },
-                Customer customer => new List<Claim>
-                {
-                    new Claim("Customer", "Customer")
-                },
-                _ => throw new NotImplementedException(),
+                new Claim(ApplicationUserClaims.Role, applicationUserRole)
             };
+
+            if (applicationUser is OrderHandler orderHandler)
+            {
+                applicationUserClaims.Add(new Claim(ApplicationUserClaims.LocationId, orderHandler.LocationId.ToString()));
+            }
+
+            return applicationUserClaims;
         }
 
         private SigningCredentials CreateSigningCredentials()
