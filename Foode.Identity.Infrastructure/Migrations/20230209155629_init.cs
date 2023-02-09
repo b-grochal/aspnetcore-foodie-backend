@@ -215,9 +215,9 @@ namespace Foode.Identity.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedDate", "Email", "EmailConfirmed", "FirstName", "LastModifiedBy", "LastModifiedDate", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "f175aa8f-1cf3-427f-8be5-def2bed3c564", 0, "5b43015f-d403-49d1-9700-ce0e6cda0a8d", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "michsco123@foodie.com", true, "Michael", null, null, "Scott", false, null, "MICHSCO123@FOODIE.COM", "MICHSCO123@FOODIE.COM", "AQAAAAEAACcQAAAAEOUcCoZrRZM/8Kqi0VXhlSHKvVxyfQsDQX3OZQt31y1EaLtvuAABEH+eYZbi4Bo6YQ==", "123-456-789", true, "d435234d-9b8e-41be-aa2b-5824325ab384", false, "michsco123" },
-                    { "6a1ab648-6be8-44f1-87b7-394c34547589", 0, "5e458756-180b-45fe-8baa-1041d85b7477", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "jimhal123@foodie.com", true, "Jim", null, null, "Halpert", false, null, "JIMHAL123@FOODIE.COM", "JIMHAL123@FOODIE.COM", "AQAAAAEAACcQAAAAEDqLdXtGrvHgwFgLXm5V54cRNAieQzaAkS1vtFCgxtxfsIAkiW0wm4iGBa8BneTAhQ==", "123-456-789", true, "a50047b6-0455-406a-a617-e05e9a24402d", false, "jimhal123" },
-                    { "51d8f926-867b-49c5-a3ba-56a76203a6a5", 0, "acabd034-5090-4ee6-8d93-4c7de465f3d6", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "dwigsch123@foodie.com", true, "Dwight", null, null, "Schrute", false, null, "DWIGSCH123@FOODIE.COM", "DWIGSCH123@FOODIE.COM", "AQAAAAEAACcQAAAAEFJ8Qk2sPzNlZrkDxGwFqh5qEgYxrm230yksRZwO5bRenqjfFyO5zkhXJElmH/XZeg==", "123-456-789", true, "dbcb9c66-a639-4ad8-9b9b-6942b0e29ab6", false, "dwigsch123" }
+                    { "f175aa8f-1cf3-427f-8be5-def2bed3c564", 0, "a71e28db-4e6a-496c-930b-6ccb8f5ed566", "Seed", new DateTimeOffset(new DateTime(2023, 2, 9, 16, 56, 28, 431, DateTimeKind.Unspecified).AddTicks(5605), new TimeSpan(0, 1, 0, 0, 0)), "michsco123@foodie.com", true, "Michael", null, null, "Scott", false, null, "MICHSCO123@FOODIE.COM", "MICHSCO123@FOODIE.COM", "AQAAAAEAACcQAAAAED5z+D7R1U8gUnBUm+g039Xk72ihsZ2CyKj2ylB7PlEdFpXHgbTWm/KfjhYGlevLgw==", "123-456-789", true, "afc1ad89-5b1b-401b-a2a5-3a029c65bce6", false, "michsco123" },
+                    { "6a1ab648-6be8-44f1-87b7-394c34547589", 0, "fed507b0-300c-481b-a783-019e16958e89", "Seed", new DateTimeOffset(new DateTime(2023, 2, 9, 16, 56, 28, 471, DateTimeKind.Unspecified).AddTicks(1526), new TimeSpan(0, 1, 0, 0, 0)), "jimhal123@foodie.com", true, "Jim", null, null, "Halpert", false, null, "JIMHAL123@FOODIE.COM", "JIMHAL123@FOODIE.COM", "AQAAAAEAACcQAAAAEAfOk02VpOLUQSM1Xuzv59MKx/Sc6t9XoXQYp8xxMYij7jeWNza5zUz2djB+IfRZcg==", "123-456-789", true, "b2082f68-27d1-442e-9c41-2af58096c6f8", false, "jimhal123" },
+                    { "51d8f926-867b-49c5-a3ba-56a76203a6a5", 0, "04b5befd-5faf-42ee-b84f-37557276c958", "Seed", new DateTimeOffset(new DateTime(2023, 2, 9, 16, 56, 28, 458, DateTimeKind.Unspecified).AddTicks(2257), new TimeSpan(0, 1, 0, 0, 0)), "dwigsch123@foodie.com", true, "Dwight", null, null, "Schrute", false, null, "DWIGSCH123@FOODIE.COM", "DWIGSCH123@FOODIE.COM", "AQAAAAEAACcQAAAAECtUl+MwRGEc/2kQ1JXlRDvw1EQfitUOTGw4te0j3HxH+Gu1f5M0DlRjwp50LWU7Dw==", "123-456-789", true, "9b9cc225-430a-40fb-a0d2-a9d13e49a565", false, "dwigsch123" }
                 });
 
             migrationBuilder.InsertData(
@@ -225,9 +225,9 @@ namespace Foode.Identity.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "fe10688b-b67d-4027-84e6-23c256af188d", "9a8d181e-04a3-421e-87d5-26eada1e82fe", "Admin", "ADMIN" },
-                    { "35d96949-978e-4f88-851b-bbb750e6d0ad", "83b28632-2eb9-40f4-9f7c-2008ca384154", "OrderHandler", "ORDERHANDLER" },
-                    { "65cff553-91da-46e6-81b5-c6adb8852b5c", "07e1ab16-458b-4dc7-8354-22c48bee1825", "Customer", "CUSTOMER" }
+                    { "fe10688b-b67d-4027-84e6-23c256af188d", "890df069-eded-465c-9267-7d4533905227", "Admin", "ADMIN" },
+                    { "35d96949-978e-4f88-851b-bbb750e6d0ad", "695078be-51ec-4cf7-9357-6016c4e91bd1", "OrderHandler", "ORDERHANDLER" },
+                    { "65cff553-91da-46e6-81b5-c6adb8852b5c", "1724b40b-96f1-47af-8932-484bd4389997", "Customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(

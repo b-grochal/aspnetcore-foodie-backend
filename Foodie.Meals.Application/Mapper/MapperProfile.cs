@@ -22,11 +22,6 @@ using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocati
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
 using Foodie.Meals.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Mapper
 {
@@ -35,8 +30,7 @@ namespace Foodie.Meals.Application.Mapper
         public MapperProfile()
         {
             // Categories
-            CreateMap<CreateCategoryCommand, Category>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
+            CreateMap<CreateCategoryCommand, Category>();
 
             CreateMap<Category, CreateCategoryCommandResponse>();
 
@@ -49,8 +43,7 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<Category, GetCategoryByIdQueryResponse>();
 
             // Cities
-            CreateMap<CreateCityCommand, City>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
+            CreateMap<CreateCityCommand, City>();
 
             CreateMap<City, CreateCityCommandResponse>();
 
@@ -63,8 +56,7 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<City, GetCityByIdQueryResponse>();
 
             // Locations
-            CreateMap<CreateLocationCommand, Location>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
+            CreateMap<CreateLocationCommand, Location>();
 
             CreateMap<Location, CreateLocationCommandResponse>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
@@ -88,8 +80,7 @@ namespace Foodie.Meals.Application.Mapper
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name));
 
             // Meals
-            CreateMap<CreateMealCommand, Meal>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
+            CreateMap<CreateMealCommand, Meal>();
 
             CreateMap<Meal, CreateMealCommandResponse>();
 
@@ -104,8 +95,7 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<Meal, RestaurantMealDto>();
 
             // Restaurants
-            CreateMap<CreateRestaurantCommand, Restaurant>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.CreatedBy));
+            CreateMap<CreateRestaurantCommand, Restaurant>();
 
             CreateMap<Restaurant, CreateRestaurantCommandResponse>();
 

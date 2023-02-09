@@ -8,6 +8,7 @@ using Foodie.Shared.Controllers;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Controllers
@@ -22,6 +23,7 @@ namespace Foodie.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)
         {
+            createCustomerCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(createCustomerCommand);
             return Ok(result);
         }
@@ -35,6 +37,7 @@ namespace Foodie.Identity.Controllers
                 return BadRequest();
             }
 
+            updateUserCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(updateUserCommand);
             return Ok(result);
         }

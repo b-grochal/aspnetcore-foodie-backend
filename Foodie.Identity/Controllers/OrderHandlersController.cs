@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Controllers
@@ -26,6 +27,7 @@ namespace Foodie.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrderHandler([FromBody] CreateOrderHandlerCommand createOrderHandlerCommand)
         {
+            createOrderHandlerCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(createOrderHandlerCommand);
             return Ok(result);
         }
@@ -39,6 +41,7 @@ namespace Foodie.Identity.Controllers
                 return BadRequest();
             }
 
+            updateOrderHandlerCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(updateOrderHandlerCommand);
             return Ok(result);
         }
