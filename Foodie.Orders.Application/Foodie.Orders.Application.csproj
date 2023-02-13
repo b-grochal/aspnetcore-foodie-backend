@@ -15,6 +15,7 @@
     <Folder Include="DomainEventsHandlers\OrderStatusChangedToInDelivery\" />
     <Folder Include="DomainEventsHandlers\OrderDelivered\" />
     <Folder Include="DomainEventsHandlers\OrderCancelled\" />
+    <Folder Include="Authorization\" />
   </ItemGroup>
 
 </Project>
