@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Foodie.Shared.Exceptions
 {
-    public class UnathorizedException : Exception
+    public class UnauthorizedException : Exception
     {
-        protected UnathorizedException(string message) : base(message) { }
+        public UnauthorizedException(string message) : base(message) { }
     }
 }

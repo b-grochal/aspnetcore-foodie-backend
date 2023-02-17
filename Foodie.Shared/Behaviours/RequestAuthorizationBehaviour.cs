@@ -1,4 +1,5 @@
 ﻿using Foodie.Shared.Authorization;
+using Foodie.Shared.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Foodie.Shared.Behaviours
             this.mediator = mediator;
         }
 
-        public Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             var requirements = new List<IAuthorizationRequirement>();
 

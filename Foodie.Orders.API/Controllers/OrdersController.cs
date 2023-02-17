@@ -60,7 +60,11 @@ namespace Foodie.Orders.API.Controllers
         [HttpGet("{orderId}")]
         public async Task<IActionResult> GetOrder(int orderId)
         {
-            var query = new GetOrderByIdQuery(orderId); 
+            var query = new GetOrderByIdQuery(orderId);
+            
+            if(GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
+                query.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+
             var result = await mediator.Send(query);
             return Ok(result);
         }

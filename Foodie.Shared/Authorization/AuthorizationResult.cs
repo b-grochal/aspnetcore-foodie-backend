@@ -35,4 +35,3 @@ namespace Foodie.Shared.Authorization
         }
     }
 }
-}
