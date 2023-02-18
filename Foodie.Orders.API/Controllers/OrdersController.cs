@@ -25,6 +25,10 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> CancelOrder(int orderId)
         {
             var command = new CancelOrderCommand(orderId);
+
+            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
+                command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+
             await mediator.Send(command);
             return Ok();
         }
@@ -34,6 +38,10 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> SetDeliveredStatus(int orderId)
         {
             var command = new SetDeliveredOrderStatusCommand(orderId);
+
+            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
+                command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+
             await mediator.Send(command);
             return Ok();
         }
@@ -43,6 +51,10 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> SetInDeliveryStatus(int orderId)
         {
             var command = new SetInDeliveryOrderStatusCommand(orderId);
+
+            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
+                command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+
             await mediator.Send(command);
             return Ok();
         }
@@ -52,6 +64,10 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> SetInProgressStatus(int orderId)
         {
             var command = new SetInProgressOrderStatusCommand(orderId);
+
+            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
+                command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+
             await mediator.Send(command);
             return Ok();
         }
