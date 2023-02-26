@@ -1,20 +1,20 @@
 ﻿using FluentValidation;
-using Foodie.Identity.API.Models;
 using Foodie.Shared.Exceptions;
+using Foodie.Shared.Types;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.API.Middlewares
+namespace Foodie.Shared.Middlewares
 {
-    public class ExceptionMiddleware
+    public class BaseExceptionMiddleware
     {
         private readonly RequestDelegate next;
-        private readonly ILogger<ExceptionMiddleware> logger;
+        private readonly ILogger<BaseExceptionMiddleware> logger;
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+        public BaseExceptionMiddleware(RequestDelegate next, ILogger<BaseExceptionMiddleware> logger)
         {
             this.next = next;
             this.logger = logger;
@@ -55,6 +55,7 @@ namespace Foodie.Identity.API.Middlewares
                 BadRequestException => (exception.Message, (int)HttpStatusCode.BadRequest),
                 InternalServerErrorException => (exception.Message, (int)HttpStatusCode.InternalServerError),
                 ValidationException => (exception.Message, (int)HttpStatusCode.BadRequest),
+                UnauthorizedException => (exception.Message, (int)HttpStatusCode.Unauthorized),
                 _ => ("Internal server error", (int)HttpStatusCode.InternalServerError)
             };
         }

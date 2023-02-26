@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foodie.Shared.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace Foodie.Orders.Domain.Exceptions
 {
-    public class OrderingDomainException : Exception
+    public class OrderingDomainException : BadRequestException
     {
-        public OrderingDomainException() { }
-
-        public OrderingDomainException(string message) : base(message) { }
-
-        public OrderingDomainException(string message, Exception innerException) : base(message, innerException) { }
+        protected OrderingDomainException(string message) : base(message) { }
     }
 }
