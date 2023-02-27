@@ -9,6 +9,6 @@ namespace Foodie.Orders.Domain.Exceptions
 {
     public class OrderingDomainException : BadRequestException
     {
-        protected OrderingDomainException(string message) : base(message) { }
+        public OrderingDomainException(string message) : base(message) { }
     }
 }

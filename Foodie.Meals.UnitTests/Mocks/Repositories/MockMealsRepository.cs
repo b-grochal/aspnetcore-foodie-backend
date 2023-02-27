@@ -16,7 +16,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
         {
             Setup(r => r.CreateAsync(It.IsAny<Meal>())).ReturnsAsync((Meal meal) =>
             {
-                meal.MealId = 1;
+                meal.Id = 1;
                 return meal;
             });
 
@@ -64,7 +64,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 return new Meal
                 {
-                    MealId = mealId,
+                    Id = mealId,
                     Name = "Test meal",
                     Description = "Test description",
                     Price = 123,
@@ -105,7 +105,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 new Meal
                 {
-                    MealId = 1,
+                    Id = 1,
                     Name = "Test meal 1",
                     Description = "Test description 1",
                     Price = 123,
@@ -113,7 +113,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 },
                 new Meal
                 {
-                    MealId = 2,
+                    Id = 2,
                     Name = "Test meal 2",
                     Description = "Test description 2",
                     Price = 123,
@@ -121,7 +121,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 },
                 new Meal
                 {
-                    MealId = 3,
+                    Id = 3,
                     Name = "Test meal 3",
                     Description = "Test description 3",
                     Price = 123,
@@ -149,7 +149,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 {
                     new Meal
                     {
-                        MealId = 1,
+                        Id = 1,
                         Name = "Test meal 1",
                         Description = "Test description 1",
                         Price = 123,
@@ -157,7 +157,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                     },
                     new Meal
                     {
-                        MealId = 2,
+                        Id = 2,
                         Name = "Test meal 2",
                         Description = "Test description 2",
                         Price = 123,
@@ -165,7 +165,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                     },
                     new Meal
                     {
-                        MealId = 3,
+                        Id = 3,
                         Name = "Test meal 3",
                         Description = "Test description 3",
                         Price = 123,
@@ -194,7 +194,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 {
                     new Meal
                     {
-                        MealId = 1,
+                        Id = 1,
                         Name = "Test meal 1",
                         Description = "Test description 1",
                         Price = 123,
@@ -202,7 +202,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                     },
                     new Meal
                     {
-                        MealId = 2,
+                        Id = 2,
                         Name = "Test meal 2",
                         Description = "Test description 2",
                         Price = 123,
@@ -210,7 +210,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                     },
                     new Meal
                     {
-                        MealId = 3,
+                        Id = 3,
                         Name = "Test meal 3",
                         Description = "Test description 3",
                         Price = 123,

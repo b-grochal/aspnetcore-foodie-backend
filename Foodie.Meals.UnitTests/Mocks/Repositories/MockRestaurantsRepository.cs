@@ -16,7 +16,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
         {
             Setup(r => r.CreateAsync(It.IsAny<Restaurant>())).ReturnsAsync((Restaurant restaurant) =>
             {
-                restaurant.RestaurantId = 1;
+                restaurant.Id = 1;
                 return restaurant;
             });
 
@@ -64,7 +64,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 return new Restaurant
                 {
-                    RestaurantId = restaurantId,
+                    Id = restaurantId,
                     Name = "Test restaurant",
                     Categories = new List<Category>()
                 };
@@ -103,17 +103,17 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 new Restaurant
                 {
-                    RestaurantId = 1,
+                    Id = 1,
                     Name = "Test restaurant 1"
                 },
                 new Restaurant
                 {
-                    RestaurantId = 2,
+                    Id = 2,
                     Name = "Test restaurant 2"
                 },
                 new Restaurant
                 {
-                    RestaurantId = 3,
+                    Id = 3,
                     Name = "Test restaurant 3"
                 }
             };
@@ -138,17 +138,17 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 new Restaurant
                 {
-                    RestaurantId = 1,
+                    Id = 1,
                     Name = "Test restaurant 1"
                 },
                 new Restaurant
                 {
-                    RestaurantId = 2,
+                    Id = 2,
                     Name = "Test restaurant 2"
                 },
                 new Restaurant
                 {
-                    RestaurantId = 3,
+                    Id = 3,
                     Name = "Test restaurant 3"
                 }
             };

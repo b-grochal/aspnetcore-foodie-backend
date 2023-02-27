@@ -16,7 +16,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
         {
             Setup(r => r.CreateAsync(It.IsAny<City>())).ReturnsAsync((City city) =>
             {
-                city.CityId= 1;
+                city.Id= 1;
                 return city;
             });
 
@@ -64,7 +64,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 return new City
                 {
-                    CityId = cityId,
+                    Id = cityId,
                     Name = "Test city",
                     Country = "Test country"
                 };
@@ -103,19 +103,19 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 new City
                 {
-                    CityId = 1,
+                    Id = 1,
                     Name = "Test category 1",
                     Country = "Test country 1"
                 },
                 new City
                 {
-                    CityId= 2,
+                    Id= 2,
                     Name = "Test category 2",
                     Country = "Test country 2"
                 },
                 new City
                 {
-                    CityId = 3,
+                    Id = 3,
                     Name = "Test category 3",
                     Country = "Test country 3"
                 }
@@ -141,19 +141,19 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 {
                     new City
                     {
-                        CityId = 1,
+                        Id = 1,
                         Name = "Test city 1",
                         Country = "Test country 1"
                     },
                     new City
                     {
-                        CityId = 2,
+                        Id = 2,
                         Name = "Test city 2",
                         Country = "Test country 2"
                     },
                     new City
                     {
-                        CityId = 3,
+                        Id = 3,
                         Name = "Test city 3",
                         Country = "Test country 3"
                     }
