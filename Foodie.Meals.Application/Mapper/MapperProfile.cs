@@ -29,84 +29,72 @@ namespace Foodie.Meals.Application.Mapper
     {
         public MapperProfile()
         {
-            // Categories
+            ConfigureCategoriesMapping();
+            ConfigureCitiesMapping();
+            ConfiureLocationsMapping();
+            ConfigureMealsMapping();
+            ConfigureRestaurantsMapping();
+        }
+
+        private void ConfigureCategoriesMapping()
+        {
             CreateMap<CreateCategoryCommand, Category>();
-
             CreateMap<Category, CreateCategoryCommandResponse>();
-
             CreateMap<UpdateCategoryCommand, Category>();
-
             CreateMap<Category, UpdateCategoryCommandResponse>();
-
             CreateMap<Category, CategoryDto>();
-
             CreateMap<Category, GetCategoryByIdQueryResponse>();
+        }
 
-            // Cities
+        private void ConfigureCitiesMapping()
+        {
             CreateMap<CreateCityCommand, City>();
-
             CreateMap<City, CreateCityCommandResponse>();
-
             CreateMap<UpdateCityCommand, City>();
-
             CreateMap<City, UpdateCityCommandResponse>();
-
             CreateMap<City, CityDto>();
-
             CreateMap<City, GetCityByIdQueryResponse>();
+        }
 
-            // Locations
+        private void ConfiureLocationsMapping()
+        {
             CreateMap<CreateLocationCommand, Location>();
-
             CreateMap<Location, CreateLocationCommandResponse>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
                 .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
-
             CreateMap<UpdateLocationCommand, Location>();
-
             CreateMap<Location, UpdateLocationCommandResponse>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
                 .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
-
             CreateMap<Location, LocationDto>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
                 .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
-
             CreateMap<Location, GetLocationByIdQueryResponse>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
                 .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
-
             CreateMap<Location, RestaurantLocationDto>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name));
+        }
 
-            // Meals
+        private void ConfigureMealsMapping()
+        {
             CreateMap<CreateMealCommand, Meal>();
-
             CreateMap<Meal, CreateMealCommandResponse>();
-
             CreateMap<UpdateMealCommand, Meal>();
-
             CreateMap<Meal, UpdateMealCommandResponse>();
-
             CreateMap<Meal, MealDto>();
-
             CreateMap<Meal, GetMealByIdQueryResponse>();
-
             CreateMap<Meal, RestaurantMealDto>();
+        }
 
-            // Restaurants
+        private void ConfigureRestaurantsMapping()
+        {
             CreateMap<CreateRestaurantCommand, Restaurant>();
-
             CreateMap<Restaurant, CreateRestaurantCommandResponse>();
-
             CreateMap<UpdateRestaurantCommand, Restaurant>();
-
             CreateMap<Restaurant, UpdateRestaurantCommandResponse>();
-
             CreateMap<Restaurant, RestauranatDto>();
-
             CreateMap<Restaurant, GetRestaurantByIdQueryResponse>();
-
         }
     }
 }
