@@ -16,7 +16,7 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
         public int? GetBuyerId => _buyerId;
         private int? _buyerId;
 
-        private int? GetContractorId => _contractorId;
+        public int? GetContractorId => _contractorId;
         private int? _contractorId;
 
         public OrderStatus OrderStatus { get; private set; }

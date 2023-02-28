@@ -24,7 +24,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.SetInDeliveryOrder
             var order = await _ordersRepository.GetByIdAsync(request.OrderId);
 
             if (order == null)
-                throw new OrderingDomainException($"The order with the indetifier {request.OrderId} was not found.");
+                throw new OrderNotFoundException(request.OrderId);
 
             order.SetInDeliveryStatus();
             await _ordersRepository.UnitOfWork.SaveChangesAsync();

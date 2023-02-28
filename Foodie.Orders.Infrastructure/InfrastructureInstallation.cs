@@ -6,6 +6,7 @@ using Foodie.Orders.Infrastructure.Contexts;
 using Foodie.Orders.Infrastructure.Queries;
 using Foodie.Orders.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;

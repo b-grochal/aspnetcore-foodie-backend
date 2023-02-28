@@ -16,6 +16,7 @@ namespace Foode.Identity.Infrastructure.Services
         public AuthService(UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
+
         }
 
         public async Task<ApplicationUser> AuthenticateUser(string email, string password)
@@ -23,7 +24,7 @@ namespace Foode.Identity.Infrastructure.Services
             var applicationUser = await userManager.FindByEmailAsync(email);
             var isPasswordValid = await userManager.CheckPasswordAsync(applicationUser, password);
 
-            if (applicationUser != null && isPasswordValid)
+            if (applicationUser != null && isPasswordValid && applicationUser.EmailConfirmed)
             {
                 return applicationUser;
             }

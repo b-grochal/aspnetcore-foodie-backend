@@ -24,7 +24,9 @@ namespace Foode.Identity.Infrastructure.DummyData
                     NormalizedEmail = "MICHSCO123@FOODIE.COM",
                     EmailConfirmed = true,
                     PhoneNumber = "123-456-789",
-                    PhoneNumberConfirmed = true
+                    PhoneNumberConfirmed = true,
+                    CreatedBy = "Seed",
+                    CreatedDate = DateTimeOffset.Now
                 }
             };
         }

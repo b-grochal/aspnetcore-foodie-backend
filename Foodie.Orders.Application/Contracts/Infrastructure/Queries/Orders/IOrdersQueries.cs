@@ -12,7 +12,7 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders
     {
         Task<OrderDetailsQueryDto> GetByIdAsync(int id);
         Task<OrderDetailsQueryDto> GetByIdAsync(int id, string userId);
-        Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, string buyerEmail, string orderStatusName, string contractorName);
+        Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, string buyerEmail, string orderStatusName, string contractorName, int? locationId);
         Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, string userId, int? orderStatusId, string contractorName);
     }
 }

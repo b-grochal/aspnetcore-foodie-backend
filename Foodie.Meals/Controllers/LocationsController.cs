@@ -4,6 +4,7 @@ using Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation;
 using Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById;
 using Foodie.Meals.Application.Functions.Locations.Queries.GetLocations;
 using Foodie.Shared.Authorization;
+using Foodie.Shared.Controllers;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,21 +15,16 @@ namespace Foodie.Meals.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LocationsController : Controller
+    public class LocationsController : BaseController
     {
-        private readonly IMediator mediator;
-
-        public LocationsController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
+        public LocationsController(IMediator mediator) : base(mediator) { }
 
         // POST api/locations
         [HttpPost]
         [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateLocation([FromBody] CreateLocationCommand createLocationCommand)
         {
-            createLocationCommand.CreatedBy = GetUserEmail();
+            createLocationCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(createLocationCommand);
             return Ok(result);
         }
@@ -43,7 +39,7 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateLocationCommand.LastModifiedBy = GetUserEmail();
+            updateLocationCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(updateLocationCommand);
             return Ok(result);
         }
@@ -73,11 +69,6 @@ namespace Foodie.Meals.API.Controllers
         {
             var result = await mediator.Send(getLocationsQuery);
             return Ok(result);
-        }
-
-        private string GetUserEmail()
-        {
-            return User.FindFirstValue(ClaimTypes.Email);
         }
     }
 }

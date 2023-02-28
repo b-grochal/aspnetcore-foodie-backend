@@ -15,28 +15,28 @@ namespace Foodie.Meals.Infrastructure.DummyData
             {
                 new Category
                 {
-                    CategoryId = DummySeed.PastaCategory,
+                    Id = DummySeed.PastaCategory,
                     Name = "Pasta",
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now,
                 },
                 new Category
                 {
-                    CategoryId = DummySeed.BurgerCategory,
+                    Id = DummySeed.BurgerCategory,
                     Name = "Burger",
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now,
                 },
                 new Category
                 {
-                    CategoryId = DummySeed.PizzaCategory,
+                    Id = DummySeed.PizzaCategory,
                     Name = "Pizza",
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now,
                 },
                 new Category
                 {
-                    CategoryId = DummySeed.SaladCategory,
+                    Id = DummySeed.SaladCategory,
                     Name = "Salad",
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now,

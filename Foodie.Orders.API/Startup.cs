@@ -17,6 +17,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Design;
+using Foodie.Shared.Middlewares;
 
 namespace Foodie.Orders.API
 {
@@ -73,6 +75,8 @@ namespace Foodie.Orders.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Orders.API v1"));
             }
+
+            app.UseMiddleware<BaseExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

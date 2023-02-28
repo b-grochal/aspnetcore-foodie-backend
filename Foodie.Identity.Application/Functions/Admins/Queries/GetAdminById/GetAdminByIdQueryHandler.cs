@@ -27,7 +27,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById
             var admin = await adminsRepository.GetByIdAsync(request.AdminId);
 
             if (admin == null)
-                throw new AdminNotFoundException(request.AdminId);
+                throw new ApplicationUserNotFoundException(request.AdminId);
 
             return mapper.Map<GetAdminByIdQueryResponse>(admin);
        }

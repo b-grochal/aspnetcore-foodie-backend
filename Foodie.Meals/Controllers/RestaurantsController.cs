@@ -6,6 +6,7 @@ using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocati
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
 using Foodie.Shared.Authorization;
+using Foodie.Shared.Controllers;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -20,21 +21,16 @@ namespace Foodie.Meals.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RestaurantsController : ControllerBase
+    public class RestaurantsController : BaseController
     {
-        private readonly IMediator mediator;
-
-        public RestaurantsController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
+        public RestaurantsController(IMediator mediator) : base(mediator) { }
 
         // POST api/restaurants
         [HttpPost]
         [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand createRestaurantCommand)
         {
-            createRestaurantCommand.CreatedBy = GetUserEmail();
+            createRestaurantCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(createRestaurantCommand);
             return Ok(result);
         }
@@ -49,7 +45,7 @@ namespace Foodie.Meals.Controllers
                 return BadRequest();
             }
 
-            updateRestaurantCommand.LastModifiedBy = GetUserEmail();
+            updateRestaurantCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(updateRestaurantCommand);
             return Ok(result);
         }

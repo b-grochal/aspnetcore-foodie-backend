@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMealsById;
+using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals;
 using Foodie.Meals.Application.Mapper;
 using Foodie.Meals.UnitTests.Mocks.Repositories;
 using Moq;

@@ -27,11 +27,15 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
             var admin = await adminsRepository.GetByIdAsync(request.AdminId);
 
             if (admin == null)
-                throw new AdminNotFoundException(request.AdminId);
+                throw new ApplicationUserNotFoundException(request.AdminId);
 
-            var editedAdmin = mapper.Map(request, admin);
-            await adminsRepository.UpdateAsync(editedAdmin);
-            return mapper.Map<UpdateAdminCommandResponse>(editedAdmin);
+            var updatedAdmin = mapper.Map(request, admin);
+            var identityResult = await adminsRepository.UpdateAsync(updatedAdmin);
+
+            if (!identityResult.Succeeded)
+                throw new ApplicationUserNotUpdatedException(updatedAdmin.Id);
+
+            return mapper.Map<UpdateAdminCommandResponse>(updatedAdmin);
         }
     }
 }

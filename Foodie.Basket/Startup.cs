@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using IdentityGrpc;
 using Foodie.Shared.Configuration;
 using MealsGrpc;
+using Foodie.Shared.Middlewares;
 
 namespace Foodie.Basket
 {
@@ -89,6 +90,8 @@ namespace Foodie.Basket
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Basket v1"));
             }
+
+            app.UseMiddleware<BaseExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

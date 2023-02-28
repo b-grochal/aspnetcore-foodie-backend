@@ -15,21 +15,21 @@ namespace Foodie.Meals.Infrastructure.DummyData
             {
                 new Restaurant()
                 {
-                    RestaurantId =  DummySeed.KfcRestaurant,
+                    Id =  DummySeed.KfcRestaurant,
                     Name = "KFC",
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now,
                 },
                 new Restaurant()
                 {
-                    RestaurantId =  DummySeed.PizzaHutRestaurant,
+                    Id =  DummySeed.PizzaHutRestaurant,
                     Name = "Pizza Hut",
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now,
                 },
                 new Restaurant()
                 {
-                    RestaurantId =  DummySeed.McDonaldsRestaurant,
+                    Id =  DummySeed.McDonaldsRestaurant,
                     Name = "McDonald's",
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now,

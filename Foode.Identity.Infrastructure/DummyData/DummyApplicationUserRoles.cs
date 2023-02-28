@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Foode.Identity.Infrastructure.DummyData
 {
-    public static class DummyUserRoles
+    public static class DummyApplicationUserRoles
     {
         public static List<IdentityUserRole<string>> Get()
         {

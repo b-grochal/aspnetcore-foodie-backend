@@ -27,7 +27,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerByI
             var customer = await customersRepository.GetByIdAsync(request.CustomerId);
 
             if (customer == null)
-                throw new CustomerNotFoundException(request.CustomerId);
+                throw new ApplicationUserNotFoundException(request.CustomerId);
 
             return mapper.Map<GetCustomerByIdQueryResponse>(customer);
         }

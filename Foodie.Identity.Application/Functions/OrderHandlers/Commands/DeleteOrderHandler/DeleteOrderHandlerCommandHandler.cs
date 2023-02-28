@@ -24,9 +24,12 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrd
             var orderHandler = await orderHandlersRepository.GetByIdAsync(request.OrderHandlerId);
 
             if (orderHandler == null)
-                throw new OrderHandlerNotFoundException(request.OrderHandlerId);
+                throw new ApplicationUserNotFoundException(request.OrderHandlerId);
 
-            await orderHandlersRepository.DeleteAsync(orderHandler);
+            var identityResult = await orderHandlersRepository.DeleteAsync(orderHandler);
+
+            if(!identityResult.Succeeded)
+                throw new ApplicationUserNotDeletedException(orderHandler.Id);
 
             return new DeleteOrderHandlerCommandResponse
             {

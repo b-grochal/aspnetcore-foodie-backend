@@ -23,15 +23,15 @@ namespace Foode.Identity.Infrastructure
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            foreach (var entry in ChangeTracker.Entries<ApplicationUser>())
             {
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedDate = DateTime.Now;
+                        entry.Entity.CreatedDate = DateTimeOffset.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedDate = DateTime.Now;
+                        entry.Entity.LastModifiedDate = DateTimeOffset.Now;
                         break;
                 }
             }
@@ -82,7 +82,7 @@ namespace Foode.Identity.Infrastructure
                 modelBuilder.Entity<Customer>().HasData(customer);
             }
 
-            foreach (var userRole in DummyUserRoles.Get())
+            foreach (var userRole in DummyApplicationUserRoles.Get())
             {
                 modelBuilder.Entity<IdentityUserRole<string>>().HasData(userRole);
             }

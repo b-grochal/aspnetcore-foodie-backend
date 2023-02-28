@@ -21,12 +21,15 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin
 
         public async Task<DeleteAdminCommandResponse> Handle(DeleteAdminCommand request, CancellationToken cancellationToken)
         {
-            var adminToDelete = await adminsRepository.GetByIdAsync(request.AdminId);
+            var admin = await adminsRepository.GetByIdAsync(request.AdminId);
 
-            if (adminToDelete == null)
-                throw new AdminNotFoundException(request.AdminId);
+            if (admin == null)
+                throw new ApplicationUserNotFoundException(request.AdminId);
 
-            await adminsRepository.DeleteAsync(adminToDelete);
+            var identityResult = await adminsRepository.DeleteAsync(admin);
+
+            if(!identityResult.Succeeded)
+                throw new ApplicationUserNotDeletedException(admin.Id);
 
             return new DeleteAdminCommandResponse
             {

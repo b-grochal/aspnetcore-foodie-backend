@@ -23,7 +23,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrders
 
         public async Task<GetOrdersQueryResponse> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
         {
-            var orders = await _orderQueries.GetAllAsync(request.PageNumber, request.PageSize, request.BuyerEmail, request.OrderStatusName, request.ContractorName);
+            var orders = await _orderQueries.GetAllAsync(request.PageNumber, request.PageSize, request.BuyerEmail, request.OrderStatusName, request.ContractorName, request.LocationId);
 
             return new GetOrdersQueryResponse
             {

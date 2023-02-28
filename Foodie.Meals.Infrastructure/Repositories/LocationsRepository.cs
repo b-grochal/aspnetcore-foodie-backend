@@ -37,7 +37,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
             return await dbContext.Locations
                 .Include(l => l.City)
                 .Include(l => l.Restaurant)
-                .FirstOrDefaultAsync(l => l.LocationId == id);
+                .FirstOrDefaultAsync(l => l.Id == id);
         }
     }
 }

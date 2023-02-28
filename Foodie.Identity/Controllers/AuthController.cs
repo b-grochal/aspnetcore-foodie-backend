@@ -1,25 +1,16 @@
 ﻿using Foodie.Identity.Application.Functions.Auth.Commands.SignIn;
 using Foodie.Identity.Application.Functions.Auth.Commands.SignUp;
+using Foodie.Shared.Controllers;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : BaseController
     {
-        private readonly IMediator mediator;
-
-        public AuthController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
+        public AuthController(IMediator mediator) : base(mediator) { }
 
         // POST api/auth/sign-in
         [HttpPost("sign-in")]

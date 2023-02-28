@@ -17,7 +17,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
         public async Task<IReadOnlyList<Category>> GetAllAsync(IReadOnlyCollection<int> categoryIds)
         {
             return await dbContext.Categories
-                .Where(c => categoryIds.Contains(c.CategoryId))
+                .Where(c => categoryIds.Contains(c.Id))
                 .ToListAsync();
         }
 

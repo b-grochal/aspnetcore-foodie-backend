@@ -19,15 +19,15 @@ namespace Foodie.Meals.API.Behaviours
             this.logger = logger;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             logger.LogInformation($"Handling {typeof(TRequest).Name}");
-            
+
             Type myType = request.GetType();
             IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
             foreach (PropertyInfo prop in props)
             {
-                object propValue = prop.GetValue(request, null); 
+                object propValue = prop.GetValue(request, null);
                 logger.LogInformation("{Property} : {@Value}", prop.Name, propValue);
             }
 

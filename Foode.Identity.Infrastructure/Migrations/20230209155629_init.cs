@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Foode.Identity.Infrastructure.Migrations
 {
-    public partial class InitMigration : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,10 @@ namespace Foode.Identity.Infrastructure.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifiedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -147,7 +151,8 @@ namespace Foode.Identity.Infrastructure.Migrations
                 name: "OrderHandlers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LocationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,12 +212,12 @@ namespace Foode.Identity.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "ApplicationUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedBy", "CreatedDate", "Email", "EmailConfirmed", "FirstName", "LastModifiedBy", "LastModifiedDate", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "f175aa8f-1cf3-427f-8be5-def2bed3c564", 0, "a510d288-8c8f-4664-a1fa-1e19b4daeec8", "michsco123@foodie.com", true, "Michael", "Scott", false, null, "MICHSCO123@FOODIE.COM", "MICHSCO123", "AQAAAAEAACcQAAAAEAS2JM6Z8qoraoea0kLZD8S3jZ6HR1vPurB0VSWwPyIN0C/nwRSRidEvzc5iSotqSA==", "123-456-789", true, "48765042-f487-407e-868c-363b4db13bdc", false, "michsco123" },
-                    { "6a1ab648-6be8-44f1-87b7-394c34547589", 0, "dc896b10-2f3e-4ccd-a76b-0c2966703acb", "jimhal123@foodie.com", true, "Jim", "Halpert", false, null, "JIMHAL@FOODIE.COM", "JIMHAL123", "AQAAAAEAACcQAAAAEGTsn6dwuVfzdK2raB+It4LPVHZh40qjJcSTV6whvt2m3lKA6nCvM8M/Wc8+VKQhdw==", "123-456-789", true, "6893d7e2-5a6e-499a-bfc6-dca98ba0b814", false, "jimhal123" },
-                    { "51d8f926-867b-49c5-a3ba-56a76203a6a5", 0, "8f08030c-651a-4704-a6ff-03efefbd0f7c", "dwigsch123@foodie.com", true, "Dwight", "Schrute", false, null, "DWIGSCH@FOODIE.COM", "DWIGSCH123", "AQAAAAEAACcQAAAAEIYY/a4po9Vk8ELvcILjS1H118OOGt4MAw2oW7/KVPzK7eLfuLAc8kkTgAvo0j7TIg==", "123-456-789", true, "f2d73ea5-21ca-4bb6-b20f-ec0df3ef5281", false, "dwigsch123" }
+                    { "f175aa8f-1cf3-427f-8be5-def2bed3c564", 0, "a71e28db-4e6a-496c-930b-6ccb8f5ed566", "Seed", new DateTimeOffset(new DateTime(2023, 2, 9, 16, 56, 28, 431, DateTimeKind.Unspecified).AddTicks(5605), new TimeSpan(0, 1, 0, 0, 0)), "michsco123@foodie.com", true, "Michael", null, null, "Scott", false, null, "MICHSCO123@FOODIE.COM", "MICHSCO123@FOODIE.COM", "AQAAAAEAACcQAAAAED5z+D7R1U8gUnBUm+g039Xk72ihsZ2CyKj2ylB7PlEdFpXHgbTWm/KfjhYGlevLgw==", "123-456-789", true, "afc1ad89-5b1b-401b-a2a5-3a029c65bce6", false, "michsco123" },
+                    { "6a1ab648-6be8-44f1-87b7-394c34547589", 0, "fed507b0-300c-481b-a783-019e16958e89", "Seed", new DateTimeOffset(new DateTime(2023, 2, 9, 16, 56, 28, 471, DateTimeKind.Unspecified).AddTicks(1526), new TimeSpan(0, 1, 0, 0, 0)), "jimhal123@foodie.com", true, "Jim", null, null, "Halpert", false, null, "JIMHAL123@FOODIE.COM", "JIMHAL123@FOODIE.COM", "AQAAAAEAACcQAAAAEAfOk02VpOLUQSM1Xuzv59MKx/Sc6t9XoXQYp8xxMYij7jeWNza5zUz2djB+IfRZcg==", "123-456-789", true, "b2082f68-27d1-442e-9c41-2af58096c6f8", false, "jimhal123" },
+                    { "51d8f926-867b-49c5-a3ba-56a76203a6a5", 0, "04b5befd-5faf-42ee-b84f-37557276c958", "Seed", new DateTimeOffset(new DateTime(2023, 2, 9, 16, 56, 28, 458, DateTimeKind.Unspecified).AddTicks(2257), new TimeSpan(0, 1, 0, 0, 0)), "dwigsch123@foodie.com", true, "Dwight", null, null, "Schrute", false, null, "DWIGSCH123@FOODIE.COM", "DWIGSCH123@FOODIE.COM", "AQAAAAEAACcQAAAAECtUl+MwRGEc/2kQ1JXlRDvw1EQfitUOTGw4te0j3HxH+Gu1f5M0DlRjwp50LWU7Dw==", "123-456-789", true, "9b9cc225-430a-40fb-a0d2-a9d13e49a565", false, "dwigsch123" }
                 });
 
             migrationBuilder.InsertData(
@@ -220,9 +225,9 @@ namespace Foode.Identity.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "fe10688b-b67d-4027-84e6-23c256af188d", "2b0cdbbc-30f1-458a-8b62-3dec7e4b59ed", "Admin", "ADMIN" },
-                    { "35d96949-978e-4f88-851b-bbb750e6d0ad", "06043069-b3bf-45da-9997-7de796fd03ff", "OrderHandler", "ORDERHANDLER" },
-                    { "65cff553-91da-46e6-81b5-c6adb8852b5c", "2f748d26-cab0-416d-ae6f-3e381358c64b", "Customer", "CUSTOMER" }
+                    { "fe10688b-b67d-4027-84e6-23c256af188d", "890df069-eded-465c-9267-7d4533905227", "Admin", "ADMIN" },
+                    { "35d96949-978e-4f88-851b-bbb750e6d0ad", "695078be-51ec-4cf7-9357-6016c4e91bd1", "OrderHandler", "ORDERHANDLER" },
+                    { "65cff553-91da-46e6-81b5-c6adb8852b5c", "1724b40b-96f1-47af-8932-484bd4389997", "Customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
@@ -247,8 +252,8 @@ namespace Foode.Identity.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "OrderHandlers",
-                column: "Id",
-                value: "51d8f926-867b-49c5-a3ba-56a76203a6a5");
+                columns: new[] { "Id", "LocationId" },
+                values: new object[] { "51d8f926-867b-49c5-a3ba-56a76203a6a5", 0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationUserClaims_UserId",

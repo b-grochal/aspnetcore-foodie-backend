@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
+using Foodie.Shared.Behaviours;
+using Foodie.Shared.Authorization;
 
 namespace Foodie.Orders.Application
 {
@@ -15,6 +17,8 @@ namespace Foodie.Orders.Application
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestAuthorizationBehaviour<,>));
+            services.AddAuthorizersFromAssembly(Assembly.GetExecutingAssembly());
             return services;
         }
     }

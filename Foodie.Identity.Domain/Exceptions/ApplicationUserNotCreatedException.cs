@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Domain.Exceptions
 {
-    public class AdminNotFoundException : NotFoundException
+    public class ApplicationUserNotCreatedException : InternalServerErrorException
     {
-        public AdminNotFoundException(string adminId) : base($"The admin with the indetifier {adminId} was not found.") { }
+        public ApplicationUserNotCreatedException() : base($"The new application user was not created.") { }
     }
 }

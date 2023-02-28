@@ -21,6 +21,7 @@ namespace Foodie.Orders.Infrastructure.Contexts
         public DbSet<OrderItem> OrdersItem { get; set; }
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Contractor> Contractors { get; set; }
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
 
         private readonly IMediator _mediator;
 

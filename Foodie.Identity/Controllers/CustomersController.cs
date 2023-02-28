@@ -4,33 +4,26 @@ using Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerById;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers;
 using Foodie.Shared.Authorization;
+using Foodie.Shared.Controllers;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     [Roles(RolesDictionary.Admin)]
-    public class CustomersController : ControllerBase
+    public class CustomersController : BaseController
     {
-        private readonly IMediator mediator;
-
-        public CustomersController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
+        public CustomersController(IMediator mediator) : base(mediator) { }
 
         // POST api/customers
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)
         {
+            createCustomerCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(createCustomerCommand);
             return Ok(result);
         }
@@ -44,6 +37,7 @@ namespace Foodie.Identity.Controllers
                 return BadRequest();
             }
 
+            updateUserCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(updateUserCommand);
             return Ok(result);
         }

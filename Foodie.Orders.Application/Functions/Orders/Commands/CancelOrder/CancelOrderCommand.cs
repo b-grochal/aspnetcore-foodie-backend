@@ -10,6 +10,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CancelOrder
     public class CancelOrderCommand : IRequest
     {
         public int OrderId { get; set; }
+        public int? LocationId { get; set; }
 
         public CancelOrderCommand(int orderId)
         {

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
+using Foodie.Orders.Domain.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderBy
             var customersOrder = await _orderQueries.GetByIdAsync(request.OrderId, request.UserId);
 
             if (customersOrder == null)
-                throw new NotImplementedException();
+                throw new OrderNotFoundException(request.OrderId);
 
             return _mapper.Map<GetCustomersOrderByIdQueryResponse>(customersOrder);
         }

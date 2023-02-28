@@ -15,7 +15,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
             {
                 new City
                 {
-                    CityId = DummySeed.LasVegasCity,
+                    Id = DummySeed.LasVegasCity,
                     Name = "Las Vegas",
                     Country = "USA",
                     CreatedBy = "Seed",
@@ -23,7 +23,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new City
                 {
-                    CityId = DummySeed.LosAngelesCity,
+                    Id = DummySeed.LosAngelesCity,
                     Name = "Los Angeles",
                     Country = "USA",
                     CreatedBy = "Seed",
@@ -31,7 +31,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new City
                 {
-                    CityId = DummySeed.NewYorkCity,
+                    Id = DummySeed.NewYorkCity,
                     Name = "New York",
                     Country = "USA",
                     CreatedBy = "Seed",

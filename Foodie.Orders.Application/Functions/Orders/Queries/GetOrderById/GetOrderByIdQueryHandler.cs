@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
+using Foodie.Orders.Domain.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,9 +21,9 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById
         public async Task<GetOrderByIdQueryResponse> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
             var order = await _orderQueries.GetByIdAsync(request.OrderId);
-            
-            if(order == null)
-                throw new NotImplementedException();
+
+            if (order == null)
+                throw new OrderNotFoundException(request.OrderId);
 
             return _mapper.Map<GetOrderByIdQueryResponse>(order);
         }

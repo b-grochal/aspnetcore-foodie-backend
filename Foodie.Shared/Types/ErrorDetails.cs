@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Foodie.Identity.API.Models
+namespace Foodie.Shared.Types
 {
     public class ErrorDetails
     {

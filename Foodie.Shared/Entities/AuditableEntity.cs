@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Shared.Entities
 {
-    public class AuditableEntity
+    public abstract class AuditableEntity : BaseEntity
     {
         public string CreatedBy { get; set; }
         public DateTimeOffset CreatedDate { get; set; }

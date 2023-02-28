@@ -4,6 +4,7 @@ using Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHa
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlerById;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlers;
 using Foodie.Shared.Authorization;
+using Foodie.Shared.Controllers;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -11,26 +12,22 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Controllers
 {
     [Route("api/order-handlers")]
-    [ApiController]
     [Roles(RolesDictionary.Admin)]
-    public class OrderHandlersController : ControllerBase
+    public class OrderHandlersController : BaseController
     {
-        private readonly IMediator mediator;
-
-        public OrderHandlersController(IMediator mediator)
-        {
-            this.mediator = mediator;
-        }
+        public OrderHandlersController(IMediator mediator) : base(mediator) { }
 
         // POST api/order-handlers
         [HttpPost]
         public async Task<IActionResult> CreateOrderHandler([FromBody] CreateOrderHandlerCommand createOrderHandlerCommand)
         {
+            createOrderHandlerCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(createOrderHandlerCommand);
             return Ok(result);
         }
@@ -44,6 +41,7 @@ namespace Foodie.Identity.Controllers
                 return BadRequest();
             }
 
+            updateOrderHandlerCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
             var result = await mediator.Send(updateOrderHandlerCommand);
             return Ok(result);
         }

@@ -16,7 +16,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
         {
             Setup(r => r.CreateAsync(It.IsAny<Category>())).ReturnsAsync((Category category) =>
             {
-                category.CategoryId = 1;
+                category.Id = 1;
                 return category;
             });
 
@@ -64,7 +64,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 return new Category
                 {
-                    CategoryId = categoryId,
+                    Id = categoryId,
                     Name = "Test category"
                 };
             });
@@ -102,17 +102,17 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 new Category
                 {
-                    CategoryId = 1,
+                    Id = 1,
                     Name = "Test category 1"
                 },
                 new Category
                 {
-                    CategoryId= 2,
+                    Id = 2,
                     Name = "Test category 2"
                 },
                 new Category
                 {
-                    CategoryId = 3,
+                    Id = 3,
                     Name = "Test category 3"
                 }
             };
@@ -137,17 +137,17 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 {
                     new Category
                     {
-                        CategoryId = 1,
+                        Id = 1,
                         Name = "Test category 1"
                     },
                     new Category
                     {
-                        CategoryId= 2,
+                        Id = 2,
                         Name = "Test categpry 2"
                     },
                     new Category
                     {
-                        CategoryId = 3,
+                        Id = 3,
                         Name = "Test category 3"
                     }
                 };
@@ -173,7 +173,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
                 foreach (var categoryId in categoryIds)
                 {
-                    categories.Add(new Category { CategoryId = categoryId, Name = "Test category" });
+                    categories.Add(new Category { Id = categoryId, Name = "Test category" });
                 }
 
                 return categories;

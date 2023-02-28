@@ -27,10 +27,14 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustome
             var customer = await customersRepository.GetByIdAsync(request.CustomerId);
 
             if (customer == null)
-                throw new CustomerNotFoundException(request.CustomerId);
+                throw new ApplicationUserNotFoundException(request.CustomerId);
 
             var updatedCustomer = mapper.Map(request, customer);
-            await customersRepository.UpdateAsync(updatedCustomer);
+            var identityResult = await customersRepository.UpdateAsync(updatedCustomer);
+
+            if (!identityResult.Succeeded)
+                throw new ApplicationUserNotUpdatedException(updatedCustomer.Id);
+
             return mapper.Map<UpdateCustomerCommandResponse>(updatedCustomer);
         }
     }

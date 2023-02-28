@@ -1,9 +1,9 @@
 using Foode.Identity.Infrastructure;
 using Foodie.Identity.API.Behaviours;
 using Foodie.Identity.API.Grpc;
-using Foodie.Identity.API.Middlewares;
 using Foodie.Identity.Application;
 using Foodie.Shared.Configuration;
+using Foodie.Shared.Middlewares;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -79,7 +79,7 @@ namespace Foodie.Identity
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Identity v1"));
             }
 
-            app.UseMiddleware<ExceptionMiddleware>();
+            app.UseMiddleware<BaseExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

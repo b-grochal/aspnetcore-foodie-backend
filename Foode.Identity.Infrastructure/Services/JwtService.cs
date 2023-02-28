@@ -1,13 +1,13 @@
 ﻿using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+using Foodie.Identity.Domain.Entities;
 using Foodie.Shared.Configuration;
+using Foodie.Shared.Enums;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Foode.Identity.Infrastructure.Services
 {
@@ -20,26 +20,56 @@ namespace Foode.Identity.Infrastructure.Services
             this.jwtTokenConfiguration = jwtTokenConfiguration;
         }
 
-        public string GenerateToken(string applicationUserId, string applicationUserRole)
+        public string GenerateToken(ApplicationUser applicationUser, string applicationUserRole)
         {
-            var authClaims = new[]
-                {
-                    new Claim("ApplicationUserId", applicationUserId),
-                    new Claim(ClaimTypes.Role, applicationUserRole),
-                    new Claim("Role", applicationUserRole)
-                };
+            var expirationTime = DateTime.Now.AddMinutes(jwtTokenConfiguration.AccessTokenExpiration);
+            var identityClaims = CreateIdentityClaims(applicationUser, applicationUserRole);
+            identityClaims.AddRange(CreateApplicationUserClaims(applicationUser, applicationUserRole));
+            var signingCredentials = CreateSigningCredentials();
 
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtTokenConfiguration.Secret));
-
-            var token = new JwtSecurityToken(
-                issuer: jwtTokenConfiguration.Issuer,
-                audience: jwtTokenConfiguration.Audience,
-                expires: DateTime.Now.AddMinutes(jwtTokenConfiguration.AccessTokenExpiration),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
+            var token = CreateJwtToken(identityClaims, signingCredentials, expirationTime);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private List<Claim> CreateIdentityClaims(ApplicationUser applicationUser, string applicationUserRole)
+        {
+            return new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, applicationUser.Id),
+                new Claim(ClaimTypes.Name, applicationUser.UserName),
+                new Claim(ClaimTypes.Email, applicationUser.Email),
+                new Claim(ClaimTypes.Role, applicationUserRole)
+            };
+        }
+
+        private IEnumerable<Claim> CreateApplicationUserClaims(ApplicationUser applicationUser, string applicationUserRole)
+        {
+            var applicationUserClaims = new List<Claim>
+            {
+                new Claim(ApplicationUserClaims.Role, applicationUserRole)
+            };
+
+            if (applicationUser is OrderHandler orderHandler)
+            {
+                applicationUserClaims.Add(new Claim(ApplicationUserClaims.LocationId, orderHandler.LocationId.ToString()));
+            }
+
+            return applicationUserClaims;
+        }
+
+        private SigningCredentials CreateSigningCredentials()
+        {
+            return new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtTokenConfiguration.Secret)), SecurityAlgorithms.HmacSha256);
+        }
+
+        private JwtSecurityToken CreateJwtToken(IEnumerable<Claim> claims, SigningCredentials signingCredentials, DateTime expirationTime)
+        {
+            return new JwtSecurityToken(issuer: jwtTokenConfiguration.Issuer,
+                audience: jwtTokenConfiguration.Audience,
+                expires: expirationTime,
+                claims: claims,
+                signingCredentials: signingCredentials);
         }
     }
 }

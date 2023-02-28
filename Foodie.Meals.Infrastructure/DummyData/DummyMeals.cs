@@ -15,7 +15,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
             {
                 new Meal()
                 {
-                    MealId = DummySeed.LongerMeal,
+                    Id = DummySeed.LongerMeal,
                     Name = "Longer",
                     Description = "Longer",
                     Price = 12,
@@ -25,7 +25,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Meal()
                 {
-                    MealId = DummySeed.ZingerMeal,
+                    Id = DummySeed.ZingerMeal,
                     Name = "Zinger",
                     Description = "Zinger",
                     Price = 10,
@@ -35,7 +35,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Meal()
                 {
-                    MealId = DummySeed.PizzaTexasMeal,
+                    Id = DummySeed.PizzaTexasMeal,
                     Name = "Pizza Texas",
                     Description = "Pizza Texas",
                     Price = 12,
@@ -45,7 +45,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Meal()
                 {
-                    MealId = DummySeed.PizzaCarbonaraMeal,
+                    Id = DummySeed.PizzaCarbonaraMeal,
                     Name = "Pizza Carbonara",
                     Description = "Pizza Carbonara",
                     Price = 12,
@@ -55,7 +55,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Meal()
                 {
-                    MealId = DummySeed.BigMacMeal,
+                    Id = DummySeed.BigMacMeal,
                     Name = "Big Mac",
                     Description = "Big Mac",
                     Price = 15,
@@ -65,7 +65,7 @@ namespace Foodie.Meals.Infrastructure.DummyData
                 },
                 new Meal()
                 {
-                    MealId = DummySeed.McRoyalMeal,
+                    Id = DummySeed.McRoyalMeal,
                     Name = "McRoyal",
                     Description = "McRoyal",
                     Price = 10,

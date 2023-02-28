@@ -9,7 +9,6 @@ namespace Foodie.Meals.Domain.Entities
 {
     public class Meal : AuditableEntity
     {
-        public int MealId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }

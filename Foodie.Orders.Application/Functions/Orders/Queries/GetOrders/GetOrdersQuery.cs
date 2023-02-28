@@ -1,17 +1,15 @@
 ﻿using Foodie.Shared.Queries;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrders
 {
     public class GetOrdersQuery : PagedQuery, IRequest<GetOrdersQueryResponse>
     {
         public string BuyerEmail { get; set; }
-        public string OrderStatusName { get; set; }
-        public string ContractorName { get; set; }
+        public string OrderStatusName { get; set; } // TODO: Change to order status id
+        public string ContractorName { get; set; } // TODO: Change to contractor id
+        public int? LocationId { get; set; }
     }
 }

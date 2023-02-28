@@ -16,7 +16,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
         {
             Setup(r => r.CreateAsync(It.IsAny<Location>())).ReturnsAsync((Location location) =>
             {
-                location.LocationId = 1;
+                location.Id = 1;
                 return location;
             });
 
@@ -64,7 +64,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 return new Location
                 {
-                    LocationId = locationId,
+                    Id = locationId,
                     Address = "Test address",
                     Email = "test@email.com",
                     PhoneNumber = "123-456-789",
@@ -106,7 +106,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
             {
                 new Location
                 {
-                    LocationId = 1,
+                    Id = 1,
                     Address = "Test address",
                     Email = "test@email.com",
                     PhoneNumber = "123-456-789",
@@ -115,7 +115,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 },
                 new Location
                 {
-                    LocationId = 2,
+                    Id = 2,
                     Address = "Test address",
                     Email = "test@email.com",
                     PhoneNumber = "123-456-789",
@@ -124,7 +124,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 },
                 new Location
                 {
-                    LocationId = 3,
+                    Id = 3,
                     Address = "Test address",
                     Email = "test@email.com",
                     PhoneNumber = "123-456-789",
@@ -153,7 +153,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 {
                     new Location
                 {
-                    LocationId = 1,
+                    Id = 1,
                     Address = "Test address",
                     Email = "test@email.com",
                     PhoneNumber = "123-456-789",
@@ -162,7 +162,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 },
                 new Location
                 {
-                    LocationId = 2,
+                    Id = 2,
                     Address = "Test address",
                     Email = "test@email.com",
                     PhoneNumber = "123-456-789",
@@ -171,7 +171,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 },
                 new Location
                 {
-                    LocationId = 3,
+                    Id = 3,
                     Address = "Test address",
                     Email = "test@email.com",
                     PhoneNumber = "123-456-789",
@@ -201,7 +201,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                 {
                     new Location
                     {
-                        LocationId = 1,
+                        Id = 1,
                         Address = "Test address",
                         Email = "test@email.com",
                         PhoneNumber = "123-456-789",
@@ -210,7 +210,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                     },
                     new Location
                     {
-                        LocationId = 2,
+                        Id = 2,
                         Address = "Test address",
                         Email = "test@email.com",
                         PhoneNumber = "123-456-789",
@@ -219,7 +219,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
                     },
                     new Location
                     {
-                        LocationId = 3,
+                        Id = 3,
                         Address = "Test address",
                         Email = "test@email.com",
                         PhoneNumber = "123-456-789",
