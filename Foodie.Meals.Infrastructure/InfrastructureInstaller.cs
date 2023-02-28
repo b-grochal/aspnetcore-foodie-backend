@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Infrastructure
 {
-    public static class InfrastructureInstallation
+    public static class InfrastructureInstaller
     {
         public static IServiceCollection AddMealsInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
