@@ -31,7 +31,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity
 
             return new DeleteCityCommandResponse
             {
-                CityId = request.CityId
+                Id = request.CityId
             };
         }
     }

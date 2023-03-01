@@ -13,4 +13,11 @@ namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
         public int? RestaurantId { get; set; }
         public string Name { get; set; }
     }
+
+    public class MealDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+    }
 }

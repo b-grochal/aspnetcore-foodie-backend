@@ -22,7 +22,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new CreateCityCommandResponse
                 {
-                    CityId = 1,
+                    Id = 1,
                     Name = createCityCommand.Name,
                     Country = createCityCommand.Country
                 };
@@ -44,7 +44,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new UpdateCityCommandResponse
                 {
-                    CityId = updateCityCommand.CityId,
+                    Id = updateCityCommand.CityId,
                     Name = updateCityCommand.Name,
                     Country = updateCityCommand.Country
                 };
@@ -66,7 +66,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new DeleteCityCommandResponse
                 {
-                    CityId = deleteCityCommand.CityId,
+                    Id = deleteCityCommand.CityId,
                 };
             });
 
@@ -86,7 +86,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new GetCityByIdQueryResponse
                 {
-                    CityId = getCityByIdQuery.CityId,
+                    Id = getCityByIdQuery.CityId,
                     Name = "Test category",
                     Country = "Test country"
                 };
@@ -117,19 +117,19 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                     {
                         new CityDto
                         {
-                            CityId = 1,
+                            Id = 1,
                             Name = "Test city 1",
                             Country = "Test country"
                         },
                         new CityDto
                         {
-                            CityId = 2,
+                            Id = 2,
                             Name = "Test city 2",
                             Country = "Test country"
                         },
                         new CityDto
                         {
-                            CityId = 3,
+                            Id = 3,
                             Name = "Test city 3",
                             Country = "Test country"
                         }

@@ -49,7 +49,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Meals
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
             Assert.IsType<UpdateMealCommandResponse>(result);
-            Assert.Equal(command.MealId, result.MealId);
+            Assert.Equal(command.MealId, result.Id);
             Assert.Equal(command.Name, result.Name);
             Assert.Equal(command.Description, result.Description);
             Assert.Equal(command.Price, result.Price);

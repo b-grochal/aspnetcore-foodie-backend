@@ -30,7 +30,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaura
 
             return new DeleteRestaurantCommandResponse
             {
-                RestaurantId = request.RestaurantId
+                Id = request.RestaurantId
             };
         }
     }

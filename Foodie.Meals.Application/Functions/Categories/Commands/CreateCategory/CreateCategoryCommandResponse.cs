@@ -8,7 +8,7 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory
 {
     public class CreateCategoryCommandResponse
     {
-        public int CategoryId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

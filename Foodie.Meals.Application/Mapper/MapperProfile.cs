@@ -93,7 +93,7 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<Restaurant, CreateRestaurantCommandResponse>();
             CreateMap<UpdateRestaurantCommand, Restaurant>();
             CreateMap<Restaurant, UpdateRestaurantCommandResponse>();
-            CreateMap<Restaurant, RestauranatDto>();
+            CreateMap<Restaurant, RestaurantDto>();
             CreateMap<Restaurant, GetRestaurantByIdQueryResponse>();
         }
     }

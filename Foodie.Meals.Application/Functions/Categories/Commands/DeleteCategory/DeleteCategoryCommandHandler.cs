@@ -31,7 +31,7 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory
 
             return new DeleteCategoryCommandResponse 
             { 
-                CategoryId = request.CategoryId 
+                Id = request.CategoryId 
             };
         }
     }

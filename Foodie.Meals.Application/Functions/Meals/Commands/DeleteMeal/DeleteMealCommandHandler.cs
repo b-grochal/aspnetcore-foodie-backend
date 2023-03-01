@@ -29,7 +29,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal
             await mealsRepository.DeleteAsync(mealToDelete);
             return new DeleteMealCommandResponse
             {
-                MealId = request.MealId
+                Id = request.MealId
             };
         }
     }

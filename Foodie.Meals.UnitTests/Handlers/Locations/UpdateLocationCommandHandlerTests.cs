@@ -50,7 +50,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Locations
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
             Assert.IsType<UpdateLocationCommandResponse>(result);
-            Assert.Equal(command.LocationId, result.LocationId);
+            Assert.Equal(command.LocationId, result.Id);
             Assert.Equal(command.Address, result.Address);
             Assert.Equal(command.Email, result.Email);
             Assert.Equal(command.PhoneNumber, result.PhoneNumber);

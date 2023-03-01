@@ -12,4 +12,10 @@ namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategories
         public IEnumerable<CategoryDto> Categories { get; set; }
         public string Name { get; set; }
     }
+
+    public class CategoryDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 }

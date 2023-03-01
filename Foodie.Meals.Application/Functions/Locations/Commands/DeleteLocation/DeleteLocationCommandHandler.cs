@@ -30,7 +30,7 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.DeleteLocation
             
             return new DeleteLocationCommandResponse
             {
-                LocationId = request.LocationId
+                Id = request.LocationId
             };
         }
     }

@@ -50,7 +50,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Restaurants
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
             Assert.IsType<UpdateRestaurantCommandResponse>(result);
-            Assert.Equal(command.RestaurantId, result.RestaurantId);
+            Assert.Equal(command.RestaurantId, result.Id);
             Assert.Equal(command.Name, result.Name);
             restaurantsRepository.VerifyUpdateAsync(Times.Once());
             restaurantsRepository.VerifyGetByIdAsync(Times.Once());

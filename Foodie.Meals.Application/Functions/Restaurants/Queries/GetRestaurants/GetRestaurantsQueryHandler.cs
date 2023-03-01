@@ -31,7 +31,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants
                 PageSize = restaurants.PageSize,
                 CurrentPage = restaurants.CurrentPage,
                 TotalPages = (int)Math.Ceiling(restaurants.TotalCount / (double)restaurants.PageSize),
-                Restaurants = mapper.Map<IEnumerable<RestauranatDto>>(restaurants),
+                Restaurants = mapper.Map<IEnumerable<RestaurantDto>>(restaurants),
                 Name = request.Name,
                 CityName = request.CityName,
                 CategoryId = request.CategoryId
