@@ -56,7 +56,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/cities/{everything}",
+      "DownstreamPathTemplate": "/api/cities/{cityId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -64,7 +64,7 @@
           "Port": 5006
         }
       ],
-      "UpstreamPathTemplate": "/foodie/cities/{everything}",
+      "UpstreamPathTemplate": "/foodie/cities/{cityId}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -99,7 +99,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/locations/{everything}",
+      "DownstreamPathTemplate": "/api/locations/{locationId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -107,7 +107,7 @@
           "Port": 5006
         }
       ],
-      "UpstreamPathTemplate": "/foodie/locations/{everything}",
+      "UpstreamPathTemplate": "/foodie/locations/{locationId}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -142,7 +142,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/meals/{everything}",
+      "DownstreamPathTemplate": "/api/meals/{mealId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -150,7 +150,7 @@
           "Port": 5006
         }
       ],
-      "UpstreamPathTemplate": "/foodie/meals/{everything}",
+      "UpstreamPathTemplate": "/foodie/meals/{mealId}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -185,7 +185,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/restaurants/{everything}",
+      "DownstreamPathTemplate": "/api/restaurants/{restaurantId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -193,7 +193,7 @@
           "Port": 5006
         }
       ],
-      "UpstreamPathTemplate": "/foodie/restaurants/{everything}",
+      "UpstreamPathTemplate": "/foodie/restaurants/{restaurantId}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
