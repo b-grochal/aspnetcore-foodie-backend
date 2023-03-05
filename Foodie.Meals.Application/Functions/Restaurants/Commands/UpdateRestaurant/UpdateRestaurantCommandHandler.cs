@@ -36,7 +36,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
 
             var categories = await categoriesRepository.GetAllAsync(request.CategoryIds);
 
-            editedRestaurant.Categories.AddIfNotExists(categories);
+            editedRestaurant.Categories.Merge(categories);
 
             await restaurantsRepository.UpdateAsync(editedRestaurant);
 

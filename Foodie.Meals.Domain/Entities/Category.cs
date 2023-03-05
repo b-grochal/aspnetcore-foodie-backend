@@ -10,6 +10,6 @@ namespace Foodie.Meals.Domain.Entities
     public class Category : AuditableEntity
     {
         public string Name { get; set; }
-        public ICollection<Restaurant> Restaurants { get; set; }
+        public virtual ICollection<Restaurant> Restaurants { get; set; }
     }
 }

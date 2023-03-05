@@ -8,13 +8,13 @@ namespace Foodie.Shared.Extensions
 {
     public static class LinqExtensions
     {
-        public static ICollection<T> AddIfNotExists<T>(this ICollection<T> list, IEnumerable<T> items)
+        public static ICollection<T> Merge<T>(this ICollection<T> list, IEnumerable<T> items)
         {
-            foreach(T item in items)
-            {
-                if(!list.Contains(item))
-                    list.Add(item);
-            }
+            list.Clear();
+
+            foreach (var item in items)
+                list.Add(item);
+
             return list;
         }
     }

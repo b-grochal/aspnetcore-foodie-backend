@@ -25,6 +25,25 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/categories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/categories",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurity",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/categories/{categoryId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -34,7 +53,7 @@
         }
       ],
       "UpstreamPathTemplate": "/foodie/categories/{categoryId}",
-      "UpstreamHttpMethod": [ "PUT", "POST", "DELETE" ],
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
         "AllowedScopes": []
@@ -68,6 +87,25 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/cities",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/cities",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurity",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/cities/{cityId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -77,7 +115,7 @@
         }
       ],
       "UpstreamPathTemplate": "/foodie/cities/{cityId}",
-      "UpstreamHttpMethod": [ "PUT", "POST", "DELETE" ],
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
         "AllowedScopes": []
@@ -111,6 +149,25 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/locations",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/locations",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurity",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/locations/{locationId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -120,7 +177,7 @@
         }
       ],
       "UpstreamPathTemplate": "/foodie/locations/{locationId}",
-      "UpstreamHttpMethod": [ "PUT", "POST", "DELETE" ],
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
         "AllowedScopes": []
@@ -154,6 +211,25 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/meals",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/meals",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurity",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/meals/{mealId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -163,7 +239,7 @@
         }
       ],
       "UpstreamPathTemplate": "/foodie/meals/{mealId}",
-      "UpstreamHttpMethod": [ "PUT", "POST", "DELETE" ],
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
         "AllowedScopes": []
@@ -197,6 +273,25 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/restaurants",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/restaurants",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurity",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/restaurants/{restaurantId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -206,7 +301,7 @@
         }
       ],
       "UpstreamPathTemplate": "/foodie/restaurants/{restaurantId}",
-      "UpstreamHttpMethod": [ "PUT", "POST", "DELETE" ],
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "ApiSecurity",
         "AllowedScopes": []
