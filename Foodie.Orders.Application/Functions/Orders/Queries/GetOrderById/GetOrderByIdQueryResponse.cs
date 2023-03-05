@@ -29,4 +29,12 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById
         public string ContractorCountry { get; set; }
         public IList<OrderItemDto> OrderItems { get; set; }
     }
+
+    public class OrderItemDto
+    {
+        public int OrderItemId { get; set; }
+        public string Name { get; set; }
+        public int Units { get; set; }
+        public decimal UnitPrice { get; set; }
+    }
 }

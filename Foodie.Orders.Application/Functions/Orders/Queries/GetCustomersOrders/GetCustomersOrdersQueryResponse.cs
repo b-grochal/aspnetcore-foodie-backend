@@ -13,4 +13,14 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrders
         public int? OrderStatusId { get; set; }
         public string ContractorName { get; set; }
     }
+
+    public class CustomersOrderDto
+    {
+        public int OrderId { get; set; }
+        public DateTimeOffset OrderDate { get; set; }
+        public int OrderStatusId { get; set; }
+        public string OrderStatusName { get; set; }
+        public int ContractorId { get; set; }
+        public string ContractorName { get; set; }
+    }
 }
