@@ -29,10 +29,10 @@ namespace Foodie.Identity.Controllers
         }
 
         // PUT api/admins/5
-        [HttpPut("{adminId}")]
-        public async Task<IActionResult> UpdateAdmin(string adminId, [FromBody] UpdateAdminCommand updateAdminCommand)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAdmin(string id, [FromBody] UpdateAdminCommand updateAdminCommand)
         {
-            if (adminId != updateAdminCommand.Id)
+            if (id != updateAdminCommand.Id)
             {
                 return BadRequest();
             }
@@ -43,19 +43,19 @@ namespace Foodie.Identity.Controllers
         }
 
         // DELETE api/admins/5
-        [HttpDelete("{adminId}")]
-        public async Task<IActionResult> DeleteAdmin(string adminId)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAdmin(string id)
         {
-            var command = new DeleteAdminCommand(adminId);
+            var command = new DeleteAdminCommand(id);
             var result = await mediator.Send(command);
             return Ok(result);
         }
 
         // GET api/admins/5
-        [HttpGet("{adminId}")]
-        public async Task<IActionResult> GetAdmin(string adminId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAdmin(string id)
         {
-            var query = new GetAdminByIdQuery(adminId);
+            var query = new GetAdminByIdQuery(id);
             var result = await mediator.Send(query);
             return Ok(result);
         }

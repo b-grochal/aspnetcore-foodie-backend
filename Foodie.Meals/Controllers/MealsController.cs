@@ -34,11 +34,11 @@ namespace Foodie.Meals.Controllers
         }
 
         // PUT api/meals/5
-        [HttpPut("{mealId}")]
+        [HttpPut("{id}")]
         [Roles(RolesDictionary.Admin)]
-        public async Task<IActionResult> UpdateMeal(int mealId, [FromBody] UpdateMealCommand updateMealCommand)
+        public async Task<IActionResult> UpdateMeal(int id, [FromBody] UpdateMealCommand updateMealCommand)
         {
-            if (mealId != updateMealCommand.Id)
+            if (id != updateMealCommand.Id)
             {
                 return BadRequest();
             }
@@ -49,20 +49,20 @@ namespace Foodie.Meals.Controllers
         }
 
         // DELETE api/meals/5
-        [HttpDelete("{mealId}")]
+        [HttpDelete("{id}")]
         [Roles(RolesDictionary.Admin)]
-        public async Task<IActionResult> DeleteMeal(int mealId)
+        public async Task<IActionResult> DeleteMeal(int id)
         {
-            var command = new DeleteMealCommand(mealId);
+            var command = new DeleteMealCommand(id);
             var result = await mediator.Send(command);
             return Ok(result);
         }
 
         // GET api/meals/5
-        [HttpGet("{mealId}")]
-        public async Task<IActionResult> GetMeal(int mealId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetMeal(int id)
         {
-            var query = new GetMealByIdQuery(mealId);
+            var query = new GetMealByIdQuery(id);
             var result = await mediator.Send(query);
             return Ok(result);
         }
@@ -73,11 +73,6 @@ namespace Foodie.Meals.Controllers
         {
             var result = await mediator.Send(getMealsQuery);
             return Ok(result);
-        }
-
-        private string GetUserEmail()
-        {
-            return User.FindFirstValue(ClaimTypes.Email);
         }
     }
 }

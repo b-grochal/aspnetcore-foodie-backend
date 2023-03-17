@@ -14,10 +14,10 @@ namespace Foodie.Orders.API.Controllers
         public BuyersController(IMediator mediator) : base(mediator) { }
 
         // GET api/buyers/5
-        [HttpGet("{buyerId}")]
-        public async Task<IActionResult> GetBuyer(int buyerId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBuyer(int id)
         {
-            var query = new GetBuyerByIdQuery(buyerId);
+            var query = new GetBuyerByIdQuery(id);
             var result = await mediator.Send(query);
             return Ok(result);
         }

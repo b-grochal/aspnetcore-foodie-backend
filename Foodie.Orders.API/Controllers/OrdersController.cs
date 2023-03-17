@@ -21,10 +21,10 @@ namespace Foodie.Orders.API.Controllers
         public OrdersController(IMediator mediator) : base(mediator) { }
 
         // PUT api/orders/5/cancel
-        [HttpPut("{orderId}/cancel")]
-        public async Task<IActionResult> CancelOrder(int orderId)
+        [HttpPut("{id}/cancel")]
+        public async Task<IActionResult> CancelOrder(int id)
         {
-            var command = new CancelOrderCommand(orderId);
+            var command = new CancelOrderCommand(id);
 
             if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
                 command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
@@ -34,10 +34,10 @@ namespace Foodie.Orders.API.Controllers
         }
 
         // PUT api/orders/5/delivered
-        [HttpPut("{orderId}/delivered")]
-        public async Task<IActionResult> SetDeliveredStatus(int orderId)
+        [HttpPut("{id}/delivered")]
+        public async Task<IActionResult> SetDeliveredStatus(int id)
         {
-            var command = new SetDeliveredOrderStatusCommand(orderId);
+            var command = new SetDeliveredOrderStatusCommand(id);
 
             if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
                 command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
@@ -47,10 +47,10 @@ namespace Foodie.Orders.API.Controllers
         }
 
         // PUT api/orders/5/in-delivery
-        [HttpPut("{orderId}/in-delivery")]
-        public async Task<IActionResult> SetInDeliveryStatus(int orderId)
+        [HttpPut("{id}/in-delivery")]
+        public async Task<IActionResult> SetInDeliveryStatus(int id)
         {
-            var command = new SetInDeliveryOrderStatusCommand(orderId);
+            var command = new SetInDeliveryOrderStatusCommand(id);
 
             if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
                 command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
@@ -60,10 +60,10 @@ namespace Foodie.Orders.API.Controllers
         }
 
         // PUT api/orders/5/in-progress
-        [HttpPut("{orderId}/in-progress")]
-        public async Task<IActionResult> SetInProgressStatus(int orderId)
+        [HttpPut("{id}/in-progress")]
+        public async Task<IActionResult> SetInProgressStatus(int id)
         {
-            var command = new SetInProgressOrderStatusCommand(orderId);
+            var command = new SetInProgressOrderStatusCommand(id);
 
             if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
                 command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
@@ -73,10 +73,10 @@ namespace Foodie.Orders.API.Controllers
         }
 
         // GET api/orders/5
-        [HttpGet("{orderId}")]
-        public async Task<IActionResult> GetOrder(int orderId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrder(int id)
         {
-            var query = new GetOrderByIdQuery(orderId);
+            var query = new GetOrderByIdQuery(id);
             
             if(GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
                 query.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));

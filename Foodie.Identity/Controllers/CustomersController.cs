@@ -29,10 +29,10 @@ namespace Foodie.Identity.Controllers
         }
 
         // PUT api/customers/5
-        [HttpPut("{customerId}")]
-        public async Task<IActionResult> UpdateCustomer(string customerId, [FromBody] UpdateCustomerCommand updateUserCommand)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCustomer(string id, [FromBody] UpdateCustomerCommand updateUserCommand)
         {
-            if (customerId != updateUserCommand.Id)
+            if (id != updateUserCommand.Id)
             {
                 return BadRequest();
             }
@@ -43,19 +43,19 @@ namespace Foodie.Identity.Controllers
         }
 
         // DELETE api/customers/5
-        [HttpDelete("{customerId}")]
-        public async Task<IActionResult> DeleteCustomer(string customerId)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCustomer(string id)
         {
-            var command = new DeleteCustomerCommand(customerId);
+            var command = new DeleteCustomerCommand(id);
             var result = await mediator.Send(command);
             return Ok(result);
         }
 
         // GET api/customers/5
-        [HttpGet("{customerId}")]
-        public async Task<IActionResult> GetCustomer(string customerId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCustomer(string id)
         {
-            var query = new GetCustomerByIdQuery(customerId);
+            var query = new GetCustomerByIdQuery(id);
             var result = await mediator.Send(query);
             return Ok(result);
         }

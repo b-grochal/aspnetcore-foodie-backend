@@ -30,11 +30,11 @@ namespace Foodie.Meals.API.Controllers
         }
 
         // PUT api/categories/5
-        [HttpPut("{categoryId}")]
+        [HttpPut("{id}")]
         [Roles(RolesDictionary.Admin)]
-        public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody] UpdateCategoryCommand updateCategoryCommand)
+        public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdateCategoryCommand updateCategoryCommand)
         {
-            if (categoryId != updateCategoryCommand.Id)
+            if (id != updateCategoryCommand.Id)
             {
                 return BadRequest();
             }
@@ -45,20 +45,20 @@ namespace Foodie.Meals.API.Controllers
         }
 
         // DELETE api/categories/5
-        [HttpDelete("{categoryId}")]
+        [HttpDelete("{id}")]
         [Roles(RolesDictionary.Admin)]
-        public async Task<IActionResult> DeleteCategory(int categoryId)
+        public async Task<IActionResult> DeleteCategory(int id)
         {
-            var command = new DeleteCategoryCommand(categoryId);
+            var command = new DeleteCategoryCommand(id);
             var result = await mediator.Send(command);
             return Ok(result);
         }
 
         // GET api/categories/5
-        [HttpGet("{categoryId}")]
-        public async Task<IActionResult> GetCategory(int categoryId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCategory(int id)
         {
-            var query = new GetCategoryByIdQuery(categoryId);
+            var query = new GetCategoryByIdQuery(id);
             var result = await mediator.Send(query);
             return Ok(result);
         }
