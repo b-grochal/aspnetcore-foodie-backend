@@ -52,7 +52,7 @@ namespace Foodie.Meals.UnitTests.Controllers
             categoriesController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var updateCategoryCommand = new UpdateCategoryCommand
             {
-                CategoryId = 1,
+                Id = 1,
                 Name = "Test category"
             };
 
@@ -74,7 +74,7 @@ namespace Foodie.Meals.UnitTests.Controllers
             categoriesController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var updateCategoryCommand = new UpdateCategoryCommand
             {
-                CategoryId = 1,
+                Id = 1,
                 Name = "Test category"
             };
 

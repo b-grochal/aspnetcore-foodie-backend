@@ -11,7 +11,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
     {
         public UpdateAdminCommandValidator()
         {
-            RuleFor(c => c.AdminId)
+            RuleFor(c => c.Id)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty");
 

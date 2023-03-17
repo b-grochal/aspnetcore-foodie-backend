@@ -11,7 +11,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustome
     {
         public UpdateCustomerCommandValidator()
         {
-            RuleFor(c => c.CustomerId)
+            RuleFor(c => c.Id)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty");
 

@@ -44,7 +44,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new UpdateCategoryCommandResponse
                 {
-                    Id = updateCategoryCommand.CategoryId,
+                    Id = updateCategoryCommand.Id,
                     Name = updateCategoryCommand.Name,
                 };
             });
@@ -65,7 +65,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new DeleteCategoryCommandResponse
                 {
-                    Id = deleteCategoryCommand.CategoryId,
+                    Id = deleteCategoryCommand.Id,
                 };
             });
 
@@ -85,7 +85,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new GetCategoryByIdQueryResponse
                 {
-                    Id = getCategoryByIdQuery.CategoryId,
+                    Id = getCategoryByIdQuery.Id,
                     Name = "Test category"
                 };
             });

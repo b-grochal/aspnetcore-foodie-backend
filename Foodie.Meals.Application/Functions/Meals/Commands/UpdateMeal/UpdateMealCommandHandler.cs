@@ -24,10 +24,10 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal
 
         public async Task<UpdateMealCommandResponse> Handle(UpdateMealCommand request, CancellationToken cancellationToken)
         {
-            var meal = await mealsRepository.GetByIdAsync(request.MealId);
+            var meal = await mealsRepository.GetByIdAsync(request.Id);
 
             if (meal == null)
-                throw new MealNotFoundException(request.MealId);
+                throw new MealNotFoundException(request.Id);
 
             var editedMeal = mapper.Map(request, meal);
             await mealsRepository.UpdateAsync(editedMeal);

@@ -46,7 +46,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new UpdateMealCommandResponse
                 {
-                    Id = updateMealCommand.MealId,
+                    Id = updateMealCommand.Id,
                     Name = updateMealCommand.Name,
                     Description = updateMealCommand.Description,
                     Price = updateMealCommand.Price,
@@ -70,7 +70,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new DeleteMealCommandResponse
                 {
-                    Id = deleteMealCommand.MealId
+                    Id = deleteMealCommand.Id
                 };
             });
 
@@ -90,7 +90,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new GetMealByIdQueryResponse
                 {
-                    Id = getMealByIdQuery.MealId,
+                    Id = getMealByIdQuery.Id,
                     Name = "Test meal",
                     Description = "Test description",
                     Price = 123

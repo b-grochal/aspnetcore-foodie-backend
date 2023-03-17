@@ -25,10 +25,10 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHa
 
         public async Task<GetOrderHandlerByIdQueryResponse> Handle(GetOrderHandlerByIdQuery request, CancellationToken cancellationToken)
         {
-            var orderHandler = await orderHandlersRepository.GetByIdAsync(request.OrderHandlerId);
+            var orderHandler = await orderHandlersRepository.GetByIdAsync(request.Id);
 
             if (orderHandler == null)
-                throw new ApplicationUserNotFoundException(request.OrderHandlerId);
+                throw new ApplicationUserNotFoundException(request.Id);
 
             return mapper.Map<GetOrderHandlerByIdQueryResponse>(orderHandler);
         }

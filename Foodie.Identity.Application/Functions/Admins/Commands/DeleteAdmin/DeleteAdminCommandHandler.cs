@@ -21,10 +21,10 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin
 
         public async Task<DeleteAdminCommandResponse> Handle(DeleteAdminCommand request, CancellationToken cancellationToken)
         {
-            var admin = await adminsRepository.GetByIdAsync(request.AdminId);
+            var admin = await adminsRepository.GetByIdAsync(request.Id);
 
             if (admin == null)
-                throw new ApplicationUserNotFoundException(request.AdminId);
+                throw new ApplicationUserNotFoundException(request.Id);
 
             var identityResult = await adminsRepository.DeleteAsync(admin);
 
@@ -33,7 +33,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin
 
             return new DeleteAdminCommandResponse
             {
-                AdminId = request.AdminId
+                Id = request.Id
             };
         }
     }

@@ -21,10 +21,10 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrd
 
         public async Task<DeleteOrderHandlerCommandResponse> Handle(DeleteOrderHandlerCommand request, CancellationToken cancellationToken)
         {
-            var orderHandler = await orderHandlersRepository.GetByIdAsync(request.OrderHandlerId);
+            var orderHandler = await orderHandlersRepository.GetByIdAsync(request.Id);
 
             if (orderHandler == null)
-                throw new ApplicationUserNotFoundException(request.OrderHandlerId);
+                throw new ApplicationUserNotFoundException(request.Id);
 
             var identityResult = await orderHandlersRepository.DeleteAsync(orderHandler);
 
@@ -33,7 +33,7 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrd
 
             return new DeleteOrderHandlerCommandResponse
             {
-                OrderHandlerId = request.OrderHandlerId
+                Id = request.Id
             };
         }
     }

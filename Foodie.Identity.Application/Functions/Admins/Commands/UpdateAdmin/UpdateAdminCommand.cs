@@ -10,7 +10,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
 {
     public class UpdateAdminCommand : AuditableUpdateCommand, IRequest<UpdateAdminCommandResponse>
     {
-        public string AdminId { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }

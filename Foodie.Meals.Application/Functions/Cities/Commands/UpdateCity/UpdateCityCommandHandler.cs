@@ -24,10 +24,10 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity
 
         public async Task<UpdateCityCommandResponse> Handle(UpdateCityCommand request, CancellationToken cancellationToken)
         {
-            var city = await citiesRepository.GetByIdAsync(request.CityId);
+            var city = await citiesRepository.GetByIdAsync(request.Id);
 
             if (city == null)
-                throw new CityNotFoundException(request.CityId);
+                throw new CityNotFoundException(request.Id);
 
             var editedCity = mapper.Map(request, city);
             await citiesRepository.UpdateAsync(editedCity);

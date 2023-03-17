@@ -37,7 +37,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Cities
 
             var command = new UpdateCityCommand
             {
-                CityId = 1,
+                Id = 1,
                 Name = "Test category",
                 Country = "Test country"
             };
@@ -47,7 +47,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Cities
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
             Assert.IsType<UpdateCityCommandResponse>(result);
-            Assert.Equal(command.CityId, result.Id);
+            Assert.Equal(command.Id, result.Id);
             Assert.Equal(command.Name, result.Name);
             Assert.Equal(command.Country, result.Country);
             citiesRepository.VerifyUpdateAsync(Times.Once());
@@ -63,7 +63,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Cities
 
             var command = new UpdateCityCommand
             {
-                CityId = 1,
+                Id = 1,
                 Name = "Test category",
                 Country = "Test country"
             };

@@ -24,10 +24,10 @@ namespace Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerByI
 
         public async Task<GetCustomerByIdQueryResponse> Handle(GetCustomerByIdQuery request, CancellationToken cancellationToken)
         {
-            var customer = await customersRepository.GetByIdAsync(request.CustomerId);
+            var customer = await customersRepository.GetByIdAsync(request.Id);
 
             if (customer == null)
-                throw new ApplicationUserNotFoundException(request.CustomerId);
+                throw new ApplicationUserNotFoundException(request.Id);
 
             return mapper.Map<GetCustomerByIdQueryResponse>(customer);
         }

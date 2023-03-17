@@ -11,7 +11,7 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrd
     {
         public UpdateOrderHandlerCommandValidator()
         {
-            RuleFor(c => c.OrderHandlerId)
+            RuleFor(c => c.Id)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty");
 

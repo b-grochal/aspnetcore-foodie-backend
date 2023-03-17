@@ -24,10 +24,10 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustome
 
         public async Task<UpdateCustomerCommandResponse> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
-            var customer = await customersRepository.GetByIdAsync(request.CustomerId);
+            var customer = await customersRepository.GetByIdAsync(request.Id);
 
             if (customer == null)
-                throw new ApplicationUserNotFoundException(request.CustomerId);
+                throw new ApplicationUserNotFoundException(request.Id);
 
             var updatedCustomer = mapper.Map(request, customer);
             var identityResult = await customersRepository.UpdateAsync(updatedCustomer);

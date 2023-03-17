@@ -23,7 +23,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMe
 
         public async Task<GetRestaurantsMealsQueryResponse> Handle(GetRestaurantMealsQuery request, CancellationToken cancellationToken)
         {
-            var meals = await mealsRepository.GetAllAsync(request.RestaurantId);
+            var meals = await mealsRepository.GetAllAsync(request.Id);
 
             return new GetRestaurantsMealsQueryResponse
             {

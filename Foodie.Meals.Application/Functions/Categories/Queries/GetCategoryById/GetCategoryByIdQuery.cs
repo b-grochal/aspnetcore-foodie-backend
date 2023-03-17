@@ -9,11 +9,11 @@ namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById
 {
     public class GetCategoryByIdQuery : IRequest<GetCategoryByIdQueryResponse>
     {
-        public int CategoryId { get; }
+        public int Id { get; }
 
-        public GetCategoryByIdQuery(int categoryId)
+        public GetCategoryByIdQuery(int id)
         {
-            this.CategoryId = categoryId;
+            this.Id = id;
         }
     }
 }

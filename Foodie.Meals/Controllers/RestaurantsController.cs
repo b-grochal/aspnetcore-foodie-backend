@@ -40,7 +40,7 @@ namespace Foodie.Meals.Controllers
         [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateRestaurant(int restaurantId, [FromBody] UpdateRestaurantCommand updateRestaurantCommand)
         {
-            if (restaurantId != updateRestaurantCommand.RestaurantId)
+            if (restaurantId != updateRestaurantCommand.Id)
             {
                 return BadRequest();
             }

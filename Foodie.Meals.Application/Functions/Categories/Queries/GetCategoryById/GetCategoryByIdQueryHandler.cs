@@ -24,10 +24,10 @@ namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById
 
         public async Task<GetCategoryByIdQueryResponse> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
-            var category = await categoriesRepository.GetByIdAsync(request.CategoryId);
+            var category = await categoriesRepository.GetByIdAsync(request.Id);
 
             if (category == null)
-                throw new CategoryNotFoundException(request.CategoryId);
+                throw new CategoryNotFoundException(request.Id);
 
             return mapper.Map<GetCategoryByIdQueryResponse>(category);
         }

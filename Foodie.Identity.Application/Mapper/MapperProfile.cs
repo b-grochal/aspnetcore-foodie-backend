@@ -30,56 +30,41 @@ namespace Foodie.Identity.Application.Mapper
         {
             CreateMap<CreateAdminCommand, Admin>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
-            CreateMap<Admin, CreateAdminCommandResponse>()
-                .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
+            CreateMap<Admin, CreateAdminCommandResponse>();
             CreateMap<UpdateAdminCommand, Admin>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AdminId));
-            CreateMap<Admin, UpdateAdminCommandResponse>()
-                .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
-            CreateMap<Admin, GetAdminByIdQueryResponse>()
-                .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
-            CreateMap<Admin, AdminDto>()
-                .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+            CreateMap<Admin, UpdateAdminCommandResponse>();
+            CreateMap<Admin, GetAdminByIdQueryResponse>();
+            CreateMap<Admin, AdminDto>();
         }
 
         private void ConfigureCustomersMapping()
         {
             CreateMap<CreateCustomerCommand, Customer>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
-            CreateMap<Customer, CreateCustomerCommandResponse>()
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
-            CreateMap<UpdateCustomerCommand, Customer>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CustomerId));
-            CreateMap<Customer, UpdateCustomerCommandResponse>()
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
-            CreateMap<Customer, GetCustomerByIdQueryResponse>()
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
-            CreateMap<Customer, CustomerDto>()
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
+            CreateMap<Customer, CreateCustomerCommandResponse>();
+            CreateMap<UpdateCustomerCommand, Customer>();
+            CreateMap<Customer, UpdateCustomerCommandResponse>();
+            CreateMap<Customer, GetCustomerByIdQueryResponse>();
+            CreateMap<Customer, CustomerDto>();
         }
 
         private void ConfigureOrderHandlersMapping()
         {
             CreateMap<CreateOrderHandlerCommand, OrderHandler>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
-            CreateMap<OrderHandler, CreateOrderHandlerCommandResponse>()
-                .ForMember(dest => dest.OrderHandlerId, opt => opt.MapFrom(src => src.Id));
-            CreateMap<UpdateOrderHandlerCommand, OrderHandler>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.OrderHandlerId));
-            CreateMap<OrderHandler, UpdateOrderHandlerCommandResponse>()
-                .ForMember(dest => dest.OrderHandlerId, opt => opt.MapFrom(src => src.Id));
-            CreateMap<OrderHandler, GetOrderHandlerByIdQueryResponse>()
-                .ForMember(dest => dest.OrderHandlerId, opt => opt.MapFrom(src => src.Id));
-            CreateMap<OrderHandler, OrderHandlerDto>()
-                .ForMember(dest => dest.OrderHandlerId, opt => opt.MapFrom(src => src.Id));
+            CreateMap<OrderHandler, CreateOrderHandlerCommandResponse>();
+            CreateMap<UpdateOrderHandlerCommand, OrderHandler>();
+            CreateMap<OrderHandler, UpdateOrderHandlerCommandResponse>();
+            CreateMap<OrderHandler, GetOrderHandlerByIdQueryResponse>();
+            CreateMap<OrderHandler, OrderHandlerDto>();
         }
 
         private void ConfigureAuthMapping()
         {
             CreateMap<SignUpCommand, Customer>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
-            CreateMap<Customer, SignUpCommandResponse>()
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
+            CreateMap<Customer, SignUpCommandResponse>();
         }
     }
 }

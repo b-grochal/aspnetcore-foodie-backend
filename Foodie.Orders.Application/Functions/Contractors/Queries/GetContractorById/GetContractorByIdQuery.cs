@@ -9,11 +9,11 @@ namespace Foodie.Orders.Application.Functions.Contractors.Queries.GetContractorB
 {
     public class GetContractorByIdQuery : IRequest<GetContractorByIdQueryResponse>
     {
-        public int ContractorId { get; set; }
+        public int Id { get; set; }
 
-        public GetContractorByIdQuery(int contractorId)
+        public GetContractorByIdQuery(int id)
         {
-            ContractorId = contractorId;
+            Id = id;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Foodie.Orders.Application.Functions.Contractors.Queries.GetContractorB
 {
     public class GetContractorByIdQueryResponse
     {
-        public int ContractorId { get; set; }
+        public int Id { get; set; }
         public int RestaurantId { get; private set; }
         public string Name { get; private set; }
         public int LocationId { get; private set; }

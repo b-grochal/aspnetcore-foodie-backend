@@ -32,7 +32,7 @@ namespace Foodie.Identity.Controllers
         [HttpPut("{customerId}")]
         public async Task<IActionResult> UpdateCustomer(string customerId, [FromBody] UpdateCustomerCommand updateUserCommand)
         {
-            if (customerId != updateUserCommand.CustomerId)
+            if (customerId != updateUserCommand.Id)
             {
                 return BadRequest();
             }

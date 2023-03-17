@@ -34,7 +34,7 @@ namespace Foodie.Meals.API.Controllers
         [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody] UpdateCategoryCommand updateCategoryCommand)
         {
-            if (categoryId != updateCategoryCommand.CategoryId)
+            if (categoryId != updateCategoryCommand.Id)
             {
                 return BadRequest();
             }

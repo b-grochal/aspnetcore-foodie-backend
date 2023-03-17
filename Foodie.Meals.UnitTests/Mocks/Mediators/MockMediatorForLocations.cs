@@ -49,7 +49,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new UpdateLocationCommandResponse
                 {
-                    Id = updateLocationCommand.LocationId,
+                    Id = updateLocationCommand.Id,
                     Address = updateLocationCommand.Address,
                     Email = updateLocationCommand.PhoneNumber,
                     PhoneNumber = updateLocationCommand.PhoneNumber,
@@ -76,7 +76,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new DeleteLocationCommandResponse
                 {
-                    Id = deleteLocationCommand.LocationId,
+                    Id = deleteLocationCommand.Id,
                 };
             });
 
@@ -96,7 +96,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new GetLocationByIdQueryResponse
                 {
-                    Id = getLocationByIdQuery.LocationId,
+                    Id = getLocationByIdQuery.Id,
                     Address = "Test address",
                     Email = "test@email.com",
                     PhoneNumber = "123-456-789",

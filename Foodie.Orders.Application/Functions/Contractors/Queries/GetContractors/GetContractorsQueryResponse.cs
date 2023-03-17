@@ -17,7 +17,7 @@ namespace Foodie.Orders.Application.Functions.Contractors.Queries.GetContractors
 
     public class ContractorDto
     {
-        public int ContractorId { get; set; }
+        public int Id { get; set; }
         public string Name { get; private set; }
         public string Address { get; private set; }
         public string City { get; private set; }

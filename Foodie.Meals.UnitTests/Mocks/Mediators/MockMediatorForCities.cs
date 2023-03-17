@@ -44,7 +44,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new UpdateCityCommandResponse
                 {
-                    Id = updateCityCommand.CityId,
+                    Id = updateCityCommand.Id,
                     Name = updateCityCommand.Name,
                     Country = updateCityCommand.Country
                 };
@@ -66,7 +66,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new DeleteCityCommandResponse
                 {
-                    Id = deleteCityCommand.CityId,
+                    Id = deleteCityCommand.Id,
                 };
             });
 
@@ -86,7 +86,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new GetCityByIdQueryResponse
                 {
-                    Id = getCityByIdQuery.CityId,
+                    Id = getCityByIdQuery.Id,
                     Name = "Test category",
                     Country = "Test country"
                 };

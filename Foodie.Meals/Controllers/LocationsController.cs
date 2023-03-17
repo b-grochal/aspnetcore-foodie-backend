@@ -34,7 +34,7 @@ namespace Foodie.Meals.API.Controllers
         [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateLocation(int locationId, [FromBody] UpdateLocationCommand updateLocationCommand)
         {
-            if (locationId != updateLocationCommand.LocationId)
+            if (locationId != updateLocationCommand.Id)
             {
                 return BadRequest();
             }

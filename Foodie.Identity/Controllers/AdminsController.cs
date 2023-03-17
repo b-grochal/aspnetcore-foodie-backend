@@ -32,7 +32,7 @@ namespace Foodie.Identity.Controllers
         [HttpPut("{adminId}")]
         public async Task<IActionResult> UpdateAdmin(string adminId, [FromBody] UpdateAdminCommand updateAdminCommand)
         {
-            if (adminId != updateAdminCommand.AdminId)
+            if (adminId != updateAdminCommand.Id)
             {
                 return BadRequest();
             }

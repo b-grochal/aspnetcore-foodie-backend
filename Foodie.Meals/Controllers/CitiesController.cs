@@ -34,7 +34,7 @@ namespace Foodie.Meals.API.Controllers
         [Roles(RolesDictionary.Admin)]
         public async Task<IActionResult> UpdateCity(int cityId, [FromBody] UpdateCityCommand updateCityCommand)
         {
-            if (cityId != updateCityCommand.CityId)
+            if (cityId != updateCityCommand.Id)
             {
                 return BadRequest();
             }

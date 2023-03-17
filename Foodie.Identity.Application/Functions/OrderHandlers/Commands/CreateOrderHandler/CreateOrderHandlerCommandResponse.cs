@@ -8,7 +8,7 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
 {
     public class CreateOrderHandlerCommandResponse
     {
-        public string OrderHandlerId { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }

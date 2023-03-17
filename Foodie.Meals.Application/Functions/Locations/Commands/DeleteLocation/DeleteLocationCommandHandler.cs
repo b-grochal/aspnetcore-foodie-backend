@@ -21,16 +21,16 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.DeleteLocation
 
         public async Task<DeleteLocationCommandResponse> Handle(DeleteLocationCommand request, CancellationToken cancellationToken)
         {
-            var locationToDelete = await locationsRepository.GetByIdAsync(request.LocationId);
+            var locationToDelete = await locationsRepository.GetByIdAsync(request.Id);
 
             if (locationToDelete == null)
-                throw new LocationNotFoundException(request.LocationId);
+                throw new LocationNotFoundException(request.Id);
 
             await locationsRepository.DeleteAsync(locationToDelete);
             
             return new DeleteLocationCommandResponse
             {
-                Id = request.LocationId
+                Id = request.Id
             };
         }
     }

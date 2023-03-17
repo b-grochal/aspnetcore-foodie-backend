@@ -15,7 +15,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins
 
     public class AdminDto
     {
-        public string AdminId { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }

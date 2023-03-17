@@ -45,7 +45,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new UpdateRestaurantCommandResponse
                 {
-                    Id = updateRestaurantCommand.RestaurantId,
+                    Id = updateRestaurantCommand.Id,
                     Name = updateRestaurantCommand.Name
                 };
             });
@@ -66,7 +66,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new DeleteRestaurantCommandResponse
                 {
-                    Id = deleteRestaurantCommand.RestaurantId
+                    Id = deleteRestaurantCommand.Id
                 };
             });
 
@@ -86,7 +86,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new GetRestaurantByIdQueryResponse
                 {
-                    Id = getRestaurantByIdQuery.RestaurantId,
+                    Id = getRestaurantByIdQuery.Id,
                     Name = "Test restaurant"
                 };
             });

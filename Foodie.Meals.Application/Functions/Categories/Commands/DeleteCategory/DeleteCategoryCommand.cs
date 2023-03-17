@@ -9,11 +9,11 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory
 {
     public class DeleteCategoryCommand : IRequest<DeleteCategoryCommandResponse>
     {
-        public int CategoryId { get; set; }
+        public int Id { get; set; }
 
-        public DeleteCategoryCommand(int categoryId)
+        public DeleteCategoryCommand(int id)
         {
-            this.CategoryId = categoryId;
+            this.Id = id;
         }
     }
 }
