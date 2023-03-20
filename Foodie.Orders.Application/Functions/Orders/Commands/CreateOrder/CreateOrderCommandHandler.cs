@@ -30,11 +30,11 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
         {
             await _publishEndpoint.Publish<OrderStartedIntegrationEvent>(new
             {
-                UserId = request.UserId
+                UserId = request.CustomerId
             });
 
             var address = new Address(request.AddressStreet, request.AddressCity, request.AddressCountry);
-            var order = new Order(request.UserId, request.UserFirstName, request.UserLastName, request.UserPhoneNumber, request.UserEmail, request.RestaurantId, request.RestaurantName, 
+            var order = new Order(request.CustomerId, request.CustomerFirstName, request.CustomerLastName, request.CustomerPhoneNumber, request.CustomerEmail, request.RestaurantId, request.RestaurantName, 
                 request.LocationId, request.LocationAddress, request.LocationPhoneNumber, request.LocationEmail, request.CityId, request.CityName, request.LocationCountry, address);
 
             foreach(var item in request.OrderItems)

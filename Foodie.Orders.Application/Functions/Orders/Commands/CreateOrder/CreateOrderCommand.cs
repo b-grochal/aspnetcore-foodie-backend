@@ -9,11 +9,11 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
 {
     public class CreateOrderCommand : IRequest
     {
-        public string UserId { get; set; }
-        public string UserFirstName { get; set; }
-        public string UserLastName { get; set; }
-        public string UserPhoneNumber { get; set; }
-        public string UserEmail { get; set; }
+        public string CustomerId { get; set; }
+        public string CustomerFirstName { get; set; }
+        public string CustomerLastName { get; set; }
+        public string CustomerPhoneNumber { get; set; }
+        public string CustomerEmail { get; set; }
         public string AddressStreet { get; set; }
         public string AddressCity { get; set; }
         public string AddressCountry { get; set; }
@@ -38,11 +38,11 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
             string addressCountry, int restaurantId, string restaurantName, int locationId, string locationAddress, 
             string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry, List<OrderItemDTO> orderItems) : this()
         {
-            UserId = userId;
-            UserFirstName = userFirstName;
-            UserLastName = userLastName;
-            UserPhoneNumber = userPhoneNumber;
-            UserEmail = userEmail;
+            CustomerId = userId;
+            CustomerFirstName = userFirstName;
+            CustomerLastName = userLastName;
+            CustomerPhoneNumber = userPhoneNumber;
+            CustomerEmail = userEmail;
             AddressStreet = addressStreet;
             AddressCity = addressCity;
             AddressCountry = addressCountry;

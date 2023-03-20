@@ -3,7 +3,7 @@ syntax = "proto3";
 option csharp_namespace = "MealsGrpc";
 
 message Location {
-  int32 locationId = 1;
+  int32 id = 1;
   string address = 2;
   string phoneNumber = 3;
   string email = 4;
