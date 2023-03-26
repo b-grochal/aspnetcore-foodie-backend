@@ -37,7 +37,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Locations
 
             var command = new UpdateLocationCommand
             {
-                LocationId = 1,
+                Id = 1,
                 Address = "Test address",
                 PhoneNumber = "123-456-789",
                 Email = "test@email.com",
@@ -50,7 +50,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Locations
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
             Assert.IsType<UpdateLocationCommandResponse>(result);
-            Assert.Equal(command.LocationId, result.LocationId);
+            Assert.Equal(command.Id, result.Id);
             Assert.Equal(command.Address, result.Address);
             Assert.Equal(command.Email, result.Email);
             Assert.Equal(command.PhoneNumber, result.PhoneNumber);
@@ -69,7 +69,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Locations
 
             var command = new UpdateLocationCommand
             {
-                LocationId = 1,
+                Id = 1,
                 Address = "Test address",
                 PhoneNumber = "123-456-789",
                 Email = "test@email.com",

@@ -30,11 +30,11 @@ namespace Foodie.Meals.API.Controllers
         }
 
         // PUT api/cities/5
-        [HttpPut("{cityId}")]
+        [HttpPut("{id}")]
         [Roles(RolesDictionary.Admin)]
-        public async Task<IActionResult> UpdateCity(int cityId, [FromBody] UpdateCityCommand updateCityCommand)
+        public async Task<IActionResult> UpdateCity(int id, [FromBody] UpdateCityCommand updateCityCommand)
         {
-            if (cityId != updateCityCommand.CityId)
+            if (id != updateCityCommand.Id)
             {
                 return BadRequest();
             }
@@ -45,20 +45,20 @@ namespace Foodie.Meals.API.Controllers
         }
 
         // DELETE api/cities/5
-        [HttpDelete("{cityId}")]
+        [HttpDelete("{id}")]
         [Roles(RolesDictionary.Admin)]
-        public async Task<IActionResult> DeleteCity(int cityId)
+        public async Task<IActionResult> DeleteCity(int id)
         {
-            var command = new DeleteCityCommand(cityId);
+            var command = new DeleteCityCommand(id);
             var result = await mediator.Send(command);
             return Ok(result);
         }
 
         // GET api/cities/5
-        [HttpGet("{cityId}")]
-        public async Task<IActionResult> GetCity(int cityId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCity(int id)
         {
-            var query = new GetCityByIdQuery(cityId);
+            var query = new GetCityByIdQuery(id);
             var result = await mediator.Send(query);
             return Ok(result);
         }

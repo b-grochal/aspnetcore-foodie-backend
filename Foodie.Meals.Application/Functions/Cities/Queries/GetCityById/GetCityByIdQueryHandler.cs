@@ -24,10 +24,10 @@ namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCityById
 
         public async Task<GetCityByIdQueryResponse> Handle(GetCityByIdQuery request, CancellationToken cancellationToken)
         {
-            var city = await citiesRepository.GetByIdAsync(request.CityId);
+            var city = await citiesRepository.GetByIdAsync(request.Id);
 
             if (city == null)
-                throw new CityNotFoundException(request.CityId);
+                throw new CityNotFoundException(request.Id);
 
             return mapper.Map<GetCityByIdQueryResponse>(city);
         }

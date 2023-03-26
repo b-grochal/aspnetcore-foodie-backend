@@ -11,7 +11,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
     {
         public UpdateRestaurantCommandValidator()
         {
-            RuleFor(r => r.RestaurantId)
+            RuleFor(r => r.Id)
                 .NotEmpty()
                 .WithMessage("{PropertyName} should not be empty");
 

@@ -1,4 +1,5 @@
-﻿using Foodie.Basket.Models;
+﻿using Foodie.Basket.API.Exceptions;
+using Foodie.Basket.Models;
 using Foodie.Basket.Repositories.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
 using System;
@@ -27,6 +28,10 @@ namespace Foodie.Basket.Repositories.Implementations
         public async Task<CustomerBasket> GetBasket(string customerId)
         {
             var redisBasket = await distributedCache.GetStringAsync(customerId);
+
+            if (string.IsNullOrEmpty(redisBasket))
+                throw new CustomerBasketNotFound(customerId);
+
             return JsonSerializer.Deserialize<CustomerBasket>(redisBasket, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true

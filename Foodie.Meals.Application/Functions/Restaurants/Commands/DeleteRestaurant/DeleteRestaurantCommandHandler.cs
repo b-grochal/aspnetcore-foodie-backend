@@ -21,16 +21,16 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaura
 
         public async Task<DeleteRestaurantCommandResponse> Handle(DeleteRestaurantCommand request, CancellationToken cancellationToken)
         {
-            var restaurantToDelete = await restaurantRepository.GetByIdAsync(request.RestaurantId);
+            var restaurantToDelete = await restaurantRepository.GetByIdAsync(request.Id);
 
             if (restaurantToDelete == null)
-                throw new RestaurantNotFoundException(request.RestaurantId);
+                throw new RestaurantNotFoundException(request.Id);
 
             await restaurantRepository.DeleteAsync(restaurantToDelete);
 
             return new DeleteRestaurantCommandResponse
             {
-                RestaurantId = request.RestaurantId
+                Id = request.Id
             };
         }
     }

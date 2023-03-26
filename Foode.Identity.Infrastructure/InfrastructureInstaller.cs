@@ -12,7 +12,7 @@ using System;
 
 namespace Foode.Identity.Infrastructure
 {
-    public static class InfrastructureInstallation
+    public static class InfrastructureInstaller
     {
         public static IServiceCollection AddIdentityInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {

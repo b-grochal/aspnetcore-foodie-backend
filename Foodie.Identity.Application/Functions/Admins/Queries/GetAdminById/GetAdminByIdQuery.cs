@@ -9,11 +9,11 @@ namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById
 {
     public class GetAdminByIdQuery : IRequest<GetAdminByIdQueryResponse>
     {
-        public string AdminId { get; }
+        public string Id { get; }
 
-        public GetAdminByIdQuery(string adminId)
+        public GetAdminByIdQuery(string id)
         {
-            this.AdminId = adminId;
+            this.Id = id;
         }
     }
 }

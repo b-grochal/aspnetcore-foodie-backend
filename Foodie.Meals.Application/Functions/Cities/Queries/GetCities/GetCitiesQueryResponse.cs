@@ -13,4 +13,11 @@ namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCities
         public string Name { get; set; }
         public string Country { get; set; }
     }
+
+    public class CityDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Country { get; set; }
+    }
 }

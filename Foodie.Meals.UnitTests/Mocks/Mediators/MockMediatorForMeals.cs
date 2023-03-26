@@ -22,7 +22,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new CreateMealCommandResponse
                 {
-                    MealId = 1,
+                    Id = 1,
                     Name = createMealCommand.Name,
                     Description = createMealCommand.Description,
                     Price = createMealCommand.Price,
@@ -46,7 +46,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new UpdateMealCommandResponse
                 {
-                    MealId = updateMealCommand.MealId,
+                    Id = updateMealCommand.Id,
                     Name = updateMealCommand.Name,
                     Description = updateMealCommand.Description,
                     Price = updateMealCommand.Price,
@@ -70,7 +70,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new DeleteMealCommandResponse
                 {
-                    MealId = deleteMealCommand.MealId
+                    Id = deleteMealCommand.Id
                 };
             });
 
@@ -90,7 +90,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new GetMealByIdQueryResponse
                 {
-                    MealId = getMealByIdQuery.MealId,
+                    Id = getMealByIdQuery.Id,
                     Name = "Test meal",
                     Description = "Test description",
                     Price = 123
@@ -122,19 +122,19 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                     {
                         new MealDto
                         {
-                            MealId = 1,
+                            Id = 1,
                             Name = "Test meal 1",
                             Price = 123
                         },
                         new MealDto
                         {
-                            MealId = 2,
+                            Id = 2,
                             Name = "Test meal 2",
                             Price = 123
                         },
                         new MealDto
                         {
-                            MealId = 3,
+                            Id = 3,
                             Name = "Test meal 3",
                             Price = 123
                         }

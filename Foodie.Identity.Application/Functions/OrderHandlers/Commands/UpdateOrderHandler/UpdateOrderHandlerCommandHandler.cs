@@ -24,10 +24,10 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrd
 
         public async Task<UpdateOrderHandlerCommandResponse> Handle(UpdateOrderHandlerCommand request, CancellationToken cancellationToken)
         {
-            var orderHandler = await orderHandlersRepository.GetByIdAsync(request.OrderHandlerId);
+            var orderHandler = await orderHandlersRepository.GetByIdAsync(request.Id);
 
             if (orderHandler == null)
-                throw new ApplicationUserNotFoundException(request.OrderHandlerId);
+                throw new ApplicationUserNotFoundException(request.Id);
 
             var updatedOrderHandler = mapper.Map(request, orderHandler);
             var identityResult = await orderHandlersRepository.UpdateAsync(updatedOrderHandler);

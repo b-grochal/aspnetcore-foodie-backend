@@ -22,16 +22,16 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity
 
         public async Task<DeleteCityCommandResponse> Handle(DeleteCityCommand request, CancellationToken cancellationToken)
         {
-            var cityToDelete = await citiesRepository.GetByIdAsync(request.CityId);
+            var cityToDelete = await citiesRepository.GetByIdAsync(request.Id);
 
             if (cityToDelete == null)
-                throw new CityNotFoundException(request.CityId);
+                throw new CityNotFoundException(request.Id);
 
             await citiesRepository.DeleteAsync(cityToDelete);
 
             return new DeleteCityCommandResponse
             {
-                CityId = request.CityId
+                Id = request.Id
             };
         }
     }

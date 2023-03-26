@@ -9,11 +9,11 @@ namespace Foodie.EventBus.IntegrationEvents.Basket
 {
     public interface CustomerCheckoutIntegrationEvent : IntegrationEvent
     {
-        string UserId { get; set; }
-        string UserFirstName { get; set; }
-        string UserLastName { get; set; }
-        string UserPhoneNumber { get; set; }
-        string UserEmail { get; set; }
+        string CustomerId { get; set; }
+        string CustomerFirstName { get; set; }
+        string CustomerLastName { get; set; }
+        string CustomerPhoneNumber { get; set; }
+        string CustomerEmail { get; set; }
         string AddressStreet { get; set; }
         string AddressCity { get; set; }
         string AddressCountry { get; set; }

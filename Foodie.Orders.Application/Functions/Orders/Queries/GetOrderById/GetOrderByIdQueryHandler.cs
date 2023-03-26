@@ -20,10 +20,10 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById
 
         public async Task<GetOrderByIdQueryResponse> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var order = await _orderQueries.GetByIdAsync(request.OrderId);
+            var order = await _orderQueries.GetByIdAsync(request.Id);
 
             if (order == null)
-                throw new OrderNotFoundException(request.OrderId);
+                throw new OrderNotFoundException(request.Id);
 
             return _mapper.Map<GetOrderByIdQueryResponse>(order);
         }

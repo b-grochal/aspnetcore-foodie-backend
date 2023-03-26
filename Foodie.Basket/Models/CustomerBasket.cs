@@ -7,7 +7,6 @@ namespace Foodie.Basket.Models
 {
     public class CustomerBasket
     {
-        public int RestaurantId { get; set; }
         public int LocationId { get; set; }
         public List<BasketItem> Items { get; set; }
     }

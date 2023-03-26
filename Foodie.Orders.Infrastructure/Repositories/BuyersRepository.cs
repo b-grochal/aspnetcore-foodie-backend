@@ -3,10 +3,6 @@ using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.AggregatesModel.BuyerAggregate;
 using Foodie.Orders.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Foodie.Orders.Infrastructure.Repositories
@@ -37,9 +33,9 @@ namespace Foodie.Orders.Infrastructure.Repositories
             return await _ordersDbContext.Buyers.FindAsync(id);
         }
 
-        public async Task<Buyer> GetByUserIdAsync(string userId)
+        public async Task<Buyer> GetByCustomerIdAsync(string customerId)
         {
-            return await _ordersDbContext.Buyers.FirstOrDefaultAsync(x => x.UserId == userId);
+            return await _ordersDbContext.Buyers.FirstOrDefaultAsync(x => x.CustomerId == customerId);
         }
     }
 }

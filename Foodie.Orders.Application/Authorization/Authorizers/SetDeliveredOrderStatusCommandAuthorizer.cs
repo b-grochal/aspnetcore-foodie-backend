@@ -17,7 +17,7 @@ namespace Foodie.Orders.Application.Authorization.Authorizers
                 UseRequirement(new SameLocationLikeOrderRequirement
                 {
                     LocationId = request.LocationId.Value,
-                    OrderId = request.OrderId
+                    OrderId = request.Id
                 });
         }
     }

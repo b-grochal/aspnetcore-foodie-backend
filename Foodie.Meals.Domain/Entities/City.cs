@@ -11,6 +11,6 @@ namespace Foodie.Meals.Domain.Entities
     {
         public string Name { get; set; }
         public string Country { get; set; }
-        public ICollection<Location> Locations { get; set; }
+        public virtual ICollection<Location> Locations { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new CreateRestaurantCommandResponse
                 {
-                    RestaurantId = 1,
+                    Id = 1,
                     Name = createRestaurantCommand.Name
                 };
             });
@@ -45,7 +45,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new UpdateRestaurantCommandResponse
                 {
-                    RestaurantId = updateRestaurantCommand.RestaurantId,
+                    Id = updateRestaurantCommand.Id,
                     Name = updateRestaurantCommand.Name
                 };
             });
@@ -66,7 +66,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new DeleteRestaurantCommandResponse
                 {
-                    RestaurantId = deleteRestaurantCommand.RestaurantId
+                    Id = deleteRestaurantCommand.Id
                 };
             });
 
@@ -86,7 +86,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new GetRestaurantByIdQueryResponse
                 {
-                    RestaurantId = getRestaurantByIdQuery.RestaurantId,
+                    Id = getRestaurantByIdQuery.Id,
                     Name = "Test restaurant"
                 };
             });
@@ -113,21 +113,21 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                     PageSize = getRestaurantsQuery.PageSize,
                     CurrentPage = getRestaurantsQuery.PageNumber,
                     TotalPages = 2,
-                    Restaurants = new List<RestauranatDto>
+                    Restaurants = new List<RestaurantDto>
                     {
-                        new RestauranatDto
+                        new RestaurantDto
                         {
-                            RestaurantId = 1,
+                            Id = 1,
                             Name = "Test restaurant 1"
                         },
-                        new RestauranatDto
+                        new RestaurantDto
                         {
-                            RestaurantId = 2,
+                            Id = 2,
                             Name = "Test restaurant 2"
                         },
-                        new RestauranatDto
+                        new RestaurantDto
                         {
-                            RestaurantId = 3,
+                            Id = 3,
                             Name = "Test restaurant 3"
                         }
                     }

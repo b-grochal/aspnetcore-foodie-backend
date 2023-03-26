@@ -24,10 +24,10 @@ namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById
 
        public async Task<GetAdminByIdQueryResponse> Handle(GetAdminByIdQuery request, CancellationToken cancellationToken)
        {
-            var admin = await adminsRepository.GetByIdAsync(request.AdminId);
+            var admin = await adminsRepository.GetByIdAsync(request.Id);
 
             if (admin == null)
-                throw new ApplicationUserNotFoundException(request.AdminId);
+                throw new ApplicationUserNotFoundException(request.Id);
 
             return mapper.Map<GetAdminByIdQueryResponse>(admin);
        }

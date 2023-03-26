@@ -9,13 +9,13 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderBy
 {
     public class GetCustomersOrderByIdQuery : IRequest<GetCustomersOrderByIdQueryResponse>
     {
-        public int OrderId { get; }
-        public string UserId { get; }
+        public int Id { get; }
+        public string CustomerId { get; }
 
-        public GetCustomersOrderByIdQuery(int orderId, string userId)
+        public GetCustomersOrderByIdQuery(int id, string customer)
         {
-            this.OrderId = orderId;
-            this.UserId = userId;
+            this.Id = id;
+            this.CustomerId = customer;
         }
     }
 }

@@ -21,10 +21,10 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.SetInProgressOrder
 
         public async Task<Unit> Handle(SetInProgressOrderStatusCommand request, CancellationToken cancellationToken)
         {
-            var order = await _ordersRepository.GetByIdAsync(request.OrderId);
+            var order = await _ordersRepository.GetByIdAsync(request.Id);
 
             if (order == null)
-                throw new OrderNotFoundException(request.OrderId);
+                throw new OrderNotFoundException(request.Id);
 
             order.SetInProgressStatus();
             await _ordersRepository.UnitOfWork.SaveChangesAsync();

@@ -9,11 +9,11 @@ namespace Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyerById
 {
     public class GetBuyerByIdQuery : IRequest<GetBuyerByIdQueryResponse>
     {
-        public int BuyerId { get; }
+        public int Id { get; }
 
-        public GetBuyerByIdQuery(int orderId)
+        public GetBuyerByIdQuery(int id)
         {
-            this.BuyerId = orderId;
+            this.Id = id;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Categories
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
             Assert.IsType<DeleteCategoryCommandResponse>(result);
-            Assert.Equal(command.CategoryId, result.CategoryId);
+            Assert.Equal(command.Id, result.Id);
             categoriesRepository.VerifyDeleteAsync(Times.Once());
             categoriesRepository.VerifyGetByIdAsync(Times.Once());
         }

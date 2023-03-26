@@ -24,10 +24,10 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantBy
 
         public async Task<GetRestaurantByIdQueryResponse> Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken)
         {
-            var restaurant = await restaurantsRepository.GetByIdAsync(request.RestaurantId);
+            var restaurant = await restaurantsRepository.GetByIdAsync(request.Id);
 
             if (restaurant == null)
-                throw new RestaurantNotFoundException(request.RestaurantId);
+                throw new RestaurantNotFoundException(request.Id);
 
             return mapper.Map<GetRestaurantByIdQueryResponse>(restaurant);
         }

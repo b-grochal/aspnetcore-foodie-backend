@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foodie.Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
-    [Migration("20230205181738_init")]
-    partial class init
+    [Migration("20230320173123_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,11 @@ namespace Foodie.Orders.Infrastructure.Migrations
                         .HasColumnType("int")
                         .UseHiLo("BuyersSequence");
 
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -51,11 +56,6 @@ namespace Foodie.Orders.Infrastructure.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 

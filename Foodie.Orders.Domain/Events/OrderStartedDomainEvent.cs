@@ -10,11 +10,11 @@ namespace Foodie.Orders.Domain.Events
 {
     public class OrderStartedDomainEvent : INotification
     {
-        public string UserId { get; }
-        public string UserFirstName { get; }
-        public string UserLastName { get; }
-        public string UserPhoneNumber { get; }
-        public string UserEmail { get; }
+        public string CustomerId { get; }
+        public string CustomerFirstName { get; }
+        public string CustomerLastName { get; }
+        public string CustomerPhoneNumber { get; }
+        public string CustomerEmail { get; }
         public int RestaurantId { get; }
         public string RestaurantName { get; }
         public int LocationId { get; }
@@ -26,14 +26,14 @@ namespace Foodie.Orders.Domain.Events
         public string LocationCountry { get; } 
         public Order Order { get; }
 
-        public OrderStartedDomainEvent(string userId, string userFirstName, string userLastName, string userPhoneNumber, string userEmail, int restaurantId,
+        public OrderStartedDomainEvent(string customerId, string customerFirstName, string customerLastName, string customerPhoneNumber, string customerEmail, int restaurantId,
             string restaurantName, int locationId, string locationAddress, string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry, Order order)
         {
-            UserId = userId;
-            UserFirstName = userFirstName;
-            UserLastName = userLastName;
-            UserPhoneNumber = userPhoneNumber;
-            UserEmail = userEmail;
+            CustomerId = customerId;
+            CustomerFirstName = customerFirstName;
+            CustomerLastName = customerLastName;
+            CustomerPhoneNumber = customerPhoneNumber;
+            CustomerEmail = customerEmail;
             RestaurantId = restaurantId;
             RestaurantName = restaurantName;
             LocationId = locationId;

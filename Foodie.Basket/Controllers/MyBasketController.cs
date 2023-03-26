@@ -74,17 +74,17 @@ namespace Foodie.Basket.Controllers
 
             await publishEndpoint.Publish<CustomerCheckoutIntegrationEvent>(new
             {
-                UserId = "6a1ab648-6be8-44f1-87b7-394c34547589",
-                UserFirstName = customer.FirstName,
-                UserLastName = customer.LastName,
-                UserPhoneNumber = customer.PhoneNumber,
-                UserEmail = customer.Email,
+                CustomerId = "6a1ab648-6be8-44f1-87b7-394c34547589",
+                CustomerFirstName = customer.FirstName,
+                CustomerLastName = customer.LastName,
+                CustomerPhoneNumber = customer.PhoneNumber,
+                CustomerEmail = customer.Email,
                 AddressStreet = basketCheckout.Address,
                 AddressCity = location.CityName,
                 AddressCountry = location.CityCountry,
                 RestaurantId = location.RestaurantId,
                 RestaurantName = location.RestaurantName,
-                LocationId = location.LocationId,
+                LocationId = location.Id,
                 LocationAddress = location.Address,
                 LocationPhoneNumber = location.PhoneNumber,
                 LocationEmail = location.Email,

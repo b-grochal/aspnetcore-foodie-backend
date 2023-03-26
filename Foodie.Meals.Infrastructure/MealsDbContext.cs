@@ -66,6 +66,13 @@ namespace Foodie.Meals.Infrastructure
             {
                 modelBuilder.Entity<Restaurant>().HasData(restaurant);
             }
+
+            modelBuilder.Entity(DummyCategoryRestaurants.JoinTableName)
+                .HasData(DummyCategoryRestaurants.Get().Select(x => new
+                {
+                    RestaurantsId = x.RestaurantId,
+                    CategoriesId = x.CategoryId
+                }).ToArray());
         }
     }
 }

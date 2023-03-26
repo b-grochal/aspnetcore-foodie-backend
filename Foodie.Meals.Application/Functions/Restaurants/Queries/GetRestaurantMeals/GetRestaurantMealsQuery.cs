@@ -9,11 +9,11 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMe
 {
     public class GetRestaurantMealsQuery : IRequest<GetRestaurantsMealsQueryResponse>
     {
-        public int RestaurantId { get; }
+        public int Id { get; }
 
-        public GetRestaurantMealsQuery(int restaurantId)
+        public GetRestaurantMealsQuery(int id)
         {
-            this.RestaurantId = restaurantId;
+            this.Id = id;
         }
     }
 }

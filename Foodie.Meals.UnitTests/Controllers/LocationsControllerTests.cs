@@ -54,7 +54,7 @@ namespace Foodie.Meals.UnitTests.Controllers
             locationsController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var updateLocationCommand = new UpdateLocationCommand
             {
-                LocationId = 1,
+                Id = 1,
                 Address = "Test address",
                 PhoneNumber = "123-456-789",
                 Email = "test@email.com",
@@ -80,7 +80,7 @@ namespace Foodie.Meals.UnitTests.Controllers
             locationsController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var updateLocationCommand = new UpdateLocationCommand
             {
-                LocationId = 1,
+                Id = 1,
                 Address = "Test address",
                 PhoneNumber = "123-456-789",
                 Email = "test@email.com",

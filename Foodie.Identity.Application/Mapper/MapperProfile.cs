@@ -13,11 +13,6 @@ using Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHa
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlerById;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlers;
 using Foodie.Identity.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Mapper
 {
@@ -25,69 +20,51 @@ namespace Foodie.Identity.Application.Mapper
     {
         public MapperProfile()
         {
-            // Admins
+            ConfigureAdminsMapping();
+            ConfigureCustomersMapping();
+            ConfigureOrderHandlersMapping();
+            ConfigureAuthMapping();
+        }
+
+        private void ConfigureAdminsMapping()
+        {
             CreateMap<CreateAdminCommand, Admin>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
-
-            CreateMap<Admin, CreateAdminCommandResponse>()
-                .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
-
+            CreateMap<Admin, CreateAdminCommandResponse>();
             CreateMap<UpdateAdminCommand, Admin>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AdminId));
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+            CreateMap<Admin, UpdateAdminCommandResponse>();
+            CreateMap<Admin, GetAdminByIdQueryResponse>();
+            CreateMap<Admin, AdminDto>();
+        }
 
-            CreateMap<Admin, UpdateAdminCommandResponse>()
-                .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
-
-            CreateMap<Admin, GetAdminByIdQueryResponse>()
-                .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
-
-            CreateMap<Admin, AdminDto>()
-                .ForMember(dest => dest.AdminId, opt => opt.MapFrom(src => src.Id));
-
-            // Customers
+        private void ConfigureCustomersMapping()
+        {
             CreateMap<CreateCustomerCommand, Customer>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+            CreateMap<Customer, CreateCustomerCommandResponse>();
+            CreateMap<UpdateCustomerCommand, Customer>();
+            CreateMap<Customer, UpdateCustomerCommandResponse>();
+            CreateMap<Customer, GetCustomerByIdQueryResponse>();
+            CreateMap<Customer, CustomerDto>();
+        }
 
-            CreateMap<Customer, CreateCustomerCommandResponse>()
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
-
-            CreateMap<UpdateCustomerCommand, Customer>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CustomerId));
-
-            CreateMap<Customer, UpdateCustomerCommandResponse>()
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
-
-            CreateMap<Customer, GetCustomerByIdQueryResponse>()
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
-
-            CreateMap<Customer, CustomerDto>()
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
-
-            // Order handlers
+        private void ConfigureOrderHandlersMapping()
+        {
             CreateMap<CreateOrderHandlerCommand, OrderHandler>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+            CreateMap<OrderHandler, CreateOrderHandlerCommandResponse>();
+            CreateMap<UpdateOrderHandlerCommand, OrderHandler>();
+            CreateMap<OrderHandler, UpdateOrderHandlerCommandResponse>();
+            CreateMap<OrderHandler, GetOrderHandlerByIdQueryResponse>();
+            CreateMap<OrderHandler, OrderHandlerDto>();
+        }
 
-            CreateMap<OrderHandler, CreateOrderHandlerCommandResponse>()
-                .ForMember(dest => dest.OrderHandlerId, opt => opt.MapFrom(src => src.Id));
-
-            CreateMap<UpdateOrderHandlerCommand, OrderHandler>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.OrderHandlerId));
-
-            CreateMap<OrderHandler, UpdateOrderHandlerCommandResponse>()
-                .ForMember(dest => dest.OrderHandlerId, opt => opt.MapFrom(src => src.Id));
-
-            CreateMap<OrderHandler, GetOrderHandlerByIdQueryResponse>()
-                .ForMember(dest => dest.OrderHandlerId, opt => opt.MapFrom(src => src.Id));
-
-            CreateMap<OrderHandler, OrderHandlerDto>()
-                .ForMember(dest => dest.OrderHandlerId, opt => opt.MapFrom(src => src.Id));
-
-            // Auth
+        private void ConfigureAuthMapping()
+        {
             CreateMap<SignUpCommand, Customer>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
-
-            CreateMap<Customer, SignUpCommandResponse>()
-                .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
+            CreateMap<Customer, SignUpCommandResponse>();
         }
     }
 }

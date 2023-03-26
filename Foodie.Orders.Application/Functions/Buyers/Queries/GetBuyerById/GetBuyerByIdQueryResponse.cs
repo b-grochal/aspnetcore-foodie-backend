@@ -8,7 +8,7 @@ namespace Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyerById
 {
     public class GetBuyerByIdQueryResponse
     {
-        public int BuyerId { get; set; }
+        public int Id { get; set; }
         public string UserId { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }

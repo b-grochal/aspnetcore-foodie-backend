@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application
 {
-    public static class ApplicationInstallation
+    public static class ApplicationInstaller
     {
         public static IServiceCollection AddMealsApplication(this IServiceCollection services)
         {

@@ -37,7 +37,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Categories
 
             var command = new UpdateCategoryCommand 
             { 
-                CategoryId = 1,
+                Id = 1,
                 Name = "Test category" 
             };
 
@@ -46,7 +46,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Categories
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
             Assert.IsType<UpdateCategoryCommandResponse>(result);
-            Assert.Equal(command.CategoryId, result.CategoryId);
+            Assert.Equal(command.Id, result.Id);
             Assert.Equal(command.Name, result.Name);
             categoriesRepository.VerifyUpdateAsync(Times.Once());
             categoriesRepository.VerifyGetByIdAsync(Times.Once());
@@ -61,7 +61,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Categories
 
             var command = new UpdateCategoryCommand
             {
-                CategoryId = 1,
+                Id = 1,
                 Name = "Test category"
             };
 

@@ -12,12 +12,14 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Infrastructure
 {
-    public static class InfrastructureInstallation
+    public static class InfrastructureInstaller
     {
         public static IServiceCollection AddMealsInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<MealsDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DbConnection")));
+            services.AddDbContext<MealsDbContext>(options => options
+                .UseLazyLoadingProxies()
+                .UseSqlServer(configuration.GetConnectionString("DbConnection"))
+            );
 
             services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             services.AddScoped<ICitiesRepository, CitiesRepository>();

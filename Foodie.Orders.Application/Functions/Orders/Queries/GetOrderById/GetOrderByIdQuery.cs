@@ -9,12 +9,12 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById
 {
     public class GetOrderByIdQuery : IRequest<GetOrderByIdQueryResponse>
     {
-        public int OrderId { get; }
+        public int Id { get; }
         public int? LocationId { get; set; }
 
-        public GetOrderByIdQuery(int orderId)
+        public GetOrderByIdQuery(int id)
         {
-            this.OrderId = orderId;
+            this.Id = id;
         }
     }
 }

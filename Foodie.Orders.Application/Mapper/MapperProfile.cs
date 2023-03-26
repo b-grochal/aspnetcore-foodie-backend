@@ -22,20 +22,33 @@ namespace Foodie.Orders.Application.Mapper
     {
         public MapperProfile()
         {
-            // Orders
+            ConfigureOrdersMapping();
+            ConfigureBuyersMapping();
+            ConfigureContractorsMapping();
+            ConfigureMyOrdersMapping();
+        }
+
+        private void ConfigureOrdersMapping()
+        {
             CreateMap<OrderDetailsQueryDto, GetOrderByIdQueryResponse>();
             CreateMap<OrderItemQueryDto, OrderItemDto>();
             CreateMap<OrderQueryDto, OrderDto>();
+        }
 
-            // Buyers
+        private void ConfigureBuyersMapping()
+        {
             CreateMap<BuyerDetailsQueryDto, GetBuyerByIdQueryResponse>();
             CreateMap<BuyerQueryDto, BuyerDto>();
+        }
 
-            // Contractors
+        private void ConfigureContractorsMapping()
+        {
             CreateMap<ContractorDetailsQueryDto, GetContractorByIdQueryResponse>();
             CreateMap<ContractorQueryDto, ContractorDto>();
+        }
 
-            // MyOrders
+        private void ConfigureMyOrdersMapping()
+        {
             CreateMap<OrderQueryDto, CustomersOrderDto>();
             CreateMap<OrderDetailsQueryDto, GetCustomersOrderByIdQueryResponse>()
                 .ForMember(dest => dest.CustomersOrderItems, opt => opt.MapFrom(src => src.OrderItems));
