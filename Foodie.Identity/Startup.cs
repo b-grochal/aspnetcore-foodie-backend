@@ -2,7 +2,7 @@ using Foode.Identity.Infrastructure;
 using Foodie.Identity.API.Behaviours;
 using Foodie.Identity.API.Grpc;
 using Foodie.Identity.Application;
-using Foodie.Shared.Configuration;
+using Foodie.Shared.Configurations;
 using Foodie.Shared.Middlewares;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

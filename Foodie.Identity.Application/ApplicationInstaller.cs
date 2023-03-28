@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application
 {
-    public static class ApplicationInstallation
+    public static class ApplicationInstaller
     {
         public static IServiceCollection AddIdentityApplication(this IServiceCollection services)
         {

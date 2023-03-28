@@ -1,3 +1,4 @@
+using Foodie.Shared.Settings;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +33,8 @@ namespace Foodie.Meals
                 {
                     webBuilder
                     .UseStartup<Startup>();
-                }).UseSerilog();
+                })
+                .AddApplicationSettings()
+                .UseSerilog();
     }
 }

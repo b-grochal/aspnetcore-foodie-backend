@@ -1,6 +1,6 @@
 ﻿using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Configuration;
+using Foodie.Shared.Configurations;
 using Foodie.Shared.Enums;
 using Microsoft.IdentityModel.Tokens;
 using System;

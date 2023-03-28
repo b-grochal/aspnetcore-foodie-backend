@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Orders.Infrastructure
 {
-    public static class InfrastructureInstallation
+    public static class InfrastructureInstaller
     {
         public static IServiceCollection AddOrdersInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
