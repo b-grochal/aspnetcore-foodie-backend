@@ -1,4 +1,5 @@
 using Foodie.Basket.API.IntegrationEventsHandlers;
+using Foodie.Shared.Settings;
 using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,7 @@ namespace Foodie.Basket
                         x.SetKebabCaseEndpointNameFormatter();
                         x.UsingRabbitMq((context, cfg) => cfg.ConfigureEndpoints(context));
                     });
-                });
+                })
+                .AddApplicationSettings();
     }
 }

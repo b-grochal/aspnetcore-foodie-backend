@@ -1,7 +1,8 @@
 ﻿using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Configuration;
+using Foodie.Shared.Configurations;
 using Foodie.Shared.Enums;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,9 @@ namespace Foode.Identity.Infrastructure.Services
     {
         private readonly JwtTokenConfiguration jwtTokenConfiguration;
 
-        public JwtService(JwtTokenConfiguration jwtTokenConfiguration)
+        public JwtService(IOptions<JwtTokenConfiguration> jwtTokenConfigurationOptions)
         {
-            this.jwtTokenConfiguration = jwtTokenConfiguration;
+            this.jwtTokenConfiguration = jwtTokenConfigurationOptions.Value;
         }
 
         public string GenerateToken(ApplicationUser applicationUser, string applicationUserRole)

@@ -2,8 +2,10 @@ using Foode.Identity.Infrastructure;
 using Foodie.Identity.API.Behaviours;
 using Foodie.Identity.API.Grpc;
 using Foodie.Identity.Application;
-using Foodie.Shared.Configuration;
+using Foodie.Shared.Authentication;
+using Foodie.Shared.Configurations;
 using Foodie.Shared.Middlewares;
+using Foodie.Shared.Settings;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -30,10 +32,10 @@ namespace Foodie.Identity
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var jwtTokenConfiguration = Configuration.GetSection("JwtTokenConfiguration").Get<JwtTokenConfiguration>();
-            services.AddSingleton(jwtTokenConfiguration);
             services.AddIdentityApplication();
             services.AddIdentityInfrastructure(Configuration);
+            services.AddJwtAuthentication(Configuration);
+            services.ConfigureApplicationSettings(Configuration);
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
@@ -44,26 +46,7 @@ namespace Foodie.Identity
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Foodie.Identity", Version = "v1" });
             });
 
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = true;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidIssuer = jwtTokenConfiguration.Issuer,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtTokenConfiguration.Secret)),
-                    ValidAudience = jwtTokenConfiguration.Audience,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromMinutes(1)
-                };
-            });
+            
 
             services.AddAutoMapper(typeof(Startup));
             services.AddGrpc();
