@@ -9,11 +9,11 @@ namespace Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerByI
 {
     public class GetCustomerByIdQuery : IRequest<GetCustomerByIdQueryResponse>
     {
-        public string CustomerId { get; }
+        public string Id { get; }
 
-        public GetCustomerByIdQuery(string customerId)
+        public GetCustomerByIdQuery(string id)
         {
-            this.CustomerId = customerId;
+            this.Id = id;
         }
     }
 }

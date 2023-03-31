@@ -8,6 +8,6 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrd
 {
     public class DeleteOrderHandlerCommandResponse
     {
-        public string OrderHandlerId { get; set; }
+        public string Id { get; set; }
     }
 }

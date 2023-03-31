@@ -27,7 +27,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Locations
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
             Assert.IsType<DeleteLocationCommandResponse>(result);
-            Assert.Equal(command.LocationId, result.LocationId);
+            Assert.Equal(command.Id, result.Id);
             locationsRepository.VerifyDeleteAsync(Times.Once());
             locationsRepository.VerifyGetByIdAsync(Times.Once());
         }

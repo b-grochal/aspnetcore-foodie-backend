@@ -33,10 +33,10 @@ namespace Foodie.Identity.Controllers
         }
 
         // PUT api/order-handlers/5
-        [HttpPut("{orderHandlerId}")]
-        public async Task<IActionResult> UpdateOrderHandler(string orderHandlerId, [FromBody] UpdateOrderHandlerCommand updateOrderHandlerCommand)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateOrderHandler(string id, [FromBody] UpdateOrderHandlerCommand updateOrderHandlerCommand)
         {
-            if (orderHandlerId != updateOrderHandlerCommand.OrderHandlerId)
+            if (id != updateOrderHandlerCommand.Id)
             {
                 return BadRequest();
             }
@@ -47,19 +47,19 @@ namespace Foodie.Identity.Controllers
         }
 
         // DELETE api/order-handlers/5
-        [HttpDelete("{orderHandlerId}")]
-        public async Task<IActionResult> DeleteOrderHandler(string orderHandlerId)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrderHandler(string id)
         {
-            var command = new DeleteOrderHandlerCommand(orderHandlerId);
+            var command = new DeleteOrderHandlerCommand(id);
             var result = await mediator.Send(command);
             return Ok(result);
         }
 
         // GET api/order-handlers/5
-        [HttpGet("{orderHandlerId}")]
-        public async Task<IActionResult> GetOrderHandler(string orderHandlerId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOrderHandler(string id)
         {
-            var query = new GetOrderHandlerByIdQuery(orderHandlerId);
+            var query = new GetOrderHandlerByIdQuery(id);
             var result = await mediator.Send(query);
             return Ok(result);
         }

@@ -8,6 +8,6 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustome
 {
     public class DeleteCustomerCommandResponse
     {
-        public string CustomerId { get; set; }
+        public string Id { get; set; }
     }
 }

@@ -27,16 +27,16 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
 
         public async Task<UpdateRestaurantCommandResponse> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
         {
-            var restaurant = await restaurantsRepository.GetByIdAsync(request.RestaurantId);
+            var restaurant = await restaurantsRepository.GetByIdAsync(request.Id);
 
             if (restaurant == null)
-                throw new RestaurantNotFoundException(request.RestaurantId);
+                throw new RestaurantNotFoundException(request.Id);
 
             var editedRestaurant = mapper.Map(request, restaurant);
 
             var categories = await categoriesRepository.GetAllAsync(request.CategoryIds);
 
-            editedRestaurant.Categories.AddIfNotExists(categories);
+            editedRestaurant.Categories.Merge(categories);
 
             await restaurantsRepository.UpdateAsync(editedRestaurant);
 

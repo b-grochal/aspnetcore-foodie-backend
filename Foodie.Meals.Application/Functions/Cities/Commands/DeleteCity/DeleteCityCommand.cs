@@ -9,11 +9,11 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity
 {
     public class DeleteCityCommand : IRequest<DeleteCityCommandResponse>
     {
-        public int CityId { get; set; }
+        public int Id { get; set; }
 
-        public DeleteCityCommand(int cityId)
+        public DeleteCityCommand(int id)
         {
-            this.CityId = cityId;
+            this.Id = id;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.UpdateCategory
     {
         public UpdateCategoryCommandValidator()
         {
-            RuleFor(c => c.CategoryId)
+            RuleFor(c => c.Id)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty");
 

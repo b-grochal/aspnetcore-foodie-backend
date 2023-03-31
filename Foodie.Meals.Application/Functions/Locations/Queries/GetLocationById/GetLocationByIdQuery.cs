@@ -9,11 +9,11 @@ namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById
 {
     public class GetLocationByIdQuery : IRequest<GetLocationByIdQueryResponse>
     {
-        public int LocationId { get; }
+        public int Id { get; }
 
-        public GetLocationByIdQuery(int locationId)
+        public GetLocationByIdQuery(int id)
         {
-            this.LocationId = locationId;
+            this.Id = id;
         }
     }
 }

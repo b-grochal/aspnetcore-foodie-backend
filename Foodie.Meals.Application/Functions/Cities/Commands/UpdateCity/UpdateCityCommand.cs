@@ -10,7 +10,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity
 {
     public class UpdateCityCommand : AuditableUpdateCommand, IRequest<UpdateCityCommandResponse>
     {
-        public int CityId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
     }

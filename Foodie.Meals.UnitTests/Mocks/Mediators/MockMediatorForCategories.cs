@@ -23,7 +23,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new CreateCategoryCommandResponse
                 {
-                    CategoryId = 1,
+                    Id = 1,
                     Name = createCategoryCommand.Name,
                 };
             });
@@ -44,7 +44,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new UpdateCategoryCommandResponse
                 {
-                    CategoryId = updateCategoryCommand.CategoryId,
+                    Id = updateCategoryCommand.Id,
                     Name = updateCategoryCommand.Name,
                 };
             });
@@ -65,7 +65,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new DeleteCategoryCommandResponse
                 {
-                    CategoryId = deleteCategoryCommand.CategoryId,
+                    Id = deleteCategoryCommand.Id,
                 };
             });
 
@@ -85,7 +85,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new GetCategoryByIdQueryResponse
                 {
-                    CategoryId = getCategoryByIdQuery.CategoryId,
+                    Id = getCategoryByIdQuery.Id,
                     Name = "Test category"
                 };
             });
@@ -114,17 +114,17 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                     {
                         new CategoryDto
                         {
-                            CategoryId = 1,
+                            Id = 1,
                             Name = "Test category 1"
                         },
                         new CategoryDto
                         {
-                            CategoryId = 2,
+                            Id = 2,
                             Name = "Test category 2"
                         },
                         new CategoryDto
                         {
-                            CategoryId = 3,
+                            Id = 3,
                             Name = "Test category 3"
                         }
                     }

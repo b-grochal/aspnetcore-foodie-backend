@@ -8,6 +8,6 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity
 {
     public class DeleteCityCommandResponse
     {
-        public int CityId { get; set; }
+        public int Id { get; set; }
     }
 }

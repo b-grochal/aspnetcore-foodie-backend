@@ -8,7 +8,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustome
 {
     public class UpdateCustomerCommandResponse
     {
-        public string CustomerId { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }

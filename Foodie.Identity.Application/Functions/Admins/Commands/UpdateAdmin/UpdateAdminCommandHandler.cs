@@ -24,10 +24,10 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
 
         public async Task<UpdateAdminCommandResponse> Handle(UpdateAdminCommand request, CancellationToken cancellationToken)
         {
-            var admin = await adminsRepository.GetByIdAsync(request.AdminId);
+            var admin = await adminsRepository.GetByIdAsync(request.Id);
 
             if (admin == null)
-                throw new ApplicationUserNotFoundException(request.AdminId);
+                throw new ApplicationUserNotFoundException(request.Id);
 
             var updatedAdmin = mapper.Map(request, admin);
             var identityResult = await adminsRepository.UpdateAsync(updatedAdmin);

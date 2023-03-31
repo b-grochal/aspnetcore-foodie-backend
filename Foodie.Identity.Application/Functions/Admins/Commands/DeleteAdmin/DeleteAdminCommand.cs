@@ -9,11 +9,11 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin
 {
     public class DeleteAdminCommand : IRequest<DeleteAdminCommandResponse>
     {
-        public string AdminId { get; set; }
+        public string Id { get; set; }
 
-        public DeleteAdminCommand(string adminId)
+        public DeleteAdminCommand(string id)
         {
-            this.AdminId = adminId;
+            this.Id = id;
         }
     }
 }

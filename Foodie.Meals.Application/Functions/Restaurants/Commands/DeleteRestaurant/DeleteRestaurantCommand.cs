@@ -9,11 +9,11 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaura
 {
     public class DeleteRestaurantCommand : IRequest<DeleteRestaurantCommandResponse>
     {
-        public int RestaurantId { get; set; }
+        public int Id { get; set; }
 
-        public DeleteRestaurantCommand(int restaurantId)
+        public DeleteRestaurantCommand(int id)
         {
-            this.RestaurantId = restaurantId;
+            this.Id = id;
         }
     }
 }

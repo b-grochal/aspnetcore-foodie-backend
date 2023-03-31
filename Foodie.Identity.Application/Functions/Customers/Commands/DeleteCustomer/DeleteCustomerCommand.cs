@@ -9,11 +9,11 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustome
 {
     public class DeleteCustomerCommand : IRequest<DeleteCustomerCommandResponse>
     {
-        public string CustomerId { get; set; }
+        public string Id { get; set; }
 
-        public DeleteCustomerCommand(string customerId)
+        public DeleteCustomerCommand(string id)
         {
-            this.CustomerId = customerId;
+            this.Id = id;
         }
     }
 }

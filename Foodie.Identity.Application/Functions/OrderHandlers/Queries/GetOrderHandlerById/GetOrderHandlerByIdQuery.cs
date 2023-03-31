@@ -9,11 +9,11 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHa
 {
     public class GetOrderHandlerByIdQuery : IRequest<GetOrderHandlerByIdQueryResponse>
     {
-        public string OrderHandlerId { get; }
+        public string Id { get; }
 
-        public GetOrderHandlerByIdQuery(string orderHandlerId)
+        public GetOrderHandlerByIdQuery(string id)
         {
-            this.OrderHandlerId = orderHandlerId;
+            this.Id = id;
         }
     }
 }

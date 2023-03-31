@@ -107,10 +107,10 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
             return _orderItems.Sum(o => o.GetQuantity() * o.GetUnitPrice());
         }
 
-        private void AddOrderStartedDomainEvent(string userId, string userFirstName, string userLastName, string userPhoneNumber, string userEmail, int restaurantId, string restaurantName, int locationId,
+        private void AddOrderStartedDomainEvent(string customerId, string customerFirstName, string customerLastName, string customerPhoneNumber, string customerEmail, int restaurantId, string restaurantName, int locationId,
                 string locationAddress, string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry)
         {
-            var orderStartedDomainEvent = new OrderStartedDomainEvent(userId, userFirstName, userLastName, userPhoneNumber, userEmail, restaurantId, restaurantName, locationId,
+            var orderStartedDomainEvent = new OrderStartedDomainEvent(customerId, customerFirstName, customerLastName, customerPhoneNumber, customerEmail, restaurantId, restaurantName, locationId,
                 locationAddress, locationPhoneNumber, locationEmail, cityId, cityName, locationCountry, this);
             AddDomainEvent(orderStartedDomainEvent);
         }

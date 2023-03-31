@@ -24,10 +24,10 @@ namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMealById
 
         public async Task<GetMealByIdQueryResponse> Handle(GetMealByIdQuery request, CancellationToken cancellationToken)
         {
-            var meal = await mealsRepository.GetByIdAsync(request.MealId);
+            var meal = await mealsRepository.GetByIdAsync(request.Id);
 
             if (meal == null)
-                throw new MealNotFoundException(request.MealId);
+                throw new MealNotFoundException(request.Id);
 
             return mapper.Map<GetMealByIdQueryResponse>(meal);
         }

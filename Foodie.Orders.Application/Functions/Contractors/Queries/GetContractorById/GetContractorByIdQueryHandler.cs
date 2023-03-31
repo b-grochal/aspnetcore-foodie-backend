@@ -23,7 +23,7 @@ namespace Foodie.Orders.Application.Functions.Contractors.Queries.GetContractorB
 
         public async Task<GetContractorByIdQueryResponse> Handle(GetContractorByIdQuery request, CancellationToken cancellationToken)
         {
-            var contractor = await _contractorsQueries.GetByIdAsync(request.ContractorId);
+            var contractor = await _contractorsQueries.GetByIdAsync(request.Id);
 
             if (contractor == null)
                 throw new NotImplementedException();

@@ -10,7 +10,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
 {
     public class UpdateRestaurantCommand : AuditableUpdateCommand, IRequest<UpdateRestaurantCommandResponse>
     {
-        public int RestaurantId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public IReadOnlyCollection<int> CategoryIds { get; set; }
     }

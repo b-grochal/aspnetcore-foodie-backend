@@ -8,7 +8,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantBy
 {
     public class GetRestaurantByIdQueryResponse
     {
-        public int RestaurantId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

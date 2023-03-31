@@ -19,10 +19,10 @@ namespace Foodie.Orders.API.Controllers
         public MyOrdersController(IMediator mediator) : base(mediator) { }
 
         // GET api/my-orders/5
-        [HttpGet("{customersOrderId}")]
-        public async Task<IActionResult> GetCustomersOrder(int customersOrderId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCustomersOrder(int id)
         {
-            var query = new GetCustomersOrderByIdQuery(customersOrderId, GetApplicationUserClaim(ClaimTypes.NameIdentifier));
+            var query = new GetCustomersOrderByIdQuery(id, GetApplicationUserClaim(ClaimTypes.NameIdentifier));
             var result = await mediator.Send(query);
             return Ok(result);
         }

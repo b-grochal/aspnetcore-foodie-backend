@@ -22,12 +22,12 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
 
         public async Task Handle(OrderStartedDomainEvent orderStartedDomainEvent, CancellationToken cancellationToken)
         {
-            var buyer = await _buyersRepository.GetByUserIdAsync(orderStartedDomainEvent.UserId);
+            var buyer = await _buyersRepository.GetByCustomerIdAsync(orderStartedDomainEvent.CustomerId);
             bool buyerOriginallyExisted = (buyer == null) ? false : true;
 
             if (!buyerOriginallyExisted)
             {
-                buyer = new Buyer(orderStartedDomainEvent.UserId, orderStartedDomainEvent.UserFirstName, orderStartedDomainEvent.UserLastName, orderStartedDomainEvent.UserPhoneNumber, orderStartedDomainEvent.UserEmail);
+                buyer = new Buyer(orderStartedDomainEvent.CustomerId, orderStartedDomainEvent.CustomerFirstName, orderStartedDomainEvent.CustomerLastName, orderStartedDomainEvent.CustomerPhoneNumber, orderStartedDomainEvent.CustomerEmail);
             }
 
             var buyerUpdated = buyerOriginallyExisted ?

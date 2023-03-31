@@ -51,7 +51,7 @@ namespace Foodie.Meals.UnitTests.Controllers
             citiesController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var updateCityCommand = new UpdateCityCommand
             {
-                CityId = 1,
+                Id = 1,
                 Name = "Test city",
                 Country = "Test country"
             };
@@ -74,7 +74,7 @@ namespace Foodie.Meals.UnitTests.Controllers
             citiesController.ControllerContext.HttpContext = new DefaultHttpContext { User = user };
             var updateCityCommand = new UpdateCityCommand
             {
-                CityId = 1,
+                Id = 1,
                 Name = "Test city",
                 Country = "Test country"
             };

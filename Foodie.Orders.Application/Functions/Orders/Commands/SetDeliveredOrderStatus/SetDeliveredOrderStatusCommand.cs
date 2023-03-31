@@ -9,12 +9,12 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.SetDeliveredOrderS
 {
     public class SetDeliveredOrderStatusCommand : IRequest
     {
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         public int? LocationId { get; set; }
 
-        public SetDeliveredOrderStatusCommand(int orderId)
+        public SetDeliveredOrderStatusCommand(int id)
         {
-            OrderId = orderId;
+            Id = id;
         }
     }
 }

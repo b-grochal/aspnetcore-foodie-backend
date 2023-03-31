@@ -37,7 +37,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Meals
 
             var command = new UpdateMealCommand
             {
-                MealId = 1,
+                Id = 1,
                 Name = "Test name",
                 Description= "Test description",
                 Price = 123,
@@ -49,7 +49,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Meals
             var result = await commandHandler.Handle(command, CancellationToken.None);
 
             Assert.IsType<UpdateMealCommandResponse>(result);
-            Assert.Equal(command.MealId, result.MealId);
+            Assert.Equal(command.Id, result.Id);
             Assert.Equal(command.Name, result.Name);
             Assert.Equal(command.Description, result.Description);
             Assert.Equal(command.Price, result.Price);
@@ -67,7 +67,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Meals
 
             var command = new UpdateMealCommand
             {
-                MealId = 1,
+                Id = 1,
                 Name = "Test name",
                 Description = "Test description",
                 Price = 123,

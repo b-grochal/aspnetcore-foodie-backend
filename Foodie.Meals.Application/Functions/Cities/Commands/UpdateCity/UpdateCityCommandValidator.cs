@@ -11,7 +11,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity
     {
         public UpdateCityCommandValidator()
         {
-           RuleFor(c => c.CityId)
+           RuleFor(c => c.Id)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty"); 
 

@@ -38,6 +38,11 @@ namespace Foodie.Orders.Infrastructure.Migrations
                         .HasColumnType("int")
                         .UseHiLo("BuyersSequence");
 
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -49,11 +54,6 @@ namespace Foodie.Orders.Infrastructure.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("Id");
 

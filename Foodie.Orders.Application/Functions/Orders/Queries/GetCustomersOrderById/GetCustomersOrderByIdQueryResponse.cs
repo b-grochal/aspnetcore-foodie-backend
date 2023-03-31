@@ -8,7 +8,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderBy
 {
     public class GetCustomersOrderByIdQueryResponse
     {
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         public DateTimeOffset OrderDate { get; set; }
         public string AddressStreet { get; set; }
         public string AddressCity { get; set; }
@@ -23,5 +23,13 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderBy
         public string ContractorCity { get; set; }
         public string ContractorCountry { get; set; }
         public IList<CustomersOrderItemDto> CustomersOrderItems { get; set; }
+    }
+
+    public class CustomersOrderItemDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Units { get; set; }
+        public decimal UnitPrice { get; set; }
     }
 }

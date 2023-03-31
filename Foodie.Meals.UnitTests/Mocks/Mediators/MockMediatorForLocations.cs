@@ -22,7 +22,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new CreateLocationCommandResponse
                 {
-                    LocationId = 1,
+                    Id = 1,
                     Address = createLocationCommand.Address,
                     Email = createLocationCommand.Email,
                     PhoneNumber = createLocationCommand.PhoneNumber,
@@ -49,7 +49,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new UpdateLocationCommandResponse
                 {
-                    LocationId = updateLocationCommand.LocationId,
+                    Id = updateLocationCommand.Id,
                     Address = updateLocationCommand.Address,
                     Email = updateLocationCommand.PhoneNumber,
                     PhoneNumber = updateLocationCommand.PhoneNumber,
@@ -76,7 +76,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new DeleteLocationCommandResponse
                 {
-                    LocationId = deleteLocationCommand.LocationId,
+                    Id = deleteLocationCommand.Id,
                 };
             });
 
@@ -96,7 +96,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
             {
                 return new GetLocationByIdQueryResponse
                 {
-                    LocationId = getLocationByIdQuery.LocationId,
+                    Id = getLocationByIdQuery.Id,
                     Address = "Test address",
                     Email = "test@email.com",
                     PhoneNumber = "123-456-789",
@@ -132,7 +132,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                     {
                         new LocationDto
                         {
-                            LocationId = 1,
+                            Id = 1,
                             Address = "Test address",
                             Email = "test@email.com",
                             PhoneNumber = "123-456-789",
@@ -141,7 +141,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                         },
                         new LocationDto
                         {
-                            LocationId = 2,
+                            Id = 2,
                             Address = "Test address",
                             Email = "test@email.com",
                             PhoneNumber = "123-456-789",
@@ -150,7 +150,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                         },
                         new LocationDto
                         {
-                            LocationId = 3,
+                            Id = 3,
                             Address = "Test address",
                             Email = "test@email.com",
                             PhoneNumber = "123-456-789",

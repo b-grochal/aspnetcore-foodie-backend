@@ -23,7 +23,7 @@ namespace Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyerById
 
         public async Task<GetBuyerByIdQueryResponse> Handle(GetBuyerByIdQuery request, CancellationToken cancellationToken)
         {
-            var buyer = await _buyerQueries.GetByIdAsync(request.BuyerId);
+            var buyer = await _buyerQueries.GetByIdAsync(request.Id);
 
             if (buyer == null)
                 throw new NotImplementedException();

@@ -36,11 +36,11 @@ namespace Foodie.Meals.Controllers
         }
 
         // PUT api/restaurants/5
-        [HttpPut("{restaurantId}")]
+        [HttpPut("{id}")]
         [Roles(RolesDictionary.Admin)]
-        public async Task<IActionResult> UpdateRestaurant(int restaurantId, [FromBody] UpdateRestaurantCommand updateRestaurantCommand)
+        public async Task<IActionResult> UpdateRestaurant(int id, [FromBody] UpdateRestaurantCommand updateRestaurantCommand)
         {
-            if (restaurantId != updateRestaurantCommand.RestaurantId)
+            if (id != updateRestaurantCommand.Id)
             {
                 return BadRequest();
             }
@@ -51,20 +51,20 @@ namespace Foodie.Meals.Controllers
         }
 
         // DELETE api/restaurants/5
-        [HttpDelete("{restaurantId}")]
+        [HttpDelete("{id}")]
         [Roles(RolesDictionary.Admin)]
-        public async Task<IActionResult> DeleteRestaurant(int restaurantId)
+        public async Task<IActionResult> DeleteRestaurant(int id)
         {
-            var command = new DeleteRestaurantCommand(restaurantId);
+            var command = new DeleteRestaurantCommand(id);
             var result = await mediator.Send(command);
             return Ok(result);
         }
 
         // GET api/restaurants/5
-        [HttpGet("{restaurantId}")]
-        public async Task<IActionResult> GetRestaurant(int restaurantId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetRestaurant(int id)
         {
-            var query = new GetRestaurantByIdQuery(restaurantId);
+            var query = new GetRestaurantByIdQuery(id);
             var result = await mediator.Send(query);
             return Ok(result);
         }
@@ -78,26 +78,21 @@ namespace Foodie.Meals.Controllers
         }
 
         // GET api/restaurants/5/meals
-        [HttpGet("{restaurantId}/meals")]
-        public async Task<IActionResult> GetRestaurantMeals(int restaurantId)
+        [HttpGet("{id}/meals")]
+        public async Task<IActionResult> GetRestaurantMeals(int id)
         {
-            var query = new GetRestaurantMealsQuery(restaurantId);
+            var query = new GetRestaurantMealsQuery(id);
             var result = await mediator.Send(query);
             return Ok(result);
         }
 
         // GET api/restaurants/5/locations
-        [HttpGet("{restaurantId}/locations")]
-        public async Task<IActionResult> GetRestaurantLocations(int restaurantId, int? cityId)
+        [HttpGet("{id}/locations")]
+        public async Task<IActionResult> GetRestaurantLocations(int id, int? cityId)
         {
-            var query = new GetRestaurantLocationsQuery(restaurantId, cityId);
+            var query = new GetRestaurantLocationsQuery(id, cityId);
             var result = await mediator.Send(query);
             return Ok(result);
-        }
-
-        private string GetUserEmail()
-        {
-            return User.FindFirstValue(ClaimTypes.Email);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
 {
     public class UpdateRestaurantCommandResponse
     {
-        public int RestaurantId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }
