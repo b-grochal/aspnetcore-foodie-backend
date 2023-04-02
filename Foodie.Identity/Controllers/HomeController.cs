@@ -9,9 +9,9 @@ namespace Foodie.Identity.API.Controllers
     {
         // GET
         [HttpGet]
-        public string GetServiceName()
+        public IActionResult GetServiceName()
         {
-            return "Foodie Identity Service";
+            return Ok("Foodie Identity Service");
         }
     }
 }
