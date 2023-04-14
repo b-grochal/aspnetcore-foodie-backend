@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Foodie.Shared.Exceptions
+﻿namespace Foodie.Shared.Exceptions
 {
-    public class UnauthorizedException : Exception
+    public sealed class UnauthorizedException : AppException
     {
         public UnauthorizedException(string message) : base(message) { }
     }

@@ -1,23 +1,18 @@
-using Foodie.Meals.API.Behaviours;
 using Foodie.Meals.API.Grpc;
 using Foodie.Meals.Application;
 using Foodie.Meals.Infrastructure;
 using Foodie.Shared.Authentication;
-using Foodie.Shared.Configurations;
+using Foodie.Shared.Behaviours;
 using Foodie.Shared.Middlewares;
 using Foodie.Shared.Settings;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using System;
-using System.Text;
 
 namespace Foodie.Meals
 {
@@ -60,7 +55,7 @@ namespace Foodie.Meals
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Meals v1"));
             }
 
-            app.UseMiddleware<BaseExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseSerilogRequestLogging();
 

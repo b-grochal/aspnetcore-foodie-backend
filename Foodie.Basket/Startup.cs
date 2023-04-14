@@ -64,7 +64,7 @@ namespace Foodie.Basket
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Basket v1"));
             }
 
-            app.UseMiddleware<BaseExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 
