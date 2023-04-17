@@ -2,10 +2,6 @@
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Domain.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,14 +18,14 @@ namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById
             this.mapper = mapper;
         }
 
-       public async Task<GetAdminByIdQueryResponse> Handle(GetAdminByIdQuery request, CancellationToken cancellationToken)
-       {
+        public async Task<GetAdminByIdQueryResponse> Handle(GetAdminByIdQuery request, CancellationToken cancellationToken)
+        {
             var admin = await adminsRepository.GetByIdAsync(request.Id);
 
             if (admin == null)
                 throw new ApplicationUserNotFoundException(request.Id);
 
             return mapper.Map<GetAdminByIdQueryResponse>(admin);
-       }
+        }
     }
 }

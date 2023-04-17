@@ -1,21 +1,17 @@
 ﻿using Foodie.Basket.API.Exceptions;
-using Foodie.Basket.Models;
+using Foodie.Basket.Model;
 using Foodie.Basket.Repositories.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Foodie.Basket.Repositories.Implementations
 {
-    public class BasketRepository : IBasketRepository
+    public class CustomerBasketsRepository : ICustomerBasketsRepository
     {
         private readonly IDistributedCache distributedCache;
 
-        public BasketRepository(IDistributedCache distributedCache)
+        public CustomerBasketsRepository(IDistributedCache distributedCache)
         {
             this.distributedCache = distributedCache;
         }
@@ -25,12 +21,12 @@ namespace Foodie.Basket.Repositories.Implementations
             await distributedCache.RemoveAsync(customerId);
         }
 
-        public async Task<CustomerBasket> GetBasket(string customerId)
+        public async Task<CustomerBasket> GetByCustomerId(string customerId)
         {
             var redisBasket = await distributedCache.GetStringAsync(customerId);
 
             if (string.IsNullOrEmpty(redisBasket))
-                throw new CustomerBasketNotFound(customerId);
+                return null;
 
             return JsonSerializer.Deserialize<CustomerBasket>(redisBasket, new JsonSerializerOptions
             {
@@ -41,7 +37,7 @@ namespace Foodie.Basket.Repositories.Implementations
         public async Task<CustomerBasket> UpdateBasket(string customerId, CustomerBasket basket)
         {
             await distributedCache.SetStringAsync(customerId, JsonSerializer.Serialize(basket));
-            return await GetBasket(customerId);
+            return await GetByCustomerId(customerId);
         }
     }
 }

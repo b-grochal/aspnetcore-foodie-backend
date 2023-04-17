@@ -7,9 +7,9 @@ namespace Foodie.Basket.API.IntegrationEventsHandlers
 {
     public class OrderStartedIntegrationEventHandler : IConsumer<OrderStartedIntegrationEvent>
     {
-        private readonly IBasketRepository basketRepository;
+        private readonly ICustomerBasketsRepository basketRepository;
 
-        public OrderStartedIntegrationEventHandler(IBasketRepository basketRepository)
+        public OrderStartedIntegrationEventHandler(ICustomerBasketsRepository basketRepository)
         {
             this.basketRepository = basketRepository;
         }

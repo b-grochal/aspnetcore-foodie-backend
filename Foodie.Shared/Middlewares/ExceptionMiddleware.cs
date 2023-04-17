@@ -1,20 +1,20 @@
-﻿using FluentValidation;
-using Foodie.Shared.Exceptions;
+﻿using Foodie.Shared.Exceptions;
 using Foodie.Shared.Types;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace Foodie.Shared.Middlewares
 {
-    public class BaseExceptionMiddleware
+    public class ExceptionMiddleware
     {
         private readonly RequestDelegate next;
-        private readonly ILogger<BaseExceptionMiddleware> logger;
+        private readonly ILogger<ExceptionMiddleware> logger;
 
-        public BaseExceptionMiddleware(RequestDelegate next, ILogger<BaseExceptionMiddleware> logger)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             this.next = next;
             this.logger = logger;
@@ -43,20 +43,21 @@ namespace Foodie.Shared.Middlewares
             await context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = responseDetails.StatusCode,
-                Message = responseDetails.Message
+                Message = responseDetails.Message,
+                Errors = responseDetails.Errors
             }.ToString());
         }
 
-        private (string Message, int StatusCode) PrepareResponseDetails(Exception exception)
+        private (string Message, int StatusCode, IReadOnlyDictionary<string, string[]> Errors) PrepareResponseDetails(Exception exception)
         {
             return exception switch
             {
-                NotFoundException => (exception.Message, (int)HttpStatusCode.NotFound),
-                BadRequestException => (exception.Message, (int)HttpStatusCode.BadRequest),
-                InternalServerErrorException => (exception.Message, (int)HttpStatusCode.InternalServerError),
-                ValidationException => (exception.Message, (int)HttpStatusCode.BadRequest),
-                UnauthorizedException => (exception.Message, (int)HttpStatusCode.Unauthorized),
-                _ => ("Internal server error", (int)HttpStatusCode.InternalServerError)
+                NotFoundException => (exception.Message, (int)HttpStatusCode.NotFound, null),
+                BadRequestException => (exception.Message, (int)HttpStatusCode.BadRequest, null),
+                InternalServerErrorException => (exception.Message, (int)HttpStatusCode.InternalServerError, null),
+                ValidationFailureException ex => (exception.Message, (int)HttpStatusCode.BadRequest, ex.ErrorsDictionary),
+                UnauthorizedException => (exception.Message, (int)HttpStatusCode.Unauthorized, null),
+                _ => ("Internal server error", (int)HttpStatusCode.InternalServerError, null)
             };
         }
     }

@@ -46,7 +46,7 @@ namespace Foodie.Orders.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Orders.API v1"));
             }
 
-            app.UseMiddleware<BaseExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

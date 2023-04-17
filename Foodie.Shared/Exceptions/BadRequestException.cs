@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Foodie.Shared.Exceptions
+﻿namespace Foodie.Shared.Exceptions
 {
-    public abstract class BadRequestException : Exception
+    public abstract class BadRequestException : AppException
     {
         protected BadRequestException(string message) : base(message) { }
     }

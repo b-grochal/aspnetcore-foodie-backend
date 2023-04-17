@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json;
 
 namespace Foodie.Shared.Types
 {
@@ -6,6 +7,7 @@ namespace Foodie.Shared.Types
     {
         public int StatusCode { get; set; }
         public string Message { get; set; }
+        public IReadOnlyDictionary<string, string[]> Errors { get; set; }
 
         public override string ToString()
         {

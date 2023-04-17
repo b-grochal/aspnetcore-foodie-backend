@@ -1,22 +1,17 @@
 using Foode.Identity.Infrastructure;
-using Foodie.Identity.API.Behaviours;
 using Foodie.Identity.API.Grpc;
 using Foodie.Identity.Application;
 using Foodie.Shared.Authentication;
-using Foodie.Shared.Configurations;
+using Foodie.Shared.Behaviours;
 using Foodie.Shared.Middlewares;
 using Foodie.Shared.Settings;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Text;
 
 namespace Foodie.Identity
 {
@@ -46,7 +41,7 @@ namespace Foodie.Identity
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Foodie.Identity", Version = "v1" });
             });
 
-            
+
 
             services.AddAutoMapper(typeof(Startup));
             services.AddGrpc();
@@ -62,7 +57,7 @@ namespace Foodie.Identity
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Identity v1"));
             }
 
-            app.UseMiddleware<BaseExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

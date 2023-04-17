@@ -1,6 +1,18 @@
 {
   "Routes": [
     {
+      "DownstreamPathTemplate": "/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/basket-service",
+      "UpstreamHttpMethod": [ "GET"]
+    },
+    {
       "DownstreamPathTemplate": "/api/my-basket",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [

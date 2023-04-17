@@ -1,3 +1,4 @@
+using FluentValidation;
 using Foodie.Basket.Repositories.Implementations;
 using Foodie.Basket.Repositories.Interfaces;
 using Foodie.Shared.Authentication;
@@ -5,6 +6,7 @@ using Foodie.Shared.Middlewares;
 using Foodie.Shared.Settings;
 using IdentityGrpc;
 using MealsGrpc;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Reflection;
 
 namespace Foodie.Basket
 {
@@ -36,12 +39,16 @@ namespace Foodie.Basket
             services.AddJwtAuthentication(Configuration);
             services.ConfigureApplicationSettings(Configuration);
 
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = "localhost:6379";
             });
 
-            services.AddTransient<IBasketRepository, BasketRepository>();
+            services.AddTransient<ICustomerBasketsRepository, CustomerBasketsRepository>();
 
             services.AddGrpcClient<IdentityService.IdentityServiceClient>(opt =>
             {
@@ -64,7 +71,7 @@ namespace Foodie.Basket
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Basket v1"));
             }
 
-            app.UseMiddleware<BaseExceptionMiddleware>();
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

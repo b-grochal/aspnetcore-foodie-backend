@@ -1,13 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using Foodie.Shared.Authorization;
 using Foodie.Shared.Behaviours;
-using Foodie.Shared.Authorization;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Foodie.Orders.Application
 {
@@ -17,7 +12,7 @@ namespace Foodie.Orders.Application
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestAuthorizationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestAuthorizationBehaviour<,>)); // TODO: Move it to API project 
             services.AddAuthorizersFromAssembly(Assembly.GetExecutingAssembly());
             return services;
         }
