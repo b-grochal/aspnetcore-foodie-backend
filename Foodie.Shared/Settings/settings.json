@@ -8,5 +8,9 @@
   },
   "RedisConfiguration": {
     "Url": "localhost:6379"
+  },
+  "CacheConfiguration": {
+    "Host": "localhost",
+    "Port": 6379
   }
 }
