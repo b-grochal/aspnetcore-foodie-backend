@@ -1,4 +1,4 @@
-﻿namespace Foodie.Shared.Configurations
+﻿namespace Foodie.Shared.Authentication
 {
     public class JwtTokenConfiguration
     {

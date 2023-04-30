@@ -1,20 +1,15 @@
-﻿using Foodie.Shared.Configurations;
+﻿using Foodie.Shared.Authentication;
+using Foodie.Shared.Redis;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Shared.Settings
 {
     public static class SettingsInstaller
     {
-        public static IHostBuilder AddApplicationSettings(this IHostBuilder hostBuilder) 
+        public static IHostBuilder AddApplicationSettings(this IHostBuilder hostBuilder)
         {
             return hostBuilder.ConfigureAppConfiguration((hostingContext, config) =>
             {
@@ -26,6 +21,7 @@ namespace Foodie.Shared.Settings
         public static IServiceCollection ConfigureApplicationSettings(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
             serviceCollection.Configure<JwtTokenConfiguration>(configuration.GetSection(nameof(JwtTokenConfiguration)));
+            serviceCollection.Configure<RedisConfiguration>(configuration.GetSection(nameof(RedisConfiguration)));
             return serviceCollection;
         }
 

@@ -3,6 +3,7 @@ using Foodie.Basket.Repositories.Implementations;
 using Foodie.Basket.Repositories.Interfaces;
 using Foodie.Shared.Authentication;
 using Foodie.Shared.Middlewares;
+using Foodie.Shared.Redis;
 using Foodie.Shared.Settings;
 using IdentityGrpc;
 using MealsGrpc;
@@ -43,10 +44,7 @@ namespace Foodie.Basket
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-            services.AddStackExchangeRedisCache(options =>
-            {
-                options.Configuration = "localhost:6379";
-            });
+            services.AddRedis(Configuration);
 
             services.AddTransient<ICustomerBasketsRepository, CustomerBasketsRepository>();
 
