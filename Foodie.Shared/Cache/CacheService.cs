@@ -1,18 +1,16 @@
 ﻿using EasyCaching.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Foodie.Shared.Cache
 {
     public interface ICacheService
     {
-        Task<T> GetAsync<T>(string key) where T : class;
-        Task<T> GetAsync<T>(string key, Func<Task<T>> factory) where T : class;
-        Task SetAsync<T>(string key, T value) where T : class;
-        Task RemoveAsync(string key);
+        Task<T> GetAsync<T>(CachePrefixes cachePrefix, [CallerMemberName] string methodName = "", params string[] parameters) where T : class;
+        Task<T> GetAsync<T>(Func<Task<T>> factory, CachePrefixes cachePrefix, [CallerMemberName] string methodName = "", params string[] parameters) where T : class;
+        Task SetAsync<T>(T value, CachePrefixes cachePrefix, [CallerMemberName] string methodName = "", params string[] parameters) where T : class;
+        Task RemoveAsync(CachePrefixes cachePrefix, [CallerMemberName] string methodName = "", params string[] parameters);
         Task RemoveByPrefixAsync(CachePrefixes cachePrefixe);
     }
 
@@ -29,13 +27,15 @@ namespace Foodie.Shared.Cache
             this.expirationTime = TimeSpan.FromMinutes(30);
         }
 
-        public async Task<T> GetAsync<T>(string key) where T : class
+        public async Task<T> GetAsync<T>(CachePrefixes cachePrefix, [CallerMemberName] string methodName = "", params string[] parameters) where T : class
         {
-            return (await cachingProvider.GetAsync<T>(key)).Value;
+            var key = cacheKeyGenerator.GenerateCacheKey(cachePrefix, methodName, parameters);
+            return await GetAsync<T>(key);
         }
 
-        public async Task<T> GetAsync<T>(string key, Func<Task<T>> factory) where T : class
+        public async Task<T> GetAsync<T>(Func<Task<T>> factory, CachePrefixes cachePrefix, [CallerMemberName] string methodName = "", params string[] parameters) where T : class
         {
+            var key = cacheKeyGenerator.GenerateCacheKey(cachePrefix, methodName, parameters);
             var cachedValue = await GetAsync<T>(key);
 
             if(cachedValue is not null)
@@ -43,13 +43,14 @@ namespace Foodie.Shared.Cache
 
             cachedValue = await factory();
             
-            await SetAsync(key, cachedValue);
+            await SetAsync<T>(key, cachedValue);
 
             return cachedValue;
         }
 
-        public async Task RemoveAsync(string key)
+        public async Task RemoveAsync(CachePrefixes cachePrefix, [CallerMemberName] string methodName = "", params string[] parameters)
         {
+            var key = cacheKeyGenerator.GenerateCacheKey(cachePrefix, methodName, parameters);
             await cachingProvider.RemoveAsync(key);
         }
 
@@ -58,7 +59,18 @@ namespace Foodie.Shared.Cache
             await cachingProvider.RemoveByPrefixAsync(cachePrefix.ToString());
         }
 
-        public async Task SetAsync<T>(string key, T value) where T : class
+        public async Task SetAsync<T>(T value, CachePrefixes cachePrefix, [CallerMemberName] string methodName = "", params string[] parameters) where T : class
+        {
+            var key = cacheKeyGenerator.GenerateCacheKey(cachePrefix, methodName, parameters);
+            await SetAsync<T>(key, value);
+        }
+
+        private async Task<T> GetAsync<T>(string key)
+        {
+            return (await cachingProvider.GetAsync<T>(key)).Value;
+        }
+
+        private async Task SetAsync<T>(string key, T value)
         {
             await cachingProvider.SetAsync<T>(key, value, expirationTime);
         }

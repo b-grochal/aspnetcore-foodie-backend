@@ -1,4 +1,5 @@
 ﻿using EasyCaching.Core.Configurations;
+using EasyCaching.Serialization.SystemTextJson.Configurations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -20,8 +21,13 @@ namespace Foodie.Shared.Cache
                 options.UseRedis(config =>
                 {
                     config.DBConfig.Endpoints.Add(new ServerEndPoint(cacheConfiguration.Host, cacheConfiguration.Port));
-                }, "FoodieRedisCache");
+                    config.SerializerName = "json";
+                }, "FoodieRedisCache")
+                .WithSystemTextJson();
             });
+
+            servicesCollection.AddScoped<ICacheKeyGenerator, CacheKeyGenerator>();
+            servicesCollection.AddScoped<ICacheService, CacheService>();
 
             return servicesCollection;
         }
