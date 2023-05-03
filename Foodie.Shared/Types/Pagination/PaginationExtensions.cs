@@ -8,9 +8,13 @@ namespace Foodie.Shared.Types.Pagination
 {
     public static class PaginationExtensions
     {
-        public static IEnumerable<T> Paginate<T>(this IQueryable<T> source, int pageNumber, int pageSize)
+        public static PagedResults<T> Paginate<T>(this IQueryable<T> source, int pageNumber, int pageSize)
         {
-            return source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            return new PagedResults<T>
+            {
+                TotalCount = source.Count(),
+                Items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList()
+            };
         }
     }
 }

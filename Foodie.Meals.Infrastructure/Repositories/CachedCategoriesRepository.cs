@@ -1,6 +1,7 @@
 ﻿using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using Foodie.Shared.Cache;
+using Foodie.Shared.Types.Pagination;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
             }, CachePrefixes.Categories, parameters: new string[] { nameof(categoryIds), categoryIds.ToString() });
         }
 
-        public async Task<IEnumerable<Category>> GetAllAsync(int pageNumber, int pageSize, string name)
+        public async Task<PagedResults<Category>> GetAllAsync(int pageNumber, int pageSize, string name)
         {
             return await cacheService.GetAsync(async () =>
             {
