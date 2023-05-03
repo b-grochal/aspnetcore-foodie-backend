@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Shared.Cache
 {
@@ -16,16 +13,19 @@ namespace Foodie.Shared.Cache
     public class CacheKeyGenerator : ICacheKeyGenerator, IDisposable
     {
         private readonly SHA256 sha256;
+        private readonly char linkingCharacter;
 
         public CacheKeyGenerator()
         {
             this.sha256 = SHA256.Create();
+            this.linkingCharacter = '-';
         }
 
         public string GenerateCacheKey(CachePrefixes cachePrefix, [CallerMemberName] string methodName = "", params string[] parameters)
         {
-            var cacheKey = PrepareKey(cachePrefix, methodName, parameters);
-            return HashKey(cacheKey);
+            var key = PrepareKey(methodName, parameters);
+            var hashedKey = HashKey(key);
+            return $"{cachePrefix}{linkingCharacter}{hashedKey}";
         }
 
         public void Dispose()
@@ -33,14 +33,14 @@ namespace Foodie.Shared.Cache
             sha256.Dispose();
         }
 
-        private string PrepareKey(CachePrefixes cachePrefix, [CallerMemberName] string methodName = "", params string[] parameters)
+        private string PrepareKey([CallerMemberName] string methodName = "", params string[] parameters)
         {
             StringBuilder cacheKey = new StringBuilder();
-            cacheKey.Append($"{cachePrefix}-{methodName}");
-            
+            cacheKey.Append($"{methodName}");
+
             foreach (string parameter in parameters)
             {
-                cacheKey.Append($"-{parameter}");
+                cacheKey.Append($"{linkingCharacter}{parameter}");
             }
 
             return cacheKey.ToString();

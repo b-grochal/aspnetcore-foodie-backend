@@ -8,6 +8,7 @@ namespace Foodie.Shared.Cache
 {
     public enum CachePrefixes
     {
-        Basket
+        Basket,
+        Categories
     }
 }

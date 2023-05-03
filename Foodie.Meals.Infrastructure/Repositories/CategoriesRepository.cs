@@ -1,6 +1,7 @@
 ﻿using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using Foodie.Shared.Extensions;
+using Foodie.Shared.Types.Pagination;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,11 @@ namespace Foodie.Meals.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<PagedList<Category>> GetAllAsync(int pageNumber, int pageSize, string name)
+        public async Task<IEnumerable<Category>> GetAllAsync(int pageNumber, int pageSize, string name)
         {
-            var categories = dbContext.Categories
-                .Where(c => name == null || c.Name.Equals(name));
-
-            return PagedList<Category>.ToPagedList(categories, pageNumber, pageSize);
+            return dbContext.Categories
+                .Where(c => name == null || c.Name.Equals(name))
+                .Paginate(pageNumber, pageSize);
         }
     }
 }

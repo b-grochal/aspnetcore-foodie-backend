@@ -4,7 +4,6 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,13 +23,14 @@ namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategories
         public async Task<GetCategoriesQueryResponse> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
             var categories = await categoriesRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Name);
+            var categoriesCount = categories.Count();
 
             return new GetCategoriesQueryResponse
             {
-                TotalCount = categories.TotalCount,
-                PageSize = categories.PageSize,
-                CurrentPage = categories.CurrentPage,
-                TotalPages = (int)Math.Ceiling(categories.TotalCount / (double)categories.PageSize),
+                TotalCount = categoriesCount,
+                PageSize = request.PageSize,
+                CurrentPage = request.PageNumber,
+                TotalPages = (int)Math.Ceiling(categoriesCount / (double)request.PageSize),
                 Categories = mapper.Map<IEnumerable<CategoryDto>>(categories),
                 Name = request.Name,
             };
