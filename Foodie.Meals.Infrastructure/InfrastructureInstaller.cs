@@ -21,9 +21,13 @@ namespace Foodie.Meals.Infrastructure
             services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             services.Decorate<ICategoriesRepository, CachedCategoriesRepository>();
             services.AddScoped<ICitiesRepository, CitiesRepository>();
+            services.Decorate<ICitiesRepository, CachedCitiesRepository>();
             services.AddScoped<ILocationsRepository, LocationsRepository>();
+            services.Decorate<ILocationsRepository, CachedLocationsRepository>();
             services.AddScoped<IMealsRepository, MealsRepository>();
+            services.Decorate<IMealsRepository, CachedMealsRepository>();
             services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
+            services.Decorate<IRestaurantsRepository, CachedRestaurantsRepository>();
 
             return services;
         }

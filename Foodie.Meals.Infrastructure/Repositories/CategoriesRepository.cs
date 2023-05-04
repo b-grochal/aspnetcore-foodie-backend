@@ -22,7 +22,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<PagedResults<Category>> GetAllAsync(int pageNumber, int pageSize, string name)
+        public async Task<PagedResult<Category>> GetAllAsync(int pageNumber, int pageSize, string name)
         {
             return dbContext.Categories
                 .Where(c => name == null || c.Name.Equals(name))

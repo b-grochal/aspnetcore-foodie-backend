@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Foodie.Shared.Cache
+﻿namespace Foodie.Shared.Cache
 {
     public enum CachePrefixes
     {
         Basket,
-        Categories
+        Categories,
+        Locations,
+        Cities,
+        Meals,
+        Restaurants
     }
 }

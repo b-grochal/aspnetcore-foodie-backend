@@ -39,7 +39,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
             }, CachePrefixes.Categories, parameters: new string[] { nameof(categoryIds), categoryIds.ToString() });
         }
 
-        public async Task<PagedResults<Category>> GetAllAsync(int pageNumber, int pageSize, string name)
+        public async Task<PagedResult<Category>> GetAllAsync(int pageNumber, int pageSize, string name)
         {
             return await cacheService.GetAsync(async () =>
             {
