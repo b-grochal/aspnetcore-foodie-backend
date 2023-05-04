@@ -23,15 +23,15 @@ namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCities
 
         public async Task<GetCitiesQueryResponse> Handle(GetCitiesQuery request, CancellationToken cancellationToken)
         {
-            var cities = await citiesRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Name, request.Country);
+            var result = await citiesRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Name, request.Country);
 
             return new GetCitiesQueryResponse
             {
-                TotalCount = cities.TotalCount,
-                PageSize = cities.PageSize,
-                CurrentPage = cities.CurrentPage,
-                TotalPages = (int)Math.Ceiling(cities.TotalCount / (double)cities.PageSize),
-                Cities = mapper.Map<IEnumerable<CityDto>>(cities),
+                TotalCount = result.TotalCount,
+                PageSize = request.PageSize,
+                CurrentPage = request.PageNumber,
+                TotalPages = (int)Math.Ceiling(result.TotalCount / (double)request.PageSize),
+                Cities = mapper.Map<IEnumerable<CityDto>>(result.Items),
                 Name = request.Name,
                 Country = request.Country
             };

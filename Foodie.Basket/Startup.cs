@@ -2,7 +2,9 @@ using FluentValidation;
 using Foodie.Basket.Repositories.Implementations;
 using Foodie.Basket.Repositories.Interfaces;
 using Foodie.Shared.Authentication;
+using Foodie.Shared.Cache;
 using Foodie.Shared.Middlewares;
+using Foodie.Shared.Redis;
 using Foodie.Shared.Settings;
 using IdentityGrpc;
 using MealsGrpc;
@@ -39,16 +41,13 @@ namespace Foodie.Basket
             services.AddJwtAuthentication(Configuration);
             services.ConfigureApplicationSettings(Configuration);
 
+            services.AddCache(Configuration);
+            services.AddScoped<ICustomerBasketsRepository, CustomerBasketsRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-            services.AddStackExchangeRedisCache(options =>
-            {
-                options.Configuration = "localhost:6379";
-            });
-
-            services.AddTransient<ICustomerBasketsRepository, CustomerBasketsRepository>();
+            
 
             services.AddGrpcClient<IdentityService.IdentityServiceClient>(opt =>
             {

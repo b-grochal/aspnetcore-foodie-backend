@@ -23,15 +23,15 @@ namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocations
 
         public async Task<GetLocationsQueryResponse> Handle(GetLocationsQuery request, CancellationToken cancellationToken)
         {
-            var locations = await locationsRepository.GetAllAsync(request.PageNumber, request.PageSize, request.RestaurantId, request.CityId);
+            var result = await locationsRepository.GetAllAsync(request.PageNumber, request.PageSize, request.RestaurantId, request.CityId);
 
             return new GetLocationsQueryResponse
             {
-                TotalCount = locations.TotalCount,
-                PageSize = locations.PageSize,
-                CurrentPage = locations.CurrentPage,
-                TotalPages = (int)Math.Ceiling(locations.TotalCount / (double)locations.PageSize),
-                Locations = mapper.Map<IEnumerable<LocationDto>>(locations),
+                TotalCount = result.TotalCount,
+                PageSize = request.PageSize,
+                CurrentPage = request.PageNumber,
+                TotalPages = (int)Math.Ceiling(result.TotalCount / (double)request.PageSize),
+                Locations = mapper.Map<IEnumerable<LocationDto>>(result.Items),
                 RestaurantId = request.RestaurantId,
                 CityId = request.CityId
             };
