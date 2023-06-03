@@ -6,7 +6,6 @@ using Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrders;
 using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -77,8 +76,8 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> GetOrder(int id)
         {
             var query = new GetOrderByIdQuery(id);
-            
-            if(GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
+
+            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
                 query.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
 
             var result = await mediator.Send(query);

@@ -9,9 +9,9 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrd
 {
     public class DeleteOrderHandlerCommand : IRequest<DeleteOrderHandlerCommandResponse>
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public DeleteOrderHandlerCommand(string id)
+        public DeleteOrderHandlerCommand(int id)
         {
             this.Id = id;
         }

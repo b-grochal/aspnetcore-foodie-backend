@@ -30,10 +30,7 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrd
                 throw new ApplicationUserNotFoundException(request.Id);
 
             var updatedOrderHandler = mapper.Map(request, orderHandler);
-            var identityResult = await orderHandlersRepository.UpdateAsync(updatedOrderHandler);
-
-            if(!identityResult.Succeeded)
-                throw new ApplicationUserNotUpdatedException(updatedOrderHandler.Id);
+            await orderHandlersRepository.UpdateAsync(updatedOrderHandler);
 
             return mapper.Map<UpdateOrderHandlerCommandResponse>(updatedOrderHandler);
         }

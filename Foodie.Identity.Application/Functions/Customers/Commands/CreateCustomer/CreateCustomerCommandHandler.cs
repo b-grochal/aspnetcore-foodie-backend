@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Domain.Entities;
 using Foodie.Identity.Domain.Exceptions;
 using MediatR;
@@ -15,32 +16,29 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
     public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, CreateCustomerCommandResponse>
     {
         private readonly ICustomersRepository customersRepository;
-        private readonly IApplicationUserRolesRepository applicationUserRolesRepository;
+        private readonly IApplicationUsersRepository applicationUsersRepository;
+        private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public CreateCustomerCommandHandler(ICustomersRepository customersRepository, IApplicationUserRolesRepository applicationUserRolesRepository, IMapper mapper)
+        public CreateCustomerCommandHandler(ICustomersRepository customersRepository, IApplicationUsersRepository applicationUsersRepository, IPasswordService passwordService, IMapper mapper)
         {
             this.customersRepository = customersRepository;
-            this.applicationUserRolesRepository = applicationUserRolesRepository;
+            this.applicationUsersRepository = applicationUsersRepository;
+            this.passwordService = passwordService;
             this.mapper = mapper;
         }
 
         public async Task<CreateCustomerCommandResponse> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
+            if ((await applicationUsersRepository.GetByEmailAsync(request.Email)) is not null)
+                throw new ApplicationUserAlreadyExistsException(request.Email);
+
             var customer = mapper.Map<Customer>(request);
 
-            customer.EmailConfirmed = true;
-            customer.PhoneNumberConfirmed = true;
+            customer.PasswordHash = passwordService.HashPassword(request.Password);
+            customer.Role = ApplicationUserRole.Customer;
 
-            var identityResult = await customersRepository.CreateAsync(customer, request.Password);
-
-            if (!identityResult.Succeeded)
-                throw new ApplicationUserNotCreatedException();
-
-            identityResult = await applicationUserRolesRepository.CreateApplicationUserRole(customer, ApplicationUserRoles.Customer);
-
-            if (!identityResult.Succeeded)
-                throw new ApplicationUserRoleNotCreatedException(customer.Id, ApplicationUserRoles.Customer);
+            await customersRepository.CreateAsync(customer);
 
             return mapper.Map<CreateCustomerCommandResponse>(customer);
         }

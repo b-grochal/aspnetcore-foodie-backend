@@ -3,8 +3,6 @@ using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,9 +26,9 @@ namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins
             return new GetAdminsQueryResponse
             {
                 TotalCount = admins.TotalCount,
-                PageSize = admins.PageSize,
-                CurrentPage = admins.CurrentPage,
-                TotalPages = (int)Math.Ceiling(admins.TotalCount / (double)admins.PageSize),
+                PageSize = request.PageSize,
+                CurrentPage = request.PageNumber,
+                TotalPages = (int)Math.Ceiling(admins.TotalCount / (double)request.PageSize),
                 Admins = mapper.Map<IEnumerable<AdminDto>>(admins),
                 Email = request.Email
             };

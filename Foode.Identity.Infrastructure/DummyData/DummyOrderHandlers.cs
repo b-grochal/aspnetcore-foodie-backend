@@ -1,9 +1,6 @@
 ﻿using Foodie.Identity.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foode.Identity.Infrastructure.DummyData
 {
@@ -18,13 +15,9 @@ namespace Foode.Identity.Infrastructure.DummyData
                     Id = DummySeed.OrderHandler,
                     FirstName = "Dwight",
                     LastName = "Schrute",
-                    UserName = "dwigsch123",
-                    NormalizedUserName = "DWIGSCH123@FOODIE.COM",
                     Email = "dwigsch123@foodie.com",
-                    NormalizedEmail = "DWIGSCH123@FOODIE.COM",
-                    EmailConfirmed = true,
                     PhoneNumber = "123-456-789",
-                    PhoneNumberConfirmed = true,
+                    Role = ApplicationUserRole.OrderHandler,
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now
                 }

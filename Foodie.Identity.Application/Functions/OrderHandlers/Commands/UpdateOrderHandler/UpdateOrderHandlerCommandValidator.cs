@@ -34,6 +34,10 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrd
             .WithMessage("Invalid email address")
             .Must(email => email.EndsWith("@foodie.com"))
             .WithMessage("Only emails in foodie.com domain are allowed for admins and order handlers");
+
+            RuleFor(c => c.LocationId)
+            .NotEmpty()
+            .WithMessage("{PropertyName} should not be empty");
         }
     }
 }

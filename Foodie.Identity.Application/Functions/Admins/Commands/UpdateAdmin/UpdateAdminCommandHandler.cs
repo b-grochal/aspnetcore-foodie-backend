@@ -2,10 +2,6 @@
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Domain.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -30,10 +26,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
                 throw new ApplicationUserNotFoundException(request.Id);
 
             var updatedAdmin = mapper.Map(request, admin);
-            var identityResult = await adminsRepository.UpdateAsync(updatedAdmin);
-
-            if (!identityResult.Succeeded)
-                throw new ApplicationUserNotUpdatedException(updatedAdmin.Id);
+            await adminsRepository.UpdateAsync(updatedAdmin);
 
             return mapper.Map<UpdateAdminCommandResponse>(updatedAdmin);
         }
