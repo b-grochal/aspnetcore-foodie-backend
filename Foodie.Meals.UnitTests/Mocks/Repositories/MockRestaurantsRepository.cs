@@ -132,29 +132,29 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
         public MockRestaurantsRepository MockGetAllAsyncWithPagingParameters()
         {
-            Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int?>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((int pageNumber, int pageSize, int? categoryId, string name, string cityName) =>
-            {
-                var restaurants = new List<Restaurant>
-            {
-                new Restaurant
-                {
-                    Id = 1,
-                    Name = "Test restaurant 1"
-                },
-                new Restaurant
-                {
-                    Id = 2,
-                    Name = "Test restaurant 2"
-                },
-                new Restaurant
-                {
-                    Id = 3,
-                    Name = "Test restaurant 3"
-                }
-            };
+            //Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int?>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((int pageNumber, int pageSize, int? categoryId, string name, string cityName) =>
+            //{
+            //    var restaurants = new List<Restaurant>
+            //{
+            //    new Restaurant
+            //    {
+            //        Id = 1,
+            //        Name = "Test restaurant 1"
+            //    },
+            //    new Restaurant
+            //    {
+            //        Id = 2,
+            //        Name = "Test restaurant 2"
+            //    },
+            //    new Restaurant
+            //    {
+            //        Id = 3,
+            //        Name = "Test restaurant 3"
+            //    }
+            //};
 
-                return new PagedList<Restaurant>(restaurants, restaurants.Count, pageNumber, pageSize);
-            });
+            //    return new PagedList<Restaurant>(restaurants, restaurants.Count, pageNumber, pageSize);
+            //});
 
             return this;
         }

@@ -29,7 +29,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins
                 PageSize = request.PageSize,
                 CurrentPage = request.PageNumber,
                 TotalPages = (int)Math.Ceiling(admins.TotalCount / (double)request.PageSize),
-                Admins = mapper.Map<IEnumerable<AdminDto>>(admins),
+                Admins = mapper.Map<IEnumerable<AdminDto>>(admins.Items),
                 Email = request.Email
             };
         }

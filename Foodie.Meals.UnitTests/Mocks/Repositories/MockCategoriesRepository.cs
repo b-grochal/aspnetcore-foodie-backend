@@ -131,29 +131,29 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
         public MockCategoriesRepository MockGetAllAsyncWithPagingParameters()
         {
-            Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync((int pageNumber, int pageSize, string name) =>
-            {
-                var categories = new List<Category>
-                {
-                    new Category
-                    {
-                        Id = 1,
-                        Name = "Test category 1"
-                    },
-                    new Category
-                    {
-                        Id = 2,
-                        Name = "Test categpry 2"
-                    },
-                    new Category
-                    {
-                        Id = 3,
-                        Name = "Test category 3"
-                    }
-                };
+            //Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync((int pageNumber, int pageSize, string name) =>
+            //{
+            //    var categories = new List<Category>
+            //    {
+            //        new Category
+            //        {
+            //            Id = 1,
+            //            Name = "Test category 1"
+            //        },
+            //        new Category
+            //        {
+            //            Id = 2,
+            //            Name = "Test categpry 2"
+            //        },
+            //        new Category
+            //        {
+            //            Id = 3,
+            //            Name = "Test category 3"
+            //        }
+            //    };
 
-                return new PagedList<Category>(categories, categories.Count, pageNumber, pageSize);
-            });
+            //    return new PagedList<Category>(categories, categories.Count, pageNumber, pageSize);
+            //});
 
             return this;
         }

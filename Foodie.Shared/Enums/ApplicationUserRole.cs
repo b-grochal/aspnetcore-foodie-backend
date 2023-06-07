@@ -2,8 +2,8 @@
 {
     public enum ApplicationUserRole
     {
-        Admin,
-        OrderHandler,
-        Customer
+        Admin = 1,
+        OrderHandler = 2,
+        Customer = 3
     }
 }

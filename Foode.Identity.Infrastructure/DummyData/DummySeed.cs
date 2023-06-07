@@ -5,5 +5,7 @@
         public static int Admin = 1;
         public static int OrderHandler = 2;
         public static int Customer = 3;
+
+        public static int OrderHandlerLocationId = 1;
     }
 }

@@ -38,6 +38,11 @@ namespace Foode.Identity.Infrastructure
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<ApplicationUser>().ToTable("ApplicationUsers");
+            modelBuilder.Entity<Admin>().ToTable("Admins");
+            modelBuilder.Entity<OrderHandler>().ToTable("OrderHandlers");
+            modelBuilder.Entity<Customer>().ToTable("Customers");
+
             var passwordService = new PasswordService();
 
             foreach (var admin in DummyAdmins.Get())

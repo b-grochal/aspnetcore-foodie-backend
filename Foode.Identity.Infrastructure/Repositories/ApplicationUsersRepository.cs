@@ -9,6 +9,11 @@ namespace Foode.Identity.Infrastructure.Repositories
     {
         private readonly IdentityDbContext dbContext;
 
+        public ApplicationUsersRepository(IdentityDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         public async Task<ApplicationUser> GetByEmailAsync(string email)
         {
             return await dbContext.ApplicationUsers

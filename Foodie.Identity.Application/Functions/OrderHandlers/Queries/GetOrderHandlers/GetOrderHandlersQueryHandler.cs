@@ -29,7 +29,7 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHa
                 PageSize = request.PageSize,
                 CurrentPage = request.PageNumber,
                 TotalPages = (int)Math.Ceiling(orderHandlers.TotalCount / (double)request.PageSize),
-                OrderHandlers = mapper.Map<IEnumerable<OrderHandlerDto>>(orderHandlers),
+                OrderHandlers = mapper.Map<IEnumerable<OrderHandlerDto>>(orderHandlers.Items),
                 Email = request.Email
             };
         }
