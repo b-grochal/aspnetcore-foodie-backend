@@ -5,8 +5,10 @@ using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantById;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
+using Foodie.Shared.Attributes;
 using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
+using Foodie.Shared.Enums;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -27,17 +29,17 @@ namespace Foodie.Meals.Controllers
 
         // POST api/restaurants
         [HttpPost]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand createRestaurantCommand)
         {
-            createRestaurantCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            createRestaurantCommand.CreatedBy = Email;
             var result = await mediator.Send(createRestaurantCommand);
             return Ok(result);
         }
 
         // PUT api/restaurants/5
         [HttpPut("{id}")]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> UpdateRestaurant(int id, [FromBody] UpdateRestaurantCommand updateRestaurantCommand)
         {
             if (id != updateRestaurantCommand.Id)
@@ -45,14 +47,14 @@ namespace Foodie.Meals.Controllers
                 return BadRequest();
             }
 
-            updateRestaurantCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            updateRestaurantCommand.LastModifiedBy = Email;
             var result = await mediator.Send(updateRestaurantCommand);
             return Ok(result);
         }
 
         // DELETE api/restaurants/5
         [HttpDelete("{id}")]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> DeleteRestaurant(int id)
         {
             var command = new DeleteRestaurantCommand(id);

@@ -3,6 +3,7 @@ using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Domain.Entities;
 using Foodie.Identity.Domain.Exceptions;
+using Foodie.Shared.Enums;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

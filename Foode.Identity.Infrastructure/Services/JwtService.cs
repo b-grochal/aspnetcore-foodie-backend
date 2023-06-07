@@ -35,14 +35,14 @@ namespace Foode.Identity.Infrastructure.Services
         {
             var applicationUserClaims = new List<Claim>
             {
-                new Claim(ApplicationUserClaims.ApplicationUserId, applicationUser.Id.ToString()),
-                new Claim(ApplicationUserClaims.Email, applicationUser.Email),
-                new Claim(ApplicationUserClaims.Role, applicationUser.Role.ToString())
+                new Claim(ApplicationUserClaim.ApplicationUserId, applicationUser.Id.ToString()),
+                new Claim(ApplicationUserClaim.Email, applicationUser.Email),
+                new Claim(ApplicationUserClaim.Role, applicationUser.Role.ToString())
             };
 
             if (applicationUser is OrderHandler orderHandler)
             {
-                applicationUserClaims.Add(new Claim(ApplicationUserClaims.LocationId, orderHandler.LocationId.ToString()));
+                applicationUserClaims.Add(new Claim(ApplicationUserClaim.LocationId, orderHandler.LocationId.ToString()));
             }
 
             return applicationUserClaims;

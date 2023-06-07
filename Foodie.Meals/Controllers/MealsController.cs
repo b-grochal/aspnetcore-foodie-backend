@@ -3,8 +3,10 @@ using Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal;
 using Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal;
 using Foodie.Meals.Application.Functions.Meals.Queries.GetMealById;
 using Foodie.Meals.Application.Functions.Meals.Queries.GetMeals;
+using Foodie.Shared.Attributes;
 using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
+using Foodie.Shared.Enums;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -25,17 +27,17 @@ namespace Foodie.Meals.Controllers
 
         // POST api/meals
         [HttpPost]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateMeal([FromBody] CreateMealCommand createMealCommand)
         {
-            createMealCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            createMealCommand.CreatedBy = Email;
             var result = await mediator.Send(createMealCommand);
             return Ok(result);
         }
 
         // PUT api/meals/5
         [HttpPut("{id}")]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> UpdateMeal(int id, [FromBody] UpdateMealCommand updateMealCommand)
         {
             if (id != updateMealCommand.Id)
@@ -43,14 +45,14 @@ namespace Foodie.Meals.Controllers
                 return BadRequest();
             }
 
-            updateMealCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            updateMealCommand.LastModifiedBy = Email;
             var result = await mediator.Send(updateMealCommand);
             return Ok(result);
         }
 
         // DELETE api/meals/5
         [HttpDelete("{id}")]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> DeleteMeal(int id)
         {
             var command = new DeleteMealCommand(id);

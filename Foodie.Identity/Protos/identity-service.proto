@@ -3,7 +3,7 @@
 option csharp_namespace = "IdentityGrpc";
 
 message Customer {
-  string id = 1;
+  int32 id = 1;
   string firstName = 2;
   string lastName = 3;
   string userName = 4;
@@ -16,7 +16,7 @@ service IdentityService {
 }
 
 message GetCustomerRequest {
-  string id = 1;
+  int32 id = 1;
 }
 message GetCustomerResponse {
   Customer customer= 1;

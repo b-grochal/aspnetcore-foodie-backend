@@ -3,8 +3,10 @@ using Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity;
 using Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCities;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCityById;
+using Foodie.Shared.Attributes;
 using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
+using Foodie.Shared.Enums;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,17 +23,17 @@ namespace Foodie.Meals.API.Controllers
 
         // POST api/cities
         [HttpPost]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateCity([FromBody] CreateCityCommand createCityCommand)
         {
-            createCityCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            createCityCommand.CreatedBy = Email;
             var result = await mediator.Send(createCityCommand);
             return Ok(result);
         }
 
         // PUT api/cities/5
         [HttpPut("{id}")]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> UpdateCity(int id, [FromBody] UpdateCityCommand updateCityCommand)
         {
             if (id != updateCityCommand.Id)
@@ -39,14 +41,14 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateCityCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            updateCityCommand.LastModifiedBy = Email;
             var result = await mediator.Send(updateCityCommand);
             return Ok(result);
         }
 
         // DELETE api/cities/5
         [HttpDelete("{id}")]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> DeleteCity(int id)
         {
             var command = new DeleteCityCommand(id);

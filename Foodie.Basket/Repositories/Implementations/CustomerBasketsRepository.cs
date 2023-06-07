@@ -14,19 +14,19 @@ namespace Foodie.Basket.Repositories.Implementations
             this.cacheService = cacheService;
         }
 
-        public async Task DeleteBasket(string customerId)
+        public async Task DeleteBasket(int customerId)
         {
-            await cacheService.RemoveAsync(CachePrefixes.Basket, nameof(CustomerBasketsRepository), new string[] { nameof(customerId), customerId });
+            await cacheService.RemoveAsync(CachePrefixes.Basket, nameof(CustomerBasketsRepository), new string[] { nameof(customerId), customerId.ToString() });
         }
 
-        public async Task<CustomerBasket> GetByCustomerId(string customerId)
+        public async Task<CustomerBasket> GetByCustomerId(int customerId)
         {
-            return await cacheService.GetAsync<CustomerBasket>(CachePrefixes.Basket, nameof(CustomerBasketsRepository), new string[] { nameof(customerId), customerId });
+            return await cacheService.GetAsync<CustomerBasket>(CachePrefixes.Basket, nameof(CustomerBasketsRepository), new string[] { nameof(customerId), customerId.ToString() });
         }
 
-        public async Task<CustomerBasket> UpdateBasket(string customerId, CustomerBasket basket)
+        public async Task<CustomerBasket> UpdateBasket(int customerId, CustomerBasket basket)
         {
-            await cacheService.SetAsync<CustomerBasket>(basket, CachePrefixes.Basket, nameof(CustomerBasketsRepository), new string[] { nameof(customerId), customerId });
+            await cacheService.SetAsync<CustomerBasket>(basket, CachePrefixes.Basket, nameof(CustomerBasketsRepository), new string[] { nameof(customerId), customerId.ToString() });
             return await GetByCustomerId(customerId);
         }
     }

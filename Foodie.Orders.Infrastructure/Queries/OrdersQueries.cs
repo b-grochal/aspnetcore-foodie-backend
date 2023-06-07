@@ -30,9 +30,9 @@ namespace Foodie.Orders.Infrastructure.Queries
             return PagedList<OrderQueryDto>.ToPagedList(orders, pageNumber, pageSize);
         }
 
-        public async Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, string userId, int? orderStatusId, string contractorName)
+        public async Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, int customerId, int? orderStatusId, string contractorName)
         {
-            var selector = PrepareSqlTemplateForGettingAllOrders(pageNumber, pageSize, userId, orderStatusId, contractorName);
+            var selector = PrepareSqlTemplateForGettingAllOrders(pageNumber, pageSize, customerId, orderStatusId, contractorName);
 
             using var connection = _dapperContext.CreateConnection();
 
@@ -71,9 +71,9 @@ namespace Foodie.Orders.Infrastructure.Queries
             return sqlQueryResult.FirstOrDefault();
         }
 
-        public async Task<OrderDetailsQueryDto> GetByIdAsync(int id, string userId)
+        public async Task<OrderDetailsQueryDto> GetByIdAsync(int id, int customerId)
         {
-            var selector = PrepareSqlTemplateForGettingOrderById(id, userId);
+            var selector = PrepareSqlTemplateForGettingOrderById(id, customerId);
 
             using var connection = _dapperContext.CreateConnection();
             connection.Open();
@@ -127,7 +127,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             return selector;
         }
 
-        private Template PrepareSqlTemplateForGettingAllOrders(int pageNumber, int pageSize, string userId, int? orderStatusId, string contractorName)
+        private Template PrepareSqlTemplateForGettingAllOrders(int pageNumber, int pageSize, int customerId, int? orderStatusId, string contractorName)
         {
             var builder = new SqlBuilder();
 
@@ -138,9 +138,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             builder.InnerJoin("Contractors c on o.ContractorId = c.Id");
             builder.InnerJoin("OrderStatuses os on o.OrderStatusId = os.Id");
             builder.OrderBy("o.Id");
-
-            if (userId != null)
-                builder.Where("b.UserId = @userId", new { userId });
+            builder.Where("b.UserId = @userId", new { customerId });
 
             if (orderStatusId != null)
                 builder.Where("os.Id = @orderStatusId", new { orderStatusId.Value });
@@ -172,7 +170,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             return selector;
         }
 
-        private Template PrepareSqlTemplateForGettingOrderById(int id, string userId)
+        private Template PrepareSqlTemplateForGettingOrderById(int id, int customerId)
         {
             var builder = new SqlBuilder();
 
@@ -189,7 +187,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             builder.InnerJoin("OrderStatuses os on o.OrderStatusId = os.Id");
             builder.InnerJoin("OrderItems oi on o.Id = oi.OrderId");
             builder.Where("o.Id = @id", new { id });
-            builder.Where("b.UserId = @userId", new { userId });
+            builder.Where("b.UserId = @userId", new { customerId });
 
             return selector;
         }

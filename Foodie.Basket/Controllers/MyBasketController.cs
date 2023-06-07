@@ -3,8 +3,10 @@ using Foodie.Basket.API.Functions.CustomerBaskets.Commands.DeleteCustomerBasket;
 using Foodie.Basket.API.Functions.CustomerBaskets.Commands.UpdateCustomerBasket;
 using Foodie.Basket.API.Functions.CustomerBaskets.Queries.GetCustomerBasketByCustomerId;
 using Foodie.Basket.Repositories.Interfaces;
+using Foodie.Shared.Attributes;
 using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
+using Foodie.Shared.Enums;
 using Foodie.Shared.Extensions.Attributes;
 using IdentityGrpc;
 using MassTransit;
@@ -17,7 +19,7 @@ using System.Threading.Tasks;
 namespace Foodie.Basket.Controllers
 {
     [Route("api/my-basket")]
-    [Roles(RolesDictionary.Customer)]
+    [RequiredRoles(ApplicationUserRole.Customer)]
     public class MyBasketController : BaseController
     {
         public MyBasketController(IMediator mediator) : base(mediator) { }
@@ -25,14 +27,14 @@ namespace Foodie.Basket.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMyBasket()
         {
-            var result = await mediator.Send(new GetCustomerBasketByCustomerIdQuery(GetApplicationUserClaim(ClaimTypes.NameIdentifier)));
+            var result = await mediator.Send(new GetCustomerBasketByCustomerIdQuery(ApplicationUserId.Value));
             return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateMyBasket([FromBody] UpdateCustomerBasketCommand updateCustomerBasketCommand)
         {
-            updateCustomerBasketCommand.CustomerId = GetApplicationUserClaim(ClaimTypes.NameIdentifier);
+            updateCustomerBasketCommand.CustomerId = ApplicationUserId.Value;
             var result = await mediator.Send(updateCustomerBasketCommand);
             return Ok(result);
         }
@@ -40,7 +42,7 @@ namespace Foodie.Basket.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteMyBasket()
         {
-            await mediator.Send(new DeleteCustomerBasketCommand(GetApplicationUserClaim(ClaimTypes.NameIdentifier)));
+            await mediator.Send(new DeleteCustomerBasketCommand(ApplicationUserId.Value));
             return Ok();
         }
 
@@ -48,7 +50,7 @@ namespace Foodie.Basket.Controllers
         [HttpPost]
         public async Task<ActionResult> CheckoutMyBasket([FromBody] CheckoutCustomerBasketCommand checkoutCustomerBasketCommand)
         {
-            checkoutCustomerBasketCommand.CustomerId = GetApplicationUserClaim(ClaimTypes.NameIdentifier);
+            checkoutCustomerBasketCommand.CustomerId = ApplicationUserId.Value;
             await mediator.Send(checkoutCustomerBasketCommand);
             return Ok();
         }

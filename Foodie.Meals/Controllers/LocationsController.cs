@@ -3,8 +3,10 @@ using Foodie.Meals.Application.Functions.Locations.Commands.DeleteLocation;
 using Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation;
 using Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById;
 using Foodie.Meals.Application.Functions.Locations.Queries.GetLocations;
+using Foodie.Shared.Attributes;
 using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
+using Foodie.Shared.Enums;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,17 +23,17 @@ namespace Foodie.Meals.API.Controllers
 
         // POST api/locations
         [HttpPost]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateLocation([FromBody] CreateLocationCommand createLocationCommand)
         {
-            createLocationCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            createLocationCommand.CreatedBy = Email;
             var result = await mediator.Send(createLocationCommand);
             return Ok(result);
         }
 
         // PUT api/locations/5
         [HttpPut("{id}")]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> UpdateLocation(int id, [FromBody] UpdateLocationCommand updateLocationCommand)
         {
             if (id != updateLocationCommand.Id)
@@ -39,14 +41,14 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateLocationCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            updateLocationCommand.LastModifiedBy = Email;
             var result = await mediator.Send(updateLocationCommand);
             return Ok(result);
         }
 
         // DELETE api/locations/5
         [HttpDelete("{id}")]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> DeleteLocation(int id)
         {
             var command = new DeleteLocationCommand(id);

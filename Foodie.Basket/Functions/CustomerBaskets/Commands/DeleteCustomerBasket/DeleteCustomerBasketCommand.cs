@@ -4,9 +4,9 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.DeleteCustomerBas
 {
     public class DeleteCustomerBasketCommand : IRequest
     {
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
-        public DeleteCustomerBasketCommand(string customerId)
+        public DeleteCustomerBasketCommand(int customerId)
         {
             CustomerId = customerId;
         }

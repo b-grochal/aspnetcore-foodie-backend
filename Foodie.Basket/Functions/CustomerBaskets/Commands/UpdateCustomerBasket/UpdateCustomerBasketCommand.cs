@@ -8,7 +8,7 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.UpdateCustomerBas
     public class UpdateCustomerBasketCommand : IRequest<UpdateCustomerBasketCommandResponse>
     {
         [JsonIgnore]
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public int LocationId { get; set; }
         public IReadOnlyCollection<CustomerBasketItemDto> Items { get; set; }
     }

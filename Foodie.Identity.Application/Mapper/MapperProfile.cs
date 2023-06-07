@@ -58,8 +58,7 @@ namespace Foodie.Identity.Application.Mapper
 
         private void ConfigureAuthMapping()
         {
-            CreateMap<SignUpCommand, Customer>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+            CreateMap<SignUpCommand, Customer>();
             CreateMap<Customer, SignUpCommandResponse>();
         }
     }

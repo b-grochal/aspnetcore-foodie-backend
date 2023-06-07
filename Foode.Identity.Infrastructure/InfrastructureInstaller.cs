@@ -28,7 +28,6 @@ namespace Foode.Identity.Infrastructure
             services.AddTransient<IAdminsRepository, AdminsRepository>();
             services.AddTransient<ICustomersRepository, CustomersRepository>();
             services.AddTransient<IOrderHandlersRepository, OrderHandlersRepository>();
-            services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<IPasswordService, PasswordService>();
 

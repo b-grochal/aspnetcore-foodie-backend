@@ -55,7 +55,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodie.EventBus", "Foodie.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodie.Orders.API", "Foodie.Orders.API\Foodie.Orders.API.csproj", "{DC6E3DF7-8A32-4CF4-926F-09296B0FFB48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foodie.Orders.Infrastructure", "Foodie.Orders.Infrastructure\Foodie.Orders.Infrastructure.csproj", "{E555ABD9-88F3-4137-B096-67291F602216}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foodie.Orders.Infrastructure", "Foodie.Orders.Infrastructure\Foodie.Orders.Infrastructure.csproj", "{E555ABD9-88F3-4137-B096-67291F602216}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

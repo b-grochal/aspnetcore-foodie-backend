@@ -1,4 +1,5 @@
 ﻿using Foodie.Identity.Domain.Entities;
+using Foodie.Shared.Enums;
 using System;
 using System.Collections.Generic;
 

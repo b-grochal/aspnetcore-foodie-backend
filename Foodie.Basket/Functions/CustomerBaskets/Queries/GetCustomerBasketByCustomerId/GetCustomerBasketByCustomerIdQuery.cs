@@ -4,9 +4,9 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Queries.GetCustomerBasketB
 {
     public class GetCustomerBasketByCustomerIdQuery : IRequest<GetCustomerBasketByCustomerIdQueryResponse>
     {
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
-        public GetCustomerBasketByCustomerIdQuery(string customerId)
+        public GetCustomerBasketByCustomerIdQuery(int customerId)
         {
             CustomerId = customerId;
         }
