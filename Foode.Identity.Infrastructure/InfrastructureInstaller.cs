@@ -2,6 +2,7 @@
 using Foode.Identity.Infrastructure.Services;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+using Foodie.Shared.Cache;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,10 +25,15 @@ namespace Foode.Identity.Infrastructure
                 options.User.RequireUniqueEmail = true;
             });
 
+            services.AddCache(configuration);
+
             services.AddTransient<IApplicationUsersRepository, ApplicationUsersRepository>();
             services.AddTransient<IAdminsRepository, AdminsRepository>();
+            services.Decorate<IAdminsRepository, CachedAdminsRepository>();
             services.AddTransient<ICustomersRepository, CustomersRepository>();
+            services.Decorate<ICustomersRepository, CachedCustomersRepository>();
             services.AddTransient<IOrderHandlersRepository, OrderHandlersRepository>();
+            services.Decorate<IOrderHandlersRepository, CachedOrderHandlersRepository>();
             services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<IPasswordService, PasswordService>();
 

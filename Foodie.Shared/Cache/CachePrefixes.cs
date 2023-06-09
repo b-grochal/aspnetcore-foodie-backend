@@ -7,6 +7,9 @@
         Locations,
         Cities,
         Meals,
-        Restaurants
+        Restaurants,
+        Admins,
+        Customers,
+        OrderHandlers
     }
 }
