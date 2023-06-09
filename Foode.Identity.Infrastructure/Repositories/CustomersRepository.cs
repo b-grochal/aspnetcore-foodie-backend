@@ -17,11 +17,5 @@ namespace Foode.Identity.Infrastructure.Repositories
                 .Where(c => email == null || c.Email.Equals(email))
                 .Paginate(pageNumber, pageSize);
         }
-
-        public async Task<Customer> GetByEmailAsync(string email)
-        {
-            return await dbContext.Customers
-                .FirstOrDefaultAsync(c => c.Email == email);
-        }
     }
 }

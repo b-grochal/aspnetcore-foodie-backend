@@ -8,6 +8,5 @@ namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
     public interface IAdminsRepository : IAsyncRepository<Admin>
     {
         Task<PagedResult<Admin>> GetAllAsync(int pageNumber, int pageSize, string email);
-        Task<Admin> GetByEmailAsync(string email);
     }
 }

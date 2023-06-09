@@ -13,19 +13,21 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignUp
     public class SignUpCommandHandler : IRequestHandler<SignUpCommand, SignUpCommandResponse>
     {
         private readonly ICustomersRepository customersRepository;
+        private readonly IApplicationUsersRepository applicationUsersRepository;
         private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public SignUpCommandHandler(ICustomersRepository customersRepository, IPasswordService passwordService, IMapper mapper)
+        public SignUpCommandHandler(ICustomersRepository customersRepository, IApplicationUsersRepository applicationUsersRepository,IPasswordService passwordService, IMapper mapper)
         {
             this.customersRepository = customersRepository;
+            this.applicationUsersRepository = applicationUsersRepository;
             this.passwordService = passwordService;
             this.mapper = mapper;
         }
 
         public async Task<SignUpCommandResponse> Handle(SignUpCommand request, CancellationToken cancellationToken)
         {
-            if((await customersRepository.GetByEmailAsync(request.Email)) is not null)
+            if((await applicationUsersRepository.GetByEmailAsync(request.Email)) is not null)
                 throw new ApplicationUserAlreadyExistsException(request.Email);
 
             var customer = mapper.Map<Customer>(request);

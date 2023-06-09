@@ -8,6 +8,5 @@ namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
     public interface IOrderHandlersRepository : IAsyncRepository<OrderHandler>
     {
         Task<PagedResult<OrderHandler>> GetAllAsync(int pageNumber, int pageSize, string email);
-        Task<OrderHandler> GetByEmailAsync(string email);
     }
 }
