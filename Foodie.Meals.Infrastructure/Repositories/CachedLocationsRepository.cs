@@ -60,9 +60,9 @@ namespace Foodie.Meals.Infrastructure.Repositories
             return await decoratedRepository.GetByIdAsync(id);
         }
 
-        public Task<Location> GetByIdWithRelatedDataAsync(int id)
+        public async Task<Location> GetByIdWithRelatedDataAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await decoratedRepository.GetByIdWithRelatedDataAsync(id);
         }
 
         public async Task UpdateAsync(Location entity)

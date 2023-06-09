@@ -1,10 +1,7 @@
 ﻿using Foodie.Identity.Domain.Entities;
+using Foodie.Shared.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Foode.Identity.Infrastructure.DummyData
 {
     public static class DummyAdmins
@@ -18,13 +15,9 @@ namespace Foode.Identity.Infrastructure.DummyData
                     Id = DummySeed.Admin,
                     FirstName = "Michael",
                     LastName = "Scott",
-                    UserName = "michsco123",
-                    NormalizedUserName = "MICHSCO123@FOODIE.COM",
                     Email = "michsco123@foodie.com",
-                    NormalizedEmail = "MICHSCO123@FOODIE.COM",
-                    EmailConfirmed = true,
                     PhoneNumber = "123-456-789",
-                    PhoneNumberConfirmed = true,
+                    Role = ApplicationUserRole.Admin,
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now
                 }

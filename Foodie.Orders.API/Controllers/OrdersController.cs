@@ -4,6 +4,8 @@ using Foodie.Orders.Application.Functions.Orders.Commands.SetInDeliveryOrderStat
 using Foodie.Orders.Application.Functions.Orders.Commands.SetInProgressOrderStatus;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrders;
+using Foodie.Shared.Attributes;
+using Foodie.Shared.Authentication;
 using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
 using Foodie.Shared.Enums;
@@ -15,7 +17,7 @@ using System.Threading.Tasks;
 namespace Foodie.Orders.API.Controllers
 {
     [Route("api/[controller]")]
-    [Roles(RolesDictionary.Admin, RolesDictionary.OrderHandler)]
+    [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler)]
     public class OrdersController : BaseController
     {
         public OrdersController(IMediator mediator) : base(mediator) { }
@@ -26,8 +28,8 @@ namespace Foodie.Orders.API.Controllers
         {
             var command = new CancelOrderCommand(id);
 
-            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
-                command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+            if (Role == ApplicationUserRole.OrderHandler)
+                command.LocationId = LocationId;
 
             await mediator.Send(command);
             return Ok();
@@ -39,8 +41,8 @@ namespace Foodie.Orders.API.Controllers
         {
             var command = new SetDeliveredOrderStatusCommand(id);
 
-            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
-                command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+            if (Role == ApplicationUserRole.OrderHandler)
+                command.LocationId = LocationId;
 
             await mediator.Send(command);
             return Ok();
@@ -52,8 +54,8 @@ namespace Foodie.Orders.API.Controllers
         {
             var command = new SetInDeliveryOrderStatusCommand(id);
 
-            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
-                command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+            if (Role == ApplicationUserRole.OrderHandler)
+                command.LocationId = LocationId;
 
             await mediator.Send(command);
             return Ok();
@@ -65,8 +67,8 @@ namespace Foodie.Orders.API.Controllers
         {
             var command = new SetInProgressOrderStatusCommand(id);
 
-            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
-                command.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+            if (Role == ApplicationUserRole.OrderHandler)
+                command.LocationId = LocationId;
 
             await mediator.Send(command);
             return Ok();
@@ -77,9 +79,9 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> GetOrder(int id)
         {
             var query = new GetOrderByIdQuery(id);
-            
-            if(GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
-                query.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+
+            if (Role == ApplicationUserRole.OrderHandler)
+                query.LocationId = LocationId;
 
             var result = await mediator.Send(query);
             return Ok(result);
@@ -89,8 +91,8 @@ namespace Foodie.Orders.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrders([FromQuery] GetOrdersQuery getOrdersQuery)
         {
-            if (GetApplicationUserClaim(ApplicationUserClaims.Role) == RolesDictionary.OrderHandler)
-                getOrdersQuery.LocationId = int.Parse(GetApplicationUserClaim(ApplicationUserClaims.LocationId));
+            if (Role == ApplicationUserRole.OrderHandler)
+                getOrdersQuery.LocationId = LocationId;
 
             var result = await mediator.Send(getOrdersQuery);
             return Ok(result);

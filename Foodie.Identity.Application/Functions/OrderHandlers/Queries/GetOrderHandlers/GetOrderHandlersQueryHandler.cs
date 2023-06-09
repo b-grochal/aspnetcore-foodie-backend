@@ -3,8 +3,6 @@ using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,10 +26,10 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHa
             return new GetOrderHandlersQueryResponse
             {
                 TotalCount = orderHandlers.TotalCount,
-                PageSize = orderHandlers.PageSize,
-                CurrentPage = orderHandlers.CurrentPage,
-                TotalPages = (int)Math.Ceiling(orderHandlers.TotalCount / (double)orderHandlers.PageSize),
-                OrderHandlers = mapper.Map<IEnumerable<OrderHandlerDto>>(orderHandlers),
+                PageSize = request.PageSize,
+                CurrentPage = request.PageNumber,
+                TotalPages = (int)Math.Ceiling(orderHandlers.TotalCount / (double)request.PageSize),
+                OrderHandlers = mapper.Map<IEnumerable<OrderHandlerDto>>(orderHandlers.Items),
                 Email = request.Email
             };
         }

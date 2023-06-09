@@ -9,9 +9,9 @@ namespace Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerByI
 {
     public class GetCustomerByIdQuery : IRequest<GetCustomerByIdQueryResponse>
     {
-        public string Id { get; }
+        public int Id { get; }
 
-        public GetCustomerByIdQuery(string id)
+        public GetCustomerByIdQuery(int id)
         {
             this.Id = id;
         }

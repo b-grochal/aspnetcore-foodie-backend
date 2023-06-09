@@ -17,7 +17,7 @@ namespace Foodie.Basket.API.IntegrationEventsHandlers
         public async Task Consume(ConsumeContext<OrderStartedIntegrationEvent> context)
         {
             var message = context.Message;
-            await basketRepository.DeleteBasket(message.UserId);
+            await basketRepository.DeleteBasket(int.Parse(message.UserId));
         }
     }
 }

@@ -135,32 +135,32 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
         public MockCitiesRepository MockGetAllAsyncWithPagingParameters()
         {
-            Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((int pageNumber, int pageSize, string name, string country) =>
-            {
-                var categories = new List<City>
-                {
-                    new City
-                    {
-                        Id = 1,
-                        Name = "Test city 1",
-                        Country = "Test country 1"
-                    },
-                    new City
-                    {
-                        Id = 2,
-                        Name = "Test city 2",
-                        Country = "Test country 2"
-                    },
-                    new City
-                    {
-                        Id = 3,
-                        Name = "Test city 3",
-                        Country = "Test country 3"
-                    }
-                };
+            //Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync((int pageNumber, int pageSize, string name, string country) =>
+            //{
+            //    var categories = new List<City>
+            //    {
+            //        new City
+            //        {
+            //            Id = 1,
+            //            Name = "Test city 1",
+            //            Country = "Test country 1"
+            //        },
+            //        new City
+            //        {
+            //            Id = 2,
+            //            Name = "Test city 2",
+            //            Country = "Test country 2"
+            //        },
+            //        new City
+            //        {
+            //            Id = 3,
+            //            Name = "Test city 3",
+            //            Country = "Test country 3"
+            //        }
+            //    };
 
-                return new PagedList<City>(categories, categories.Count, pageNumber, pageSize);
-            });
+            //    return new PagedList<City>(categories, categories.Count, pageNumber, pageSize);
+            //});
 
             return this;
         }

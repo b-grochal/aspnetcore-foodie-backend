@@ -1,7 +1,6 @@
 ﻿using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Domain.Entities;
 using Foodie.Shared.Authentication;
-using Foodie.Shared.Enums;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -21,39 +20,29 @@ namespace Foode.Identity.Infrastructure.Services
             this.jwtTokenConfiguration = jwtTokenConfigurationOptions.Value;
         }
 
-        public string GenerateToken(ApplicationUser applicationUser, string applicationUserRole)
+        public string GenerateToken(ApplicationUser applicationUser)
         {
             var expirationTime = DateTime.Now.AddMinutes(jwtTokenConfiguration.AccessTokenExpiration);
-            var identityClaims = CreateIdentityClaims(applicationUser, applicationUserRole);
-            identityClaims.AddRange(CreateApplicationUserClaims(applicationUser, applicationUserRole));
+            var applicationUserClaims = CreateApplicationUserClaims(applicationUser);
             var signingCredentials = CreateSigningCredentials();
 
-            var token = CreateJwtToken(identityClaims, signingCredentials, expirationTime);
+            var token = CreateJwtToken(applicationUserClaims, signingCredentials, expirationTime);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private List<Claim> CreateIdentityClaims(ApplicationUser applicationUser, string applicationUserRole)
-        {
-            return new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, applicationUser.Id),
-                new Claim(ClaimTypes.Name, applicationUser.UserName),
-                new Claim(ClaimTypes.Email, applicationUser.Email),
-                new Claim(ClaimTypes.Role, applicationUserRole)
-            };
-        }
-
-        private IEnumerable<Claim> CreateApplicationUserClaims(ApplicationUser applicationUser, string applicationUserRole)
+        private List<Claim> CreateApplicationUserClaims(ApplicationUser applicationUser)
         {
             var applicationUserClaims = new List<Claim>
             {
-                new Claim(ApplicationUserClaims.Role, applicationUserRole)
+                new Claim(ApplicationUserClaim.ApplicationUserId, applicationUser.Id.ToString()),
+                new Claim(ApplicationUserClaim.Email, applicationUser.Email),
+                new Claim(ApplicationUserClaim.Role, applicationUser.Role.ToString())
             };
 
             if (applicationUser is OrderHandler orderHandler)
             {
-                applicationUserClaims.Add(new Claim(ApplicationUserClaims.LocationId, orderHandler.LocationId.ToString()));
+                applicationUserClaims.Add(new Claim(ApplicationUserClaim.LocationId, orderHandler.LocationId.ToString()));
             }
 
             return applicationUserClaims;

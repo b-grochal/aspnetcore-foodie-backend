@@ -3,8 +3,10 @@ using Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory;
 using Foodie.Meals.Application.Functions.Categories.Commands.UpdateCategory;
 using Foodie.Meals.Application.Functions.Categories.Queries.GetCategories;
 using Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById;
+using Foodie.Shared.Attributes;
 using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
+using Foodie.Shared.Enums;
 using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,17 +23,17 @@ namespace Foodie.Meals.API.Controllers
 
         // POST api/categories
         [HttpPost]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand createCategoryCommand)
         {
-            createCategoryCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            createCategoryCommand.CreatedBy = Email;
             var result = await mediator.Send(createCategoryCommand);
             return Ok(result);
         }
 
         // PUT api/categories/5
         [HttpPut("{id}")]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdateCategoryCommand updateCategoryCommand)
         {
             if (id != updateCategoryCommand.Id)
@@ -39,14 +41,14 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateCategoryCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            updateCategoryCommand.LastModifiedBy = Email;
             var result = await mediator.Send(updateCategoryCommand);
             return Ok(result);
         }
 
         // DELETE api/categories/5
         [HttpDelete("{id}")]
-        [Roles(RolesDictionary.Admin)]
+        [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var command = new DeleteCategoryCommand(id);

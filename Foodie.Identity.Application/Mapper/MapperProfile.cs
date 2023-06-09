@@ -28,11 +28,9 @@ namespace Foodie.Identity.Application.Mapper
 
         private void ConfigureAdminsMapping()
         {
-            CreateMap<CreateAdminCommand, Admin>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+            CreateMap<CreateAdminCommand, Admin>();
             CreateMap<Admin, CreateAdminCommandResponse>();
-            CreateMap<UpdateAdminCommand, Admin>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+            CreateMap<UpdateAdminCommand, Admin>();
             CreateMap<Admin, UpdateAdminCommandResponse>();
             CreateMap<Admin, GetAdminByIdQueryResponse>();
             CreateMap<Admin, AdminDto>();
@@ -40,8 +38,7 @@ namespace Foodie.Identity.Application.Mapper
 
         private void ConfigureCustomersMapping()
         {
-            CreateMap<CreateCustomerCommand, Customer>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+            CreateMap<CreateCustomerCommand, Customer>();
             CreateMap<Customer, CreateCustomerCommandResponse>();
             CreateMap<UpdateCustomerCommand, Customer>();
             CreateMap<Customer, UpdateCustomerCommandResponse>();
@@ -51,8 +48,7 @@ namespace Foodie.Identity.Application.Mapper
 
         private void ConfigureOrderHandlersMapping()
         {
-            CreateMap<CreateOrderHandlerCommand, OrderHandler>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+            CreateMap<CreateOrderHandlerCommand, OrderHandler>();
             CreateMap<OrderHandler, CreateOrderHandlerCommandResponse>();
             CreateMap<UpdateOrderHandlerCommand, OrderHandler>();
             CreateMap<OrderHandler, UpdateOrderHandlerCommandResponse>();
@@ -62,8 +58,7 @@ namespace Foodie.Identity.Application.Mapper
 
         private void ConfigureAuthMapping()
         {
-            CreateMap<SignUpCommand, Customer>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+            CreateMap<SignUpCommand, Customer>();
             CreateMap<Customer, SignUpCommandResponse>();
         }
     }

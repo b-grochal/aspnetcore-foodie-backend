@@ -1,17 +1,12 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin
 {
     public class DeleteAdminCommand : IRequest<DeleteAdminCommandResponse>
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public DeleteAdminCommand(string id)
+        public DeleteAdminCommand(int id)
         {
             this.Id = id;
         }

@@ -11,8 +11,8 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders
     public interface IOrdersQueries
     {
         Task<OrderDetailsQueryDto> GetByIdAsync(int id);
-        Task<OrderDetailsQueryDto> GetByIdAsync(int id, string userId);
+        Task<OrderDetailsQueryDto> GetByIdAsync(int id, int customerId);
         Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, string buyerEmail, string orderStatusName, string contractorName, int? locationId);
-        Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, string userId, int? orderStatusId, string contractorName);
+        Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, int customerId, int? orderStatusId, string contractorName);
     }
 }

@@ -3,9 +3,9 @@ using Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustomer;
 using Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerById;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers;
-using Foodie.Shared.Authorization;
+using Foodie.Shared.Attributes;
 using Foodie.Shared.Controllers;
-using Foodie.Shared.Extensions.Attributes;
+using Foodie.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Foodie.Identity.Controllers
 {
     [Route("api/[controller]")]
-    [Roles(RolesDictionary.Admin)]
+    [RequiredRoles(ApplicationUserRole.Admin)]
     public class CustomersController : BaseController
     {
         public CustomersController(IMediator mediator) : base(mediator) { }
@@ -23,28 +23,28 @@ namespace Foodie.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)
         {
-            createCustomerCommand.CreatedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            createCustomerCommand.CreatedBy = Email;
             var result = await mediator.Send(createCustomerCommand);
             return Ok(result);
         }
 
         // PUT api/customers/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCustomer(string id, [FromBody] UpdateCustomerCommand updateUserCommand)
+        public async Task<IActionResult> UpdateCustomer(int id, [FromBody] UpdateCustomerCommand updateUserCommand)
         {
             if (id != updateUserCommand.Id)
             {
                 return BadRequest();
             }
 
-            updateUserCommand.LastModifiedBy = GetApplicationUserClaim(ClaimTypes.Email);
+            updateUserCommand.LastModifiedBy = Email;
             var result = await mediator.Send(updateUserCommand);
             return Ok(result);
         }
 
         // DELETE api/customers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCustomer(string id)
+        public async Task<IActionResult> DeleteCustomer(int id)
         {
             var command = new DeleteCustomerCommand(id);
             var result = await mediator.Send(command);
@@ -53,7 +53,7 @@ namespace Foodie.Identity.Controllers
 
         // GET api/customers/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCustomer(string id)
+        public async Task<IActionResult> GetCustomer(int id)
         {
             var query = new GetCustomerByIdQuery(id);
             var result = await mediator.Send(query);

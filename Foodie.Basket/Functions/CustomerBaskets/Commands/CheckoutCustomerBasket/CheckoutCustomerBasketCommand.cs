@@ -6,7 +6,7 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.CheckoutCustomerB
     public class CheckoutCustomerBasketCommand : IRequest
     {
         [JsonIgnore]
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public string Address { get; set; }
     }
 }

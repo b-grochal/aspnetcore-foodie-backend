@@ -26,10 +26,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustome
             if (customer == null)
                 throw new ApplicationUserNotFoundException(request.Id);
 
-            var identityResult = await customersRepository.DeleteAsync(customer);
-
-            if(!identityResult.Succeeded)
-                throw new ApplicationUserNotDeletedException(customer.Id);
+            await customersRepository.DeleteAsync(customer);
 
             return new DeleteCustomerCommandResponse
             {

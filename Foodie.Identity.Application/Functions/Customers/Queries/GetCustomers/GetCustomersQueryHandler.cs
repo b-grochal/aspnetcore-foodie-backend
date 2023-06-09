@@ -3,8 +3,6 @@ using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,10 +26,10 @@ namespace Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers
             return new GetCustomersQueryResponse
             {
                 TotalCount = customers.TotalCount,
-                PageSize = customers.PageSize,
-                CurrentPage = customers.CurrentPage,
-                TotalPages = (int)Math.Ceiling(customers.TotalCount / (double)customers.PageSize),
-                Customers = mapper.Map<IEnumerable<CustomerDto>>(customers),
+                PageSize = request.PageSize,
+                CurrentPage = request.PageNumber,
+                TotalPages = (int)Math.Ceiling(customers.TotalCount / (double)request.PageSize),
+                Customers = mapper.Map<IEnumerable<CustomerDto>>(customers.Items),
                 Email = request.Email
             };
         }

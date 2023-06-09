@@ -40,6 +40,10 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
             .WithMessage("{PropertyName} should not be empty")
             .Equal(c => c.Password)
             .WithMessage("Passwords do not match");
+
+            RuleFor(c => c.LocationId)
+            .NotEmpty()
+            .WithMessage("{PropertyName} should not be empty");
         }
     }
 }

@@ -143,38 +143,38 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
         public MockMealsRepository MockGetAllAsyncWithPagingParameters()
         {
-            Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int?>(), It.IsAny<string>())).ReturnsAsync((int pageNumber, int pageSize, int? restaurantId, string name) =>
-            {
-                var meals = new List<Meal>
-                {
-                    new Meal
-                    {
-                        Id = 1,
-                        Name = "Test meal 1",
-                        Description = "Test description 1",
-                        Price = 123,
-                        RestaurantId = 1
-                    },
-                    new Meal
-                    {
-                        Id = 2,
-                        Name = "Test meal 2",
-                        Description = "Test description 2",
-                        Price = 123,
-                        RestaurantId = 1
-                    },
-                    new Meal
-                    {
-                        Id = 3,
-                        Name = "Test meal 3",
-                        Description = "Test description 3",
-                        Price = 123,
-                        RestaurantId = 1
-                    }
-                };
+            //Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int?>(), It.IsAny<string>())).ReturnsAsync((int pageNumber, int pageSize, int? restaurantId, string name) =>
+            //{
+            //    var meals = new List<Meal>
+            //    {
+            //        new Meal
+            //        {
+            //            Id = 1,
+            //            Name = "Test meal 1",
+            //            Description = "Test description 1",
+            //            Price = 123,
+            //            RestaurantId = 1
+            //        },
+            //        new Meal
+            //        {
+            //            Id = 2,
+            //            Name = "Test meal 2",
+            //            Description = "Test description 2",
+            //            Price = 123,
+            //            RestaurantId = 1
+            //        },
+            //        new Meal
+            //        {
+            //            Id = 3,
+            //            Name = "Test meal 3",
+            //            Description = "Test description 3",
+            //            Price = 123,
+            //            RestaurantId = 1
+            //        }
+            //    };
 
-                return new PagedList<Meal>(meals, meals.Count, pageNumber, pageSize);
-            });
+            //    return new PagedList<Meal>(meals, meals.Count, pageNumber, pageSize);
+            //});
 
             return this;
         }

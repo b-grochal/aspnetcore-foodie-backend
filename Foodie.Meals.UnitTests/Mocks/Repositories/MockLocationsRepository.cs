@@ -147,41 +147,41 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
         public MockLocationsRepository MockGetAllAsyncWithPagingParameters()
         {
-            Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int?>(), It.IsAny<int?>())).ReturnsAsync((int pageNumber, int pageSize, int? restaurantId, int? cityId) =>
-            {
-                var locations = new List<Location>
-                {
-                    new Location
-                {
-                    Id = 1,
-                    Address = "Test address",
-                    Email = "test@email.com",
-                    PhoneNumber = "123-456-789",
-                    CityId = 1,
-                    RestaurantId = 1
-                },
-                new Location
-                {
-                    Id = 2,
-                    Address = "Test address",
-                    Email = "test@email.com",
-                    PhoneNumber = "123-456-789",
-                    CityId = 2,
-                    RestaurantId = 2
-                },
-                new Location
-                {
-                    Id = 3,
-                    Address = "Test address",
-                    Email = "test@email.com",
-                    PhoneNumber = "123-456-789",
-                    CityId = 3,
-                    RestaurantId = 3
-                }
-                };
+            //Setup(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int?>(), It.IsAny<int?>())).ReturnsAsync((int pageNumber, int pageSize, int? restaurantId, int? cityId) =>
+            //{
+            //    var locations = new List<Location>
+            //    {
+            //        new Location
+            //    {
+            //        Id = 1,
+            //        Address = "Test address",
+            //        Email = "test@email.com",
+            //        PhoneNumber = "123-456-789",
+            //        CityId = 1,
+            //        RestaurantId = 1
+            //    },
+            //    new Location
+            //    {
+            //        Id = 2,
+            //        Address = "Test address",
+            //        Email = "test@email.com",
+            //        PhoneNumber = "123-456-789",
+            //        CityId = 2,
+            //        RestaurantId = 2
+            //    },
+            //    new Location
+            //    {
+            //        Id = 3,
+            //        Address = "Test address",
+            //        Email = "test@email.com",
+            //        PhoneNumber = "123-456-789",
+            //        CityId = 3,
+            //        RestaurantId = 3
+            //    }
+            //    };
 
-                return new PagedList<Location>(locations, locations.Count, pageNumber, pageSize);
-            });
+            //    return new PagedList<Location>(locations, locations.Count, pageNumber, pageSize);
+            //});
 
             return this;
         }
