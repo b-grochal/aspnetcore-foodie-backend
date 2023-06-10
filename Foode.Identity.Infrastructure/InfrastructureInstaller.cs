@@ -37,6 +37,7 @@ namespace Foode.Identity.Infrastructure
             services.AddTransient<IApplicationUserRefreshTokensRepository, ApplicationUserRefreshTokensRepository>();
             services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<IPasswordService, PasswordService>();
+            services.AddTransient<IRefreshTokenService, RefreshTokenService>();
 
             return services;
         }
