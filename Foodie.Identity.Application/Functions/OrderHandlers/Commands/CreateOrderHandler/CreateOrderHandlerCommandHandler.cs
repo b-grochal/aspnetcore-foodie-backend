@@ -14,13 +14,15 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
     {
         private readonly IOrderHandlersRepository orderHandlersRepository;
         private readonly IApplicationUsersRepository applicationUsersRepository;
+        private readonly IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public CreateOrderHandlerCommandHandler(IOrderHandlersRepository orderHandlersRepository, IApplicationUsersRepository applicationUsersRepository, IPasswordService passwordService, IMapper mapper)
+        public CreateOrderHandlerCommandHandler(IOrderHandlersRepository orderHandlersRepository, IApplicationUsersRepository applicationUsersRepository, IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
         {
             this.orderHandlersRepository = orderHandlersRepository;
             this.applicationUsersRepository = applicationUsersRepository;
+            this.applicationUserRefreshTokensRepository = applicationUserRefreshTokensRepository;
             this.passwordService = passwordService;
             this.mapper = mapper;
         }
@@ -36,6 +38,13 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
             orderHandler.Role = ApplicationUserRole.OrderHandler;
 
             await orderHandlersRepository.CreateAsync(orderHandler);
+
+            await applicationUserRefreshTokensRepository.CreateAsync(new ApplicationUserRefreshToken
+            {
+                ApplicationUserId = orderHandler.Id,
+                Token = null,
+                ExpirationTime = null
+            });
 
             return mapper.Map<CreateOrderHandlerCommandResponse>(orderHandler);
         }

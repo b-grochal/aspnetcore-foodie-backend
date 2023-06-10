@@ -18,13 +18,15 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
     {
         private readonly ICustomersRepository customersRepository;
         private readonly IApplicationUsersRepository applicationUsersRepository;
+        private readonly IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public CreateCustomerCommandHandler(ICustomersRepository customersRepository, IApplicationUsersRepository applicationUsersRepository, IPasswordService passwordService, IMapper mapper)
+        public CreateCustomerCommandHandler(ICustomersRepository customersRepository, IApplicationUsersRepository applicationUsersRepository, IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
         {
             this.customersRepository = customersRepository;
             this.applicationUsersRepository = applicationUsersRepository;
+            this.applicationUserRefreshTokensRepository = applicationUserRefreshTokensRepository;
             this.passwordService = passwordService;
             this.mapper = mapper;
         }
@@ -40,6 +42,13 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
             customer.Role = ApplicationUserRole.Customer;
 
             await customersRepository.CreateAsync(customer);
+
+            await applicationUserRefreshTokensRepository.CreateAsync(new ApplicationUserRefreshToken
+            {
+                ApplicationUserId = customer.Id,
+                Token = null,
+                ExpirationTime = null
+            });
 
             return mapper.Map<CreateCustomerCommandResponse>(customer);
         }
