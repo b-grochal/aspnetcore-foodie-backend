@@ -19,12 +19,12 @@ namespace Foode.Identity.Infrastructure.Services
             this.jwtTokenConfiguration = jwtTokenConfigurationOptions.Value;
         }
 
-        public string GenerateRefreshToken()
+        public (string RefreshToken, DateTimeOffset ExpirationDate) GenerateRefreshToken()
         {
             var randomNumber = new byte[32];
             using var rng = RandomNumberGenerator.Create();
             rng.GetBytes(randomNumber);
-            return Convert.ToBase64String(randomNumber);
+            return (Convert.ToBase64String(randomNumber), DateTimeOffset.Now.AddMinutes(jwtTokenConfiguration.RefreshTokenExpiration));
         }
 
         public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
