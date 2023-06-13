@@ -46,8 +46,10 @@ namespace Foode.Identity.Infrastructure.Services
         {
             var tokenValidationParameters = new TokenValidationParameters
             {
-                ValidateAudience = false,
-                ValidateIssuer = false,
+                ValidateAudience = true,
+                ValidAudience = jwtTokenConfiguration.Audience,
+                ValidateIssuer = true,
+                ValidIssuer = jwtTokenConfiguration.Issuer,
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtTokenConfiguration.Secret)),
                 ValidateLifetime = false
