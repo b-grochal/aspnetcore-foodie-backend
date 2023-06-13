@@ -1,4 +1,5 @@
-﻿using Foodie.Identity.Application.Functions.Auth.Commands.SignIn;
+﻿using Foodie.Identity.Application.Functions.Auth.Commands.RefreshJwtToken;
+using Foodie.Identity.Application.Functions.Auth.Commands.SignIn;
 using Foodie.Identity.Application.Functions.Auth.Commands.SignUp;
 using Foodie.Shared.Controllers;
 using MediatR;
@@ -25,6 +26,14 @@ namespace Foodie.Identity.Controllers
         public async Task<IActionResult> SignUp([FromBody] SignUpCommand signUpCommand)
         {
             var result = await mediator.Send(signUpCommand);
+            return Ok(result);
+        }
+
+        // POST api/auth/refresh-jwt-token
+        [HttpPost("refresh-jwt-token")]
+        public async Task<IActionResult> RefreshJwtToken([FromBody] RefreshJwtTokenCommand refreshJwtTokenCommand)
+        {
+            var result = await mediator.Send(refreshJwtTokenCommand);
             return Ok(result);
         }
     }

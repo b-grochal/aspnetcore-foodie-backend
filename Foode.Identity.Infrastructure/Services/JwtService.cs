@@ -31,6 +31,40 @@ namespace Foode.Identity.Infrastructure.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public int GetApplicationUserIdFromExpiredToken(string token)
+        {
+            var applicationUserId = GetClaimsPrincipalFromExpiredToken(token)
+                .FindFirstValue(ApplicationUserClaim.ApplicationUserId);
+
+            if(applicationUserId is null)
+                throw new SecurityTokenException("Invalid token");
+
+            return int.Parse(applicationUserId);
+        }
+
+        private ClaimsPrincipal GetClaimsPrincipalFromExpiredToken(string token)
+        {
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtTokenConfiguration.Secret)),
+                ValidateLifetime = false
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
+
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException("Invalid token");
+
+            return principal;
+        }
+
         private List<Claim> CreateApplicationUserClaims(ApplicationUser applicationUser)
         {
             var applicationUserClaims = new List<Claim>

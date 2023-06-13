@@ -20,6 +20,12 @@ namespace Foode.Identity.Infrastructure.Repositories
                 .FirstOrDefaultAsync(x => x.Email == email);
         }
 
+        public async Task<ApplicationUser> GetByIdAsync(int id)
+        {
+            return await dbContext.Set<ApplicationUser>()
+                .FindAsync(id);
+        }
+
         public async Task UpdateAsync(ApplicationUser entity)
         {
             dbContext.Entry(entity).State = EntityState.Modified;
