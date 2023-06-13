@@ -14,11 +14,11 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
     {
         private readonly IOrderHandlersRepository orderHandlersRepository;
         private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository;
+        private readonly IRefreshTokensRepository applicationUserRefreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public CreateOrderHandlerCommandHandler(IOrderHandlersRepository orderHandlersRepository, IApplicationUsersRepository applicationUsersRepository, IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
+        public CreateOrderHandlerCommandHandler(IOrderHandlersRepository orderHandlersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
         {
             this.orderHandlersRepository = orderHandlersRepository;
             this.applicationUsersRepository = applicationUsersRepository;

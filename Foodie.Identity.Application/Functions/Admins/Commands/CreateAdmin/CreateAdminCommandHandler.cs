@@ -14,11 +14,11 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
     {
         private readonly IAdminsRepository adminsRepository;
         private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository;
+        private readonly IRefreshTokensRepository applicationUserRefreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public CreateAdminCommandHandler(IAdminsRepository adminsRepository, IApplicationUsersRepository applicationUsersRepository, IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
+        public CreateAdminCommandHandler(IAdminsRepository adminsRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
         {
             this.adminsRepository = adminsRepository;
             this.applicationUsersRepository = applicationUsersRepository;

@@ -12,14 +12,14 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
     public class SignInCommandHandler : IRequestHandler<SignInCommand, SignInCommandResponse>
     {
         private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository;
+        private readonly IRefreshTokensRepository applicationUserRefreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IJwtService jwtService;
         private readonly IRefreshTokenService refreshTokenService;
 
         public SignInCommandHandler(
             IApplicationUsersRepository applicationUserRolesRepository,
-            IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository,
+            IRefreshTokensRepository applicationUserRefreshTokensRepository,
             IPasswordService passwordService, 
             IJwtService jwtService, 
             IRefreshTokenService refreshTokenService)

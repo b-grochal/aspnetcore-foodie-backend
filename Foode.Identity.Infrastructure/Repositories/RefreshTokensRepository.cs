@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Foode.Identity.Infrastructure.Repositories
 {
-    public class ApplicationUserRefreshTokensRepository : IApplicationUserRefreshTokensRepository
+    public class RefreshTokensRepository : IRefreshTokensRepository
     {
         protected readonly IdentityDbContext dbContext;
 
-        public ApplicationUserRefreshTokensRepository(IdentityDbContext dbContext)
+        public RefreshTokensRepository(IdentityDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

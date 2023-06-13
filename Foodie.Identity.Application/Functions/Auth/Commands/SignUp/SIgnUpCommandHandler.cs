@@ -14,11 +14,11 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignUp
     {
         private readonly ICustomersRepository customersRepository;
         private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository;
+        private readonly IRefreshTokensRepository applicationUserRefreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public SignUpCommandHandler(ICustomersRepository customersRepository, IApplicationUsersRepository applicationUsersRepository, IApplicationUserRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
+        public SignUpCommandHandler(ICustomersRepository customersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
         {
             this.customersRepository = customersRepository;
             this.applicationUsersRepository = applicationUsersRepository;

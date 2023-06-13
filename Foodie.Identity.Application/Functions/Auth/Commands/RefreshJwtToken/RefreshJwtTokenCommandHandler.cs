@@ -10,12 +10,12 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.RefreshJwtToken
 {
     public class RefreshJwtTokenCommandHandler : IRequestHandler<RefreshJwtTokenCommand, RefreshJwtTokenCommandResponse>
     {
-        private readonly IApplicationUserRefreshTokensRepository refreshTokensRepository;
+        private readonly IRefreshTokensRepository refreshTokensRepository;
         private readonly IApplicationUsersRepository applicationUsersRepository;
         private readonly IJwtService jwtService;
         private readonly IRefreshTokenService refreshTokenService;
 
-        public RefreshJwtTokenCommandHandler(IApplicationUserRefreshTokensRepository refreshTokensRepository, 
+        public RefreshJwtTokenCommandHandler(IRefreshTokensRepository refreshTokensRepository, 
             IApplicationUsersRepository applicationUsersRepository, 
             IJwtService jwtService, 
             IRefreshTokenService refreshTokenService)
@@ -32,7 +32,7 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.RefreshJwtToken
             var refreshToken = await refreshTokensRepository.GetByApplicationUserIdAsync(applicationUserId);
 
             if (refreshToken == null)
-                throw new ApplicationUserRefreshTokenForApplicationUserNotFoundException(applicationUserId);
+                throw new RefreshTokenForApplicationUserNotFoundException(applicationUserId);
 
             if (refreshToken.Token != request.RefreshToken || refreshToken.ExpirationTime <= DateTimeOffset.Now)
                 throw new InvalidRefreshTokenException();
