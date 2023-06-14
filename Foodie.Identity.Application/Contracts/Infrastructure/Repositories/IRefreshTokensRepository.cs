@@ -5,8 +5,8 @@ namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
 {
     public interface IRefreshTokensRepository
     {
-        Task<ApplicationUserRefreshToken> CreateAsync(ApplicationUserRefreshToken entity);
-        Task UpdateAsync(ApplicationUserRefreshToken entity);
-        Task<ApplicationUserRefreshToken> GetByApplicationUserIdAsync(int applicationUserId);
+        Task<RefreshToken> CreateAsync(RefreshToken entity);
+        Task UpdateAsync(RefreshToken entity);
+        Task<RefreshToken> GetByApplicationUserIdAsync(int applicationUserId);
     }
 }

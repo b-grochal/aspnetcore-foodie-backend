@@ -14,7 +14,7 @@ namespace Foode.Identity.Infrastructure
         public DbSet<Admin> Admins { get; set; }
         public DbSet<OrderHandler> OrderHandlers { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<ApplicationUserRefreshToken> ApplicationUserRefreshTokens { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public IdentityDbContext(DbContextOptions options) : base(options) { }
 
@@ -64,9 +64,9 @@ namespace Foode.Identity.Infrastructure
                 modelBuilder.Entity<Customer>().HasData(customer);
             }
 
-            foreach (var refreshToken in DummyApplicationUserRefreshTokens.Get())
+            foreach (var refreshToken in DummyRefreshTokens.Get())
             {
-                modelBuilder.Entity<ApplicationUserRefreshToken>().HasData(refreshToken);
+                modelBuilder.Entity<RefreshToken>().HasData(refreshToken);
             }
         }
     }

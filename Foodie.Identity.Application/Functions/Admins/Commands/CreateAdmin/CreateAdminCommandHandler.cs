@@ -39,7 +39,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
 
             await adminsRepository.CreateAsync(admin);
 
-            await applicationUserRefreshTokensRepository.CreateAsync(new ApplicationUserRefreshToken
+            await applicationUserRefreshTokensRepository.CreateAsync(new RefreshToken
             {
                 ApplicationUserId = admin.Id,
                 Token = null,

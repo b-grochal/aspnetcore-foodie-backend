@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace Foode.Identity.Infrastructure.DummyData
 {
-    public class DummyApplicationUserRefreshTokens
+    public class DummyRefreshTokens
     {
-        public static List<ApplicationUserRefreshToken> Get()
+        public static List<RefreshToken> Get()
         {
-            return new List<ApplicationUserRefreshToken>
+            return new List<RefreshToken>
             {
-                new ApplicationUserRefreshToken
+                new RefreshToken
                 {
                     Id = DummySeed.AdminRefreshTokenId,
                     Token = null,
@@ -19,7 +19,7 @@ namespace Foode.Identity.Infrastructure.DummyData
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now
                 },
-                new ApplicationUserRefreshToken
+                new RefreshToken
                 {
                     Id = DummySeed.OrderHandlerRefreshTokenId,
                     Token = null,
@@ -28,7 +28,7 @@ namespace Foode.Identity.Infrastructure.DummyData
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now
                 },
-                new ApplicationUserRefreshToken
+                new RefreshToken
                 {
                     Id = DummySeed.CustomerRefreshTokenId,
                     Token = null,

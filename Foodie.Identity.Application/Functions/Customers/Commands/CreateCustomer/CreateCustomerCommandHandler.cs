@@ -18,15 +18,15 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
     {
         private readonly ICustomersRepository customersRepository;
         private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IRefreshTokensRepository applicationUserRefreshTokensRepository;
+        private readonly IRefreshTokensRepository refreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public CreateCustomerCommandHandler(ICustomersRepository customersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
+        public CreateCustomerCommandHandler(ICustomersRepository customersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository refreshTokensRepository, IPasswordService passwordService, IMapper mapper)
         {
             this.customersRepository = customersRepository;
             this.applicationUsersRepository = applicationUsersRepository;
-            this.applicationUserRefreshTokensRepository = applicationUserRefreshTokensRepository;
+            this.refreshTokensRepository = refreshTokensRepository;
             this.passwordService = passwordService;
             this.mapper = mapper;
         }
@@ -43,7 +43,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
 
             await customersRepository.CreateAsync(customer);
 
-            await applicationUserRefreshTokensRepository.CreateAsync(new ApplicationUserRefreshToken
+            await refreshTokensRepository.CreateAsync(new RefreshToken
             {
                 ApplicationUserId = customer.Id,
                 Token = null,

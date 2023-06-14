@@ -12,20 +12,20 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
     public class SignInCommandHandler : IRequestHandler<SignInCommand, SignInCommandResponse>
     {
         private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IRefreshTokensRepository applicationUserRefreshTokensRepository;
+        private readonly IRefreshTokensRepository refreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IJwtService jwtService;
         private readonly IRefreshTokenService refreshTokenService;
 
         public SignInCommandHandler(
             IApplicationUsersRepository applicationUserRolesRepository,
-            IRefreshTokensRepository applicationUserRefreshTokensRepository,
+            IRefreshTokensRepository refreshTokensRepository,
             IPasswordService passwordService, 
             IJwtService jwtService, 
             IRefreshTokenService refreshTokenService)
         {
             this.applicationUsersRepository = applicationUserRolesRepository;
-            this.applicationUserRefreshTokensRepository = applicationUserRefreshTokensRepository;
+            this.refreshTokensRepository = refreshTokensRepository;
             this.passwordService = passwordService;
             this.jwtService = jwtService;
             this.refreshTokenService = refreshTokenService;
@@ -69,12 +69,12 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
 
         private async Task UpdateRefreshTokenForApplicationUser(int applicationUserId, (string RefreshToken, DateTimeOffset ExpirationDate) refreshTokenData)
         {
-            var applicationUserRefreshToken = await applicationUserRefreshTokensRepository.GetByApplicationUserIdAsync(applicationUserId);
+            var refreshToken = await refreshTokensRepository.GetByApplicationUserIdAsync(applicationUserId);
 
-            applicationUserRefreshToken.Token = refreshTokenData.RefreshToken;
-            applicationUserRefreshToken.ExpirationTime = refreshTokenData.ExpirationDate;
+            refreshToken.Token = refreshTokenData.RefreshToken;
+            refreshToken.ExpirationTime = refreshTokenData.ExpirationDate;
 
-            await applicationUserRefreshTokensRepository.UpdateAsync(applicationUserRefreshToken);
+            await refreshTokensRepository.UpdateAsync(refreshToken);
         }
     }
 }

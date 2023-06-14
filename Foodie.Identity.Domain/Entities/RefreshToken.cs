@@ -3,7 +3,7 @@ using System;
 
 namespace Foodie.Identity.Domain.Entities
 {
-    public class ApplicationUserRefreshToken : AuditableEntity
+    public class RefreshToken : AuditableEntity
     {
         public string Token { get; set; }
         public DateTimeOffset? ExpirationTime { get; set; }

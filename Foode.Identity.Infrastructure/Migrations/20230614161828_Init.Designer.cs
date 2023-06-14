@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foode.Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20230610133535_Init")]
+    [Migration("20230614161828_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,7 @@ namespace Foode.Identity.Infrastructure.Migrations
                     b.ToTable("ApplicationUsers");
                 });
 
-            modelBuilder.Entity("Foodie.Identity.Domain.Entities.ApplicationUserRefreshToken", b =>
+            modelBuilder.Entity("Foodie.Identity.Domain.Entities.RefreshToken", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -102,7 +102,7 @@ namespace Foode.Identity.Infrastructure.Migrations
                     b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
-                    b.ToTable("ApplicationUserRefreshTokens");
+                    b.ToTable("RefreshTokens");
 
                     b.HasData(
                         new
@@ -110,21 +110,21 @@ namespace Foode.Identity.Infrastructure.Migrations
                             Id = 1,
                             ApplicationUserId = 1,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 10, 15, 35, 34, 902, DateTimeKind.Unspecified).AddTicks(1978), new TimeSpan(0, 2, 0, 0, 0))
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 937, DateTimeKind.Unspecified).AddTicks(3001), new TimeSpan(0, 2, 0, 0, 0))
                         },
                         new
                         {
                             Id = 2,
                             ApplicationUserId = 2,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 10, 15, 35, 34, 902, DateTimeKind.Unspecified).AddTicks(2051), new TimeSpan(0, 2, 0, 0, 0))
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 937, DateTimeKind.Unspecified).AddTicks(3133), new TimeSpan(0, 2, 0, 0, 0))
                         },
                         new
                         {
                             Id = 3,
                             ApplicationUserId = 3,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 10, 15, 35, 34, 902, DateTimeKind.Unspecified).AddTicks(2057), new TimeSpan(0, 2, 0, 0, 0))
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 937, DateTimeKind.Unspecified).AddTicks(3153), new TimeSpan(0, 2, 0, 0, 0))
                         });
                 });
 
@@ -140,12 +140,12 @@ namespace Foode.Identity.Infrastructure.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 10, 15, 35, 34, 382, DateTimeKind.Unspecified).AddTicks(2981), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 441, DateTimeKind.Unspecified).AddTicks(3276), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "michsco123@foodie.com",
                             FirstName = "Michael",
                             IsLocked = false,
                             LastName = "Scott",
-                            PasswordHash = "$2a$11$XztFnn9kdY4w9RcdvH0lPO/.HKpy80bmobGQg68J3y27uGgj4nY7q",
+                            PasswordHash = "$2a$11$jifga0wsECg8kvwDUUHVPOuHVrIScy9qFhOQsVtq1CgOMGD5BB/8e",
                             PhoneNumber = "123-456-789",
                             Role = 1
                         });
@@ -163,12 +163,12 @@ namespace Foode.Identity.Infrastructure.Migrations
                             Id = 3,
                             AccessFailedCount = 0,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 10, 15, 35, 34, 752, DateTimeKind.Unspecified).AddTicks(4031), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 770, DateTimeKind.Unspecified).AddTicks(5870), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "jimhal123@foodie.com",
                             FirstName = "Jim",
                             IsLocked = false,
                             LastName = "Halpert",
-                            PasswordHash = "$2a$11$J3NpQhzDMy88B3m9XYNzeuCPn8E8sFrmVaymGtTCa8s9Rf/horrbe",
+                            PasswordHash = "$2a$11$y9/bT7ot2O5rvOu.sQebK.HeSRxl/6sKxghFGyZan/oWwM57SMHn6",
                             PhoneNumber = "123-456-789",
                             Role = 3
                         });
@@ -189,23 +189,23 @@ namespace Foode.Identity.Infrastructure.Migrations
                             Id = 2,
                             AccessFailedCount = 0,
                             CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 10, 15, 35, 34, 605, DateTimeKind.Unspecified).AddTicks(5155), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedDate = new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 595, DateTimeKind.Unspecified).AddTicks(7118), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "dwigsch123@foodie.com",
                             FirstName = "Dwight",
                             IsLocked = false,
                             LastName = "Schrute",
-                            PasswordHash = "$2a$11$7cnkWriTdzObp27Z6HWxPuYc2KPETwYOhnotyqA/IKPMlvMuOdnwi",
+                            PasswordHash = "$2a$11$8RwtHfCGjD2cTYAsTWQpBuqkS0kzvpnwdwdjW/iL8BjwOs5y6E.MS",
                             PhoneNumber = "123-456-789",
                             Role = 2,
                             LocationId = 1
                         });
                 });
 
-            modelBuilder.Entity("Foodie.Identity.Domain.Entities.ApplicationUserRefreshToken", b =>
+            modelBuilder.Entity("Foodie.Identity.Domain.Entities.RefreshToken", b =>
                 {
                     b.HasOne("Foodie.Identity.Domain.Entities.ApplicationUser", "ApplicationUser")
-                        .WithOne("ApplicationUserRefreshToken")
-                        .HasForeignKey("Foodie.Identity.Domain.Entities.ApplicationUserRefreshToken", "ApplicationUserId")
+                        .WithOne("RefreshToken")
+                        .HasForeignKey("Foodie.Identity.Domain.Entities.RefreshToken", "ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -241,7 +241,7 @@ namespace Foode.Identity.Infrastructure.Migrations
 
             modelBuilder.Entity("Foodie.Identity.Domain.Entities.ApplicationUser", b =>
                 {
-                    b.Navigation("ApplicationUserRefreshToken");
+                    b.Navigation("RefreshToken");
                 });
 #pragma warning restore 612, 618
         }

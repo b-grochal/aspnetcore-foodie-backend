@@ -14,15 +14,15 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
     {
         private readonly IOrderHandlersRepository orderHandlersRepository;
         private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IRefreshTokensRepository applicationUserRefreshTokensRepository;
+        private readonly IRefreshTokensRepository refreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public CreateOrderHandlerCommandHandler(IOrderHandlersRepository orderHandlersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
+        public CreateOrderHandlerCommandHandler(IOrderHandlersRepository orderHandlersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository refreshTokensRepository, IPasswordService passwordService, IMapper mapper)
         {
             this.orderHandlersRepository = orderHandlersRepository;
             this.applicationUsersRepository = applicationUsersRepository;
-            this.applicationUserRefreshTokensRepository = applicationUserRefreshTokensRepository;
+            this.refreshTokensRepository = refreshTokensRepository;
             this.passwordService = passwordService;
             this.mapper = mapper;
         }
@@ -39,7 +39,7 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
 
             await orderHandlersRepository.CreateAsync(orderHandler);
 
-            await applicationUserRefreshTokensRepository.CreateAsync(new ApplicationUserRefreshToken
+            await refreshTokensRepository.CreateAsync(new RefreshToken
             {
                 ApplicationUserId = orderHandler.Id,
                 Token = null,

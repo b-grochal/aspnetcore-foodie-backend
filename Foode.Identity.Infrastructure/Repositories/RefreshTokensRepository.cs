@@ -14,23 +14,23 @@ namespace Foode.Identity.Infrastructure.Repositories
             this.dbContext = dbContext;
         }
 
-        public async Task<ApplicationUserRefreshToken> CreateAsync(ApplicationUserRefreshToken entity)
+        public async Task<RefreshToken> CreateAsync(RefreshToken entity)
         {
-            await dbContext.Set<ApplicationUserRefreshToken>().AddAsync(entity);
+            await dbContext.Set<RefreshToken>().AddAsync(entity);
             await dbContext.SaveChangesAsync();
 
             return entity;
         }
 
-        public async Task UpdateAsync(ApplicationUserRefreshToken entity)
+        public async Task UpdateAsync(RefreshToken entity)
         {
             dbContext.Entry(entity).State = EntityState.Modified;
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<ApplicationUserRefreshToken> GetByApplicationUserIdAsync(int applicationUserId)
+        public async Task<RefreshToken> GetByApplicationUserIdAsync(int applicationUserId)
         {
-            return await dbContext.Set<ApplicationUserRefreshToken>()
+            return await dbContext.Set<RefreshToken>()
                 .FirstOrDefaultAsync(x => x.ApplicationUserId == applicationUserId);
         }
     }
