@@ -1,8 +1,10 @@
 ﻿using Foodie.Identity.Application.Functions.Auth.Commands.RefreshJwtToken;
+using Foodie.Identity.Application.Functions.Auth.Commands.RevokeRefreshToken;
 using Foodie.Identity.Application.Functions.Auth.Commands.SignIn;
 using Foodie.Identity.Application.Functions.Auth.Commands.SignUp;
 using Foodie.Shared.Controllers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -35,6 +37,14 @@ namespace Foodie.Identity.Controllers
         {
             var result = await mediator.Send(refreshJwtTokenCommand);
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPost("revoke-refresh-token")]
+        public async Task<IActionResult> RevokeRefreshToken()
+        {
+            await mediator.Send(new RevokeRefreshTokenCommand(ApplicationUserId.Value));
+            return NoContent();
         }
     }
 }
