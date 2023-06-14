@@ -12,7 +12,7 @@ namespace Foode.Identity.Infrastructure.DummyData
             {
                 new Admin
                 {
-                    Id = DummySeed.Admin,
+                    Id = DummySeed.AdminId,
                     FirstName = "Michael",
                     LastName = "Scott",
                     Email = "michsco123@foodie.com",

@@ -13,7 +13,7 @@ namespace Foode.Identity.Infrastructure.DummyData
             {
                 new Customer
                 {
-                    Id = DummySeed.Customer,
+                    Id = DummySeed.CustomerId,
                     FirstName = "Jim",
                     LastName = "Halpert",
                     Email = "jimhal123@foodie.com",

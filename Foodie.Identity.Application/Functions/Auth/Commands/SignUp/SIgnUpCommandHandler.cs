@@ -14,13 +14,15 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignUp
     {
         private readonly ICustomersRepository customersRepository;
         private readonly IApplicationUsersRepository applicationUsersRepository;
+        private readonly IRefreshTokensRepository refreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public SignUpCommandHandler(ICustomersRepository customersRepository, IApplicationUsersRepository applicationUsersRepository,IPasswordService passwordService, IMapper mapper)
+        public SignUpCommandHandler(ICustomersRepository customersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository refreshTokensRepository, IPasswordService passwordService, IMapper mapper)
         {
             this.customersRepository = customersRepository;
             this.applicationUsersRepository = applicationUsersRepository;
+            this.refreshTokensRepository = refreshTokensRepository;
             this.passwordService = passwordService;
             this.mapper = mapper;
         }
@@ -35,6 +37,13 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignUp
             customer.Role = ApplicationUserRole.Customer;
 
             await customersRepository.CreateAsync(customer);
+
+            await refreshTokensRepository.CreateAsync(new RefreshToken
+            {
+                ApplicationUserId = customer.Id,
+                Token = null,
+                ExpirationTime = null
+            });
 
             return mapper.Map<SignUpCommandResponse>(customer);
         }

@@ -34,8 +34,10 @@ namespace Foode.Identity.Infrastructure
             services.Decorate<ICustomersRepository, CachedCustomersRepository>();
             services.AddTransient<IOrderHandlersRepository, OrderHandlersRepository>();
             services.Decorate<IOrderHandlersRepository, CachedOrderHandlersRepository>();
+            services.AddTransient<IRefreshTokensRepository, RefreshTokensRepository>();
             services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<IPasswordService, PasswordService>();
+            services.AddTransient<IRefreshTokenService, RefreshTokenService>();
 
             return services;
         }

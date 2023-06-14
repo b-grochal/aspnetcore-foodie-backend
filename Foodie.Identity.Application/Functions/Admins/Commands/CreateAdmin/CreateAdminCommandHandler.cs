@@ -14,13 +14,15 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
     {
         private readonly IAdminsRepository adminsRepository;
         private readonly IApplicationUsersRepository applicationUsersRepository;
+        private readonly IRefreshTokensRepository applicationUserRefreshTokensRepository;
         private readonly IPasswordService passwordService;
         private readonly IMapper mapper;
 
-        public CreateAdminCommandHandler(IAdminsRepository adminsRepository, IApplicationUsersRepository applicationUsersRepository, IPasswordService passwordService, IMapper mapper)
+        public CreateAdminCommandHandler(IAdminsRepository adminsRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
         {
             this.adminsRepository = adminsRepository;
             this.applicationUsersRepository = applicationUsersRepository;
+            this.applicationUserRefreshTokensRepository = applicationUserRefreshTokensRepository;
             this.passwordService = passwordService;
             this.mapper = mapper;
         }
@@ -36,6 +38,13 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
             admin.Role = ApplicationUserRole.Admin;
 
             await adminsRepository.CreateAsync(admin);
+
+            await applicationUserRefreshTokensRepository.CreateAsync(new RefreshToken
+            {
+                ApplicationUserId = admin.Id,
+                Token = null,
+                ExpirationTime = null
+            });
 
             return mapper.Map<CreateAdminCommandResponse>(admin);
         }
