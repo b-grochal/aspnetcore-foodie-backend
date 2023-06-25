@@ -1,5 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Foodie.Emails.Templates.Orders.OrderInProgress
+@model OrderInProgressEmailViewModel
+
 @{
+    ViewData["EmailTitle"] = "Welcome!";
 }
+
+<p>Order with id: @Model.OrderId in progress</p>

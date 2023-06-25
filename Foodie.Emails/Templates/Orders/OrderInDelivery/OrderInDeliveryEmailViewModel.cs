@@ -1,6 +1,7 @@
 ﻿namespace Foodie.Emails.Templates.Orders.OrderInDelivery
 {
-    internal class OrderInDeliveryEmailViewModel
+    public class OrderInDeliveryEmailViewModel
     {
+        public long OrderId { get; set; }
     }
 }

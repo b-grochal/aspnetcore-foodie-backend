@@ -1,5 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Foodie.Emails.Templates.Orders.OrderDelivered
+@model OrderDeliveredEmailViewModel
+
 @{
+    ViewData["EmailTitle"] = "Welcome!";
 }
+
+<p>Order with id: @Model.OrderId delivered</p>

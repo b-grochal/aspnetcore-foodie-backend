@@ -1,6 +1,7 @@
 ﻿namespace Foodie.Emails.Templates.Orders.OrderStarted
 {
-    internal class OrderStartedEmailViewModel
+    public class OrderStartedEmailViewModel
     {
+        public long OrderId { get; set; }
     }
 }

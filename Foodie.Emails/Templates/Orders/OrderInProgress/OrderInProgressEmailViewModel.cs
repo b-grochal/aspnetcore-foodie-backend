@@ -1,6 +1,7 @@
 ﻿namespace Foodie.Emails.Templates.Orders.OrderInProgress
 {
-    internal class OrderInProgressEmailViewModel
+    public class OrderInProgressEmailViewModel
     {
+        public long OrderId { get; set; }
     }
 }
