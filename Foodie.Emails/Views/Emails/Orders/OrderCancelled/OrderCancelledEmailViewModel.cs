@@ -1,4 +1,4 @@
-﻿namespace Foodie.Emails.Templates.Orders.OrderCancelled
+﻿namespace Foodie.Templates.Views.Emails.Orders.OrderCancelled
 {
     public class OrderCancelledEmailViewModel
     {

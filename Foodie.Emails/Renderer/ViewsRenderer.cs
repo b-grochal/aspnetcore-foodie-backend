@@ -12,20 +12,20 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Foodie.Emails.Services
+namespace Foodie.Templates.Renderer
 {
-    public interface IEmailsRenderer
+    public interface IViewsRenderer
     {
-        Task<string> RenderEmail<T>(string viewName, T model);
+        Task<string> RenderView<T>(string viewName, T viewModel);
     }
 
-    public class EmailsRenderer : IEmailsRenderer
+    public class ViewsRenderer : IViewsRenderer
     {
         private IRazorViewEngine _viewEngine;
         private ITempDataProvider _tempDataProvider;
         private IServiceProvider _serviceProvider;
 
-        public EmailsRenderer(
+        public ViewsRenderer(
             IRazorViewEngine viewEngine,
             ITempDataProvider tempDataProvider,
             IServiceProvider serviceProvider)
@@ -35,10 +35,10 @@ namespace Foodie.Emails.Services
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<string> RenderEmail<T>(string templateName, T model)
+        public async Task<string> RenderView<T>(string viewName, T viewModel)
         {
             var actionContext = GetActionContext();
-            var view = FindView(actionContext, templateName);
+            var view = FindView(actionContext, viewName);
 
             using (var output = new StringWriter())
             {
@@ -49,7 +49,7 @@ namespace Foodie.Emails.Services
                         metadataProvider: new EmptyModelMetadataProvider(),
                         modelState: new ModelStateDictionary())
                     {
-                        Model = model
+                        Model = viewModel
                     },
                     new TempDataDictionary(
                         actionContext.HttpContext,
@@ -63,15 +63,15 @@ namespace Foodie.Emails.Services
             }
         }
 
-        private IView FindView(ActionContext actionContext, string templateName)
+        private IView FindView(ActionContext actionContext, string viewName)
         {
-            var getViewResult = _viewEngine.GetView(executingFilePath: null, viewPath: templateName, isMainPage: true);
+            var getViewResult = _viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: true);
             if (getViewResult.Success)
             {
                 return getViewResult.View;
             }
 
-            var findViewResult = _viewEngine.FindView(actionContext, templateName, isMainPage: true);
+            var findViewResult = _viewEngine.FindView(actionContext, viewName, isMainPage: true);
             if (findViewResult.Success)
             {
                 return findViewResult.View;
@@ -80,7 +80,7 @@ namespace Foodie.Emails.Services
             var searchedLocations = getViewResult.SearchedLocations.Concat(findViewResult.SearchedLocations);
             var errorMessage = string.Join(
                 Environment.NewLine,
-                new[] { $"Unable to find view '{templateName}'. The following locations were searched:" }.Concat(searchedLocations)); ;
+                new[] { $"Unable to find view '{viewName}'. The following locations were searched:" }.Concat(searchedLocations)); ;
 
             throw new InvalidOperationException(errorMessage);
         }

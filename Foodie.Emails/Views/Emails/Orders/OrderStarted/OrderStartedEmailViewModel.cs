@@ -1,4 +1,4 @@
-﻿namespace Foodie.Emails.Templates.Orders.OrderStarted
+﻿namespace Foodie.Templates.Views.Emails.Orders.OrderStarted
 {
     public class OrderStartedEmailViewModel
     {

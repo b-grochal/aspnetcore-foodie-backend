@@ -1,4 +1,4 @@
-﻿namespace Foodie.Emails.Templates.Orders.OrderInProgress
+﻿namespace Foodie.Templates.Views.Emails.Orders.OrderInProgress
 {
     public class OrderInProgressEmailViewModel
     {
