@@ -1,3 +1,4 @@
+using Foodie.Emails;
 using Foodie.Orders.Application;
 using Foodie.Orders.Infrastructure;
 using Foodie.Shared.Authentication;
@@ -28,6 +29,7 @@ namespace Foodie.Orders.API
             services.AddOrdersInfrastructure(Configuration);
             services.AddJwtAuthentication(Configuration);
             services.ConfigureApplicationSettings(Configuration);
+            services.AddEmails();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -106,7 +106,7 @@ namespace Foodie.Orders.Infrastructure.Queries
 
             var selector = builder.AddTemplate("Select /**select**/ from orders o /**innerjoin**/ /**where**/ /**orderby**/ offset @offset rows fetch next @pageSize rows only", new { offset = (pageNumber - 1) * pageSize, pageSize });
 
-            builder.Select("o.Id as OrderId, o.OrderDate as OrderDate, os.Id as OrderStatusId, os.Name as OrderStatusName, b.Id as BuyerId, b.Email as BuyerEmail, c.Id as ContractorId, c.Name as ContractorName");
+            builder.Select("o.Id as Id, o.OrderDate as OrderDate, os.Id as OrderStatusId, os.Name as OrderStatusName, b.Id as BuyerId, b.Email as BuyerEmail, c.Id as ContractorId, c.Name as ContractorName");
             builder.InnerJoin("Buyers b on o.BuyerId = b.Id");
             builder.InnerJoin("Contractors c on o.ContractorId = c.Id");
             builder.InnerJoin("OrderStatuses os on o.OrderStatusId = os.Id");

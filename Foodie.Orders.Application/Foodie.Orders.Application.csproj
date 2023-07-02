@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Foodie.Emails\Foodie.Templates.csproj" />
     <ProjectReference Include="..\Foodie.EventBus\Foodie.EventBus.csproj" />
     <ProjectReference Include="..\Foodie.Orders.Domain\Foodie.Orders.Domain.csproj" />
     <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />

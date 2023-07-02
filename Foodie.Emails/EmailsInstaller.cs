@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Foodie.Templates.Factories;
+using Foodie.Templates.Renderer;
+using Foodie.Templates.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Foodie.Emails
 {
-    internal class EmailsInstaller
+    public static class EmailsInstaller
     {
+        public static IServiceCollection AddEmails(this IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddRazorPages();
+            serviceCollection.AddTransient<IEmailsService, EmailsService>();
+            serviceCollection.AddTransient<IEmailMessageFactory, EmailMessageFactory>();
+            serviceCollection.AddTransient<IViewsRenderer, ViewsRenderer>();
+
+            return serviceCollection;
+        }
     }
 }
