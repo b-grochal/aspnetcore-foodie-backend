@@ -28,7 +28,6 @@ namespace Foodie.Orders.API
             services.AddOrdersApplication();
             services.AddOrdersInfrastructure(Configuration);
             services.AddJwtAuthentication(Configuration);
-            services.ConfigureApplicationSettings(Configuration);
             services.AddEmails();
 
             services.AddControllers();

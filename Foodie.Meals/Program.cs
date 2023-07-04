@@ -34,7 +34,7 @@ namespace Foodie.Meals
                     webBuilder
                     .UseStartup<Startup>();
                 })
-                .AddApplicationSettings()
+                .AddApplicationSettings(SettingsType.JwtToken, SettingsType.Cache)
                 .UseSerilog();
     }
 }

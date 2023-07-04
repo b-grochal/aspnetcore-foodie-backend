@@ -1,6 +1,6 @@
 ﻿namespace Foodie.Shared.Authentication
 {
-    public class JwtTokenConfiguration
+    public class JwtTokenSettings
     {
         public string Secret { get; set; }
         public string Issuer { get; set; }

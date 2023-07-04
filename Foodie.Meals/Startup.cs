@@ -31,7 +31,6 @@ namespace Foodie.Meals
             services.AddMealsApplication();
             services.AddMealsInfrastructure(Configuration);
             services.AddJwtAuthentication(Configuration);
-            services.ConfigureApplicationSettings(Configuration);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
 

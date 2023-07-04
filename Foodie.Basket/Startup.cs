@@ -39,8 +39,6 @@ namespace Foodie.Basket
             });
 
             services.AddJwtAuthentication(Configuration);
-            services.ConfigureApplicationSettings(Configuration);
-
             services.AddCache(Configuration);
             services.AddScoped<ICustomerBasketsRepository, CustomerBasketsRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
