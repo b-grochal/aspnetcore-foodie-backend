@@ -29,6 +29,7 @@ namespace Foodie.Identity
         {
             services.AddIdentityApplication();
             services.AddIdentityInfrastructure(Configuration);
+            services.ConfigureApplicationSettings(Configuration, SettingsType.JwtToken);
             services.AddJwtAuthentication(Configuration);
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));

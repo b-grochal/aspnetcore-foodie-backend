@@ -11,7 +11,6 @@ namespace Foodie.Shared.Authentication
     {
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection servicesCollection, IConfiguration configuration)
         {
-            servicesCollection.Configure<JwtTokenSettings>(configuration.GetSection(nameof(JwtTokenSettings)));
             var jwtTokenConfiguration = configuration.GetSection(nameof(JwtTokenSettings)).Get<JwtTokenSettings>();
 
             servicesCollection.AddAuthentication(x =>

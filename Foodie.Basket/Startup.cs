@@ -38,6 +38,7 @@ namespace Foodie.Basket
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Foodie.Basket", Version = "v1" });
             });
 
+            services.ConfigureApplicationSettings(Configuration, SettingsType.JwtToken);
             services.AddJwtAuthentication(Configuration);
             services.AddCache(Configuration);
             services.AddScoped<ICustomerBasketsRepository, CustomerBasketsRepository>();
