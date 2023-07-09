@@ -11,11 +11,4 @@
     <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DomainEventsHandlers\OrderStatusChangedToInProgress\" />
-    <Folder Include="DomainEventsHandlers\OrderStatusChangedToInDelivery\" />
-    <Folder Include="DomainEventsHandlers\OrderDelivered\" />
-    <Folder Include="DomainEventsHandlers\OrderCancelled\" />
-  </ItemGroup>
-
 </Project>

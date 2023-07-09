@@ -11,7 +11,11 @@ namespace Foodie.Templates.Services
 {
     public interface IEmailsService
     {
+        Task SendOrderStartedEmail(string toEmailAddress, long orderId);
         Task SendOrderInProgressEmail(string toEmailAddress, long orderId);
+        Task SendOrderInDeliveryEmail(string toEmailAddress, long orderId);
+        Task SendOrderDeliveredEmail(string toEmailAddress, long orderId);
+        Task SendOrderCancelledEmail(string toEmailAddress, long orderId);
     }
 
     public class EmailsService : IEmailsService
@@ -25,10 +29,34 @@ namespace Foodie.Templates.Services
             this.smtpSettings = smtpSettings.Value; 
         }
 
+        public async Task SendOrderCancelledEmail(string toEmailAddress, long orderId)
+        {
+            var orderCancelledEmailMessage = await emailsFactory.GenerateOrderCancelledMessage(toEmailAddress, orderId);
+            await SendEmail(CreateMessage(orderCancelledEmailMessage));
+        }
+
+        public async Task SendOrderDeliveredEmail(string toEmailAddress, long orderId)
+        {
+            var orderDeliveredEmailMessage = await emailsFactory.GenerateOrderDeliveredMessage(toEmailAddress, orderId);
+            await SendEmail(CreateMessage(orderDeliveredEmailMessage));
+        }
+
+        public async Task SendOrderInDeliveryEmail(string toEmailAddress, long orderId)
+        {
+            var orderInDeliveryEmailMessage = await emailsFactory.GenerateOrderInDeliveryMessage(toEmailAddress, orderId);
+            await SendEmail(CreateMessage(orderInDeliveryEmailMessage));
+        }
+
         public async Task SendOrderInProgressEmail(string toEmailAddress, long orderId)
         {
             var orderInProgressEmailMessage = await emailsFactory.GenerateOrderInProgressMessage(toEmailAddress, orderId);
             await SendEmail(CreateMessage(orderInProgressEmailMessage));
+        }
+
+        public async Task SendOrderStartedEmail(string toEmailAddress, long orderId)
+        {
+            var orderStartedEmailMessage = await emailsFactory.GenerateOrderStartedMessage(toEmailAddress, orderId);
+            await SendEmail(CreateMessage(orderStartedEmailMessage));
         }
 
         private MimeMessage CreateMessage(EmailMessage emailMessage)
@@ -63,8 +91,5 @@ namespace Foodie.Templates.Services
             await smtp.SendAsync(message);
             await smtp.DisconnectAsync(true);
         }
-
-
-
     }
 }

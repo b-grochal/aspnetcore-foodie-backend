@@ -2,10 +2,6 @@
 using Foodie.Orders.Domain.AggregatesModel.BuyerAggregate;
 using Foodie.Orders.Domain.Events;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

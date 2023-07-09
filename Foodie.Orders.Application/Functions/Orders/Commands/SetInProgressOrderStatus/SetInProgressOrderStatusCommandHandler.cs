@@ -30,9 +30,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.SetInProgressOrder
                 throw new OrderNotFoundException(request.Id);
 
             order.SetInProgressStatus();
-            await _ordersRepository.UnitOfWork.SaveChangesAsync();
-
-            await _emailsService.SendOrderInProgressEmail("test@email.com", request.Id);
+            await _ordersRepository.UnitOfWork.SaveEntitiesAsync();
 
             return Unit.Value;
         }

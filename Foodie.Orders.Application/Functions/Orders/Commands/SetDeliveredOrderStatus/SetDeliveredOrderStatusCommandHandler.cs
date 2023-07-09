@@ -27,7 +27,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.SetDeliveredOrderS
                 throw new OrderNotFoundException(request.Id);
 
             order.SetDeliveredStatus();
-            await _ordersRepository.UnitOfWork.SaveChangesAsync();
+            await _ordersRepository.UnitOfWork.SaveEntitiesAsync();
             return Unit.Value;
         }
     }

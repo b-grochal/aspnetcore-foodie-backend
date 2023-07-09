@@ -2,6 +2,7 @@ using Foodie.Emails;
 using Foodie.Orders.Application;
 using Foodie.Orders.Infrastructure;
 using Foodie.Shared.Authentication;
+using Foodie.Shared.Hangfire;
 using Foodie.Shared.Middlewares;
 using Foodie.Shared.Settings;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,7 @@ namespace Foodie.Orders.API
             services.ConfigureApplicationSettings(Configuration, SettingsType.JwtToken, SettingsType.Smtp);
             services.AddJwtAuthentication(Configuration);
             services.AddEmails();
+            services.AddHangfire(Configuration);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -61,6 +63,8 @@ namespace Foodie.Orders.API
             {
                 endpoints.MapControllers();
             });
+
+            app.UseHangifreDashboardTool();
         }
     }
 }
