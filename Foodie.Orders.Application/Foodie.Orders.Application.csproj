@@ -5,16 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Foodie.Emails\Foodie.Templates.csproj" />
     <ProjectReference Include="..\Foodie.EventBus\Foodie.EventBus.csproj" />
     <ProjectReference Include="..\Foodie.Orders.Domain\Foodie.Orders.Domain.csproj" />
     <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DomainEventsHandlers\OrderStatusChangedToInProgress\" />
-    <Folder Include="DomainEventsHandlers\OrderStatusChangedToInDelivery\" />
-    <Folder Include="DomainEventsHandlers\OrderDelivered\" />
-    <Folder Include="DomainEventsHandlers\OrderCancelled\" />
   </ItemGroup>
 
 </Project>

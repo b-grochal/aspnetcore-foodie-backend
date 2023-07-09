@@ -1,0 +1,8 @@
+﻿@using Foodie.Templates.Views.Emails.Orders.OrderInProgress
+@model OrderInProgressEmailViewModel
+
+@{
+    ViewData["EmailTitle"] = "Welcome!";
+}
+
+<p>Order with id: @Model.OrderId in progress</p>

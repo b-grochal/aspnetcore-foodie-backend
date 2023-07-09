@@ -13,9 +13,9 @@ namespace Foode.Identity.Infrastructure.Services
 {
     internal class JwtService : IJwtService
     {
-        private readonly JwtTokenConfiguration jwtTokenConfiguration;
+        private readonly JwtTokenSettings jwtTokenConfiguration;
 
-        public JwtService(IOptions<JwtTokenConfiguration> jwtTokenConfigurationOptions)
+        public JwtService(IOptions<JwtTokenSettings> jwtTokenConfigurationOptions)
         {
             this.jwtTokenConfiguration = jwtTokenConfigurationOptions.Value;
         }

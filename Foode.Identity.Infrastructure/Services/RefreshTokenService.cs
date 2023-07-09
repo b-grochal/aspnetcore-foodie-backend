@@ -12,9 +12,9 @@ namespace Foode.Identity.Infrastructure.Services
 {
     public class RefreshTokenService : IRefreshTokenService
     {
-        private readonly JwtTokenConfiguration jwtTokenConfiguration;
+        private readonly JwtTokenSettings jwtTokenConfiguration;
 
-        public RefreshTokenService(IOptions<JwtTokenConfiguration> jwtTokenConfigurationOptions)
+        public RefreshTokenService(IOptions<JwtTokenSettings> jwtTokenConfigurationOptions)
         {
             this.jwtTokenConfiguration = jwtTokenConfigurationOptions.Value;
         }

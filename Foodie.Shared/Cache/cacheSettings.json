@@ -1,0 +1,6 @@
+﻿{
+  "CacheSettings": {
+    "Host": "localhost",
+    "Port": 6379
+  }
+}

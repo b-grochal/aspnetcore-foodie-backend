@@ -1,0 +1,8 @@
+﻿@using Foodie.Templates.Views.Emails.Orders.OrderCancelled
+@model OrderCancelledEmailViewModel
+
+@{
+    ViewData["EmailTitle"] = "Welcome!";
+}
+
+<p>Order with id: @Model.OrderId cancelled</p>

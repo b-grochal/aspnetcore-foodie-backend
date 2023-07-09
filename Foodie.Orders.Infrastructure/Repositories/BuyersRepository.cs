@@ -33,6 +33,7 @@ namespace Foodie.Orders.Infrastructure.Repositories
             return await _ordersDbContext.Buyers.FindAsync(id);
         }
 
+        //TODO: Change customerId from int to string
         public async Task<Buyer> GetByCustomerIdAsync(string customerId)
         {
             return await _ordersDbContext.Buyers.FirstOrDefaultAsync(x => x.CustomerId == customerId);

@@ -1,0 +1,8 @@
+﻿@using Foodie.Templates.Views.Emails.Orders.OrderDelivered
+@model OrderDeliveredEmailViewModel
+
+@{
+    ViewData["EmailTitle"] = "Welcome!";
+}
+
+<p>Order with id: @Model.OrderId delivered</p>

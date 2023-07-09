@@ -27,7 +27,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CancelOrder
                 throw new OrderNotFoundException(request.Id);
 
             order.SetCancelledStatus();
-            await _ordersRepository.UnitOfWork.SaveChangesAsync();
+            await _ordersRepository.UnitOfWork.SaveEntitiesAsync();
             return Unit.Value;
         }
     }

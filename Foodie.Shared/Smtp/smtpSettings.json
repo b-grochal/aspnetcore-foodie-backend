@@ -1,0 +1,12 @@
+﻿{
+  "SmtpSettings": {
+    "DisplayName": "Foodie",
+    "From": "info@foodie.com",
+    "Host": "smtp.ethereal.email",
+    "Port": 587,
+    "UserName": "isom.bechtelar@ethereal.email",
+    "Password": "TAacpApUrYC35qKu2y",
+    "UseSsl": false,
+    "UseStartTls": true
+  }
+}

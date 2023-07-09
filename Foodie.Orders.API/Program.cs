@@ -1,4 +1,5 @@
 using Foodie.Orders.Application.IntegrationEventsHandlers;
+using Foodie.Shared.Settings;
 using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,7 @@ namespace Foodie.Orders.API
                 {
                     webBuilder.UseStartup<Startup>();
                 })
+                .AddApplicationSettings(SettingsType.JwtToken, SettingsType.Smtp)
                 .ConfigureServices(services =>
                 {
                     services.AddMassTransit(x =>
