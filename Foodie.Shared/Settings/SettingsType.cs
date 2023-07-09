@@ -4,6 +4,7 @@
     {
         JwtToken,
         Redis,
-        Cache
+        Cache,
+        Smtp
     }
 }

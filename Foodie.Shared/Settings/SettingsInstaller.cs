@@ -1,6 +1,7 @@
 ﻿using Foodie.Shared.Authentication;
 using Foodie.Shared.Cache;
 using Foodie.Shared.Redis;
+using Foodie.Shared.Smtp;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -43,6 +44,9 @@ namespace Foodie.Shared.Settings
                 case SettingsType.Cache:
                     serviceCollection.Configure<CacheSettings>(configuration.GetSection(nameof(CacheSettings)));
                     break;
+                case SettingsType.Smtp:
+                    serviceCollection.Configure<SmtpSettings>(configuration.GetSection(nameof(SmtpSettings)));
+                    break;
             }
 
             return serviceCollection;
@@ -65,6 +69,7 @@ namespace Foodie.Shared.Settings
                 SettingsType.JwtToken => Path.Combine(hostEnvironment.ContentRootPath, "..", "Foodie.Shared", "Authentication", "jwtTokenSettings.json"),
                 SettingsType.Redis => Path.Combine(hostEnvironment.ContentRootPath, "..", "Foodie.Shared", "Redis", "redisSettings.json"),
                 SettingsType.Cache => Path.Combine(hostEnvironment.ContentRootPath, "..", "Foodie.Shared", "Cache", "cacheSettings.json"),
+                SettingsType.Smtp => Path.Combine(hostEnvironment.ContentRootPath, "..", "Foodie.Shared", "Smtp", "smtpSettings.json"),
                 _ => throw new ArgumentException($"Unsupported settings type: {settingsType}")
             };
         }
