@@ -7,6 +7,10 @@ using Foodie.Meals.Application.Functions.Cities.Commands.CreateCity;
 using Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCities;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCityById;
+using Foodie.Meals.Application.Functions.Countries.Commands.CreateCountry;
+using Foodie.Meals.Application.Functions.Countries.Commands.UpdateCountry;
+using Foodie.Meals.Application.Functions.Countries.Queries.GetCountries;
+using Foodie.Meals.Application.Functions.Countries.Queries.GetCountryById;
 using Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation;
 using Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation;
 using Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById;
@@ -34,6 +38,7 @@ namespace Foodie.Meals.Application.Mapper
             ConfiureLocationsMapping();
             ConfigureMealsMapping();
             ConfigureRestaurantsMapping();
+            ConfigureCountriesMapping();
         }
 
         private void ConfigureCategoriesMapping()
@@ -59,7 +64,7 @@ namespace Foodie.Meals.Application.Mapper
         private void ConfiureLocationsMapping()
         {
             CreateMap<CreateLocationCommand, Location>();
-            CreateMap<Location, CreateLocationCommandResponse>()
+            CreateMap<Location, CreateLocationCommandResponse>() // TODO Check if it will work without mappings listed below
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
                 .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
             CreateMap<UpdateLocationCommand, Location>();
@@ -95,6 +100,16 @@ namespace Foodie.Meals.Application.Mapper
             CreateMap<Restaurant, UpdateRestaurantCommandResponse>();
             CreateMap<Restaurant, RestaurantDto>();
             CreateMap<Restaurant, GetRestaurantByIdQueryResponse>();
+        }
+
+        private void ConfigureCountriesMapping()
+        {
+            CreateMap<CreateCountryCommand, Country>();
+            CreateMap<Country, CreateCountryCommandResponse>();
+            CreateMap<UpdateCountryCommand, Country>();
+            CreateMap<Country, UpdateCountryCommandResponse>();
+            CreateMap<Country, CountryDto>();
+            CreateMap<Country, GetCountryByIdQueryResponse>();
         }
     }
 }

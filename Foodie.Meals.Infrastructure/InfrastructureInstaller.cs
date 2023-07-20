@@ -28,6 +28,8 @@ namespace Foodie.Meals.Infrastructure
             services.Decorate<IMealsRepository, CachedMealsRepository>();
             services.AddScoped<IRestaurantsRepository, RestaurantsRepository>();
             services.Decorate<IRestaurantsRepository, CachedRestaurantsRepository>();
+            services.AddScoped<ICountriesRepository, CountriesRepository>();
+            services.Decorate<ICountriesRepository, CachedCountriesRepository>();
 
             return services;
         }

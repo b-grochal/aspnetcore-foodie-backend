@@ -10,11 +10,11 @@ namespace Foodie.Meals.Infrastructure.Repositories
     {
         public CitiesRepository(MealsDbContext dbContext) : base(dbContext) { }
 
-        public async Task<PagedResult<City>> GetAllAsync(int pageNumber, int pageSize, string name, string country)
+        public async Task<PagedResult<City>> GetAllAsync(int pageNumber, int pageSize, string name, int? countryId)
         {
             return dbContext.Cities
                 .Where(c => name == null || c.Name.Equals(name))
-                .Where(c => country == null || c.Country.Equals(country))
+                .Where(c => countryId == null || c.CountryId == countryId)
                 .Paginate(pageNumber, pageSize);
         }
     }

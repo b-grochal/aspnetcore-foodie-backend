@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Foodie.Meals.Infrastructure.DummyData
+﻿namespace Foodie.Meals.Infrastructure.DummyData
 {
     public class DummySeed
     {
@@ -34,5 +28,8 @@ namespace Foodie.Meals.Infrastructure.DummyData
         public static int PizzaCarbonaraMeal = 4;
         public static int BigMacMeal = 5;
         public static int McRoyalMeal = 6;
+
+        public static int UsaCountry = 1;
+        public static int GermanyCountry = 2;
     }
 }

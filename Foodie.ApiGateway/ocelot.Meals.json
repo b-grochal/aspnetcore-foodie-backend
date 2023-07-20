@@ -137,6 +137,68 @@
       }
     },
     {
+      "DownstreamPathTemplate": "/api/countries",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/countries",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/countries/{countryId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/countries/{countryId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/countries",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/countries",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurity",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/countries/{countryId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/foodie/countries/{countryId}",
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurity",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/locations",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [

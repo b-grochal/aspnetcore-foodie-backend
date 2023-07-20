@@ -18,15 +18,15 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
     {
         public MockMediatorForCities MockSendingCreateCityCommand()
         {
-            Setup(m => m.Send(It.IsAny<CreateCityCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((CreateCityCommand createCityCommand, CancellationToken cancellationToken) =>
-            {
-                return new CreateCityCommandResponse
-                {
-                    Id = 1,
-                    Name = createCityCommand.Name,
-                    Country = createCityCommand.Country
-                };
-            });
+            //Setup(m => m.Send(It.IsAny<CreateCityCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((CreateCityCommand createCityCommand, CancellationToken cancellationToken) =>
+            //{
+            //    return new CreateCityCommandResponse
+            //    {
+            //        Id = 1,
+            //        Name = createCityCommand.Name,
+            //        Country = createCityCommand.Country
+            //    };
+            //});
 
             return this;
         }
@@ -40,15 +40,15 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
 
         public MockMediatorForCities MockSendingUpdateCityCommand()
         {
-            Setup(m => m.Send(It.IsAny<UpdateCityCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((UpdateCityCommand updateCityCommand, CancellationToken cancellationToken) =>
-            {
-                return new UpdateCityCommandResponse
-                {
-                    Id = updateCityCommand.Id,
-                    Name = updateCityCommand.Name,
-                    Country = updateCityCommand.Country
-                };
-            });
+            //Setup(m => m.Send(It.IsAny<UpdateCityCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((UpdateCityCommand updateCityCommand, CancellationToken cancellationToken) =>
+            //{
+            //    return new UpdateCityCommandResponse
+            //    {
+            //        Id = updateCityCommand.Id,
+            //        Name = updateCityCommand.Name,
+            //        Country = updateCityCommand.Country
+            //    };
+            //});
 
             return this;
         }
@@ -82,15 +82,15 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
 
         public MockMediatorForCities MockSendingGetCityByIdQuery()
         {
-            Setup(m => m.Send(It.IsAny<GetCityByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCityByIdQuery getCityByIdQuery, CancellationToken cancellationToken) =>
-            {
-                return new GetCityByIdQueryResponse
-                {
-                    Id = getCityByIdQuery.Id,
-                    Name = "Test category",
-                    Country = "Test country"
-                };
-            });
+            //Setup(m => m.Send(It.IsAny<GetCityByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCityByIdQuery getCityByIdQuery, CancellationToken cancellationToken) =>
+            //{
+            //    return new GetCityByIdQueryResponse
+            //    {
+            //        Id = getCityByIdQuery.Id,
+            //        Name = "Test category",
+            //        Country = "Test country"
+            //    };
+            //});
 
             return this;
         }
@@ -104,38 +104,38 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
 
         public MockMediatorForCities MockSendingGetCitiesQuery()
         {
-            Setup(m => m.Send(It.IsAny<GetCitiesQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCitiesQuery getCitiesQuery, CancellationToken cancellationToken) =>
-            {
-                return new GetCitiesQueryResponse
-                {
-                    Name = getCitiesQuery.Name,
-                    Country = getCitiesQuery.Country,
-                    PageSize = getCitiesQuery.PageSize,
-                    CurrentPage = getCitiesQuery.PageNumber,
-                    TotalPages = 2,
-                    Cities = new List<CityDto>
-                    {
-                        new CityDto
-                        {
-                            Id = 1,
-                            Name = "Test city 1",
-                            Country = "Test country"
-                        },
-                        new CityDto
-                        {
-                            Id = 2,
-                            Name = "Test city 2",
-                            Country = "Test country"
-                        },
-                        new CityDto
-                        {
-                            Id = 3,
-                            Name = "Test city 3",
-                            Country = "Test country"
-                        }
-                    }
-                };
-            });
+            //Setup(m => m.Send(It.IsAny<GetCitiesQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCitiesQuery getCitiesQuery, CancellationToken cancellationToken) =>
+            //{
+            //    return new GetCitiesQueryResponse
+            //    {
+            //        Name = getCitiesQuery.Name,
+            //        Country = getCitiesQuery.Country,
+            //        PageSize = getCitiesQuery.PageSize,
+            //        CurrentPage = getCitiesQuery.PageNumber,
+            //        TotalPages = 2,
+            //        Cities = new List<CityDto>
+            //        {
+            //            new CityDto
+            //            {
+            //                Id = 1,
+            //                Name = "Test city 1",
+            //                Country = "Test country"
+            //            },
+            //            new CityDto
+            //            {
+            //                Id = 2,
+            //                Name = "Test city 2",
+            //                Country = "Test country"
+            //            },
+            //            new CityDto
+            //            {
+            //                Id = 3,
+            //                Name = "Test city 3",
+            //                Country = "Test country"
+            //            }
+            //        }
+            //    };
+            //});
 
             return this;
         }

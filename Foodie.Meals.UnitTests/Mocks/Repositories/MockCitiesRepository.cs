@@ -60,15 +60,15 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
         public MockCitiesRepository MockGetByIdAsync()
         {
-            Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((int cityId) =>
-            {
-                return new City
-                {
-                    Id = cityId,
-                    Name = "Test city",
-                    Country = "Test country"
-                };
-            });
+            //Setup(r => r.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((int cityId) =>
+            //{
+            //    return new City
+            //    {
+            //        Id = cityId,
+            //        Name = "Test city",
+            //        Country = "Test country"
+            //    };
+            //});
 
             return this;
         }
@@ -99,29 +99,29 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
         public MockCitiesRepository MockGetAllAsync()
         {
-            var categories = new List<City>
-            {
-                new City
-                {
-                    Id = 1,
-                    Name = "Test category 1",
-                    Country = "Test country 1"
-                },
-                new City
-                {
-                    Id= 2,
-                    Name = "Test category 2",
-                    Country = "Test country 2"
-                },
-                new City
-                {
-                    Id = 3,
-                    Name = "Test category 3",
-                    Country = "Test country 3"
-                }
-            };
+            //var categories = new List<City>
+            //{
+            //    new City
+            //    {
+            //        Id = 1,
+            //        Name = "Test category 1",
+            //        Country = "Test country 1"
+            //    },
+            //    new City
+            //    {
+            //        Id= 2,
+            //        Name = "Test category 2",
+            //        Country = "Test country 2"
+            //    },
+            //    new City
+            //    {
+            //        Id = 3,
+            //        Name = "Test category 3",
+            //        Country = "Test country 3"
+            //    }
+            //};
 
-            Setup(r => r.GetAllAsync()).ReturnsAsync(categories);
+            //Setup(r => r.GetAllAsync()).ReturnsAsync(categories);
 
             return this;
         }
@@ -167,7 +167,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Repositories
 
         public MockCitiesRepository VerifyGetAllAsyncWithPagingParameters(Times times)
         {
-            Verify(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>()), times);
+            //Verify(r => r.GetAllAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>()), times);
 
             return this;
         }

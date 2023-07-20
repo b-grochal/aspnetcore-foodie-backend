@@ -15,7 +15,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.CreateCity
                 .NotEmpty()
                 .WithMessage("{PropertyName} should not be empty");
 
-            RuleFor(c => c.Country)
+            RuleFor(c => c.CountryId)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty");
         }
