@@ -31,12 +31,12 @@ namespace Foodie.Meals.Infrastructure.Repositories
             await cacheService.RemoveByPrefixAsync(CachePrefixes.Cities);
         }
 
-        public async Task<PagedResult<City>> GetAllAsync(int pageNumber, int pageSize, string name, string country)
+        public async Task<PagedResult<City>> GetAllAsync(int pageNumber, int pageSize, string name, int? countryId)
         {
             return await cacheService.GetAsync(async () =>
             {
-                return await decoratedRepository.GetAllAsync(pageNumber, pageSize, name, country);
-            }, CachePrefixes.Cities, parameters: new string[] { nameof(pageNumber), pageNumber.ToString(), nameof(pageSize), pageSize.ToString(), nameof(name), name, nameof(country), country });
+                return await decoratedRepository.GetAllAsync(pageNumber, pageSize, name, countryId);
+            }, CachePrefixes.Cities, parameters: new string[] { nameof(pageNumber), pageNumber.ToString(), nameof(pageSize), pageSize.ToString(), nameof(name), name, nameof(countryId), countryId.ToString() });
         }
 
         public async Task<IReadOnlyList<City>> GetAllAsync()

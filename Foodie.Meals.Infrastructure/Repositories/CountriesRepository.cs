@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Infrastructure.Repositories
 {
-    public class CitiesRepository : BaseMealsRepository<City>, ICitiesRepository
+    public class CountriesRepository : BaseMealsRepository<Country>, ICountriesRepository
     {
-        public CitiesRepository(MealsDbContext dbContext) : base(dbContext) { }
+        public CountriesRepository(MealsDbContext dbContext) : base(dbContext) { }
 
-        public async Task<PagedResult<City>> GetAllAsync(int pageNumber, int pageSize, string name, int? countryId)
+        public async Task<PagedResult<Country>> GetAllAsync(int pageNumber, int pageSize, string name)
         {
-            return dbContext.Cities
+            return dbContext.Countries
                 .Where(c => name == null || c.Name.Equals(name))
-                .Where(c => countryId == null || c.CountryId == countryId)
                 .Paginate(pageNumber, pageSize);
         }
     }

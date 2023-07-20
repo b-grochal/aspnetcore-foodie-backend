@@ -7,7 +7,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCities
     {
         public IEnumerable<CityDto> Cities { get; set; }
         public string Name { get; set; }
-        public int CountryId { get; set; }
+        public int? CountryId { get; set; }
     }
 
     public class CityDto

@@ -6,6 +6,6 @@ namespace Foodie.Meals.Domain.Entities
     public class Country : AuditableEntity
     {
         public string Name { get; set; }
-        public ICollection<City> Cities { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
     }
 }

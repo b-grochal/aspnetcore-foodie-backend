@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Infrastructure.Repositories
 {
-    internal class CachedLocationsRepository : ILocationsRepository
+    public class CachedLocationsRepository : ILocationsRepository
     {
         private readonly ILocationsRepository decoratedRepository;
         private readonly ICacheService cacheService;

@@ -10,6 +10,7 @@
         Restaurants,
         Admins,
         Customers,
-        OrderHandlers
+        OrderHandlers,
+        Countries
     }
 }

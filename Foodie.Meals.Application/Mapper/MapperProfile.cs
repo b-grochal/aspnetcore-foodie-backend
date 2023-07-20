@@ -9,6 +9,7 @@ using Foodie.Meals.Application.Functions.Cities.Queries.GetCities;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCityById;
 using Foodie.Meals.Application.Functions.Countries.Commands.CreateCountry;
 using Foodie.Meals.Application.Functions.Countries.Commands.UpdateCountry;
+using Foodie.Meals.Application.Functions.Countries.Queries.GetCountries;
 using Foodie.Meals.Application.Functions.Countries.Queries.GetCountryById;
 using Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation;
 using Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation;

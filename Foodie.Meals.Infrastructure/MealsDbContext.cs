@@ -3,9 +3,7 @@ using Foodie.Meals.Infrastructure.DummyData;
 using Foodie.Shared.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,6 +16,7 @@ namespace Foodie.Meals.Infrastructure
         public DbSet<Location> Locations { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
         public MealsDbContext(DbContextOptions options) : base(options) { }
 
@@ -45,6 +44,11 @@ namespace Foodie.Meals.Infrastructure
             foreach (var category in DummyCategories.Get())
             {
                 modelBuilder.Entity<Category>().HasData(category);
+            }
+
+            foreach (var country in DummyCountries.Get())
+            {
+                modelBuilder.Entity<Country>().HasData(country);
             }
 
             foreach (var city in DummyCities.Get())

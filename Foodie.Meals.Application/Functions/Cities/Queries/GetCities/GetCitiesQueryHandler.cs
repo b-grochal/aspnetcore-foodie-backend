@@ -21,7 +21,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCities
 
         public async Task<GetCitiesQueryResponse> Handle(GetCitiesQuery request, CancellationToken cancellationToken)
         {
-            var result = await citiesRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Name, request.Country);
+            var result = await citiesRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Name, request.CountryId);
 
             return new GetCitiesQueryResponse
             {

@@ -6,7 +6,7 @@ namespace Foodie.Meals.Application.Functions.Countries.Queries.GetCountries
     public class GetCountriesQueryResponse : PagedResponse
     {
         public IEnumerable<CountryDto> Countries { get; set; }
-        public string Name { get; set; }}
+        public string Name { get; set; }
     }
 
     public class CountryDto
@@ -15,3 +15,4 @@ namespace Foodie.Meals.Application.Functions.Countries.Queries.GetCountries
         public string Name { get; set; }
     }
 }
+
