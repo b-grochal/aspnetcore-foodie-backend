@@ -4,13 +4,10 @@ using Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCities;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCityById;
 using Foodie.Shared.Attributes;
-using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
 using Foodie.Shared.Enums;
-using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Meals.API.Controllers
