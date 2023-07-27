@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Foodie.Emails\Foodie.Templates.csproj" />
     <ProjectReference Include="..\Foodie.Identity.Domain\Foodie.Identity.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Functions\MyAccount\Queries\" />
   </ItemGroup>
 
 </Project>

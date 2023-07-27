@@ -1,0 +1,8 @@
+﻿@using Foodie.Templates.Views.Emails.MyAccount.AccountActivation
+@model AccountActivationEmailViewModel
+
+@{
+    ViewData["EmailTitle"] = "Welcome!";
+}
+
+<p>Account activation token: @Model.AccountActivationToken</p>

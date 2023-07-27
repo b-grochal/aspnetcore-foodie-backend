@@ -1,6 +1,6 @@
 ﻿using Foodie.Shared.Exceptions;
 
-namespace Foodie.Identity.Domain.Exceptions
+namespace Foodie.Identity.Application.Exceptions
 {
     public class RefreshTokenForApplicationUserNotFoundException : NotFoundException
     {

@@ -1,5 +1,6 @@
 ﻿using Foodie.Templates.Models;
 using Foodie.Templates.Renderer;
+using Foodie.Templates.Views.Emails.MyAccount.AccountActivation;
 using Foodie.Templates.Views.Emails.Orders.OrderCancelled;
 using Foodie.Templates.Views.Emails.Orders.OrderDelivered;
 using Foodie.Templates.Views.Emails.Orders.OrderInDelivery;
@@ -17,6 +18,7 @@ namespace Foodie.Templates.Factories
         Task<EmailMessage> GenerateOrderInDeliveryMessage(string toAddress, long orderId);
         Task<EmailMessage> GenerateOrderDeliveredMessage(string toAddress, long orderId);
         Task<EmailMessage> GenerateOrderCancelledMessage(string toAddress, long orderId);
+        Task<EmailMessage> GenerateAccountActivationMessage(string toAddress, string accountActivationToken);
     }
 
     public class EmailMessageFactory : IEmailMessageFactory
@@ -26,6 +28,20 @@ namespace Foodie.Templates.Factories
         public EmailMessageFactory(IViewsRenderer viewsRenderer)
         {
             this.viewsRenderer = viewsRenderer;
+        }
+
+        public async Task<EmailMessage> GenerateAccountActivationMessage(string toAddress, string accountActivationToken)
+        {
+            var accountActivationEmialViewModel = new AccountActivationEmailViewModel
+            {
+                AccountActivationToken = accountActivationToken
+            };
+
+            return new EmailMessage
+            {
+                Content = await viewsRenderer.RenderView("/Views/Emails/MyAccount/AccountActivation/AccountActivationEmail.cshtml", accountActivationEmialViewModel),
+                To = new List<string> { toAddress }
+            };
         }
 
         public async Task<EmailMessage> GenerateOrderCancelledMessage(string toAddress, long orderId)

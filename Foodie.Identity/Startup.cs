@@ -1,8 +1,10 @@
 using Foode.Identity.Infrastructure;
+using Foodie.Emails;
 using Foodie.Identity.API.Grpc;
 using Foodie.Identity.Application;
 using Foodie.Shared.Authentication;
 using Foodie.Shared.Behaviours;
+using Foodie.Shared.Hangfire;
 using Foodie.Shared.Middlewares;
 using Foodie.Shared.Settings;
 using MediatR;
@@ -29,8 +31,10 @@ namespace Foodie.Identity
         {
             services.AddIdentityApplication();
             services.AddIdentityInfrastructure(Configuration);
-            services.ConfigureApplicationSettings(Configuration, SettingsType.JwtToken);
+            services.ConfigureApplicationSettings(Configuration, SettingsType.JwtToken, SettingsType.Smtp);
             services.AddJwtAuthentication(Configuration);
+            services.AddEmails();
+            services.AddHangfire(Configuration);
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
