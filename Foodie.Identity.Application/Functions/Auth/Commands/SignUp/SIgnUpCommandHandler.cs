@@ -63,7 +63,11 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignUp
             });
 
             var accountActivationToken = Guid.NewGuid().ToString();
-            await _cacheService.SetAsync<ApplicationUser>(customer, CachePrefixes.AccountActivationTokens, string.Empty, nameof(accountActivationToken), accountActivationToken);
+            await _cacheService.SetAsync<ApplicationUser>(customer,
+                                                          CachePrefixes.AccountActivationTokens,
+                                                          string.Empty,
+                                                          CacheParameters.AccountActivationToken,
+                                                          accountActivationToken);
             _backgroundJobClient.Enqueue(() => _emailsService.SendAccountActivationEmail(customer.Email, accountActivationToken));
 
             return _mapper.Map<SignUpCommandResponse>(customer);

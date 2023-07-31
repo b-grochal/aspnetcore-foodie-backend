@@ -6,7 +6,7 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccou
     {
         public ActivateAccountCommandValidator()
         {
-            RuleFor(c => c.Token)
+            RuleFor(c => c.AccountActivationToken)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty");
         }

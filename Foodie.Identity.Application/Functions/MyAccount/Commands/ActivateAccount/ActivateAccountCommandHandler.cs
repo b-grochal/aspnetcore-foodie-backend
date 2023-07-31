@@ -21,7 +21,7 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccou
 
         public async Task<Unit> Handle(ActivateAccountCommand request, CancellationToken cancellationToken)
         {
-            var applicationUser = await _cacheService.GetAsync<ApplicationUser>(CachePrefixes.AccountActivationTokens, string.Empty, nameof(request.Token), request.Token);
+            var applicationUser = await _cacheService.GetAsync<ApplicationUser>(CachePrefixes.AccountActivationTokens, string.Empty, CacheParameters.AccountActivationToken, request.AccountActivationToken);
 
             if (applicationUser is null)
                 throw new InvalidAccountActivationTokenException();

@@ -4,6 +4,6 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccou
 {
     public class ActivateAccountCommand : IRequest
     {
-        public string Token { get; set; }
+        public string AccountActivationToken { get; set; }
     }
 }
