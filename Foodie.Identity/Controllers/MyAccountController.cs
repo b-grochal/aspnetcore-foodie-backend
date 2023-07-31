@@ -1,4 +1,6 @@
 ﻿using Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccount;
+using Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData;
+using Foodie.Identity.Application.Functions.MyAccount.Queries.GetAccountData;
 using Foodie.Shared.Attributes;
 using Foodie.Shared.Controllers;
 using Foodie.Shared.Enums;
@@ -21,6 +23,23 @@ namespace Foodie.Identity.API.Controllers
         {
             var result = await mediator.Send(createAdminCommand);
             return Ok(result);
+        }
+
+        [HttpGet]
+        [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler, ApplicationUserRole.Customer)]
+        public async Task<IActionResult> GetAccountData()
+        {
+            var result = await mediator.Send(new GetAccountDataQuery(ApplicationUserId.Value));
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler, ApplicationUserRole.Customer)]
+        public async Task<IActionResult> UpdateAccountData([FromBody] UpdateAccountDataCommand updateAccountDataCommand)
+        {
+            updateAccountDataCommand.ApplicationUserId = ApplicationUserId.Value;
+            await mediator.Send(updateAccountDataCommand);
+            return NoContent();
         }
     }
 }

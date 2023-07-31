@@ -9,8 +9,4 @@
     <ProjectReference Include="..\Foodie.Identity.Domain\Foodie.Identity.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Functions\MyAccount\Queries\" />
-  </ItemGroup>
-
 </Project>

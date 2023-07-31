@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Foodie.Identity.Application.Functions.Auth.Commands.SignUp
+namespace Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData
 {
-    public class SignUpCommandValidator : AbstractValidator<SignUpCommand>
+    public class UpdateAccountDataCommandValidator : AbstractValidator<UpdateAccountDataCommand>
     {
-        public SignUpCommandValidator()
+        public UpdateAccountDataCommandValidator()
         {
             RuleFor(c => c.FirstName)
             .NotEmpty()
@@ -23,16 +23,6 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignUp
             .WithMessage("{PropertyName} should not be empty")
             .EmailAddress()
             .WithMessage("Invalid email address");
-
-            RuleFor(c => c.Password)
-            .NotEmpty()
-            .WithMessage("{PropertyName} should not be empty");
-
-            RuleFor(c => c.ConfirmPassword)
-            .NotEmpty()
-            .WithMessage("{PropertyName} should not be empty")
-            .Equal(c => c.Password)
-            .WithMessage("Passwords do not match");
         }
     }
 }

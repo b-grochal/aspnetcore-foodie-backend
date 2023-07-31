@@ -8,6 +8,8 @@ using Foodie.Identity.Application.Functions.Customers.Commands.CreateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerById;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers;
+using Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData;
+using Foodie.Identity.Application.Functions.MyAccount.Queries.GetAccountData;
 using Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler;
 using Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHandler;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlerById;
@@ -24,6 +26,7 @@ namespace Foodie.Identity.Application.Mapper
             ConfigureCustomersMapping();
             ConfigureOrderHandlersMapping();
             ConfigureAuthMapping();
+            ConfigureMyAccountMapping();
         }
 
         private void ConfigureAdminsMapping()
@@ -60,6 +63,12 @@ namespace Foodie.Identity.Application.Mapper
         {
             CreateMap<SignUpCommand, Customer>();
             CreateMap<Customer, SignUpCommandResponse>();
+        }
+
+        private void ConfigureMyAccountMapping()
+        {
+            CreateMap<ApplicationUser, GetAccountDataQueryResponse>();
+            CreateMap<UpdateAccountDataCommand, ApplicationUser>();
         }
     }
 }
