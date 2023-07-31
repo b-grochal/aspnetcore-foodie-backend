@@ -1,4 +1,5 @@
 ﻿using Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccount;
+using Foodie.Identity.Application.Functions.MyAccount.Commands.ChangePassword;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData;
 using Foodie.Identity.Application.Functions.MyAccount.Queries.GetAccountData;
 using Foodie.Shared.Attributes;
@@ -39,6 +40,16 @@ namespace Foodie.Identity.API.Controllers
         {
             updateAccountDataCommand.ApplicationUserId = ApplicationUserId.Value;
             await mediator.Send(updateAccountDataCommand);
+            return NoContent();
+        }
+
+        [HttpPost]
+        [Route("change-password")]
+        [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler, ApplicationUserRole.Customer)]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand changePassowrdCommand)
+        {
+            changePassowrdCommand.ApplicationUserId = ApplicationUserId.Value;
+            await mediator.Send(changePassowrdCommand);
             return NoContent();
         }
     }
