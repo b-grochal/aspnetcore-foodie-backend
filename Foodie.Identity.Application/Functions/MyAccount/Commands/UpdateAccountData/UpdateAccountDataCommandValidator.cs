@@ -17,12 +17,6 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccount
             RuleFor(c => c.PhoneNumber)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty");
-
-            RuleFor(c => c.Email)
-            .NotEmpty()
-            .WithMessage("{PropertyName} should not be empty")
-            .EmailAddress()
-            .WithMessage("Invalid email address");
         }
     }
 }
