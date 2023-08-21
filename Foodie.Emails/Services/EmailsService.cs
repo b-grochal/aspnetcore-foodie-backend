@@ -16,6 +16,8 @@ namespace Foodie.Templates.Services
         Task SendOrderInDeliveryEmail(string toEmailAddress, long orderId);
         Task SendOrderDeliveredEmail(string toEmailAddress, long orderId);
         Task SendOrderCancelledEmail(string toEmailAddress, long orderId);
+        Task SendAccountActivationEmail(string toEmailAddress, string accountActivationToken);
+        Task SendSetPasswordEmail(string toEmailAddress, string setPasswordToken);
     }
 
     public class EmailsService : IEmailsService
@@ -27,6 +29,12 @@ namespace Foodie.Templates.Services
         {
             this.emailsFactory = emailsFactory;
             this.smtpSettings = smtpSettings.Value; 
+        }
+
+        public async Task SendAccountActivationEmail(string toEmailAddress, string accountActivationToken)
+        {
+            var accountActivationEmailMessage = await emailsFactory.GenerateAccountActivationMessage(toEmailAddress, accountActivationToken);
+            await SendEmail(CreateMessage(accountActivationEmailMessage));
         }
 
         public async Task SendOrderCancelledEmail(string toEmailAddress, long orderId)
@@ -57,6 +65,12 @@ namespace Foodie.Templates.Services
         {
             var orderStartedEmailMessage = await emailsFactory.GenerateOrderStartedMessage(toEmailAddress, orderId);
             await SendEmail(CreateMessage(orderStartedEmailMessage));
+        }
+
+        public async Task SendSetPasswordEmail(string toEmailAddress, string setPasswordToken)
+        {
+            var setPasswordEmailMessage = await emailsFactory.GenerateSetPasswordMessage(toEmailAddress, setPasswordToken);
+            await SendEmail(CreateMessage(setPasswordEmailMessage));
         }
 
         private MimeMessage CreateMessage(EmailMessage emailMessage)

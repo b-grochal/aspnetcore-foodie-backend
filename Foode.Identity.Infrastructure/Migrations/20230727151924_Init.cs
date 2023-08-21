@@ -20,6 +20,7 @@ namespace Foode.Identity.Infrastructure.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false),
                     IsLocked = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Role = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -110,18 +111,18 @@ namespace Foode.Identity.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "ApplicationUsers",
-                columns: new[] { "Id", "AccessFailedCount", "CreatedBy", "CreatedDate", "Email", "FirstName", "IsLocked", "LastModifiedBy", "LastModifiedDate", "LastName", "PasswordHash", "PhoneNumber", "Role" },
-                values: new object[] { 1, 0, "Seed", new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 441, DateTimeKind.Unspecified).AddTicks(3276), new TimeSpan(0, 2, 0, 0, 0)), "michsco123@foodie.com", "Michael", false, null, null, "Scott", "$2a$11$jifga0wsECg8kvwDUUHVPOuHVrIScy9qFhOQsVtq1CgOMGD5BB/8e", "123-456-789", 1 });
+                columns: new[] { "Id", "AccessFailedCount", "CreatedBy", "CreatedDate", "Email", "FirstName", "IsActive", "IsLocked", "LastModifiedBy", "LastModifiedDate", "LastName", "PasswordHash", "PhoneNumber", "Role" },
+                values: new object[] { 1, 0, "Seed", new DateTimeOffset(new DateTime(2023, 7, 27, 17, 19, 23, 347, DateTimeKind.Unspecified).AddTicks(6626), new TimeSpan(0, 2, 0, 0, 0)), "michsco123@foodie.com", "Michael", false, false, null, null, "Scott", "$2a$11$Ute11nPVosZfsBSiUjQMWeLaJP0CivHC4M352w9h6MdFblObIt.eq", "123-456-789", 1 });
 
             migrationBuilder.InsertData(
                 table: "ApplicationUsers",
-                columns: new[] { "Id", "AccessFailedCount", "CreatedBy", "CreatedDate", "Email", "FirstName", "IsLocked", "LastModifiedBy", "LastModifiedDate", "LastName", "PasswordHash", "PhoneNumber", "Role" },
-                values: new object[] { 3, 0, "Seed", new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 770, DateTimeKind.Unspecified).AddTicks(5870), new TimeSpan(0, 2, 0, 0, 0)), "jimhal123@foodie.com", "Jim", false, null, null, "Halpert", "$2a$11$y9/bT7ot2O5rvOu.sQebK.HeSRxl/6sKxghFGyZan/oWwM57SMHn6", "123-456-789", 3 });
+                columns: new[] { "Id", "AccessFailedCount", "CreatedBy", "CreatedDate", "Email", "FirstName", "IsActive", "IsLocked", "LastModifiedBy", "LastModifiedDate", "LastName", "PasswordHash", "PhoneNumber", "Role" },
+                values: new object[] { 3, 0, "Seed", new DateTimeOffset(new DateTime(2023, 7, 27, 17, 19, 23, 774, DateTimeKind.Unspecified).AddTicks(968), new TimeSpan(0, 2, 0, 0, 0)), "jimhal123@foodie.com", "Jim", false, false, null, null, "Halpert", "$2a$11$nGuVXjR/mUxPmIF8U9kUtu0OpPX6XizJvJgWnFvxZK8Zvx5q.Fvxm", "123-456-789", 3 });
 
             migrationBuilder.InsertData(
                 table: "ApplicationUsers",
-                columns: new[] { "Id", "AccessFailedCount", "CreatedBy", "CreatedDate", "Email", "FirstName", "IsLocked", "LastModifiedBy", "LastModifiedDate", "LastName", "PasswordHash", "PhoneNumber", "Role" },
-                values: new object[] { 2, 0, "Seed", new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 595, DateTimeKind.Unspecified).AddTicks(7118), new TimeSpan(0, 2, 0, 0, 0)), "dwigsch123@foodie.com", "Dwight", false, null, null, "Schrute", "$2a$11$8RwtHfCGjD2cTYAsTWQpBuqkS0kzvpnwdwdjW/iL8BjwOs5y6E.MS", "123-456-789", 2 });
+                columns: new[] { "Id", "AccessFailedCount", "CreatedBy", "CreatedDate", "Email", "FirstName", "IsActive", "IsLocked", "LastModifiedBy", "LastModifiedDate", "LastName", "PasswordHash", "PhoneNumber", "Role" },
+                values: new object[] { 2, 0, "Seed", new DateTimeOffset(new DateTime(2023, 7, 27, 17, 19, 23, 602, DateTimeKind.Unspecified).AddTicks(1312), new TimeSpan(0, 2, 0, 0, 0)), "dwigsch123@foodie.com", "Dwight", false, false, null, null, "Schrute", "$2a$11$GiJb5u9b8lj5gKoW8q7RE.omkoGuhii.cO.XAQJs2RnxZZRV5i9h2", "123-456-789", 2 });
 
             migrationBuilder.InsertData(
                 table: "Admins",
@@ -143,9 +144,9 @@ namespace Foode.Identity.Infrastructure.Migrations
                 columns: new[] { "Id", "ApplicationUserId", "CreatedBy", "CreatedDate", "ExpirationTime", "LastModifiedBy", "LastModifiedDate", "Token" },
                 values: new object[,]
                 {
-                    { 1, 1, "Seed", new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 937, DateTimeKind.Unspecified).AddTicks(3001), new TimeSpan(0, 2, 0, 0, 0)), null, null, null, null },
-                    { 3, 3, "Seed", new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 937, DateTimeKind.Unspecified).AddTicks(3153), new TimeSpan(0, 2, 0, 0, 0)), null, null, null, null },
-                    { 2, 2, "Seed", new DateTimeOffset(new DateTime(2023, 6, 14, 18, 18, 27, 937, DateTimeKind.Unspecified).AddTicks(3133), new TimeSpan(0, 2, 0, 0, 0)), null, null, null, null }
+                    { 1, 1, "Seed", new DateTimeOffset(new DateTime(2023, 7, 27, 17, 19, 23, 966, DateTimeKind.Unspecified).AddTicks(8549), new TimeSpan(0, 2, 0, 0, 0)), null, null, null, null },
+                    { 3, 3, "Seed", new DateTimeOffset(new DateTime(2023, 7, 27, 17, 19, 23, 966, DateTimeKind.Unspecified).AddTicks(8669), new TimeSpan(0, 2, 0, 0, 0)), null, null, null, null },
+                    { 2, 2, "Seed", new DateTimeOffset(new DateTime(2023, 7, 27, 17, 19, 23, 966, DateTimeKind.Unspecified).AddTicks(8663), new TimeSpan(0, 2, 0, 0, 0)), null, null, null, null }
                 });
 
             migrationBuilder.CreateIndex(

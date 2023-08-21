@@ -1,7 +1,7 @@
 ﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Domain.Entities;
-using Foodie.Identity.Domain.Exceptions;
+using Foodie.Identity.Application.Exceptions;
 using MediatR;
 using System;
 using System.Threading;
@@ -40,6 +40,9 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
 
             if (applicationUser.IsLocked)
                 throw new ApplicationUserLockedException(request.Email);
+
+            if (!applicationUser.IsActive)
+                throw new ApplicationUserNotActivatedException(request.Email);
 
             if (!passwordService.VerifyPassword(request.Password, applicationUser.PasswordHash))
                 await HandleInvalidAuthentication(applicationUser);

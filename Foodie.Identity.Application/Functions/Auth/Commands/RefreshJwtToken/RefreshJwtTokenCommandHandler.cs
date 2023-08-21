@@ -1,6 +1,6 @@
 ﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Identity.Domain.Exceptions;
+using Foodie.Identity.Application.Exceptions;
 using MediatR;
 using System;
 using System.Threading;

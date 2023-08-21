@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Domain.Exceptions;
+using Foodie.Identity.Application.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;

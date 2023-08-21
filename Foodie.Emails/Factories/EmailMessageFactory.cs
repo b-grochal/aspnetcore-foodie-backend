@@ -1,5 +1,7 @@
 ﻿using Foodie.Templates.Models;
 using Foodie.Templates.Renderer;
+using Foodie.Templates.Views.Emails.MyAccount.AccountActivation;
+using Foodie.Templates.Views.Emails.MyAccount.SetPassword;
 using Foodie.Templates.Views.Emails.Orders.OrderCancelled;
 using Foodie.Templates.Views.Emails.Orders.OrderDelivered;
 using Foodie.Templates.Views.Emails.Orders.OrderInDelivery;
@@ -17,6 +19,8 @@ namespace Foodie.Templates.Factories
         Task<EmailMessage> GenerateOrderInDeliveryMessage(string toAddress, long orderId);
         Task<EmailMessage> GenerateOrderDeliveredMessage(string toAddress, long orderId);
         Task<EmailMessage> GenerateOrderCancelledMessage(string toAddress, long orderId);
+        Task<EmailMessage> GenerateAccountActivationMessage(string toAddress, string accountActivationToken);
+        Task<EmailMessage> GenerateSetPasswordMessage(string toAddress, string setPasswordToken);
     }
 
     public class EmailMessageFactory : IEmailMessageFactory
@@ -26,6 +30,20 @@ namespace Foodie.Templates.Factories
         public EmailMessageFactory(IViewsRenderer viewsRenderer)
         {
             this.viewsRenderer = viewsRenderer;
+        }
+
+        public async Task<EmailMessage> GenerateAccountActivationMessage(string toAddress, string accountActivationToken)
+        {
+            var accountActivationEmialViewModel = new AccountActivationEmailViewModel
+            {
+                AccountActivationToken = accountActivationToken
+            };
+
+            return new EmailMessage
+            {
+                Content = await viewsRenderer.RenderView("/Views/Emails/MyAccount/AccountActivation/AccountActivationEmail.cshtml", accountActivationEmialViewModel),
+                To = new List<string> { toAddress }
+            };
         }
 
         public async Task<EmailMessage> GenerateOrderCancelledMessage(string toAddress, long orderId)
@@ -94,6 +112,20 @@ namespace Foodie.Templates.Factories
             return new EmailMessage
             {
                 Content = await viewsRenderer.RenderView("/Views/Emails/Orders/OrderStarted/OrderStartedEmail.cshtml", orderStartedEmialViewModel),
+                To = new List<string> { toAddress }
+            };
+        }
+
+        public async Task<EmailMessage> GenerateSetPasswordMessage(string toAddress, string setPasswordToken)
+        {
+            var setPasswordEmialViewModel = new SetPasswordEmailViewModel
+            {
+                SetPasswordToken = setPasswordToken
+            };
+
+            return new EmailMessage
+            {
+                Content = await viewsRenderer.RenderView("/Views/Emails/MyAccount/SetPassword/SetPasswordEmail.cshtml", setPasswordEmialViewModel),
                 To = new List<string> { toAddress }
             };
         }

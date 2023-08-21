@@ -2,51 +2,69 @@
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Domain.Entities;
-using Foodie.Identity.Domain.Exceptions;
+using Foodie.Identity.Application.Exceptions;
 using Foodie.Shared.Enums;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Foodie.Shared.Cache;
+using Hangfire;
+using Foodie.Templates.Services;
+using System;
 
 namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler
 {
     public class CreateOrderHandlerCommandHandler : IRequestHandler<CreateOrderHandlerCommand, CreateOrderHandlerCommandResponse>
     {
-        private readonly IOrderHandlersRepository orderHandlersRepository;
-        private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IRefreshTokensRepository refreshTokensRepository;
-        private readonly IPasswordService passwordService;
-        private readonly IMapper mapper;
+        private readonly IOrderHandlersRepository _orderHandlersRepository;
+        private readonly IApplicationUsersRepository _applicationUsersRepository;
+        private readonly IRefreshTokensRepository _refreshTokensRepository;
+        private readonly IPasswordService _passwordService;
+        private readonly IMapper _mapper;
+        private readonly ICacheService _cacheService;
+        private readonly IBackgroundJobClient _backgroundJobClient;
+        private readonly IEmailsService _emailsService;
 
-        public CreateOrderHandlerCommandHandler(IOrderHandlersRepository orderHandlersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository refreshTokensRepository, IPasswordService passwordService, IMapper mapper)
+        public CreateOrderHandlerCommandHandler(IOrderHandlersRepository orderHandlersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository refreshTokensRepository, IPasswordService passwordService, IMapper mapper, ICacheService cacheService, IBackgroundJobClient backgroundJobClient, IEmailsService emailsService)
         {
-            this.orderHandlersRepository = orderHandlersRepository;
-            this.applicationUsersRepository = applicationUsersRepository;
-            this.refreshTokensRepository = refreshTokensRepository;
-            this.passwordService = passwordService;
-            this.mapper = mapper;
+            _orderHandlersRepository = orderHandlersRepository;
+            _applicationUsersRepository = applicationUsersRepository;
+            _refreshTokensRepository = refreshTokensRepository;
+            _passwordService = passwordService;
+            _mapper = mapper;
+            _cacheService = cacheService;
+            _backgroundJobClient = backgroundJobClient;
+            _emailsService = emailsService;
         }
 
         public async Task<CreateOrderHandlerCommandResponse> Handle(CreateOrderHandlerCommand request, CancellationToken cancellationToken)
         {
-            if ((await applicationUsersRepository.GetByEmailAsync(request.Email)) is not null)
+            if ((await _applicationUsersRepository.GetByEmailAsync(request.Email)) is not null)
                 throw new ApplicationUserAlreadyExistsException(request.Email);
 
-            var orderHandler = mapper.Map<OrderHandler>(request);
+            var orderHandler = _mapper.Map<OrderHandler>(request);
 
-            orderHandler.PasswordHash = passwordService.HashPassword(request.Password);
+            orderHandler.PasswordHash = _passwordService.HashPassword(request.Password);
             orderHandler.Role = ApplicationUserRole.OrderHandler;
 
-            await orderHandlersRepository.CreateAsync(orderHandler);
+            await _orderHandlersRepository.CreateAsync(orderHandler);
 
-            await refreshTokensRepository.CreateAsync(new RefreshToken
+            await _refreshTokensRepository.CreateAsync(new RefreshToken
             {
                 ApplicationUserId = orderHandler.Id,
                 Token = null,
                 ExpirationTime = null
             });
 
-            return mapper.Map<CreateOrderHandlerCommandResponse>(orderHandler);
+            var accountActivationToken = Guid.NewGuid().ToString();
+            await _cacheService.SetAsync<ApplicationUser>(orderHandler,
+                                                          CachePrefixes.AccountActivationTokens,
+                                                          string.Empty,
+                                                          CacheParameters.AccountActivationToken,
+                                                          accountActivationToken);
+            _backgroundJobClient.Enqueue(() => _emailsService.SendAccountActivationEmail(orderHandler.Email, accountActivationToken));
+
+            return _mapper.Map<CreateOrderHandlerCommandResponse>(orderHandler);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Foodie.Identity.Domain.Entities
         public string PasswordHash { get; set; }
         public int AccessFailedCount { get; set; }
         public bool IsLocked { get; set; }
+        public bool IsActive { get; set; }
         public ApplicationUserRole Role { get; set; }
         public RefreshToken RefreshToken { get; set; }
     }

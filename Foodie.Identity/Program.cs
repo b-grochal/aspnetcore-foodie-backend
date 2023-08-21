@@ -28,7 +28,7 @@ namespace Foodie.Identity
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-                .AddApplicationSettings(SettingsType.JwtToken, SettingsType.Cache)
+                .AddApplicationSettings(SettingsType.JwtToken, SettingsType.Cache, SettingsType.Smtp)
                 .UseSerilog();
     }
 }
