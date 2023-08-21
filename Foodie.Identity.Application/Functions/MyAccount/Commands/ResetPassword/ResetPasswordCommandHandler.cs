@@ -37,7 +37,7 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ResetPassword
             await _cacheService.SetAsync(applicationUser,
                                                           CachePrefixes.SetPasswordToken,
                                                           string.Empty,
-                                                          CacheParameters.AccountActivationToken,
+                                                          CacheParameters.SetPasswordToken,
                                                           setPasswordToken);
 
             _backgroundJobClient.Enqueue(() => _emailsService.SendAccountActivationEmail(applicationUser.Email, setPasswordToken));

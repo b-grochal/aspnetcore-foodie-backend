@@ -26,7 +26,7 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.SetPassword
         {
             var applicationUser = await _cacheService.GetAsync<ApplicationUser>(CachePrefixes.SetPasswordToken,
                                                           string.Empty,
-                                                          CacheParameters.AccountActivationToken,
+                                                          CacheParameters.SetPasswordToken,
                                                           request.SetPasswordToken);
 
             if (applicationUser is null)
@@ -40,6 +40,10 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.SetPassword
             applicationUser.PasswordHash = _passwordService.HashPassword(request.Password);
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
+
+            await _cacheService.RemoveAsync(CachePrefixes.SetPasswordToken, string.Empty, CacheParameters.SetPasswordToken,
+                                                          request.SetPasswordToken);
+
             return Unit.Value;
         }
     }

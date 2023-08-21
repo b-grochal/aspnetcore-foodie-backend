@@ -7,46 +7,64 @@ using Foodie.Shared.Enums;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Foodie.Shared.Cache;
+using Hangfire;
+using Foodie.Templates.Services;
+using System;
 
 namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
 {
     public class CreateAdminCommandHandler : IRequestHandler<CreateAdminCommand, CreateAdminCommandResponse>
     {
-        private readonly IAdminsRepository adminsRepository;
-        private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IRefreshTokensRepository applicationUserRefreshTokensRepository;
-        private readonly IPasswordService passwordService;
-        private readonly IMapper mapper;
+        private readonly IAdminsRepository _adminsRepository;
+        private readonly IApplicationUsersRepository _applicationUsersRepository;
+        private readonly IRefreshTokensRepository _applicationUserRefreshTokensRepository;
+        private readonly IPasswordService _passwordService;
+        private readonly IMapper _mapper;
+        private readonly ICacheService _cacheService;
+        private readonly IBackgroundJobClient _backgroundJobClient;
+        private readonly IEmailsService _emailsService;
 
-        public CreateAdminCommandHandler(IAdminsRepository adminsRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper)
+        public CreateAdminCommandHandler(IAdminsRepository adminsRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper, ICacheService cacheService, IBackgroundJobClient backgroundJobClient, IEmailsService emailsService)
         {
-            this.adminsRepository = adminsRepository;
-            this.applicationUsersRepository = applicationUsersRepository;
-            this.applicationUserRefreshTokensRepository = applicationUserRefreshTokensRepository;
-            this.passwordService = passwordService;
-            this.mapper = mapper;
+            _adminsRepository = adminsRepository;
+            _applicationUsersRepository = applicationUsersRepository;
+            _applicationUserRefreshTokensRepository = applicationUserRefreshTokensRepository;
+            _passwordService = passwordService;
+            _mapper = mapper;
+            _cacheService = cacheService;
+            _backgroundJobClient = backgroundJobClient;
+            _emailsService = emailsService;
         }
 
         public async Task<CreateAdminCommandResponse> Handle(CreateAdminCommand request, CancellationToken cancellationToken)
         {
-            if ((await applicationUsersRepository.GetByEmailAsync(request.Email)) is not null)
+            if ((await _applicationUsersRepository.GetByEmailAsync(request.Email)) is not null)
                 throw new ApplicationUserAlreadyExistsException(request.Email);
 
-            var admin = mapper.Map<Admin>(request);
+            var admin = _mapper.Map<Admin>(request);
 
-            admin.PasswordHash = passwordService.HashPassword(request.Password);
+            admin.PasswordHash = _passwordService.HashPassword(request.Password);
             admin.Role = ApplicationUserRole.Admin;
 
-            await adminsRepository.CreateAsync(admin);
+            await _adminsRepository.CreateAsync(admin);
 
-            await applicationUserRefreshTokensRepository.CreateAsync(new RefreshToken
+            await _applicationUserRefreshTokensRepository.CreateAsync(new RefreshToken
             {
                 ApplicationUserId = admin.Id,
                 Token = null,
                 ExpirationTime = null
             });
 
-            return mapper.Map<CreateAdminCommandResponse>(admin);
+            var accountActivationToken = Guid.NewGuid().ToString();
+            await _cacheService.SetAsync<ApplicationUser>(admin,
+                                                          CachePrefixes.AccountActivationTokens,
+                                                          string.Empty,
+                                                          CacheParameters.AccountActivationToken,
+                                                          accountActivationToken);
+            _backgroundJobClient.Enqueue(() => _emailsService.SendAccountActivationEmail(admin.Email, accountActivationToken));
+
+            return _mapper.Map<CreateAdminCommandResponse>(admin);
         }
     }
 }

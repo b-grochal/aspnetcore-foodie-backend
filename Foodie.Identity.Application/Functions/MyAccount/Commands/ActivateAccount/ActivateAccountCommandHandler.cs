@@ -34,6 +34,9 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccou
             applicationUser.IsActive = true;
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
+
+            await _cacheService.RemoveAsync(CachePrefixes.AccountActivationTokens, string.Empty, CacheParameters.AccountActivationToken, request.AccountActivationToken);
+
             return Unit.Value;
         }
     }
