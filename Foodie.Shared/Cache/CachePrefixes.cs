@@ -12,6 +12,7 @@
         Customers,
         OrderHandlers,
         Countries,
-        AccountActivationTokens
+        AccountActivationTokens,
+        SetPasswordToken
     }
 }

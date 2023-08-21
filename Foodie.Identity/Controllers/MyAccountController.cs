@@ -1,6 +1,8 @@
 ﻿using Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccount;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.ChangeEmail;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.ChangePassword;
+using Foodie.Identity.Application.Functions.MyAccount.Commands.ResetPassword;
+using Foodie.Identity.Application.Functions.MyAccount.Commands.SetPassword;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData;
 using Foodie.Identity.Application.Functions.MyAccount.Queries.GetAccountData;
 using Foodie.Shared.Attributes;
@@ -61,6 +63,22 @@ namespace Foodie.Identity.API.Controllers
         {
             changeEmailCommand.ApplicationUserId = ApplicationUserId.Value;
             await mediator.Send(changeEmailCommand);
+            return NoContent();
+        }
+
+        [HttpPost]
+        [Route("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordCommand resetPasswordCommand)
+        {
+            await mediator.Send(resetPasswordCommand);
+            return NoContent();
+        }
+
+        [HttpPost]
+        [Route("set-password")]
+        public async Task<IActionResult> SetPassword([FromBody] SetPasswordCommand setPasswordCommand)
+        {
+            await mediator.Send(setPasswordCommand);
             return NoContent();
         }
     }
