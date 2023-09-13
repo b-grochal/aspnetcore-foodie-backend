@@ -34,7 +34,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
 
             var editedRestaurant = mapper.Map(request, restaurant);
 
-            var categories = await categoriesRepository.GetAllAsync(request.CategoryIds);
+            var categories = await categoriesRepository.GetAllAsync(request.CategoriesIds);
 
             editedRestaurant.Categories.Merge(categories);
 

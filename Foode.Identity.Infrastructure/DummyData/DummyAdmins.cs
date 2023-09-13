@@ -19,7 +19,8 @@ namespace Foode.Identity.Infrastructure.DummyData
                     PhoneNumber = "123-456-789",
                     Role = ApplicationUserRole.Admin,
                     CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now
+                    CreatedDate = DateTimeOffset.Now,
+                    IsActive = true
                 }
             };
         }

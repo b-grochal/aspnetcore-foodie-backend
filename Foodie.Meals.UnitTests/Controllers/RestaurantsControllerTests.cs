@@ -31,7 +31,7 @@ namespace Foodie.Meals.UnitTests.Controllers
             var createRestaurantCommand = new CreateRestaurantCommand
             {
                 Name = "Test restaurant",
-                CategoryIds = new List<int> { 1, 2, 3 }
+                CategoriesIds = new List<int> { 1, 2, 3 }
             };
 
             var result = await restaurantsController.CreateRestaurant(createRestaurantCommand);
@@ -54,7 +54,7 @@ namespace Foodie.Meals.UnitTests.Controllers
             {
                 Id = 1,
                 Name = "Test restaurant",
-                CategoryIds = new List<int> { 1, 2, 3 }
+                CategoriesIds = new List<int> { 1, 2, 3 }
             };
 
             var result = await restaurantsController.UpdateRestaurant(2, updateRestaurantCommand);
@@ -77,7 +77,7 @@ namespace Foodie.Meals.UnitTests.Controllers
             {
                 Id = 1,
                 Name = "Test restaurant",
-                CategoryIds = new List<int> { 1, 2, 3 }
+                CategoriesIds = new List<int> { 1, 2, 3 }
             };
 
             var result = await restaurantsController.UpdateRestaurant(1, updateRestaurantCommand);
