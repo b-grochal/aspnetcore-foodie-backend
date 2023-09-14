@@ -6,17 +6,10 @@ using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocati
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
 using Foodie.Shared.Attributes;
-using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
 using Foodie.Shared.Enums;
-using Foodie.Shared.Extensions.Attributes;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Meals.Controllers
