@@ -4,17 +4,10 @@ using Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal;
 using Foodie.Meals.Application.Functions.Meals.Queries.GetMealById;
 using Foodie.Meals.Application.Functions.Meals.Queries.GetMeals;
 using Foodie.Shared.Attributes;
-using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
 using Foodie.Shared.Enums;
-using Foodie.Shared.Extensions.Attributes;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Meals.Controllers
@@ -22,7 +15,7 @@ namespace Foodie.Meals.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class MealsController : BaseController
-    { 
+    {
         public MealsController(IMediator mediator) : base(mediator) { }
 
         // POST api/meals
