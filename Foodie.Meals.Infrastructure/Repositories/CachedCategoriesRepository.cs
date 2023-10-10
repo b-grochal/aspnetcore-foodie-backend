@@ -64,7 +64,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
         public async Task UpdateAsync(Category entity)
         {
             await decoratedRepository.UpdateAsync(entity);
-            await cacheService.RemoveAsync(CachePrefixes.Categories);
+            await cacheService.RemoveByPrefixAsync(CachePrefixes.Categories);
         }
     }
 }
