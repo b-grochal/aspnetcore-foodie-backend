@@ -18,20 +18,20 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
     {
         public MockMediatorForLocations MockSendingCreateLocationCommand()
         {
-            Setup(m => m.Send(It.IsAny<CreateLocationCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((CreateLocationCommand createLocationCommand, CancellationToken cancellationToken) =>
-            {
-                return new CreateLocationCommandResponse
-                {
-                    Id = 1,
-                    Address = createLocationCommand.Address,
-                    Email = createLocationCommand.Email,
-                    PhoneNumber = createLocationCommand.PhoneNumber,
-                    CityId = createLocationCommand.CityId,
-                    RestaurantId = createLocationCommand.RestaurantId,
-                    CityName = "Test city",
-                    RestaurantName = "Test restaurant"
-                };
-            });
+            //Setup(m => m.Send(It.IsAny<CreateLocationCommand>(), It.IsAny<CancellationToken>())).ReturnsAsync((CreateLocationCommand createLocationCommand, CancellationToken cancellationToken) =>
+            //{
+            //    return new CreateLocationCommandResponse
+            //    {
+            //        Id = 1,
+            //        Address = createLocationCommand.Address,
+            //        Email = createLocationCommand.Email,
+            //        PhoneNumber = createLocationCommand.PhoneNumber,
+            //        CityId = createLocationCommand.CityId,
+            //        RestaurantId = createLocationCommand.RestaurantId,
+            //        CityName = "Test city",
+            //        RestaurantName = "Test restaurant"
+            //    };
+            //});
 
             return this;
         }
