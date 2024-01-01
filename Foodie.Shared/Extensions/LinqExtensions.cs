@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Foodie.Shared.Extensions
 {
     public static class LinqExtensions
     {
+        // TODO: Remove the method, assign new values insted
         public static ICollection<T> Merge<T>(this ICollection<T> list, IEnumerable<T> items)
         {
             list.Clear();

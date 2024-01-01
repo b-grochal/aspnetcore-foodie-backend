@@ -27,7 +27,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaura
         public async Task<CreateRestaurantCommandResponse> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
         {
             var restaurant = mapper.Map<Restaurant>(request);
-            var categories = await categoriesRepository.GetAllAsync(request.CategoryIds);
+            var categories = await categoriesRepository.GetAllAsync(request.CategoriesIds);
             restaurant.Categories = new List<Category>();
 
             foreach (var category in categories)

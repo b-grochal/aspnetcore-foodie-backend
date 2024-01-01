@@ -64,9 +64,7 @@ namespace Foodie.Meals.Application.Mapper
         private void ConfiureLocationsMapping()
         {
             CreateMap<CreateLocationCommand, Location>();
-            CreateMap<Location, CreateLocationCommandResponse>() // TODO Check if it will work without mappings listed below
-                .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
-                .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
+            CreateMap<Location, CreateLocationCommandResponse>();
             CreateMap<UpdateLocationCommand, Location>();
             CreateMap<Location, UpdateLocationCommandResponse>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))

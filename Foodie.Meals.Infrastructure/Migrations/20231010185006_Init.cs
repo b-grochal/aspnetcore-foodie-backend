@@ -170,10 +170,10 @@ namespace Foodie.Meals.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "LastModifiedBy", "LastModifiedDate", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 933, DateTimeKind.Unspecified).AddTicks(98), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Pasta" },
-                    { 2, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 934, DateTimeKind.Unspecified).AddTicks(8908), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Burger" },
-                    { 3, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 934, DateTimeKind.Unspecified).AddTicks(8943), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Pizza" },
-                    { 4, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 934, DateTimeKind.Unspecified).AddTicks(8949), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Salad" }
+                    { 1, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 612, DateTimeKind.Unspecified).AddTicks(8240), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Pasta" },
+                    { 2, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 615, DateTimeKind.Unspecified).AddTicks(7285), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Burger" },
+                    { 3, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 615, DateTimeKind.Unspecified).AddTicks(7325), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Pizza" },
+                    { 4, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 615, DateTimeKind.Unspecified).AddTicks(7332), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Salad" }
                 });
 
             migrationBuilder.InsertData(
@@ -190,9 +190,9 @@ namespace Foodie.Meals.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "LastModifiedBy", "LastModifiedDate", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 937, DateTimeKind.Unspecified).AddTicks(6702), new TimeSpan(0, 2, 0, 0, 0)), null, null, "KFC" },
-                    { 2, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 937, DateTimeKind.Unspecified).AddTicks(6731), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Pizza Hut" },
-                    { 3, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 937, DateTimeKind.Unspecified).AddTicks(6734), new TimeSpan(0, 2, 0, 0, 0)), null, null, "McDonald's" }
+                    { 1, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 618, DateTimeKind.Unspecified).AddTicks(7042), new TimeSpan(0, 2, 0, 0, 0)), null, null, "KFC" },
+                    { 2, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 618, DateTimeKind.Unspecified).AddTicks(7072), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Pizza Hut" },
+                    { 3, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 618, DateTimeKind.Unspecified).AddTicks(7076), new TimeSpan(0, 2, 0, 0, 0)), null, null, "McDonald's" }
                 });
 
             migrationBuilder.InsertData(
@@ -210,9 +210,9 @@ namespace Foodie.Meals.Infrastructure.Migrations
                 columns: new[] { "Id", "CountryId", "CreatedBy", "CreatedDate", "LastModifiedBy", "LastModifiedDate", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 936, DateTimeKind.Unspecified).AddTicks(4164), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Las Vegas" },
-                    { 2, 1, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 936, DateTimeKind.Unspecified).AddTicks(4197), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Los Angeles" },
-                    { 3, 1, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 936, DateTimeKind.Unspecified).AddTicks(4201), new TimeSpan(0, 2, 0, 0, 0)), null, null, "New York" }
+                    { 1, 1, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 617, DateTimeKind.Unspecified).AddTicks(3614), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Las Vegas" },
+                    { 2, 1, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 617, DateTimeKind.Unspecified).AddTicks(3650), new TimeSpan(0, 2, 0, 0, 0)), null, null, "Los Angeles" },
+                    { 3, 1, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 617, DateTimeKind.Unspecified).AddTicks(3655), new TimeSpan(0, 2, 0, 0, 0)), null, null, "New York" }
                 });
 
             migrationBuilder.InsertData(
@@ -220,12 +220,12 @@ namespace Foodie.Meals.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "LastModifiedBy", "LastModifiedDate", "Name", "Price", "RestaurantId" },
                 values: new object[,]
                 {
-                    { 1, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 937, DateTimeKind.Unspecified).AddTicks(4293), new TimeSpan(0, 2, 0, 0, 0)), "Longer", null, null, "Longer", 12m, 1 },
-                    { 2, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 937, DateTimeKind.Unspecified).AddTicks(4326), new TimeSpan(0, 2, 0, 0, 0)), "Zinger", null, null, "Zinger", 10m, 1 },
-                    { 3, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 937, DateTimeKind.Unspecified).AddTicks(4330), new TimeSpan(0, 2, 0, 0, 0)), "Pizza Texas", null, null, "Pizza Texas", 12m, 2 },
-                    { 4, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 937, DateTimeKind.Unspecified).AddTicks(4333), new TimeSpan(0, 2, 0, 0, 0)), "Pizza Carbonara", null, null, "Pizza Carbonara", 12m, 2 },
-                    { 5, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 937, DateTimeKind.Unspecified).AddTicks(4336), new TimeSpan(0, 2, 0, 0, 0)), "Big Mac", null, null, "Big Mac", 15m, 3 },
-                    { 6, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 937, DateTimeKind.Unspecified).AddTicks(4342), new TimeSpan(0, 2, 0, 0, 0)), "McRoyal", null, null, "McRoyal", 10m, 3 }
+                    { 1, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 618, DateTimeKind.Unspecified).AddTicks(4375), new TimeSpan(0, 2, 0, 0, 0)), "Longer", null, null, "Longer", 12m, 1 },
+                    { 2, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 618, DateTimeKind.Unspecified).AddTicks(4407), new TimeSpan(0, 2, 0, 0, 0)), "Zinger", null, null, "Zinger", 10m, 1 },
+                    { 3, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 618, DateTimeKind.Unspecified).AddTicks(4413), new TimeSpan(0, 2, 0, 0, 0)), "Pizza Texas", null, null, "Pizza Texas", 12m, 2 },
+                    { 4, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 618, DateTimeKind.Unspecified).AddTicks(4416), new TimeSpan(0, 2, 0, 0, 0)), "Pizza Carbonara", null, null, "Pizza Carbonara", 12m, 2 },
+                    { 5, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 618, DateTimeKind.Unspecified).AddTicks(4420), new TimeSpan(0, 2, 0, 0, 0)), "Big Mac", null, null, "Big Mac", 15m, 3 },
+                    { 6, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 618, DateTimeKind.Unspecified).AddTicks(4425), new TimeSpan(0, 2, 0, 0, 0)), "McRoyal", null, null, "McRoyal", 10m, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -233,12 +233,12 @@ namespace Foodie.Meals.Infrastructure.Migrations
                 columns: new[] { "Id", "Address", "CityId", "CreatedBy", "CreatedDate", "Email", "LastModifiedBy", "LastModifiedDate", "PhoneNumber", "RestaurantId" },
                 values: new object[,]
                 {
-                    { 1, "Kfc Las Vegas", 1, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 936, DateTimeKind.Unspecified).AddTicks(9117), new TimeSpan(0, 2, 0, 0, 0)), "kfc.lasvegas@email.com", null, null, "123-123-213", 1 },
-                    { 4, "Pizza Hut Las Vegas", 1, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 936, DateTimeKind.Unspecified).AddTicks(9155), new TimeSpan(0, 2, 0, 0, 0)), "pizzahut.lasvegas@email.com", null, null, "123-123-213", 2 },
-                    { 6, "McDonald's Las Vegas", 1, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 936, DateTimeKind.Unspecified).AddTicks(9165), new TimeSpan(0, 2, 0, 0, 0)), "mcdonalds.lasvegas@email.com", null, null, "123-123-213", 3 },
-                    { 2, "Kfc Los Angeles", 2, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 936, DateTimeKind.Unspecified).AddTicks(9148), new TimeSpan(0, 2, 0, 0, 0)), "kfc.losangeles@email.com", null, null, "123-123-213", 1 },
-                    { 5, "Pizza Hut Los Angeles", 2, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 936, DateTimeKind.Unspecified).AddTicks(9158), new TimeSpan(0, 2, 0, 0, 0)), "pizzahut.losangeles@email.com", null, null, "123-123-213", 2 },
-                    { 3, "Kfc New York", 3, "Seed", new DateTimeOffset(new DateTime(2023, 7, 20, 20, 28, 32, 936, DateTimeKind.Unspecified).AddTicks(9152), new TimeSpan(0, 2, 0, 0, 0)), "kfc.newyork@email.com", null, null, "123-123-213", 1 }
+                    { 1, "Kfc Las Vegas", 1, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 617, DateTimeKind.Unspecified).AddTicks(8863), new TimeSpan(0, 2, 0, 0, 0)), "kfc.lasvegas@email.com", null, null, "123-123-213", 1 },
+                    { 4, "Pizza Hut Las Vegas", 1, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 617, DateTimeKind.Unspecified).AddTicks(8907), new TimeSpan(0, 2, 0, 0, 0)), "pizzahut.lasvegas@email.com", null, null, "123-123-213", 2 },
+                    { 6, "McDonald's Las Vegas", 1, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 617, DateTimeKind.Unspecified).AddTicks(8916), new TimeSpan(0, 2, 0, 0, 0)), "mcdonalds.lasvegas@email.com", null, null, "123-123-213", 3 },
+                    { 2, "Kfc Los Angeles", 2, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 617, DateTimeKind.Unspecified).AddTicks(8896), new TimeSpan(0, 2, 0, 0, 0)), "kfc.losangeles@email.com", null, null, "123-123-213", 1 },
+                    { 5, "Pizza Hut Los Angeles", 2, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 617, DateTimeKind.Unspecified).AddTicks(8910), new TimeSpan(0, 2, 0, 0, 0)), "pizzahut.losangeles@email.com", null, null, "123-123-213", 2 },
+                    { 3, "Kfc New York", 3, "Seed", new DateTimeOffset(new DateTime(2023, 10, 10, 20, 50, 5, 617, DateTimeKind.Unspecified).AddTicks(8902), new TimeSpan(0, 2, 0, 0, 0)), "kfc.newyork@email.com", null, null, "123-123-213", 1 }
                 });
 
             migrationBuilder.CreateIndex(

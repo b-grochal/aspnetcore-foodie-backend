@@ -42,7 +42,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Restaurants
             {
                 Id = 1,
                 Name = "Test name",
-                CategoryIds = new List<int> { 1, 2, 3 }
+                CategoriesIds = new List<int> { 1, 2, 3 }
             };
 
             var commandHandler = new UpdateRestaurantCommandHandler(restaurantsRepository.Object, categoriesRepository.Object, this.mapper);
@@ -70,7 +70,7 @@ namespace Foodie.Meals.UnitTests.Handlers.Restaurants
             {
                 Id = 1,
                 Name = "Test name",
-                CategoryIds = new List<int> { 1, 2, 3 }
+                CategoriesIds = new List<int> { 1, 2, 3 }
             };
 
             var commandHandler = new UpdateRestaurantCommandHandler(restaurantsRepository.Object, categoriesRepository.Object, this.mapper);

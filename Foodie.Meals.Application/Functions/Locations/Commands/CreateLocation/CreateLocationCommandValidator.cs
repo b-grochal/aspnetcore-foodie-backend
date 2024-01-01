@@ -21,7 +21,9 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation
 
             RuleFor(l => l.Email)
                 .NotEmpty()
-                .WithMessage("{PropertyName} should not be empty");
+                .WithMessage("{PropertyName} should not be empty")
+                .EmailAddress()
+                .WithMessage("Invalid email address");
 
             RuleFor(l => l.CityId)
                 .NotEmpty()

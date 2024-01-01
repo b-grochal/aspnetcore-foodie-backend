@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation
 {
@@ -25,7 +20,9 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation
 
             RuleFor(l => l.Email)
                 .NotEmpty()
-                .WithMessage("{PropertyName} should not be empty");
+                .WithMessage("{PropertyName} should not be empty")
+                .EmailAddress()
+                .WithMessage("Invalid email address");
 
             RuleFor(l => l.CityId)
                 .NotEmpty()

@@ -15,7 +15,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaura
                 .NotEmpty()
                 .WithMessage("{PropertyName} should not be empty");
 
-            RuleFor(r => r.CategoryIds)
+            RuleFor(r => r.CategoriesIds)
                 .NotEmpty()
                 .WithMessage("{PropertyName} should not be empty");
         }

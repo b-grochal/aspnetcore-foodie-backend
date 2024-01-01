@@ -1,9 +1,5 @@
 ﻿using Foodie.Shared.Responses;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
 {
@@ -19,5 +15,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public string Description { get; set; }
+        public int RestaurantId { get; set; }
     }
 }

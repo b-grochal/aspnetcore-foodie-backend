@@ -16,7 +16,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
             return dbContext.Restaurants
                 .Where(r => categoryId == null || r.Categories.Any(c => c.Id == categoryId))
                 .Where(r => name == null || r.Name.Equals(name))
-                .Where(r => cityName == null || r.Locations.Any(l => l.City.Name.Equals(name)))
+                .Where(r => cityName == null || r.Locations.Any(l => l.City.Name.Equals(cityName)))
                 .Paginate(pageNumber, pageSize);
         }
     }

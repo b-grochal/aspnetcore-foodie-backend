@@ -12,6 +12,6 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IReadOnlyCollection<int> CategoryIds { get; set; }
+        public IReadOnlyCollection<int> CategoriesIds { get; set; }
     }
 }

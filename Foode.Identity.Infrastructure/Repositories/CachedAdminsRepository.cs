@@ -55,7 +55,7 @@ namespace Foode.Identity.Infrastructure.Repositories
         public async Task UpdateAsync(Admin entity)
         {
             await decoratedRepository.UpdateAsync(entity);
-            await cacheService.RemoveAsync(CachePrefixes.Admins);
+            await cacheService.RemoveByPrefixAsync(CachePrefixes.Admins);
         }
     }
 }

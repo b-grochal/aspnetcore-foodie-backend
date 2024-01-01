@@ -4,7 +4,7 @@ namespace Foodie.Shared.Exceptions
 {
     public sealed class ValidationFailureException : AppException
     {
-        public ValidationFailureException(IReadOnlyDictionary<string, string[]> errorsDictionary) : base("Validation failure.")
+        public ValidationFailureException(IReadOnlyDictionary<string, string[]> errorsDictionary) : base("Validation failure")
         {
             ErrorsDictionary = errorsDictionary;
         } 

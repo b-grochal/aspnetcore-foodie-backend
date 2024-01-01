@@ -21,7 +21,8 @@ namespace Foode.Identity.Infrastructure.DummyData
                     Role = ApplicationUserRole.OrderHandler,
                     CreatedBy = "Seed",
                     CreatedDate = DateTimeOffset.Now,
-                    LocationId = DummySeed.OrderHandlerLocationId
+                    LocationId = DummySeed.OrderHandlerLocationId,
+                    IsActive = true
                 }
             };
         }
