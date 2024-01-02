@@ -1,4 +1,4 @@
-﻿namespace Foodie.Shared.Entities
+﻿namespace Foodie.Common.Domain.Entities
 {
     public abstract class BaseEntity
     {

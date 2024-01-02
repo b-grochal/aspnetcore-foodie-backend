@@ -1,6 +1,6 @@
-﻿using Foodie.Meals.Domain.Entities;
+﻿using Foodie.Common.Domain.Entities;
+using Foodie.Meals.Domain.Entities;
 using Foodie.Meals.Infrastructure.DummyData;
-using Foodie.Shared.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;

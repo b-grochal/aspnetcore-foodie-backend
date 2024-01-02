@@ -1,4 +1,4 @@
-﻿using Foodie.Shared.Entities;
+﻿using Foodie.Common.Domain.Entities;
 using System;
 
 namespace Foodie.Identity.Domain.Entities
