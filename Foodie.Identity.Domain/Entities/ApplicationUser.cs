@@ -3,7 +3,7 @@ using Foodie.Shared.Enums;
 
 namespace Foodie.Identity.Domain.Entities
 {
-    public class ApplicationUser : AuditableEntity
+    public class ApplicationUser : AuditableEntity<int>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

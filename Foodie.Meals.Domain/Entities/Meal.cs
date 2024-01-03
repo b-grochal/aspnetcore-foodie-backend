@@ -2,7 +2,7 @@
 
 namespace Foodie.Meals.Domain.Entities
 {
-    public class Meal : AuditableEntity
+    public class Meal : AuditableEntity<int>
     {
         public string Name { get; set; }
         public string Description { get; set; }

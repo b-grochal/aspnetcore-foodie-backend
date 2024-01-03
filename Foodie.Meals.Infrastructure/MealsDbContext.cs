@@ -1,4 +1,4 @@
-﻿using Foodie.Common.Domain.Entities;
+﻿using Foodie.Common.Domain.Entities.Interfaces;
 using Foodie.Meals.Domain.Entities;
 using Foodie.Meals.Infrastructure.DummyData;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +22,7 @@ namespace Foodie.Meals.Infrastructure
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            foreach (var entry in ChangeTracker.Entries<IIsAuditable>())
             {
                 switch (entry.State)
                 {
