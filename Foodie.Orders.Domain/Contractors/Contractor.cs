@@ -1,13 +1,9 @@
-﻿using Foodie.Orders.Domain.SeedWork;
+﻿using Foodie.Common.Domain.AggregateRoots;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Foodie.Orders.Domain.AggregatesModel.ContractorAggregate
+namespace Foodie.Orders.Domain.Contractors
 {
-    public class Contractor : Entity, IAggregateRoot
+    public class Contractor : AggregateRoot
     {
         public int RestaurantId { get; private set; }
         public string Name { get; private set; }

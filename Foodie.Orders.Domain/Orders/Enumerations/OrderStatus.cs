@@ -1,12 +1,10 @@
-﻿using Foodie.Orders.Domain.Exceptions;
-using Foodie.Orders.Domain.SeedWork;
+﻿using Foodie.Common.Domain.Enumerations;
+using Foodie.Orders.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
+namespace Foodie.Orders.Domain.Orders.Enumerations
 {
     public class OrderStatus : Enumeration
     {
@@ -18,7 +16,7 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
 
         public OrderStatus(int id, string name) : base(id, name) { }
 
-        public static IEnumerable<OrderStatus> List() => new[] { Started, InProgress, InDelivery, Delivered, Cancelled};
+        public static IEnumerable<OrderStatus> List() => new[] { Started, InProgress, InDelivery, Delivered, Cancelled };
 
         public static OrderStatus FromName(string name)
         {

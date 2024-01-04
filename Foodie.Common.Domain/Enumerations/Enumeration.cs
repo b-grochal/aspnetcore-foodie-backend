@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Foodie.Orders.Domain.SeedWork
+namespace Foodie.Common.Domain.Enumerations
 {
     public abstract class Enumeration : IComparable
     {

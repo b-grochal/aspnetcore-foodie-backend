@@ -1,45 +1,36 @@
-﻿using Foodie.Orders.Domain.Events;
-using Foodie.Orders.Domain.SeedWork;
-using System;
+﻿using Foodie.Common.Domain.AggregateRoots;
+using Foodie.Orders.Domain.Events;
+using Foodie.Orders.Domain.Orders.Entities;
+using Foodie.Orders.Domain.Orders.Enumerations;
+using Foodie.Orders.Domain.Orders.ValueObjects;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
+namespace Foodie.Orders.Domain.Orders
 {
-    public class Order : Entity, IAggregateRoot
+    public class Order : AggregateRoot
     {
-        private DateTime _orderDate;
-        public Address Address { get; private set; }
+        private readonly List<OrderItem> _orderItems = new();
 
-        public int? GetBuyerId => _buyerId;
-        private int? _buyerId;
+        public int? BuyerId { get; private set; }
 
-        public int? GetContractorId => _contractorId;
-        private int? _contractorId;
+        public int? ContractorId { get; private set; }
 
-        public OrderStatus OrderStatus { get; private set; }
-        private int _orderStatusId;
+        public int OrderStatusId { get; private set; }
 
-        private readonly List<OrderItem> _orderItems;
-        public IReadOnlyCollection<OrderItem> OrderItems => _orderItems;
+        public DeliveryAddress Address { get; private set; }
 
-        protected Order()
-        {
-            _orderItems = new List<OrderItem>();
-        }
+        public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
         public Order(string userId, string userFirstName, string userLastName, string userPhoneNumber, string userEmail, int restaurantId, string restaurantName, int locationId, string locationAddress,
-            string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry, Address address, int? buyerId = null, int? contractorId = null) : this()
+            string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry, DeliveryAddress address, int? buyerId = null, int? contractorId = null)
         {
-            _buyerId = buyerId;
-            _contractorId = contractorId;
-            _orderStatusId = OrderStatus.Started.Id;
-            _orderDate = DateTime.UtcNow;
+            BuyerId = buyerId;
+            ContractorId = contractorId;
+            OrderStatusId = OrderStatus.Started.Id;
             Address = address;
 
-            AddOrderStartedDomainEvent(userId, userFirstName, userLastName, userPhoneNumber, userEmail, restaurantId, restaurantName, locationId, 
+            AddOrderStartedDomainEvent(userId, userFirstName, userLastName, userPhoneNumber, userEmail, restaurantId, restaurantName, locationId,
                 locationAddress, locationPhoneNumber, locationEmail, cityId, cityName, locationCountry);
         }
 
@@ -61,50 +52,50 @@ namespace Foodie.Orders.Domain.AggregatesModel.OrderAggregate
 
         public void SetBuyerId(int id)
         {
-            _buyerId = id;
+            BuyerId = id;
         }
 
         public void SetContractorId(int id)
         {
-            _contractorId = id;
+            ContractorId = id;
         }
 
         public void SetInProgressStatus()
         {
-            if (this._orderStatusId == OrderStatus.Started.Id)
+            if (OrderStatusId == OrderStatus.Started.Id)
             {
                 AddDomainEvent(new OrderStatusChangedToInProgressDomainEvent(this));
-                _orderStatusId = OrderStatus.InProgress.Id;
+                OrderStatusId = OrderStatus.InProgress.Id;
             }
         }
 
         public void SetInDeliveryStatus()
         {
-            if (_orderStatusId == OrderStatus.InProgress.Id)
+            if (OrderStatusId == OrderStatus.InProgress.Id)
             {
                 AddDomainEvent(new OrderStatusChangedToInDeliveryDomainEvent(this));
-                _orderStatusId = OrderStatus.InDelivery.Id;
+                OrderStatusId = OrderStatus.InDelivery.Id;
             }
         }
 
         public void SetDeliveredStatus()
         {
-            if (_orderStatusId == OrderStatus.InDelivery.Id)
+            if (OrderStatusId == OrderStatus.InDelivery.Id)
             {
                 AddDomainEvent(new OrderDeliveredDomainEvent(this));
-                _orderStatusId = OrderStatus.Delivered.Id;
+                OrderStatusId = OrderStatus.Delivered.Id;
             }
         }
 
         public void SetCancelledStatus()
         {
-                AddDomainEvent(new OrderCancelledDomainEvent(this));
-                _orderStatusId = OrderStatus.Cancelled.Id;
+            AddDomainEvent(new OrderCancelledDomainEvent(this));
+            OrderStatusId = OrderStatus.Cancelled.Id;
         }
 
         public decimal GetTotal()
         {
-            return _orderItems.Sum(o => o.GetQuantity() * o.GetUnitPrice());
+            return _orderItems.Sum(i => i.Quantity * i.UnitPrice);
         }
 
         private void AddOrderStartedDomainEvent(string customerId, string customerFirstName, string customerLastName, string customerPhoneNumber, string customerEmail, int restaurantId, string restaurantName, int locationId,

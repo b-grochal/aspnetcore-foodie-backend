@@ -1,9 +1,9 @@
-﻿using Foodie.Orders.Domain.SeedWork;
+﻿using Foodie.Common.Domain.AggregateRoots;
 using System;
 
-namespace Foodie.Orders.Domain.AggregatesModel.BuyerAggregate
+namespace Foodie.Orders.Domain.Buyers
 {
-    public class Buyer : Entity, IAggregateRoot
+    public class Buyer : AggregateRoot
     {
         public string CustomerId { get; private set; }
         public string FirstName { get; private set; }

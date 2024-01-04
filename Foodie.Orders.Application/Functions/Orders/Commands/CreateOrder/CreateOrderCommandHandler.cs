@@ -28,7 +28,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
                 UserId = request.CustomerId
             });
 
-            var address = new Address(request.AddressStreet, request.AddressCity, request.AddressCountry);
+            var address = new DeliveryAddress(request.AddressStreet, request.AddressCity, request.AddressCountry);
             var order = new Order(request.CustomerId, request.CustomerFirstName, request.CustomerLastName, request.CustomerPhoneNumber, request.CustomerEmail, request.RestaurantId, request.RestaurantName,
                 request.LocationId, request.LocationAddress, request.LocationPhoneNumber, request.LocationEmail, request.CityId, request.CityName, request.LocationCountry, address);
 

@@ -3,7 +3,7 @@ using System;
 
 namespace Foodie.Common.Domain.Entities
 {
-    public abstract class AuditableEntity<TId> : BaseEntity<TId>, IIsAuditable
+    public abstract class AuditableEntity : BaseEntity, IIsAuditable
     {
         public string CreatedBy { get; set; }
 

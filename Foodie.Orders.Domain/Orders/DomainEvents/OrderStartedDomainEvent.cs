@@ -1,12 +1,6 @@
-﻿using Foodie.Orders.Domain.AggregatesModel.OrderAggregate;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
-namespace Foodie.Orders.Domain.Events
+namespace Foodie.Orders.Domain.Orders.DomainEvents
 {
     public class OrderStartedDomainEvent : INotification
     {
@@ -23,7 +17,7 @@ namespace Foodie.Orders.Domain.Events
         public string LocationEmail { get; }
         public int CityId { get; }
         public string CityName { get; }
-        public string LocationCountry { get; } 
+        public string LocationCountry { get; }
         public Order Order { get; }
 
         public OrderStartedDomainEvent(string customerId, string customerFirstName, string customerLastName, string customerPhoneNumber, string customerEmail, int restaurantId,
