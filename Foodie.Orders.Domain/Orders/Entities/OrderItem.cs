@@ -13,7 +13,7 @@ namespace Foodie.Orders.Domain.Orders.Entities
 
         public int MealId { get; }
 
-        public OrderItem(int mealId, string name, decimal unitPrice, int quantity = 1)
+        private OrderItem(int mealId, string name, decimal unitPrice, int quantity = 1)
         {
             if (quantity <= 0)
             {
@@ -24,6 +24,11 @@ namespace Foodie.Orders.Domain.Orders.Entities
             Name = name;
             UnitPrice = unitPrice;
             Quantity = quantity;
+        }
+
+        public static OrderItem Create(int mealId, string name, decimal unitPrice, int quantity = 1)
+        {
+            return new OrderItem(mealId, name, unitPrice, quantity);
         }
 
         public void AddQuantity(int quantity)

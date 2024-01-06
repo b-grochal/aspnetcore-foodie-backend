@@ -1,14 +1,6 @@
-﻿using MediatR;
+﻿using Foodie.Common.Domain.DomainEvents.Interfaces;
 
 namespace Foodie.Orders.Domain.Orders.DomainEvents
 {
-    public class OrderCancelledDomainEvent : INotification
-    {
-        public Order Order { get; }
-
-        public OrderCancelledDomainEvent(Order order)
-        {
-            Order = order;
-        }
-    }
+    public record OrderCancelledDomainEvent(Order Order) : IDomainEvent;
 }

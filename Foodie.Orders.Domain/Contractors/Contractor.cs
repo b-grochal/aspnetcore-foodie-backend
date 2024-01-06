@@ -5,17 +5,17 @@ namespace Foodie.Orders.Domain.Contractors
 {
     public class Contractor : AggregateRoot
     {
-        public int RestaurantId { get; private set; }
-        public string Name { get; private set; }
-        public int LocationId { get; private set; }
-        public string Address { get; private set; }
-        public string PhoneNumber { get; private set; }
-        public string Email { get; private set; }
-        public int CityId { get; private set; }
-        public string City { get; private set; }
-        public string Country { get; private set; }
+        public int RestaurantId { get; }
+        public string Name { get; }
+        public int LocationId { get; }
+        public string Address { get; }
+        public string PhoneNumber { get; }
+        public string Email { get; }
+        public int CityId { get; }
+        public string City { get; }
+        public string Country { get; }
 
-        public Contractor(int restaurantId, string name, int locationId, string address, string phoneNumber, string email, int cityId, string city, string country)
+        private Contractor(int restaurantId, string name, int locationId, string address, string phoneNumber, string email, int cityId, string city, string country)
         {
             RestaurantId = restaurantId > 0 ? restaurantId : throw new ArgumentNullException(nameof(restaurantId));
             Name = !string.IsNullOrWhiteSpace(name) ? name : throw new ArgumentNullException(nameof(name));
@@ -26,6 +26,11 @@ namespace Foodie.Orders.Domain.Contractors
             CityId = cityId > 0 ? cityId : throw new ArgumentNullException(nameof(cityId));
             City = !string.IsNullOrWhiteSpace(city) ? city : throw new ArgumentNullException(nameof(city));
             Country = !string.IsNullOrWhiteSpace(country) ? country : throw new ArgumentNullException(nameof(country));
+        }
+
+        public static Contractor Create(int restaurantId, string name, int locationId, string address, string phoneNumber, string email, int cityId, string city, string country)
+        {
+            return new Contractor(restaurantId, name, locationId, address, phoneNumber, email, cityId, city, country);
         }
     }
 }

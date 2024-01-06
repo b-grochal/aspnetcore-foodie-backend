@@ -1,5 +1,5 @@
 ﻿using Foodie.Common.Domain.AggregateRoots;
-using Foodie.Orders.Domain.Events;
+using Foodie.Orders.Domain.Orders.DomainEvents;
 using Foodie.Orders.Domain.Orders.Entities;
 using Foodie.Orders.Domain.Orders.Enumerations;
 using Foodie.Orders.Domain.Orders.ValueObjects;
@@ -18,20 +18,28 @@ namespace Foodie.Orders.Domain.Orders
 
         public int OrderStatusId { get; private set; }
 
-        public DeliveryAddress Address { get; private set; }
+        public DeliveryAddress Address { get; }
 
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
-        public Order(string userId, string userFirstName, string userLastName, string userPhoneNumber, string userEmail, int restaurantId, string restaurantName, int locationId, string locationAddress,
-            string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry, DeliveryAddress address, int? buyerId = null, int? contractorId = null)
+        private Order(DeliveryAddress address, string customerEmail, int? buyerId = null, int? contractorId = null)
         {
-            BuyerId = buyerId;
-            ContractorId = contractorId;
             OrderStatusId = OrderStatus.Started.Id;
             Address = address;
+            CreatedBy = customerEmail;
+            BuyerId = buyerId;
+            ContractorId = contractorId;
+        }
 
-            AddOrderStartedDomainEvent(userId, userFirstName, userLastName, userPhoneNumber, userEmail, restaurantId, restaurantName, locationId,
-                locationAddress, locationPhoneNumber, locationEmail, cityId, cityName, locationCountry);
+        public static Order Create(string customerId, string customerFirstName, string customerLastName, string customerPhoneNumber, string customerEmail, int restaurantId, string restaurantName, int locationId, string locationAddress,
+            string locationPhoneNumber, string locationEmail, int cityId, string cityName, int countryId, string countryName, string locationCountry, DeliveryAddress deliveryAddress, int? buyerId = null, int? contractorId = null)
+        {
+            var order = new Order(deliveryAddress, customerEmail, buyerId, contractorId);
+
+            order.AddDomainEvent(new OrderStartedDomainEvent(customerId, customerFirstName, customerLastName, customerPhoneNumber, customerEmail, restaurantId, restaurantName, locationId,
+                locationAddress, locationPhoneNumber, locationEmail, cityId, cityName, countryId, countryName, order));
+
+            return order;
         }
 
         public void AddOrderItem(int mealId, string mealName, decimal unitPrice, int quantity = 1)
@@ -45,7 +53,7 @@ namespace Foodie.Orders.Domain.Orders
             }
             else
             {
-                var orderItem = new OrderItem(mealId, mealName, unitPrice, quantity);
+                var orderItem = OrderItem.Create(mealId, mealName, unitPrice, quantity);
                 _orderItems.Add(orderItem);
             }
         }
@@ -96,14 +104,6 @@ namespace Foodie.Orders.Domain.Orders
         public decimal GetTotal()
         {
             return _orderItems.Sum(i => i.Quantity * i.UnitPrice);
-        }
-
-        private void AddOrderStartedDomainEvent(string customerId, string customerFirstName, string customerLastName, string customerPhoneNumber, string customerEmail, int restaurantId, string restaurantName, int locationId,
-                string locationAddress, string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry)
-        {
-            var orderStartedDomainEvent = new OrderStartedDomainEvent(customerId, customerFirstName, customerLastName, customerPhoneNumber, customerEmail, restaurantId, restaurantName, locationId,
-                locationAddress, locationPhoneNumber, locationEmail, cityId, cityName, locationCountry, this);
-            AddDomainEvent(orderStartedDomainEvent);
         }
     }
 }

@@ -1,14 +1,6 @@
-﻿using MediatR;
+﻿using Foodie.Common.Domain.DomainEvents.Interfaces;
 
 namespace Foodie.Orders.Domain.Orders.DomainEvents
 {
-    public class OrderStatusChangedToInDeliveryDomainEvent : INotification
-    {
-        public Order Order { get; }
-
-        public OrderStatusChangedToInDeliveryDomainEvent(Order order)
-        {
-            Order = order;
-        }
-    }
+    public record OrderStatusChangedToInDeliveryDomainEvent(Order Order) : IDomainEvent;
 }

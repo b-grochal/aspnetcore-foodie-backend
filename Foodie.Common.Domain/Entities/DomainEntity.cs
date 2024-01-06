@@ -1,10 +1,22 @@
 ﻿using Foodie.Common.Domain.DomainEvents.Interfaces;
+using Foodie.Common.Domain.Entities.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace Foodie.Common.Domain.Entities
 {
-    public abstract class DomainEntity : AuditableEntity
+    public abstract class DomainEntity : IHasDomainEvents
     {
+        public int Id { get; protected set; }
+
+        public string CreatedBy { get; protected set; }
+
+        public DateTimeOffset CreatedDate { get; protected set; }
+
+        public string LastModifiedBy { get; protected set; }
+
+        public DateTimeOffset? LastModifiedDate { get; protected set; }
+
         private readonly List<IDomainEvent> _domainEvents = new();
 
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
