@@ -1,9 +1,9 @@
-﻿using Foodie.Shared.Commands;
+﻿using Foodie.Common.Application.Commands;
 using MediatR;
 
 namespace Foodie.Meals.Application.Functions.Meals.Commands.CreateMeal
 {
-    public class CreateMealCommand : AuditableCreateCommand, IRequest<CreateMealCommandResponse>
+    public class CreateMealCommand : AuditableCommand, IRequest<CreateMealCommandResponse>
     {
         public string Name { get; set; }
         public string Description { get; set; }
