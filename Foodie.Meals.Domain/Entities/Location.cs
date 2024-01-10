@@ -2,7 +2,7 @@
 
 namespace Foodie.Meals.Domain.Entities
 {
-    public class Location : AuditableEntity<int>
+    public class Location : BaseEntity
     {
         public string Address { get; set; }
         public string PhoneNumber { get; set; }

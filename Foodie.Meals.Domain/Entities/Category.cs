@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Foodie.Meals.Domain.Entities
 {
-    public class Category : AuditableEntity<int>
+    public class Category : BaseEntity
     {
         public string Name { get; set; }
 
