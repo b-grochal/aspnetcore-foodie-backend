@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Foode.Identity.Infrastructure.Repositories
 {
-    public class BaseIdentityRepository<T> : IAsyncRepository<T> where T : class
+    public class BaseIdentityRepository<T> : IRepository<T> where T : class
     {
         protected readonly IdentityDbContext dbContext;
 

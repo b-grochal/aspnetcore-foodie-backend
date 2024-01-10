@@ -1,7 +1,10 @@
-﻿namespace Foodie.Shared.Responses
+﻿using System.Collections.Generic;
+
+namespace Foodie.Common.Application.Responses
 {
-    public abstract class PagedResponse
+    public abstract class PagedResponse<TResult>
     {
+        public IEnumerable<TResult> Items { get; set; }
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
         public int PageSize { get; set; }

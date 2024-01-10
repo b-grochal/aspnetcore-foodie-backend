@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Foodie.Common.Application.Authorization.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Foodie.Shared.Authorization
+namespace Foodie.Common.Application.Authorization
 {
-    public abstract class AbstractRequestAuthorizer<TRequest> : IAuthorizer<TRequest>
+    public abstract class RequestAuthorizer<TRequest> : IAuthorizer<TRequest>
     {
         private HashSet<IAuthorizationRequirement> requirements { get; set; } = new HashSet<IAuthorizationRequirement>();
 

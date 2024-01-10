@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Foodie.Common.Application.Authorization.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Foodie.Shared.Authorization
+namespace Foodie.Common.Application.Authorization
 {
     public static class Extensions
     {
@@ -31,7 +32,7 @@ namespace Foodie.Shared.Authorization
             });
         }
 
-        public static List<TypeInfo> GetTypesAssignableTo(this Assembly assembly, Type compareType)
+        private static List<TypeInfo> GetTypesAssignableTo(this Assembly assembly, Type compareType)
         {
             var typeInfoList = assembly.DefinedTypes.Where(x => x.IsClass
                                 && !x.IsAbstract

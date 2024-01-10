@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Foodie.Shared.Authorization
+namespace Foodie.Common.Application.Authorization.Interfaces
 {
     public interface IAuthorizer<T>
     {

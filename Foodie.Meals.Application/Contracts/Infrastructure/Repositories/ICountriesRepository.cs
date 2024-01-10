@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
 {
-    public interface ICountriesRepository : IAsyncRepository<Country>
+    public interface ICountriesRepository : IRepository<Country>
     {
         Task<PagedResult<Country>> GetAllAsync(int pageNumber, int pageSize, string name);
     }

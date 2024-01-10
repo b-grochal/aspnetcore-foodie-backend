@@ -1,4 +1,4 @@
-﻿namespace Foodie.Shared.Queries
+﻿namespace Foodie.Common.Application.Queries
 {
     public abstract class PagedQuery
     {

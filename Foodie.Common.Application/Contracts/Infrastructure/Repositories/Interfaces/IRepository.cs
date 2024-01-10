@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Foodie.Shared.Repositories
+namespace Foodie.Common.Application.Contracts.Infrastructure.Repositories.Interfaces
 {
-    public interface IAsyncRepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
         Task<T> GetByIdAsync(int id);
 

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Foodie.Common.Application.Authorization.Interfaces;
 
-namespace Foodie.Shared.Authorization
+namespace Foodie.Common.Application.Authorization
 {
-    public class AuthorizationResult
+    public class AuthorizationResult : IAuthorizationResult
     {
         public AuthorizationResult() { }
 
