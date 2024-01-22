@@ -1,6 +1,4 @@
-﻿using Foodie.Shared.Authentication;
-using Foodie.Shared.Enums;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -17,13 +15,13 @@ namespace Foodie.Shared.Controllers
             this.mediator = mediator;
         }
 
-        protected ApplicationUserRole? Role => 
+        protected ApplicationUserRole? Role =>
             Enum.TryParse<ApplicationUserRole>(User.Claims.FirstOrDefault(c => c.Type == ApplicationUserClaim.Role).Value, out var role) ? role : null;
 
-        protected int? LocationId => 
+        protected int? LocationId =>
             int.TryParse(User.Claims.FirstOrDefault(c => c.Type == ApplicationUserClaim.LocationId).Value, out var locationId) ? locationId : null;
 
-        protected string Email => 
+        protected string Email =>
             User.Claims.FirstOrDefault(c => c.Type == ApplicationUserClaim.Email).Value;
 
         protected int? ApplicationUserId =>

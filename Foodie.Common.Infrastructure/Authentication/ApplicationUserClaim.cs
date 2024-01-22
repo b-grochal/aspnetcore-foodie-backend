@@ -1,6 +1,6 @@
 ﻿using Ardalis.SmartEnum;
 
-namespace Foodie.Shared.Authentication
+namespace Foodie.Common.Infrastructure.Authentication
 {
     public class ApplicationUserClaim : SmartEnum<ApplicationUserClaim, string>
     {

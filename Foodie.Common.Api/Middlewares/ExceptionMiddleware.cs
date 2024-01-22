@@ -1,4 +1,4 @@
-﻿using Foodie.Shared.Exceptions;
+﻿using Foodie.Common.Exceptions;
 using Foodie.Shared.Types;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Foodie.Shared.Middlewares
+namespace Foodie.Common.Api.Middlewares
 {
     public class ExceptionMiddleware
     {
