@@ -1,4 +1,4 @@
-﻿using Foodie.Shared.Exceptions;
+﻿using Foodie.Common.Exceptions;
 
 namespace Foodie.Meals.Domain.Exceptions
 {

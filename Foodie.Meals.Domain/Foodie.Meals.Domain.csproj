@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Foodie.Common.Domain\Foodie.Common.Domain.csproj" />
+    <ProjectReference Include="..\Foodie.Common\Foodie.Common.csproj" />
     <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
   </ItemGroup>
 

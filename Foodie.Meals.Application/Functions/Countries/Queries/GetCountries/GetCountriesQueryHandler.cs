@@ -26,10 +26,10 @@ namespace Foodie.Meals.Application.Functions.Countries.Queries.GetCountries
             return new GetCountriesQueryResponse
             {
                 TotalCount = result.TotalCount,
-                PageSize = request.PageSize,
-                CurrentPage = request.PageNumber,
-                TotalPages = (int)Math.Ceiling(result.TotalCount / (double)request.PageSize),
-                Countries = mapper.Map<IEnumerable<CountryDto>>(result.Items),
+                PageSize = result.PageSize,
+                Page = result.Page,
+                TotalPages = result.TotalPages,
+                Items = mapper.Map<IEnumerable<CountryDto>>(result.Items),
                 Name = request.Name
             };
         }

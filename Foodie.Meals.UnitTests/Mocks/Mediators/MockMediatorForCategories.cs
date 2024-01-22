@@ -108,7 +108,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                 {
                     Name = getCategoriesQuery.Name,
                     PageSize = getCategoriesQuery.PageSize,
-                    CurrentPage = getCategoriesQuery.PageNumber,
+                    Page = getCategoriesQuery.PageNumber,
                     TotalPages = 2,
                     Categories = new List<CategoryDto>
                     {

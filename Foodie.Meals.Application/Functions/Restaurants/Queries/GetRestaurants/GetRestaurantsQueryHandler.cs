@@ -28,10 +28,10 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants
             return new GetRestaurantsQueryResponse
             {
                 TotalCount = result.TotalCount,
-                PageSize = request.PageSize,
-                CurrentPage = request.PageNumber,
-                TotalPages = (int)Math.Ceiling(result.TotalCount / (double)request.PageSize),
-                Restaurants = mapper.Map<IEnumerable<RestaurantDto>>(result.Items),
+                PageSize = result.PageSize,
+                Page = result.Page,
+                TotalPages = result.TotalPages,
+                Items = mapper.Map<IEnumerable<RestaurantDto>>(result.Items),
                 Name = request.Name,
                 CityName = request.CityName,
                 CategoryId = request.CategoryId

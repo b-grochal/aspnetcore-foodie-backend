@@ -126,7 +126,7 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
                     CityId = getLocationsQuery.CityId,
                     RestaurantId = getLocationsQuery.RestaurantId,
                     PageSize = getLocationsQuery.PageSize,
-                    CurrentPage = getLocationsQuery.PageNumber,
+                    Page = getLocationsQuery.PageNumber,
                     TotalPages = 2,
                     Locations = new List<LocationDto>
                     {

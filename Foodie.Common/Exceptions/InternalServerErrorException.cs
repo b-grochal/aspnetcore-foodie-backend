@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Foodie.Shared.Exceptions
+﻿namespace Foodie.Common.Exceptions
 {
     public abstract class InternalServerErrorException : AppException
     {

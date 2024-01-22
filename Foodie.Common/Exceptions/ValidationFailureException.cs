@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Foodie.Shared.Exceptions
+namespace Foodie.Common.Exceptions
 {
     public sealed class ValidationFailureException : AppException
     {

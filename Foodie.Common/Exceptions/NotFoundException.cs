@@ -1,4 +1,4 @@
-﻿namespace Foodie.Shared.Exceptions
+﻿namespace Foodie.Common.Exceptions
 {
     public abstract class NotFoundException : AppException
     {

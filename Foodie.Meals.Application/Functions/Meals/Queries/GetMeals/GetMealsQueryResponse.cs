@@ -1,4 +1,6 @@
-﻿namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
+﻿using Foodie.Common.Application.Responses;
+
+namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
 {
     public class GetMealsQueryResponse : PagedResponse<MealDto>
     {
