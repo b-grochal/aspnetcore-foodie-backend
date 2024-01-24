@@ -1,14 +1,10 @@
-﻿using System;
+﻿using Foodie.Common.Infrastructure.Cache.Interfaces;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Foodie.Shared.Cache
+namespace Foodie.Common.Infrastructure.Cache
 {
-    public interface ICacheKeyGenerator
-    {
-        string GenerateCacheKey(CachePrefixes cachePrefix, string methodName, params string[] parameters);
-    }
-
     public class CacheKeyGenerator : ICacheKeyGenerator, IDisposable
     {
         private readonly SHA256 sha256;

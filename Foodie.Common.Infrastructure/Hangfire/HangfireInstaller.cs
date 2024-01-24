@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Foodie.Shared.Hangfire
+namespace Foodie.Common.Infrastructure.Hangfire
 {
     public static class HangfireInstaller
     {

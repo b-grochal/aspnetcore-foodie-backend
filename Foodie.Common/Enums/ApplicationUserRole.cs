@@ -1,4 +1,4 @@
-﻿namespace Foodie.Shared.Enums
+﻿namespace Foodie.Common.Enums
 {
     public enum ApplicationUserRole
     {

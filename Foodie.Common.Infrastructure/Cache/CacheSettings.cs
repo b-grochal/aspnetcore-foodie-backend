@@ -1,4 +1,4 @@
-﻿namespace Foodie.Shared.Cache
+﻿namespace Foodie.Common.Infrastructure.Cache
 {
     public class CacheSettings
     {

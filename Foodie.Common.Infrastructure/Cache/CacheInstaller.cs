@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
 
-namespace Foodie.Shared.Cache
+namespace Foodie.Common.Infrastructure.Cache
 {
     public static class CacheInstaller
     {

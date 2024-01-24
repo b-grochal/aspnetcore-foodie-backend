@@ -1,11 +1,11 @@
-﻿using Foodie.Shared.Authentication;
-using Foodie.Shared.Enums;
+﻿using Foodie.Common.Enums;
+using Foodie.Common.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Linq;
 
-namespace Foodie.Shared.Attributes
+namespace Foodie.Common.Api.Authorization
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class RequiredRolesAttribute : Attribute, IAuthorizationFilter

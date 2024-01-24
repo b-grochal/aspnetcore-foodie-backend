@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 
-namespace Foodie.Shared.Authentication
+namespace Foodie.Common.Infrastructure.Authentication
 {
     public static class AuthenticationInstaller
     {
