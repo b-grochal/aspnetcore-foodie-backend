@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Foodie.Shared.Exceptions;
+using Foodie.Common.Exceptions;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;

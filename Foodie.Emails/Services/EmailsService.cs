@@ -1,4 +1,4 @@
-﻿using Foodie.Shared.Smtp;
+﻿using Foodie.Common.Infrastructure.Emails;
 using Foodie.Templates.Factories;
 using Foodie.Templates.Models;
 using MailKit.Net.Smtp;
@@ -28,7 +28,7 @@ namespace Foodie.Templates.Services
         public EmailsService(IEmailMessageFactory emailsFactory, IOptions<SmtpSettings> smtpSettings)
         {
             this.emailsFactory = emailsFactory;
-            this.smtpSettings = smtpSettings.Value; 
+            this.smtpSettings = smtpSettings.Value;
         }
 
         public async Task SendAccountActivationEmail(string toEmailAddress, string accountActivationToken)

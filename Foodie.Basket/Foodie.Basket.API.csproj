@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Foodie.Common.Api\Foodie.Common.Api.csproj" />
     <ProjectReference Include="..\Foodie.EventBus\Foodie.EventBus.csproj" />
-    <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

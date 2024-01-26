@@ -1,5 +1,6 @@
 ﻿using EasyCaching.Core.Configurations;
 using EasyCaching.Serialization.SystemTextJson.Configurations;
+using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;

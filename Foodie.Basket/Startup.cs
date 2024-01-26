@@ -1,20 +1,17 @@
-using FluentValidation;
 using Foodie.Basket.Repositories.Implementations;
 using Foodie.Basket.Repositories.Interfaces;
-using Foodie.Shared.Authentication;
-using Foodie.Shared.Cache;
-using Foodie.Shared.Middlewares;
-using Foodie.Shared.Redis;
+using Foodie.Common.Api.Middlewares;
+using Foodie.Common.Infrastructure.Authentication;
+using Foodie.Common.Infrastructure.Cache;
 using Foodie.Shared.Settings;
 using IdentityGrpc;
+using MassTransit;
 using MealsGrpc;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using System;
 using System.Reflection;
 
@@ -43,10 +40,10 @@ namespace Foodie.Basket
             services.AddCache(Configuration);
             services.AddScoped<ICustomerBasketsRepository, CustomerBasketsRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediator(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-            
+
 
             services.AddGrpcClient<IdentityService.IdentityServiceClient>(opt =>
             {

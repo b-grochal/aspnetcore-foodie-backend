@@ -1,10 +1,8 @@
-﻿using Foodie.Shared.Authorization;
-using Foodie.Shared.Exceptions;
+﻿using Foodie.Common.Application.Authorization.Interfaces;
+using Foodie.Common.Exceptions;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

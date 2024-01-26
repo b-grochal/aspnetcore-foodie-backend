@@ -1,4 +1,4 @@
-﻿namespace Foodie.Common.Infrastructure.Smtp
+﻿namespace Foodie.Common.Infrastructure.Emails
 {
     public class SmtpSettings
     {

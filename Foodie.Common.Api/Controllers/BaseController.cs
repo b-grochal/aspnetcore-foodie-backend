@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Foodie.Common.Enums;
+using Foodie.Common.Infrastructure.Authentication;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
