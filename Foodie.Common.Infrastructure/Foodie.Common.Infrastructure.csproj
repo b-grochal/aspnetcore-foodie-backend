@@ -9,7 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ardalis.SmartEnum" Version="8.0.0" />
+    <ProjectReference Include="..\Foodie.Common.Application\Foodie.Common.Application.csproj" />
+    <ProjectReference Include="..\Foodie.Common.Domain\Foodie.Common.Domain.csproj" />
+    <ProjectReference Include="..\Foodie.Common\Foodie.Common.csproj" />
   </ItemGroup>
 
 </Project>

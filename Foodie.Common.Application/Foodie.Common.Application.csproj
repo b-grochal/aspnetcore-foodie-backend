@@ -7,11 +7,12 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.9.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Foodie.Common.Domain\Foodie.Common.Domain.csproj" />
+    <ProjectReference Include="..\Foodie.Common\Foodie.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Foodie.Shared.Extensions
+namespace Foodie.Common.Extensions
 {
     public static class LinqExtensions
     {

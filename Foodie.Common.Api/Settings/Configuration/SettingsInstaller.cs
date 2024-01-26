@@ -1,7 +1,7 @@
-﻿using Foodie.Shared.Authentication;
-using Foodie.Shared.Cache;
+﻿using Foodie.Common.Infrastructure.Authentication;
+using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Smtp;
 using Foodie.Shared.Redis;
-using Foodie.Shared.Smtp;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,7 +33,7 @@ namespace Foodie.Shared.Settings
 
         private static IServiceCollection ConfigureSettings(this IServiceCollection serviceCollection, IConfiguration configuration, SettingsType settingsType)
         {
-            switch(settingsType)
+            switch (settingsType)
             {
                 case SettingsType.JwtToken:
                     serviceCollection.Configure<JwtTokenSettings>(configuration.GetSection(nameof(JwtTokenSettings)));
