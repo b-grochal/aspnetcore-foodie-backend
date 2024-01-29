@@ -1,5 +1,5 @@
 ﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Orders.Domain.Events;
+using Foodie.Orders.Domain.Orders.DomainEvents;
 using Foodie.Templates.Services;
 using Hangfire;
 using MediatR;
@@ -23,7 +23,7 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStatusChangedToInP
 
         public async Task Handle(OrderStatusChangedToInProgressDomainEvent notification, CancellationToken cancellationToken)
         {
-            var buyer = await _buyersRepository.GetByIdAsync(notification.Order.GetBuyerId.Value);
+            var buyer = await _buyersRepository.GetByIdAsync(notification.Order.BuyerId.Value);
             _backgroundJobClient.Enqueue(() => _emailsService.SendOrderInProgressEmail(buyer.Email, notification.Order.Id));
         }
     }

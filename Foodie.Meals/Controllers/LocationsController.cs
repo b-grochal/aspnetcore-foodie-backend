@@ -1,11 +1,11 @@
-﻿using Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Enums;
+using Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation;
 using Foodie.Meals.Application.Functions.Locations.Commands.DeleteLocation;
 using Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation;
 using Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById;
 using Foodie.Meals.Application.Functions.Locations.Queries.GetLocations;
-using Foodie.Shared.Attributes;
 using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -23,7 +23,7 @@ namespace Foodie.Meals.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateLocation([FromBody] CreateLocationCommand createLocationCommand)
         {
-            createLocationCommand.CreatedBy = Email;
+            createLocationCommand.User = Email;
             var result = await mediator.Send(createLocationCommand);
             return Ok(result);
         }
@@ -38,7 +38,7 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateLocationCommand.LastModifiedBy = Email;
+            updateLocationCommand.User = Email;
             var result = await mediator.Send(updateLocationCommand);
             return Ok(result);
         }

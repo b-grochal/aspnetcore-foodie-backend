@@ -1,6 +1,7 @@
 ﻿using Foodie.Basket.Model;
 using Foodie.Basket.Repositories.Interfaces;
-using Foodie.Shared.Cache;
+using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Cache.Interfaces;
 using System.Threading.Tasks;
 
 namespace Foodie.Basket.Repositories.Implementations

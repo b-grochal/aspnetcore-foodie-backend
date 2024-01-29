@@ -1,11 +1,11 @@
-﻿using Foodie.Meals.Application.Functions.Cities.Commands.CreateCity;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Enums;
+using Foodie.Meals.Application.Functions.Cities.Commands.CreateCity;
 using Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity;
 using Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCities;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCityById;
-using Foodie.Shared.Attributes;
 using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -23,7 +23,7 @@ namespace Foodie.Meals.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateCity([FromBody] CreateCityCommand createCityCommand)
         {
-            createCityCommand.CreatedBy = Email;
+            createCityCommand.User = Email;
             var result = await mediator.Send(createCityCommand);
             return Ok(result);
         }
@@ -38,7 +38,7 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateCityCommand.LastModifiedBy = Email;
+            updateCityCommand.User = Email;
             var result = await mediator.Send(updateCityCommand);
             return Ok(result);
         }

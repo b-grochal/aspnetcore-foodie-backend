@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using Foodie.Common.Extensions;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Exceptions;
-using Foodie.Shared.Extensions;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
+using Foodie.Common.Enums;
+using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Identity.Domain.Entities;
 using Foodie.Identity.Application.Exceptions;
-using Foodie.Shared.Enums;
+using Foodie.Identity.Domain.Entities;
+using Foodie.Templates.Services;
+using Hangfire;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Foodie.Shared.Cache;
-using Hangfire;
-using Foodie.Templates.Services;
-using System;
 
 namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
 {

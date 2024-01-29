@@ -1,7 +1,5 @@
-﻿using Foodie.Shared.Queries;
+﻿using Foodie.Common.Application.Queries;
 using MediatR;
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
 
 namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrders
 {

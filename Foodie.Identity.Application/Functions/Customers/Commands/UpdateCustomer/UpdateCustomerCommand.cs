@@ -1,14 +1,9 @@
-﻿using Foodie.Shared.Commands;
+﻿using Foodie.Common.Application.Commands;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer
 {
-    public class UpdateCustomerCommand : AuditableUpdateCommand, IRequest<UpdateCustomerCommandResponse>
+    public class UpdateCustomerCommand : AuditableCommand, IRequest<UpdateCustomerCommandResponse>
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

@@ -1,13 +1,10 @@
-﻿using Foodie.Shared.Responses;
+﻿using Foodie.Common.Application.Responses;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrders
 {
-    public class GetOrdersQueryResponse : PagedResponse
+    public class GetOrdersQueryResponse : PagedResponse<OrderDto>
     {
         public IEnumerable<OrderDto> Orders { get; set; }
         public string BuyerEmail { get; set; }

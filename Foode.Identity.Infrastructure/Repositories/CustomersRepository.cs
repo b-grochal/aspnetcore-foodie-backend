@@ -1,7 +1,7 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Collections;
+using Foodie.Common.Extensions;
+using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Types.Pagination;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +11,7 @@ namespace Foode.Identity.Infrastructure.Repositories
     {
         public CustomersRepository(IdentityDbContext identityDbContext) : base(identityDbContext) { }
 
-        public async Task<PagedResult<Customer>> GetAllAsync(int pageNumber, int pageSize, string email)
+        public async Task<PagedList<Customer>> GetAllAsync(int pageNumber, int pageSize, string email)
         {
             return dbContext.Customers
                 .Where(c => email == null || c.Email.Equals(email))

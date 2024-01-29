@@ -1,20 +1,13 @@
-﻿using Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Enums;
+using Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler;
 using Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrderHandler;
 using Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHandler;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlerById;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlers;
-using Foodie.Shared.Attributes;
-using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
-using Foodie.Shared.Extensions.Attributes;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Controllers
@@ -29,7 +22,7 @@ namespace Foodie.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrderHandler([FromBody] CreateOrderHandlerCommand createOrderHandlerCommand)
         {
-            createOrderHandlerCommand.CreatedBy = Email;
+            createOrderHandlerCommand.User = Email;
             var result = await mediator.Send(createOrderHandlerCommand);
             return Ok(result);
         }
@@ -43,7 +36,7 @@ namespace Foodie.Identity.Controllers
                 return BadRequest();
             }
 
-            updateOrderHandlerCommand.LastModifiedBy = Email;
+            updateOrderHandlerCommand.User = Email;
             var result = await mediator.Send(updateOrderHandlerCommand);
             return Ok(result);
         }

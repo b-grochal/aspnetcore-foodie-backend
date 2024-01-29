@@ -1,14 +1,13 @@
-﻿using Foodie.Identity.Application.Functions.Customers.Commands.CreateCustomer;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Enums;
+using Foodie.Identity.Application.Functions.Customers.Commands.CreateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustomer;
 using Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerById;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers;
-using Foodie.Shared.Attributes;
 using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Controllers
@@ -23,7 +22,7 @@ namespace Foodie.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)
         {
-            createCustomerCommand.CreatedBy = Email;
+            createCustomerCommand.User = Email;
             var result = await mediator.Send(createCustomerCommand);
             return Ok(result);
         }
@@ -37,7 +36,7 @@ namespace Foodie.Identity.Controllers
                 return BadRequest();
             }
 
-            updateUserCommand.LastModifiedBy = Email;
+            updateUserCommand.User = Email;
             var result = await mediator.Send(updateUserCommand);
             return Ok(result);
         }

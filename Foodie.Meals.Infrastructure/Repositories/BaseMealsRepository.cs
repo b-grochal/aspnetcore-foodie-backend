@@ -1,9 +1,6 @@
-﻿using Foodie.Shared.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Foodie.Meals.Infrastructure.Repositories

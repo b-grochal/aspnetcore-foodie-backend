@@ -1,11 +1,10 @@
-﻿using Foodie.Shared.Responses;
+﻿using Foodie.Common.Application.Responses;
 using System.Collections.Generic;
 
 namespace Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers
 {
-    public class GetCustomersQueryResponse : PagedResponse
+    public class GetCustomersQueryResponse : PagedResponse<CustomerDto>
     {
-        public IEnumerable<CustomerDto> Customers { get; set; }
         public string Email { get; set; }
     }
 

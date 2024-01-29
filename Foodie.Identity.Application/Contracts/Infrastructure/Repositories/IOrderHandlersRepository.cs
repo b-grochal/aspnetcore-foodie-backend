@@ -1,12 +1,12 @@
-﻿using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Repositories;
-using Foodie.Shared.Types.Pagination;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Repositories.Interfaces;
+using Foodie.Common.Collections;
+using Foodie.Identity.Domain.Entities;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
 {
     public interface IOrderHandlersRepository : IRepository<OrderHandler>
     {
-        Task<PagedResult<OrderHandler>> GetAllAsync(int pageNumber, int pageSize, string email);
+        Task<PagedList<OrderHandler>> GetAllAsync(int pageNumber, int pageSize, string email);
     }
 }

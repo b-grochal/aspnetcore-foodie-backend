@@ -1,11 +1,8 @@
 ﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Orders.Domain.AggregatesModel.ContractorAggregate;
-using Foodie.Orders.Domain.Events;
+using Foodie.Orders.Domain.Contractors;
+using Foodie.Orders.Domain.Contractors.DomainEvents;
+using Foodie.Orders.Domain.Orders.DomainEvents;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,7 +24,7 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
 
             if (!contractorOriginallyExisted)
             {
-                contractor = new Contractor(orderStartedDomainEvent.RestaurantId, orderStartedDomainEvent.RestaurantName, orderStartedDomainEvent.LocationId, orderStartedDomainEvent.LocationAddress, orderStartedDomainEvent.LocationPhoneNumber, orderStartedDomainEvent.LocationEmail, orderStartedDomainEvent.CityId, orderStartedDomainEvent.CityName, orderStartedDomainEvent.LocationCountry);
+                contractor = Contractor.Create(orderStartedDomainEvent.RestaurantId, orderStartedDomainEvent.RestaurantName, orderStartedDomainEvent.LocationId, orderStartedDomainEvent.LocationAddress, orderStartedDomainEvent.LocationPhoneNumber, orderStartedDomainEvent.LocationEmail, orderStartedDomainEvent.CityId, orderStartedDomainEvent.CityName, orderStartedDomainEvent.LocationCountry);
             }
 
             var contractorUpdated = contractorOriginallyExisted ?

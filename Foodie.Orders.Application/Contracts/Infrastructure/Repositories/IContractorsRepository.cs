@@ -1,8 +1,4 @@
-﻿using Foodie.Orders.Domain.AggregatesModel.ContractorAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Foodie.Orders.Domain.Contractors;
 using System.Threading.Tasks;
 
 namespace Foodie.Orders.Application.Contracts.Infrastructure.Repositories

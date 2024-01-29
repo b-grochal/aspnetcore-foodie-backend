@@ -1,4 +1,4 @@
-﻿using Foodie.Shared.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;

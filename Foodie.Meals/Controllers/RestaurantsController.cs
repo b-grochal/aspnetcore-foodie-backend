@@ -1,13 +1,13 @@
-﻿using Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaurant;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Enums;
+using Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantById;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantLocations;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurantMeals;
 using Foodie.Meals.Application.Functions.Restaurants.Queries.GetRestaurants;
-using Foodie.Shared.Attributes;
 using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -25,7 +25,7 @@ namespace Foodie.Meals.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand createRestaurantCommand)
         {
-            createRestaurantCommand.CreatedBy = Email;
+            createRestaurantCommand.User = Email;
             var result = await mediator.Send(createRestaurantCommand);
             return Ok(result);
         }
@@ -40,7 +40,7 @@ namespace Foodie.Meals.Controllers
                 return BadRequest();
             }
 
-            updateRestaurantCommand.LastModifiedBy = Email;
+            updateRestaurantCommand.User = Email;
             var result = await mediator.Send(updateRestaurantCommand);
             return Ok(result);
         }

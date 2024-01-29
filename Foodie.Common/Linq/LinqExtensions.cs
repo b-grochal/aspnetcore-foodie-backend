@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Foodie.Common.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Foodie.Common.Extensions
 {
@@ -13,6 +15,11 @@ namespace Foodie.Common.Extensions
                 list.Add(item);
 
             return list;
+        }
+
+        public static PagedList<T> Paginate<T>(this IQueryable<T> queryable, int page, int pageSize)
+        {
+            return PagedList<T>.Create(queryable, page, pageSize);
         }
     }
 }

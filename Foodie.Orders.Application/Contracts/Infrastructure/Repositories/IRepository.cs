@@ -1,14 +1,9 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Context;
-using Foodie.Orders.Domain.SeedWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Foodie.Common.Domain.AggregateRoots;
+using Foodie.Orders.Application.Contracts.Infrastructure.Context;
 
 namespace Foodie.Orders.Application.Contracts.Infrastructure.Repositories
 {
-    public interface IRepository<T> where T : IAggregateRoot
+    public interface IRepository<T> where T : AggregateRoot
     {
         IUnitOfWork UnitOfWork { get; }
     }

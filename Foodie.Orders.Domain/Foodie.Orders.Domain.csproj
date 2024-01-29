@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Foodie.Common.Domain\Foodie.Common.Domain.csproj" />
-    <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
   </ItemGroup>
 
 </Project>

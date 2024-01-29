@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using Foodie.Common.Enums;
+using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Identity.Domain.Entities;
 using Foodie.Identity.Application.Exceptions;
-using Foodie.Shared.Cache;
-using Foodie.Shared.Enums;
+using Foodie.Identity.Domain.Entities;
 using Foodie.Templates.Services;
 using Hangfire;
 using MediatR;
@@ -46,7 +47,7 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignUp
 
         public async Task<SignUpCommandResponse> Handle(SignUpCommand request, CancellationToken cancellationToken)
         {
-            if((await _applicationUsersRepository.GetByEmailAsync(request.Email)) is not null)
+            if ((await _applicationUsersRepository.GetByEmailAsync(request.Email)) is not null)
                 throw new ApplicationUserAlreadyExistsException(request.Email);
 
             var customer = _mapper.Map<Customer>(request);

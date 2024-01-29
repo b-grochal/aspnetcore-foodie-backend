@@ -1,11 +1,11 @@
-﻿using Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Enums;
+using Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin;
 using Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin;
 using Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin;
 using Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById;
 using Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins;
-using Foodie.Shared.Attributes;
 using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -22,7 +22,7 @@ namespace Foodie.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAdmin([FromBody] CreateAdminCommand createAdminCommand)
         {
-            createAdminCommand.CreatedBy = Email;
+            createAdminCommand.User = Email;
             var result = await mediator.Send(createAdminCommand);
             return Ok(result);
         }
@@ -36,7 +36,7 @@ namespace Foodie.Identity.Controllers
                 return BadRequest();
             }
 
-            updateAdminCommand.LastModifiedBy = Email;
+            updateAdminCommand.User = Email;
             var result = await mediator.Send(updateAdminCommand);
             return Ok(result);
         }

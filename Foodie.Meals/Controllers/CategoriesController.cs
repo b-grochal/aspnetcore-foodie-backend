@@ -1,16 +1,13 @@
-﻿using Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Enums;
+using Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory;
 using Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory;
 using Foodie.Meals.Application.Functions.Categories.Commands.UpdateCategory;
 using Foodie.Meals.Application.Functions.Categories.Queries.GetCategories;
 using Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById;
-using Foodie.Shared.Attributes;
-using Foodie.Shared.Authorization;
 using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
-using Foodie.Shared.Extensions.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Meals.API.Controllers
@@ -26,7 +23,7 @@ namespace Foodie.Meals.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand createCategoryCommand)
         {
-            createCategoryCommand.CreatedBy = Email;
+            createCategoryCommand.User = Email;
             var result = await mediator.Send(createCategoryCommand);
             return Ok(result);
         }
@@ -41,7 +38,7 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateCategoryCommand.LastModifiedBy = Email;
+            updateCategoryCommand.User = Email;
             var result = await mediator.Send(updateCategoryCommand);
             return Ok(result);
         }

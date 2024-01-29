@@ -1,14 +1,9 @@
-﻿using Foodie.Orders.Domain.AggregatesModel.BuyerAggregate;
-using Foodie.Orders.Domain.AggregatesModel.ContractorAggregate;
-using Foodie.Orders.Domain.AggregatesModel.OrderAggregate;
-using Foodie.Orders.Infrastructure.Contexts;
+﻿using Foodie.Orders.Domain.Buyers;
+using Foodie.Orders.Domain.Contractors;
+using Foodie.Orders.Domain.Orders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Orders.Infrastructure.Configurations
 {

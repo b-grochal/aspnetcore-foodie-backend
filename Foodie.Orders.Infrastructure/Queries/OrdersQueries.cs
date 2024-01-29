@@ -1,7 +1,7 @@
 ﻿using Dapper;
+using Foodie.Common.Collections;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
 using Foodie.Orders.Infrastructure.Contexts;
-using Foodie.Shared.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,11 +23,11 @@ namespace Foodie.Orders.Infrastructure.Queries
             var selector = PrepareSqlTemplateForGettingAllOrders(pageNumber, pageSize, buyerEmail, orderStatusName, contractorName, locationId);
 
             using var connection = _dapperContext.CreateConnection();
-            
+
             connection.Open();
 
             var orders = await connection.QueryAsync<OrderQueryDto>(selector.RawSql, selector.Parameters);
-            return PagedList<OrderQueryDto>.ToPagedList(orders, pageNumber, pageSize);
+            return PagedList<OrderQueryDto>.Create(orders, pageNumber, pageSize);
         }
 
         public async Task<PagedList<OrderQueryDto>> GetAllAsync(int pageNumber, int pageSize, int customerId, int? orderStatusId, string contractorName)
@@ -39,7 +39,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             connection.Open();
 
             var orders = await connection.QueryAsync<OrderQueryDto>(selector.RawSql, selector.Parameters);
-            return PagedList<OrderQueryDto>.ToPagedList(orders, pageNumber, pageSize);
+            return PagedList<OrderQueryDto>.Create(orders, pageNumber, pageSize);
         }
 
         public async Task<OrderDetailsQueryDto> GetByIdAsync(int id)
@@ -121,7 +121,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             if (contractorName != null)
                 builder.Where("c.Name like @contractorName", new { contractorName = $"%{contractorName}%" });
 
-            if(locationId.HasValue)
+            if (locationId.HasValue)
                 builder.Where("c.LocationId = @locationId", new { locationId = locationId.Value });
 
             return selector;

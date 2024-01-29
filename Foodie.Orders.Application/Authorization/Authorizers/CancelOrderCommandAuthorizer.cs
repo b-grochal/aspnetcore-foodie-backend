@@ -1,10 +1,10 @@
 ﻿using Foodie.Orders.Application.Authorization.Requirements;
 using Foodie.Orders.Application.Functions.Orders.Commands.CancelOrder;
-using Foodie.Shared.Authorization;
+using Foodie.Common.Application.Authorization;
 
 namespace Foodie.Orders.Application.Authorization.Authorizers
 {
-    public class CancelOrderCommandAuthorizer : AbstractRequestAuthorizer<CancelOrderCommand>
+    public class CancelOrderCommandAuthorizer : RequestAuthorizer<CancelOrderCommand>
     {
         public override void BuildPolicy(CancelOrderCommand request)
         {

@@ -1,6 +1,6 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+﻿using Foodie.Common.Infrastructure.Authentication;
+using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Authentication;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -36,7 +36,7 @@ namespace Foode.Identity.Infrastructure.Services
             var applicationUserId = GetClaimsPrincipalFromExpiredToken(token)
                 .FindFirstValue(ApplicationUserClaim.ApplicationUserId);
 
-            if(applicationUserId is null)
+            if (applicationUserId is null)
                 throw new SecurityTokenException("Invalid token");
 
             return int.Parse(applicationUserId);

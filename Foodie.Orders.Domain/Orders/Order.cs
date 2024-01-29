@@ -32,7 +32,7 @@ namespace Foodie.Orders.Domain.Orders
         }
 
         public static Order Create(string customerId, string customerFirstName, string customerLastName, string customerPhoneNumber, string customerEmail, int restaurantId, string restaurantName, int locationId, string locationAddress,
-            string locationPhoneNumber, string locationEmail, int cityId, string cityName, int countryId, string countryName, string locationCountry, DeliveryAddress deliveryAddress, int? buyerId = null, int? contractorId = null)
+            string locationPhoneNumber, string locationEmail, int cityId, string cityName, int countryId, string countryName, DeliveryAddress deliveryAddress, int? buyerId = null, int? contractorId = null)
         {
             var order = new Order(deliveryAddress, customerEmail, buyerId, contractorId);
 

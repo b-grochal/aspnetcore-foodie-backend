@@ -1,21 +1,20 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Context;
-using Foodie.Orders.Domain.AggregatesModel.BuyerAggregate;
-using Foodie.Orders.Domain.AggregatesModel.ContractorAggregate;
-using Foodie.Orders.Domain.AggregatesModel.OrderAggregate;
+﻿using Foodie.EventBus.IntegrationEvents.Basket;
+using Foodie.Orders.Application.Contracts.Infrastructure.Context;
+using Foodie.Orders.Domain.Buyers;
+using Foodie.Orders.Domain.Contractors;
+using Foodie.Orders.Domain.Orders;
+using Foodie.Orders.Domain.Orders.Enumerations;
 using Foodie.Orders.Infrastructure.Configurations;
 using Foodie.Orders.Infrastructure.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Orders.Infrastructure.Contexts
 {
-    public class OrdersDbContext : DbContext, IUnitOfWork 
+    public class OrdersDbContext : DbContext, IUnitOfWork
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrdersItem { get; set; }

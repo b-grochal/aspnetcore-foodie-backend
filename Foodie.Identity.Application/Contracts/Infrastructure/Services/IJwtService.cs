@@ -1,5 +1,4 @@
 ﻿using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Authentication;
 
 namespace Foodie.Identity.Application.Contracts.Infrastructure.Services
 {

@@ -1,9 +1,9 @@
-﻿using Foodie.Shared.Commands;
+﻿using Foodie.Common.Application.Commands;
 using MediatR;
 
 namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler
 {
-    public class CreateOrderHandlerCommand : AuditableCreateCommand, IRequest<CreateOrderHandlerCommandResponse>
+    public class CreateOrderHandlerCommand : AuditableCommand, IRequest<CreateOrderHandlerCommandResponse>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

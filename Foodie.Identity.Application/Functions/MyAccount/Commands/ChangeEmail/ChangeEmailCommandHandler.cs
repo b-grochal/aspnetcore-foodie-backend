@@ -1,7 +1,7 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Infrastructure.Cache.Interfaces;
+using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
 using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Cache;
 using Foodie.Templates.Services;
 using Hangfire;
 using MediatR;
@@ -33,7 +33,7 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ChangeEmail
             if (applicationUser is null)
                 throw new ApplicationUserNotFoundException(request.ApplicationUserId);
 
-            if(applicationUser.Email == request.Email)
+            if (applicationUser.Email == request.Email)
                 throw new SameEmailAsOldOneException();
 
             applicationUser.Email = request.Email;

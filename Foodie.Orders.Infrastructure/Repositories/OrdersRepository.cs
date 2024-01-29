@@ -1,12 +1,9 @@
 ﻿using Foodie.Orders.Application.Contracts.Infrastructure.Context;
 using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Orders.Domain.AggregatesModel.OrderAggregate;
+using Foodie.Orders.Domain.Orders;
 using Foodie.Orders.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Foodie.Orders.Infrastructure.Repositories

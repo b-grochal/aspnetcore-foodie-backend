@@ -1,8 +1,8 @@
 ﻿using Foode.Identity.Infrastructure.Repositories;
 using Foode.Identity.Infrastructure.Services;
+using Foodie.Common.Infrastructure.Cache;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Shared.Cache;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +29,7 @@ namespace Foode.Identity.Infrastructure
 
             services.AddTransient<IApplicationUsersRepository, ApplicationUsersRepository>();
             services.AddTransient<IAdminsRepository, AdminsRepository>();
-            services.Decorate<IAdminsRepository, CachedAdminsRepository>();
+            services.Decor2ate<IAdminsRepository, CachedAdminsRepository>();
             services.AddTransient<ICustomersRepository, CustomersRepository>();
             services.Decorate<ICustomersRepository, CachedCustomersRepository>();
             services.AddTransient<IOrderHandlersRepository, OrderHandlersRepository>();

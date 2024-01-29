@@ -29,7 +29,15 @@ namespace Foodie.Common.Collections
             TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
         }
 
-        public PagedList<T> Create(IQueryable<T> query, int page, int pageSize)
+        public static PagedList<T> Create(IQueryable<T> query, int page, int pageSize)
+        {
+            var totalCount = query.Count();
+            var items = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            return new(items, page, pageSize, totalCount);
+        }
+
+        public static PagedList<T> Create(IEnumerable<T> query, int page, int pageSize)
         {
             var totalCount = query.Count();
             var items = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();

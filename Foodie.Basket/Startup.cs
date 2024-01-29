@@ -5,15 +5,16 @@ using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Shared.Settings;
 using IdentityGrpc;
-using MassTransit;
 using MealsGrpc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Reflection;
+using MediatR;
 
 namespace Foodie.Basket
 {

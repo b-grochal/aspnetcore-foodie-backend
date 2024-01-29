@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Foodie.Common.Infrastructure\Foodie.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\Foodie.Identity.Application\Foodie.Identity.Application.csproj" />
   </ItemGroup>
 
