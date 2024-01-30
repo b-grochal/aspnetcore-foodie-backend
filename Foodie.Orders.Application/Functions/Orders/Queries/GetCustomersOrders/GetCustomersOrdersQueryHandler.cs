@@ -29,9 +29,9 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrders
             {
                 TotalCount = customersOrders.TotalCount,
                 PageSize = customersOrders.PageSize,
-                CurrentPage = customersOrders.CurrentPage,
+                Page = customersOrders.Page,
                 TotalPages = (int)Math.Ceiling(customersOrders.TotalCount / (double)customersOrders.PageSize),
-                CustomersOrders = _mapper.Map<IEnumerable<CustomersOrderDto>>(customersOrders),
+                Items = _mapper.Map<IEnumerable<CustomersOrderDto>>(customersOrders),
                 OrderStatusId = request.OrderStatusId,
                 ContractorName = request.ContractorName
             };

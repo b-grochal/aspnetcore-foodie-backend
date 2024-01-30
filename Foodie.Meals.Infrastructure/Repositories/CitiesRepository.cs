@@ -1,4 +1,5 @@
 ﻿using Foodie.Common.Collections;
+using Foodie.Common.Extensions;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using System.Linq;

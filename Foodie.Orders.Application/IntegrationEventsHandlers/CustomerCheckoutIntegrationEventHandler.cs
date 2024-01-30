@@ -31,9 +31,11 @@ namespace Foodie.Orders.Application.IntegrationEventsHandlers
                 Quantity = o.Quantity
             }).ToList();
 
-            var createOrderCommand = new CreateOrderCommand(message.CustomerId, message.CustomerFirstName, message.CustomerLastName, message.CustomerPhoneNumber, message.CustomerEmail, message.AddressStreet, message.AddressCity,
-                message.AddressCountry, message.RestaurantId, message.RestaurantName, message.LocationId, message.LocationAddress, message.LocationPhoneNumber, message.LocationEmail, message.CityId, message.CityName,
-                message.LocationCountry, orderItems);
+            var createOrderCommand = new CreateOrderCommand(message.CustomerId, message.CustomerFirstName, 
+                message.CustomerLastName, message.CustomerPhoneNumber, message.CustomerEmail, message.AddressStreet, 
+                message.AddressCity, message.AddressCountry, message.RestaurantId, message.RestaurantName, 
+                message.LocationId, message.LocationAddress, message.LocationPhoneNumber, message.LocationEmail, 
+                message.CityId, message.CityName, message.CountryId, message.CountryName, orderItems);
 
             await _medaitor.Send(createOrderCommand);
         }

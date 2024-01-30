@@ -24,7 +24,9 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
 
             if (!contractorOriginallyExisted)
             {
-                contractor = Contractor.Create(orderStartedDomainEvent.RestaurantId, orderStartedDomainEvent.RestaurantName, orderStartedDomainEvent.LocationId, orderStartedDomainEvent.LocationAddress, orderStartedDomainEvent.LocationPhoneNumber, orderStartedDomainEvent.LocationEmail, orderStartedDomainEvent.CityId, orderStartedDomainEvent.CityName, orderStartedDomainEvent.LocationCountry);
+                contractor = Contractor.Create(orderStartedDomainEvent.RestaurantId, orderStartedDomainEvent.RestaurantName, orderStartedDomainEvent.LocationId, 
+                    orderStartedDomainEvent.LocationAddress, orderStartedDomainEvent.LocationPhoneNumber, orderStartedDomainEvent.LocationEmail, 
+                    orderStartedDomainEvent.CityId, orderStartedDomainEvent.CityName, orderStartedDomainEvent.CountryId, orderStartedDomainEvent.CountryName);
             }
 
             var contractorUpdated = contractorOriginallyExisted ?

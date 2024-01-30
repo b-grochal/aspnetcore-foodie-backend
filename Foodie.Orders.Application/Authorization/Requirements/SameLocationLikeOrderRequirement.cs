@@ -27,7 +27,7 @@ namespace Foodie.Orders.Application.Authorization.Requirements
         public async Task<IAuthorizationResult> Handle(SameLocationLikeOrderRequirement request, CancellationToken cancellationToken)
         {
             var order = await _ordersRepository.GetByIdAsync(request.OrderId);
-            var contractor = await _contractorsRepository.GetByIdAsync(order.GetContractorId.Value);
+            var contractor = await _contractorsRepository.GetByIdAsync(order.ContractorId.Value);
 
             if (contractor.LocationId != request.LocationId)
                 return AuthorizationResult.Fail("Access forbidden");

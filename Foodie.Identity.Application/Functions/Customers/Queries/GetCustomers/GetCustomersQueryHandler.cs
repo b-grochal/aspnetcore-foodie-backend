@@ -21,15 +21,15 @@ namespace Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers
 
         public async Task<GetCustomersQueryResponse> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
         {
-            var customers = await customersRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Email);
+            var result = await customersRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Email);
 
             return new GetCustomersQueryResponse
             {
-                TotalCount = customers.TotalCount,
-                PageSize = request.PageSize,
-                CurrentPage = request.PageNumber,
-                TotalPages = (int)Math.Ceiling(customers.TotalCount / (double)request.PageSize),
-                Customers = mapper.Map<IEnumerable<CustomerDto>>(customers.Items),
+                TotalCount = result.TotalCount,
+                PageSize = result.PageSize,
+                Page = result.Page,
+                TotalPages = result.TotalPages,
+                Items = mapper.Map<IEnumerable<CustomerDto>>(result.Items),
                 Email = request.Email
             };
         }

@@ -29,9 +29,9 @@ namespace Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyers
             {
                 TotalCount = buyers.TotalCount,
                 PageSize = buyers.PageSize,
-                CurrentPage = buyers.CurrentPage,
+                Page = buyers.Page,
                 TotalPages = (int)Math.Ceiling(buyers.TotalCount / (double)buyers.PageSize),
-                Buyers = _mapper.Map<IEnumerable<BuyerDto>>(buyers),
+                Items = _mapper.Map<IEnumerable<BuyerDto>>(buyers),
                 Email = request.Email
             };
         }

@@ -5,7 +5,6 @@ namespace Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyers
 {
     public class GetBuyersQueryResponse : PagedResponse<BuyerDto>
     {
-        public IEnumerable<BuyerDto> Buyers { get; set; }
         public string Email { get; set; }
     }
 

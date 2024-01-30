@@ -21,15 +21,15 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHa
 
         public async Task<GetOrderHandlersQueryResponse> Handle(GetOrderHandlersQuery request, CancellationToken cancellationToken)
         {
-            var orderHandlers = await orderHandlersRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Email);
+            var result = await orderHandlersRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Email);
 
             return new GetOrderHandlersQueryResponse
             {
-                TotalCount = orderHandlers.TotalCount,
+                TotalCount = result.TotalCount,
                 PageSize = request.PageSize,
-                CurrentPage = request.PageNumber,
-                TotalPages = (int)Math.Ceiling(orderHandlers.TotalCount / (double)request.PageSize),
-                OrderHandlers = mapper.Map<IEnumerable<OrderHandlerDto>>(orderHandlers.Items),
+                Page = result.Page,
+                TotalPages = (int)Math.Ceiling(result.TotalCount / (double)request.PageSize),
+                Items = mapper.Map<IEnumerable<OrderHandlerDto>>(result.Items),
                 Email = request.Email
             };
         }

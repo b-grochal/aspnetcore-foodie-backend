@@ -29,7 +29,7 @@ namespace Foode.Identity.Infrastructure
 
             services.AddTransient<IApplicationUsersRepository, ApplicationUsersRepository>();
             services.AddTransient<IAdminsRepository, AdminsRepository>();
-            services.Decor2ate<IAdminsRepository, CachedAdminsRepository>();
+            services.Decorate<IAdminsRepository, CachedAdminsRepository>();
             services.AddTransient<ICustomersRepository, CustomersRepository>();
             services.Decorate<ICustomersRepository, CachedCustomersRepository>();
             services.AddTransient<IOrderHandlersRepository, OrderHandlersRepository>();
