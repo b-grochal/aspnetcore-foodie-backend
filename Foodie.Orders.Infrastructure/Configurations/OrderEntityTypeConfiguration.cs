@@ -1,74 +1,84 @@
 ﻿using Foodie.Orders.Domain.Buyers;
 using Foodie.Orders.Domain.Contractors;
 using Foodie.Orders.Domain.Orders;
+using Foodie.Orders.Domain.Orders.Enumerations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace Foodie.Orders.Infrastructure.Configurations
 {
     public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
     {
-        public void Configure(EntityTypeBuilder<Order> orderConfiguration)
+        public void Configure(EntityTypeBuilder<Order> builder)
         {
-            orderConfiguration.ToTable("Orders");
-            orderConfiguration.HasKey(o => o.Id);
-            orderConfiguration.Ignore(o => o.DomainEvents);
+            ConfigureOrdersTable(builder);
+            ConfigureOrderItemsTable(builder);
+        }
 
-            orderConfiguration.Property(o => o.Id)
-            .UseHiLo("OrdersSequence");
+        private void ConfigureOrdersTable(EntityTypeBuilder<Order> builder)
+        {
+            builder.ToTable("Orders");
 
-            orderConfiguration
-            .Property<int?>("_buyerId")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("BuyerId")
-            .IsRequired(false);
+            builder.HasKey(o => o.Id);
 
-            orderConfiguration
-            .Property<int?>("_contractorId")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("ContractorId")
-            .IsRequired(false);
-
-            orderConfiguration
-            .Property<DateTime>("_orderDate")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("OrderDate")
-            .IsRequired();
-
-            orderConfiguration
-            .Property<int>("_orderStatusId")
-            .UsePropertyAccessMode(PropertyAccessMode.Field)
-            .HasColumnName("OrderStatusId")
-            .IsRequired();
-
-            orderConfiguration
-            .OwnsOne(o => o.Address, a =>
-            {
-                a.Property<int>("OrderId")
+            builder.Property(o => o.Id)
                 .UseHiLo("OrdersSequence");
-                a.WithOwner();
+
+            builder.Property(o => o.BuyerId);
+
+            builder.Property(o => o.ContractorId);
+
+            builder.Property(o => o.OrderStatus)
+                .HasConversion(x => x.Name, x => OrderStatus.FromName(x))
+                .IsRequired();
+
+            builder.Property(o => o.CreatedBy);
+
+            builder.Property(o => o.CreatedDate);
+
+            builder.Property(o => o.LastModifiedBy);
+
+            builder.Property(o => o.LastModifiedDate);
+
+            builder.OwnsOne(o => o.DeliveryAddress);
+
+            builder.HasOne<Buyer>()
+            .WithMany()
+            .IsRequired(false)
+            .HasForeignKey(o => o.BuyerId);
+
+            builder.HasOne<Contractor>()
+            .WithMany()
+            .IsRequired(false)
+            .HasForeignKey(o => o.ContractorId);
+        }
+
+        private void ConfigureOrderItemsTable(EntityTypeBuilder<Order> builder)
+        {
+            builder.OwnsMany(o => o.OrderItems, orderItemBuilder =>
+            {
+                orderItemBuilder.ToTable("OrderItems");
+
+                orderItemBuilder.WithOwner()
+                .HasForeignKey("OrderId");
+
+                orderItemBuilder.HasKey(oi => oi.Id);
+
+                orderItemBuilder.Property(oi => oi.Id)
+                .UseHiLo("OrderItemsSequence");
+
+                orderItemBuilder.Property(oi => oi.Name);
+
+                orderItemBuilder.Property(oi => oi.UnitPrice);
+
+                orderItemBuilder.Property(oi => oi.Quantity);
+
+                orderItemBuilder.Property(oi => oi.MealId);
             });
 
-            var navigation = orderConfiguration.Metadata.FindNavigation(nameof(Order.OrderItems));
-            navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
-
-            orderConfiguration
-            .HasOne<Buyer>()
-            .WithMany()
-            .IsRequired(false)
-            .HasForeignKey("_buyerId");
-
-            orderConfiguration
-            .HasOne<Contractor>()
-            .WithMany()
-            .IsRequired(false)
-            .HasForeignKey("_contractorId");
-
-            orderConfiguration
-            .HasOne(o => o.OrderStatus)
-            .WithMany()
-            .HasForeignKey("_orderStatusId");
+            builder.Metadata
+            .FindNavigation(nameof(Order.OrderItems))!
+            .SetPropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

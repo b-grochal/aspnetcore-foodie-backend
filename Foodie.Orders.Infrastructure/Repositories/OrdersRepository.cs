@@ -32,7 +32,7 @@ namespace Foodie.Orders.Infrastructure.Repositories
         {
             var order = await _ordersDbContext
                             .Orders
-                            .Include(x => x.Address)
+                            .Include(x => x.DeliveryAddress)
                             .FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null)

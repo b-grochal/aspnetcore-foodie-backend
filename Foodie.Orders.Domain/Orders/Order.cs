@@ -16,16 +16,16 @@ namespace Foodie.Orders.Domain.Orders
 
         public int? ContractorId { get; private set; }
 
-        public int OrderStatusId { get; private set; }
+        public OrderStatus OrderStatus { get; private set; }
 
-        public DeliveryAddress Address { get; }
+        public DeliveryAddress DeliveryAddress { get; }
 
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
-        private Order(DeliveryAddress address, string customerEmail, int? buyerId = null, int? contractorId = null)
+        private Order(DeliveryAddress deliveryAddress, string customerEmail, int? buyerId = null, int? contractorId = null)
         {
-            OrderStatusId = OrderStatus.Started.Id;
-            Address = address;
+            OrderStatus = OrderStatus.Started;
+            DeliveryAddress = deliveryAddress;
             CreatedBy = customerEmail;
             BuyerId = buyerId;
             ContractorId = contractorId;
@@ -70,35 +70,35 @@ namespace Foodie.Orders.Domain.Orders
 
         public void SetInProgressStatus()
         {
-            if (OrderStatusId == OrderStatus.Started.Id)
+            if (OrderStatus == OrderStatus.Started)
             {
                 AddDomainEvent(new OrderStatusChangedToInProgressDomainEvent(this));
-                OrderStatusId = OrderStatus.InProgress.Id;
+                OrderStatus = OrderStatus.InProgress;
             }
         }
 
         public void SetInDeliveryStatus()
         {
-            if (OrderStatusId == OrderStatus.InProgress.Id)
+            if (OrderStatus == OrderStatus.InProgress)
             {
                 AddDomainEvent(new OrderStatusChangedToInDeliveryDomainEvent(this));
-                OrderStatusId = OrderStatus.InDelivery.Id;
+                OrderStatus = OrderStatus.InDelivery;
             }
         }
 
         public void SetDeliveredStatus()
         {
-            if (OrderStatusId == OrderStatus.InDelivery.Id)
+            if (OrderStatus == OrderStatus.InDelivery)
             {
                 AddDomainEvent(new OrderDeliveredDomainEvent(this));
-                OrderStatusId = OrderStatus.Delivered.Id;
+                OrderStatus = OrderStatus.Delivered;
             }
         }
 
         public void SetCancelledStatus()
         {
             AddDomainEvent(new OrderCancelledDomainEvent(this));
-            OrderStatusId = OrderStatus.Cancelled.Id;
+            OrderStatus = OrderStatus.Cancelled;
         }
 
         public decimal GetTotal()

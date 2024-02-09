@@ -9,8 +9,8 @@ namespace Foodie.Orders.Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<Contractor> contractorConfiguration)
         {
             contractorConfiguration.ToTable("Contractors");
+            
             contractorConfiguration.HasKey(c => c.Id);
-            contractorConfiguration.Ignore(c => c.DomainEvents);
 
             contractorConfiguration.Property(o => o.Id)
             .UseHiLo("ContractorsSequence");

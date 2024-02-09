@@ -9,8 +9,8 @@ namespace Foodie.Orders.Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<Buyer> buyerConfiguration)
         {
             buyerConfiguration.ToTable("Buyers");
+
             buyerConfiguration.HasKey(b => b.Id);
-            buyerConfiguration.Ignore(b => b.DomainEvents);
 
             buyerConfiguration.Property(o => o.Id)
             .UseHiLo("BuyersSequence");
