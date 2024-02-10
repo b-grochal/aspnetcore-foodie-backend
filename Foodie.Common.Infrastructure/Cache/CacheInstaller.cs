@@ -22,7 +22,7 @@ namespace Foodie.Common.Infrastructure.Cache
                 }, "FoodieRedisCache")
                 .WithSystemTextJson(jsonSerializerSettingsConfigure: serializerOptions =>
                 {
-                    serializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                    serializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 }, name: "json");
             });
 

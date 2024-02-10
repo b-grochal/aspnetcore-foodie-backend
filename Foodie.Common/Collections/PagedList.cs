@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace Foodie.Common.Collections
 {
@@ -20,7 +21,8 @@ namespace Foodie.Common.Collections
 
         public bool HasPreviousPage => Page > 1;
 
-        private PagedList(List<T> items, int page, int pageSize, int totalCount)
+        [JsonConstructor]
+        public PagedList(List<T> items, int page, int pageSize, int totalCount)
         {
             Items = items;
             Page = page;
