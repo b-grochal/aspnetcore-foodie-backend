@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Foodie.Common.Extensions
 {
-    public static class LinqExtensions
+    public static class Extensions
     {
         // TODO: Remove the method, assign new values insted
         public static ICollection<T> Merge<T>(this ICollection<T> list, IEnumerable<T> items)
