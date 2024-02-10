@@ -22,6 +22,8 @@ namespace Foodie.Orders.Domain.Orders
 
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
+        private Order() { }
+
         private Order(DeliveryAddress deliveryAddress, string customerEmail, int? buyerId = null, int? contractorId = null)
         {
             OrderStatus = OrderStatus.Started;

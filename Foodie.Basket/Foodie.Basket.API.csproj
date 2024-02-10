@@ -10,6 +10,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Foodie.Common.Api\Foodie.Common.Api.csproj" />
+    <ProjectReference Include="..\Foodie.Common.Application\Foodie.Common.Application.csproj" />
+    <ProjectReference Include="..\Foodie.Common.Domain\Foodie.Common.Domain.csproj" />
+    <ProjectReference Include="..\Foodie.Common.Infrastructure\Foodie.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\Foodie.EventBus\Foodie.EventBus.csproj" />
   </ItemGroup>
 

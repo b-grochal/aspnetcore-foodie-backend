@@ -11,6 +11,8 @@ namespace Foodie.Orders.Domain.Buyers
         public string PhoneNumber { get; }
         public string Email { get; }
 
+        private Buyer() { }
+
         private Buyer(string customerId, string firstName, string lastName, string phoneNumber, string email)
         {
             CustomerId = !string.IsNullOrWhiteSpace(customerId) ? customerId : throw new ArgumentNullException(nameof(customerId));

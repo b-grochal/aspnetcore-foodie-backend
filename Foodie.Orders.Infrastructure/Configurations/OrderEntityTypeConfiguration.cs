@@ -40,7 +40,18 @@ namespace Foodie.Orders.Infrastructure.Configurations
 
             builder.Property(o => o.LastModifiedDate);
 
-            builder.OwnsOne(o => o.DeliveryAddress);
+            builder.OwnsOne(o => o.DeliveryAddress, deliveryAddressBuilder =>
+            {
+                deliveryAddressBuilder
+                .Property("OrderId")
+                .UseHiLo("OrdersSequence");
+
+                deliveryAddressBuilder.Property(d => d.Street);
+
+                deliveryAddressBuilder.Property(d => d.City);
+
+                deliveryAddressBuilder.Property(d => d.Country);
+            });
 
             builder.HasOne<Buyer>()
             .WithMany()

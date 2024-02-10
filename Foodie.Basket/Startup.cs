@@ -15,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Reflection;
 using MediatR;
+using FluentValidation;
 
 namespace Foodie.Basket
 {
@@ -41,7 +42,7 @@ namespace Foodie.Basket
             services.AddCache(Configuration);
             services.AddScoped<ICustomerBasketsRepository, CustomerBasketsRepository>();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediator(Assembly.GetExecutingAssembly());
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 

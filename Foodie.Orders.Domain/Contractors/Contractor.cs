@@ -16,6 +16,8 @@ namespace Foodie.Orders.Domain.Contractors
         public int CountryId { get; }
         public string Country { get; }
 
+        private Contractor() { }
+
         private Contractor(int restaurantId, string name, int locationId, string address, string phoneNumber, string email, int cityId, string city, int countryId, string country)
         {
             RestaurantId = restaurantId > 0 ? restaurantId : throw new ArgumentNullException(nameof(restaurantId));

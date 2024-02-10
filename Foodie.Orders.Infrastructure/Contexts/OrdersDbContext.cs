@@ -1,8 +1,8 @@
-﻿using Foodie.EventBus.IntegrationEvents.Basket;
-using Foodie.Orders.Application.Contracts.Infrastructure.Context;
+﻿using Foodie.Orders.Application.Contracts.Infrastructure.Context;
 using Foodie.Orders.Domain.Buyers;
 using Foodie.Orders.Domain.Contractors;
 using Foodie.Orders.Domain.Orders;
+using Foodie.Orders.Domain.Orders.Entities;
 using Foodie.Orders.Domain.Orders.Enumerations;
 using Foodie.Orders.Infrastructure.Configurations;
 using Foodie.Orders.Infrastructure.Extensions;
@@ -20,7 +20,6 @@ namespace Foodie.Orders.Infrastructure.Contexts
         public DbSet<OrderItem> OrdersItem { get; set; }
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Contractor> Contractors { get; set; }
-        public DbSet<OrderStatus> OrderStatuses { get; set; }
 
         private readonly IMediator _mediator;
 
@@ -34,10 +33,8 @@ namespace Foodie.Orders.Infrastructure.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new OrderItemEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new BuyerEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ContractorEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new OrderStatusEntityTypeConfiguration());
         }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)

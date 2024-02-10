@@ -104,31 +104,32 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetCategoriesQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetCategoriesQuery getCategoriesQuery, CancellationToken cancellationToken) =>
             {
-                return new GetCategoriesQueryResponse
-                {
-                    Name = getCategoriesQuery.Name,
-                    PageSize = getCategoriesQuery.PageSize,
-                    Page = getCategoriesQuery.PageNumber,
-                    TotalPages = 2,
-                    Categories = new List<CategoryDto>
-                    {
-                        new CategoryDto
-                        {
-                            Id = 1,
-                            Name = "Test category 1"
-                        },
-                        new CategoryDto
-                        {
-                            Id = 2,
-                            Name = "Test category 2"
-                        },
-                        new CategoryDto
-                        {
-                            Id = 3,
-                            Name = "Test category 3"
-                        }
-                    }
-                };
+                //return new GetCategoriesQueryResponse
+                //{
+                //    Name = getCategoriesQuery.Name,
+                //    PageSize = getCategoriesQuery.PageSize,
+                //    Page = getCategoriesQuery.PageNumber,
+                //    TotalPages = 2,
+                //    Categories = new List<CategoryDto>
+                //    {
+                //        new CategoryDto
+                //        {
+                //            Id = 1,
+                //            Name = "Test category 1"
+                //        },
+                //        new CategoryDto
+                //        {
+                //            Id = 2,
+                //            Name = "Test category 2"
+                //        },
+                //        new CategoryDto
+                //        {
+                //            Id = 3,
+                //            Name = "Test category 3"
+                //        }
+                //    }
+                //};
+                return null;
             });
 
             return this;

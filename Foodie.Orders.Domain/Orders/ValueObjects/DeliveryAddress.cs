@@ -9,6 +9,8 @@ namespace Foodie.Orders.Domain.Orders.ValueObjects
         public string City { get; }
         public string Country { get; }
 
+        private DeliveryAddress() { }
+
         private DeliveryAddress(string street, string city, string country)
         {
             Street = street;

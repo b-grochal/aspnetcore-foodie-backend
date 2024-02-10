@@ -105,33 +105,34 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetRestaurantsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetRestaurantsQuery getRestaurantsQuery, CancellationToken cancellationToken) =>
             {
-                return new GetRestaurantsQueryResponse
-                {
-                    Name = getRestaurantsQuery.Name,
-                    CategoryId = getRestaurantsQuery.CategoryId,
-                    CityName = getRestaurantsQuery.CityName,
-                    PageSize = getRestaurantsQuery.PageSize,
-                    Page = getRestaurantsQuery.PageNumber,
-                    TotalPages = 2,
-                    Restaurants = new List<RestaurantDto>
-                    {
-                        new RestaurantDto
-                        {
-                            Id = 1,
-                            Name = "Test restaurant 1"
-                        },
-                        new RestaurantDto
-                        {
-                            Id = 2,
-                            Name = "Test restaurant 2"
-                        },
-                        new RestaurantDto
-                        {
-                            Id = 3,
-                            Name = "Test restaurant 3"
-                        }
-                    }
-                };
+                //return new GetRestaurantsQueryResponse
+                //{
+                //    Name = getRestaurantsQuery.Name,
+                //    CategoryId = getRestaurantsQuery.CategoryId,
+                //    CityName = getRestaurantsQuery.CityName,
+                //    PageSize = getRestaurantsQuery.PageSize,
+                //    Page = getRestaurantsQuery.PageNumber,
+                //    TotalPages = 2,
+                //    Restaurants = new List<RestaurantDto>
+                //    {
+                //        new RestaurantDto
+                //        {
+                //            Id = 1,
+                //            Name = "Test restaurant 1"
+                //        },
+                //        new RestaurantDto
+                //        {
+                //            Id = 2,
+                //            Name = "Test restaurant 2"
+                //        },
+                //        new RestaurantDto
+                //        {
+                //            Id = 3,
+                //            Name = "Test restaurant 3"
+                //        }
+                //    }
+                //};
+                return null;
             });
 
             return this;
