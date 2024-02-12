@@ -1,11 +1,11 @@
 ﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
 using Foodie.Common.Enums;
 using Foodie.Meals.Application.Functions.Cities.Commands.CreateCity;
 using Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity;
 using Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCities;
 using Foodie.Meals.Application.Functions.Cities.Queries.GetCityById;
-using Foodie.Shared.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

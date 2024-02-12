@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
 {
-    public interface ILocationsRepository : IRepository<Location>
+    public interface ILocationsRepository : IGenericRepository<Location>
     {
         Task<PagedList<Location>> GetAllAsync(int pageNumber, int pageSize, int? restaurantId, int? cityId);
         Task<IReadOnlyList<Location>> GetAllAsync(int restaurantId, int? cityId);

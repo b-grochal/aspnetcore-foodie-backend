@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Common.Application.Contracts.Infrastructure.Repositories.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         Task<T> GetByIdAsync(int id);
 

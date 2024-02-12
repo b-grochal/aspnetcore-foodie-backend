@@ -7,7 +7,7 @@ using Foodie.Identity.Application.Functions.MyAccount.Commands.ResetPassword;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.SetPassword;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData;
 using Foodie.Identity.Application.Functions.MyAccount.Queries.GetAccountData;
-using Foodie.Shared.Controllers;
+using Foodie.Common.Api.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

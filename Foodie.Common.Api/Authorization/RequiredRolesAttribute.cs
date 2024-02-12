@@ -10,11 +10,11 @@ namespace Foodie.Common.Api.Authorization
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class RequiredRolesAttribute : Attribute, IAuthorizationFilter
     {
-        private readonly ApplicationUserRole[] roles;
-
+        private readonly ApplicationUserRole[] _roles;
+        
         public RequiredRolesAttribute(params ApplicationUserRole[] roles)
         {
-            this.roles = roles;
+            _roles = roles;
         }
 
         public void OnAuthorization(AuthorizationFilterContext context)
@@ -25,7 +25,7 @@ namespace Foodie.Common.Api.Authorization
                 return;
             }
 
-            if (Enum.TryParse<ApplicationUserRole>(context.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ApplicationUserClaim.Role).Value, out var claimRole) && !roles.Contains(claimRole))
+            if (Enum.TryParse<ApplicationUserRole>(context.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ApplicationUserClaim.Role).Value, out var claimRole) && !_roles.Contains(claimRole))
             {
                 context.Result = new ForbidResult();
                 return;

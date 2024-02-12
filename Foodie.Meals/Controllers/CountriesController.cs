@@ -1,11 +1,11 @@
 ﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
 using Foodie.Common.Enums;
 using Foodie.Meals.Application.Functions.Countries.Commands.CreateCountry;
 using Foodie.Meals.Application.Functions.Countries.Commands.DeleteCountry;
 using Foodie.Meals.Application.Functions.Countries.Commands.UpdateCountry;
 using Foodie.Meals.Application.Functions.Countries.Queries.GetCountries;
 using Foodie.Meals.Application.Functions.Countries.Queries.GetCountryById;
-using Foodie.Shared.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

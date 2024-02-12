@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Foodie.Common.Application.Authorization
 {
-    public static class Extensions
+    public static class AuthorizationInstaller
     {
         public static void AddAuthorizersFromAssembly(this IServiceCollection services, Assembly assembly, ServiceLifetime lifetime = ServiceLifetime.Scoped)
         {

@@ -1,11 +1,11 @@
 ﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
 using Foodie.Common.Enums;
 using Foodie.Meals.Application.Functions.Meals.Commands.CreateMeal;
 using Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal;
 using Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal;
 using Foodie.Meals.Application.Functions.Meals.Queries.GetMealById;
 using Foodie.Meals.Application.Functions.Meals.Queries.GetMeals;
-using Foodie.Shared.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

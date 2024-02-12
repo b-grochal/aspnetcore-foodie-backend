@@ -1,4 +1,4 @@
-using Foodie.Shared.Settings;
+using Foodie.Common.Api.Settings;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;

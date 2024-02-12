@@ -1,11 +1,11 @@
 ﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
 using Foodie.Common.Enums;
 using Foodie.Identity.Application.Functions.Customers.Commands.CreateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustomer;
 using Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerById;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers;
-using Foodie.Shared.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

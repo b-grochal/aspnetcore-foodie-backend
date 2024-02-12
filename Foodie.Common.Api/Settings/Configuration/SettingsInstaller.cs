@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 
-namespace Foodie.Shared.Settings
+namespace Foodie.Common.Api.Settings
 {
     public static class SettingsInstaller
     {

@@ -1,11 +1,11 @@
 ﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
 using Foodie.Common.Enums;
 using Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin;
 using Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin;
 using Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin;
 using Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById;
 using Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins;
-using Foodie.Shared.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

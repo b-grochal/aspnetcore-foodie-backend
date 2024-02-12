@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Contracts.Infrastructure.Repositories
 {
-    public interface IAdminsRepository : IRepository<Admin>
+    public interface IAdminsRepository : IGenericRepository<Admin>
     {
         Task<PagedList<Admin>> GetAllAsync(int pageNumber, int pageSize, string email);
     }

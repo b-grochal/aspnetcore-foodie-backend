@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Infrastructure.Repositories
 {
-    public class BaseMealsRepository<T> : IRepository<T> where T : class
+    public class BaseMealsRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly MealsDbContext dbContext;
 

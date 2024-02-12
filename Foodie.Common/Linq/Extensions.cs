@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Foodie.Common.Extensions
+namespace Foodie.Common.Linq
 {
     public static class Extensions
     {

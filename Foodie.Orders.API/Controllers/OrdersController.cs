@@ -1,4 +1,5 @@
 ﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
 using Foodie.Common.Enums;
 using Foodie.Orders.Application.Functions.Orders.Commands.CancelOrder;
 using Foodie.Orders.Application.Functions.Orders.Commands.SetDeliveredOrderStatus;
@@ -6,7 +7,6 @@ using Foodie.Orders.Application.Functions.Orders.Commands.SetInDeliveryOrderStat
 using Foodie.Orders.Application.Functions.Orders.Commands.SetInProgressOrderStatus;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetOrders;
-using Foodie.Shared.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

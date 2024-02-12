@@ -1,11 +1,11 @@
 using Foodie.Common.Api.Middlewares;
+using Foodie.Common.Api.Settings;
 using Foodie.Common.Application.Behaviours;
 using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Meals.API.Grpc;
 using Foodie.Meals.Application;
 using Foodie.Meals.Infrastructure;
 using Foodie.Shared.Behaviours;
-using Foodie.Shared.Settings;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

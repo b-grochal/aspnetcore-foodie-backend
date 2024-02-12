@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Contracts.Infrastructure.Repositories
 {
-    public interface ICategoriesRepository : IRepository<Category>
+    public interface ICategoriesRepository : IGenericRepository<Category>
     {
         Task<IReadOnlyList<Category>> GetAllAsync(IReadOnlyCollection<int> categoryIds);
         Task<PagedList<Category>> GetAllAsync(int pageNumber, int pageSize, string name);

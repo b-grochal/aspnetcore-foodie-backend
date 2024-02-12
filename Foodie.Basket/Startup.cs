@@ -1,11 +1,13 @@
+using FluentValidation;
 using Foodie.Basket.Repositories.Implementations;
 using Foodie.Basket.Repositories.Interfaces;
 using Foodie.Common.Api.Middlewares;
+using Foodie.Common.Api.Settings;
 using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Cache;
-using Foodie.Shared.Settings;
 using IdentityGrpc;
 using MealsGrpc;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,8 +16,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Reflection;
-using MediatR;
-using FluentValidation;
 
 namespace Foodie.Basket
 {
