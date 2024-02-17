@@ -1,10 +1,10 @@
+using Foodie.Common.Api.Middlewares;
+using Foodie.Common.Api.Settings;
+using Foodie.Common.Infrastructure.Authentication;
+using Foodie.Common.Infrastructure.Hangfire;
 using Foodie.Emails;
 using Foodie.Orders.Application;
 using Foodie.Orders.Infrastructure;
-using Foodie.Shared.Authentication;
-using Foodie.Shared.Hangfire;
-using Foodie.Shared.Middlewares;
-using Foodie.Shared.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

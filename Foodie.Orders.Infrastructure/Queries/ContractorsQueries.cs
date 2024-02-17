@@ -1,11 +1,8 @@
 ﻿using Dapper;
+using Foodie.Common.Collections;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Contractors;
 using Foodie.Orders.Infrastructure.Contexts;
-using Foodie.Shared.Extensions;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static Dapper.SqlBuilder;
 
@@ -28,7 +25,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             connection.Open();
 
             var contractors = await connection.QueryAsync<ContractorQueryDto>(selector.RawSql, selector.Parameters);
-            return PagedList<ContractorQueryDto>.ToPagedList(contractors, pageNumber, pageSize);
+            return PagedList<ContractorQueryDto>.Create(contractors, pageNumber, pageSize);
         }
 
         public async Task<ContractorDetailsQueryDto> GetByIdAsync(int id)

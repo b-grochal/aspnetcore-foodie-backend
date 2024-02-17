@@ -1,6 +1,6 @@
-﻿using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Infrastructure.Cache;
+using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Infrastructure.Repositories;
-using Foodie.Shared.Cache;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

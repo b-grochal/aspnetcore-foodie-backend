@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Foodie.Common.Infrastructure\Foodie.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\Foodie.Orders.Application\Foodie.Orders.Application.csproj" />
     <ProjectReference Include="..\Foodie.Orders.Domain\Foodie.Orders.Domain.csproj" />
-    <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

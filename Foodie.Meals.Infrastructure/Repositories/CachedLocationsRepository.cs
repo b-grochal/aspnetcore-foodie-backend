@@ -1,7 +1,8 @@
-﻿using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Collections;
+using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Cache.Interfaces;
+using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
-using Foodie.Shared.Cache;
-using Foodie.Shared.Types.Pagination;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -31,7 +32,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
             await cacheService.RemoveByPrefixAsync(CachePrefixes.Locations);
         }
 
-        public async Task<PagedResult<Location>> GetAllAsync(int pageNumber, int pageSize, int? restaurantId, int? cityId)
+        public async Task<PagedList<Location>> GetAllAsync(int pageNumber, int pageSize, int? restaurantId, int? cityId)
         {
             return await cacheService.GetAsync(async () =>
             {

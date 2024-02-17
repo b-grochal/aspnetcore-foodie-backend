@@ -1,9 +1,9 @@
-﻿using Foodie.Shared.Commands;
+﻿using Foodie.Common.Application.Commands;
 using MediatR;
 
 namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
 {
-    public class CreateAdminCommand : AuditableCreateCommand, IRequest<CreateAdminCommandResponse>
+    public class CreateAdminCommand : AuditableCommand, IRequest<CreateAdminCommandResponse>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

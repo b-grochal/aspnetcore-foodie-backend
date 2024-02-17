@@ -1,4 +1,4 @@
-﻿using Foodie.Shared.Authorization;
+﻿using Foodie.Common.Application.Authorization;
 using Foodie.Shared.Behaviours;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

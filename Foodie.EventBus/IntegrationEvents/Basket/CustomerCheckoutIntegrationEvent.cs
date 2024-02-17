@@ -1,9 +1,5 @@
 ﻿using Foodie.EventBus.IntegrationEvents.Base;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.EventBus.IntegrationEvents.Basket
 {
@@ -25,8 +21,9 @@ namespace Foodie.EventBus.IntegrationEvents.Basket
         string LocationEmail { get; set; }
         int CityId { get; set; }
         string CityName { get; set; }
-        string LocationCountry { get; set; }
-        IEnumerable<OrderItem> OrderItems { get;}
+        int CountryId { get; set; }
+        string CountryName { get; set; }
+        IEnumerable<OrderItem> OrderItems { get; }
     }
 
     public interface OrderItem

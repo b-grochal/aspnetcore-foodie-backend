@@ -1,11 +1,10 @@
-﻿using Foodie.Orders.Application.Authorization.Requirements;
+﻿using Foodie.Common.Application.Authorization;
+using Foodie.Orders.Application.Authorization.Requirements;
 using Foodie.Orders.Application.Functions.Orders.Commands.SetInDeliveryOrderStatus;
-using Foodie.Shared.Authorization;
-using System;
 
 namespace Foodie.Orders.Application.Authorization.Authorizers
 {
-    public class SetInDeliveryOrderStatusCommandAuthorizer : AbstractRequestAuthorizer<SetInDeliveryOrderStatusCommand>
+    public class SetInDeliveryOrderStatusCommandAuthorizer : RequestAuthorizer<SetInDeliveryOrderStatusCommand>
     {
         public override void BuildPolicy(SetInDeliveryOrderStatusCommand request)
         {

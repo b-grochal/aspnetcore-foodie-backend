@@ -121,44 +121,45 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetLocationsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetLocationsQuery getLocationsQuery, CancellationToken cancellationToken) =>
             {
-                return new GetLocationsQueryResponse
-                {
-                    CityId = getLocationsQuery.CityId,
-                    RestaurantId = getLocationsQuery.RestaurantId,
-                    PageSize = getLocationsQuery.PageSize,
-                    CurrentPage = getLocationsQuery.PageNumber,
-                    TotalPages = 2,
-                    Locations = new List<LocationDto>
-                    {
-                        new LocationDto
-                        {
-                            Id = 1,
-                            Address = "Test address",
-                            Email = "test@email.com",
-                            PhoneNumber = "123-456-789",
-                            CityName = "Test city",
-                            RestaurantName = "Test restaurant"
-                        },
-                        new LocationDto
-                        {
-                            Id = 2,
-                            Address = "Test address",
-                            Email = "test@email.com",
-                            PhoneNumber = "123-456-789",
-                            CityName = "Test city",
-                            RestaurantName = "Test restaurant"
-                        },
-                        new LocationDto
-                        {
-                            Id = 3,
-                            Address = "Test address",
-                            Email = "test@email.com",
-                            PhoneNumber = "123-456-789",
-                            CityName = "Test city",
-                            RestaurantName = "Test restaurant"
-                        }
-                    }
-                };
+                //return new GetLocationsQueryResponse
+                //{
+                //    CityId = getLocationsQuery.CityId,
+                //    RestaurantId = getLocationsQuery.RestaurantId,
+                //    PageSize = getLocationsQuery.PageSize,
+                //    Page = getLocationsQuery.PageNumber,
+                //    TotalPages = 2,
+                //    Locations = new List<LocationDto>
+                //    {
+                //        new LocationDto
+                //        {
+                //            Id = 1,
+                //            Address = "Test address",
+                //            Email = "test@email.com",
+                //            PhoneNumber = "123-456-789",
+                //            CityName = "Test city",
+                //            RestaurantName = "Test restaurant"
+                //        },
+                //        new LocationDto
+                //        {
+                //            Id = 2,
+                //            Address = "Test address",
+                //            Email = "test@email.com",
+                //            PhoneNumber = "123-456-789",
+                //            CityName = "Test city",
+                //            RestaurantName = "Test restaurant"
+                //        },
+                //        new LocationDto
+                //        {
+                //            Id = 3,
+                //            Address = "Test address",
+                //            Email = "test@email.com",
+                //            PhoneNumber = "123-456-789",
+                //            CityName = "Test city",
+                //            RestaurantName = "Test restaurant"
+                //        }
+                //    }
+                //};
+                return null;
             });
 
             return this;

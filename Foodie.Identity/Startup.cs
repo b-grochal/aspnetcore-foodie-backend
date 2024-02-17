@@ -1,12 +1,13 @@
 using Foode.Identity.Infrastructure;
+using Foodie.Common.Api.Middlewares;
+using Foodie.Common.Api.Settings;
+using Foodie.Common.Application.Behaviours;
+using Foodie.Common.Infrastructure.Authentication;
+using Foodie.Common.Infrastructure.Hangfire;
 using Foodie.Emails;
 using Foodie.Identity.API.Grpc;
 using Foodie.Identity.Application;
-using Foodie.Shared.Authentication;
 using Foodie.Shared.Behaviours;
-using Foodie.Shared.Hangfire;
-using Foodie.Shared.Middlewares;
-using Foodie.Shared.Settings;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

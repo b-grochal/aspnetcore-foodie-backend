@@ -21,15 +21,15 @@ namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins
 
         public async Task<GetAdminsQueryResponse> Handle(GetAdminsQuery request, CancellationToken cancellationToken)
         {
-            var admins = await adminsRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Email);
+            var result = await adminsRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Email);
 
             return new GetAdminsQueryResponse
             {
-                TotalCount = admins.TotalCount,
-                PageSize = request.PageSize,
-                CurrentPage = request.PageNumber,
-                TotalPages = (int)Math.Ceiling(admins.TotalCount / (double)request.PageSize),
-                Admins = mapper.Map<IEnumerable<AdminDto>>(admins.Items),
+                TotalCount = result.TotalCount,
+                PageSize = result.PageSize,
+                Page = result.Page,
+                TotalPages = result.TotalPages,
+                Items = mapper.Map<IEnumerable<AdminDto>>(result.Items),
                 Email = request.Email
             };
         }

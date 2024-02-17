@@ -1,14 +1,8 @@
+using Foodie.Common.Api.Settings;
 using Foodie.Orders.Application.IntegrationEventsHandlers;
-using Foodie.Shared.Settings;
 using MassTransit;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Foodie.Orders.API
 {

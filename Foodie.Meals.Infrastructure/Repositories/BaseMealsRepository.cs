@@ -1,14 +1,11 @@
-﻿using Foodie.Shared.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Foodie.Meals.Infrastructure.Repositories
 {
-    public class BaseMealsRepository<T> : IAsyncRepository<T> where T : class
+    public class BaseMealsRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly MealsDbContext dbContext;
 

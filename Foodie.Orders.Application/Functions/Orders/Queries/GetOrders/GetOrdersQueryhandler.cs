@@ -29,7 +29,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrders
             {
                 TotalCount = orders.TotalCount,
                 PageSize = orders.PageSize,
-                CurrentPage = orders.CurrentPage,
+                Page = orders.Page,
                 TotalPages = (int)Math.Ceiling(orders.TotalCount / (double)orders.PageSize),
                 Orders = _mapper.Map<IEnumerable<OrderDto>>(orders),
                 BuyerEmail = request.BuyerEmail,

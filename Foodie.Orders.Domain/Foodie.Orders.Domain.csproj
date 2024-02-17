@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Foodie.Shared\Foodie.Shared.csproj" />
+    <ProjectReference Include="..\Foodie.Common.Domain\Foodie.Common.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,9 @@
-﻿using Foodie.Shared.Commands;
+﻿using Foodie.Common.Application.Commands;
 using MediatR;
 
 namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustomer
 {
-    public class CreateCustomerCommand : AuditableCreateCommand, IRequest<CreateCustomerCommandResponse>
+    public class CreateCustomerCommand : AuditableCommand, IRequest<CreateCustomerCommandResponse>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

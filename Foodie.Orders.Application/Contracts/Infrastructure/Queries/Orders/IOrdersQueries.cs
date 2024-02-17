@@ -1,9 +1,4 @@
-﻿using Foodie.Orders.Domain.AggregatesModel.OrderAggregate;
-using Foodie.Shared.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Foodie.Common.Collections;
 using System.Threading.Tasks;
 
 namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders

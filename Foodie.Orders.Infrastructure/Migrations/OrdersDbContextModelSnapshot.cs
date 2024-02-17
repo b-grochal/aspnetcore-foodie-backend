@@ -31,65 +31,59 @@ namespace Foodie.Orders.Infrastructure.Migrations
             modelBuilder.HasSequence("OrdersSequence")
                 .IncrementsBy(10);
 
-            modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.BuyerAggregate.Buyer", b =>
+            modelBuilder.Entity("Foodie.Orders.Domain.Buyers.Buyer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseHiLo("BuyersSequence");
 
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTimeOffset?>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
 
                     b.ToTable("Buyers");
                 });
 
-            modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.ContractorAggregate.Contractor", b =>
+            modelBuilder.Entity("Foodie.Orders.Domain.Contractors.Contractor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseHiLo("ContractorsSequence");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Country")
+                    b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RestaurantId")
                         .HasColumnType("int");
@@ -99,106 +93,99 @@ namespace Foodie.Orders.Infrastructure.Migrations
                     b.ToTable("Contractors");
                 });
 
-            modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.Order", b =>
+            modelBuilder.Entity("Foodie.Orders.Domain.Orders.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseHiLo("OrdersSequence");
 
-                    b.Property<int?>("_buyerId")
-                        .HasColumnType("int")
-                        .HasColumnName("BuyerId");
+                    b.Property<int?>("BuyerId")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("_contractorId")
-                        .HasColumnType("int")
-                        .HasColumnName("ContractorId");
+                    b.Property<int?>("ContractorId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("_orderDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("OrderDate");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("_orderStatusId")
-                        .HasColumnType("int")
-                        .HasColumnName("OrderStatusId");
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("LastModifiedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("OrderStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("_buyerId");
+                    b.HasIndex("BuyerId");
 
-                    b.HasIndex("_contractorId");
-
-                    b.HasIndex("_orderStatusId");
+                    b.HasIndex("ContractorId");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.OrderItem", b =>
+            modelBuilder.Entity("Foodie.Orders.Domain.Orders.Order", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseHiLo("OrderItemsSequence");
-
-                    b.Property<int>("MealId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("_name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Name");
-
-                    b.Property<int>("_quantity")
-                        .HasColumnType("int")
-                        .HasColumnName("Units");
-
-                    b.Property<decimal>("_unitPrice")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("UnitPrice");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderItems");
-                });
-
-            modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.OrderStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OrderStatuses");
-                });
-
-            modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.Order", b =>
-                {
-                    b.HasOne("Foodie.Orders.Domain.AggregatesModel.BuyerAggregate.Buyer", null)
+                    b.HasOne("Foodie.Orders.Domain.Buyers.Buyer", null)
                         .WithMany()
-                        .HasForeignKey("_buyerId");
+                        .HasForeignKey("BuyerId");
 
-                    b.HasOne("Foodie.Orders.Domain.AggregatesModel.ContractorAggregate.Contractor", null)
+                    b.HasOne("Foodie.Orders.Domain.Contractors.Contractor", null)
                         .WithMany()
-                        .HasForeignKey("_contractorId");
+                        .HasForeignKey("ContractorId");
 
-                    b.HasOne("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.OrderStatus", "OrderStatus")
-                        .WithMany()
-                        .HasForeignKey("_orderStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.OwnsMany("Foodie.Orders.Domain.Orders.Entities.OrderItem", "OrderItems", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .UseHiLo("OrderItemsSequence");
 
-                    b.OwnsOne("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.Address", "Address", b1 =>
+                            b1.Property<string>("CreatedBy")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<DateTimeOffset>("CreatedDate")
+                                .HasColumnType("datetimeoffset");
+
+                            b1.Property<string>("LastModifiedBy")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<DateTimeOffset?>("LastModifiedDate")
+                                .HasColumnType("datetimeoffset");
+
+                            b1.Property<int>("MealId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("Name")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<int>("OrderId")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("Quantity")
+                                .HasColumnType("int");
+
+                            b1.Property<decimal>("UnitPrice")
+                                .HasColumnType("decimal(18,2)");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("OrderId");
+
+                            b1.ToTable("OrderItems");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("Foodie.Orders.Domain.Orders.ValueObjects.DeliveryAddress", "DeliveryAddress", b1 =>
                         {
                             b1.Property<int>("OrderId")
                                 .ValueGeneratedOnAdd()
@@ -222,22 +209,8 @@ namespace Foodie.Orders.Infrastructure.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.Navigation("Address");
+                    b.Navigation("DeliveryAddress");
 
-                    b.Navigation("OrderStatus");
-                });
-
-            modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.OrderItem", b =>
-                {
-                    b.HasOne("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.Order", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Foodie.Orders.Domain.AggregatesModel.OrderAggregate.Order", b =>
-                {
                     b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618

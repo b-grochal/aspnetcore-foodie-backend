@@ -1,8 +1,8 @@
 ﻿using Foode.Identity.Infrastructure.Repositories;
 using Foode.Identity.Infrastructure.Services;
+using Foodie.Common.Infrastructure.Cache;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Shared.Cache;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

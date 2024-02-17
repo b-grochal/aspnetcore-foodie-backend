@@ -3,7 +3,6 @@ using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,10 +26,10 @@ namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategories
             return new GetCategoriesQueryResponse
             {
                 TotalCount = result.TotalCount,
-                PageSize = request.PageSize,
-                CurrentPage = request.PageNumber,
-                TotalPages = (int)Math.Ceiling(result.TotalCount / (double)request.PageSize),
-                Categories = mapper.Map<IEnumerable<CategoryDto>>(result.Items),
+                PageSize = result.PageSize,
+                Page = result.Page,
+                TotalPages = result.TotalPages,
+                Items = mapper.Map<IEnumerable<CategoryDto>>(result.Items),
                 Name = request.Name,
             };
         }

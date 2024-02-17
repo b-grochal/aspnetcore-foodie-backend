@@ -1,8 +1,9 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Cache.Interfaces;
+using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Application.Exceptions;
 using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Cache;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

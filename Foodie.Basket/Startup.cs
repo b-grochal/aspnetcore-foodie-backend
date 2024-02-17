@@ -1,11 +1,10 @@
 using FluentValidation;
 using Foodie.Basket.Repositories.Implementations;
 using Foodie.Basket.Repositories.Interfaces;
-using Foodie.Shared.Authentication;
-using Foodie.Shared.Cache;
-using Foodie.Shared.Middlewares;
-using Foodie.Shared.Redis;
-using Foodie.Shared.Settings;
+using Foodie.Common.Api.Middlewares;
+using Foodie.Common.Api.Settings;
+using Foodie.Common.Infrastructure.Authentication;
+using Foodie.Common.Infrastructure.Cache;
 using IdentityGrpc;
 using MealsGrpc;
 using MediatR;
@@ -46,7 +45,7 @@ namespace Foodie.Basket
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-            
+
 
             services.AddGrpcClient<IdentityService.IdentityServiceClient>(opt =>
             {

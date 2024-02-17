@@ -1,10 +1,5 @@
-﻿using Foodie.Shared.Queries;
+﻿using Foodie.Common.Application.Queries;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Orders.Application.Functions.Contractors.Queries.GetContractors
 {

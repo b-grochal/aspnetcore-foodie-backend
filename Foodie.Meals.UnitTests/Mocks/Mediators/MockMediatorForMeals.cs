@@ -111,35 +111,36 @@ namespace Foodie.Meals.UnitTests.Mocks.Mediators
         {
             Setup(m => m.Send(It.IsAny<GetMealsQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync((GetMealsQuery getMealsQuery, CancellationToken cancellationToken) =>
             {
-                return new GetMealsQueryResponse
-                {
-                    Name = getMealsQuery.Name,
-                    RestaurantId = getMealsQuery.RestaurantId,
-                    PageSize = getMealsQuery.PageSize,
-                    CurrentPage = getMealsQuery.PageNumber,
-                    TotalPages = 2,
-                    Meals = new List<MealDto>
-                    {
-                        new MealDto
-                        {
-                            Id = 1,
-                            Name = "Test meal 1",
-                            Price = 123
-                        },
-                        new MealDto
-                        {
-                            Id = 2,
-                            Name = "Test meal 2",
-                            Price = 123
-                        },
-                        new MealDto
-                        {
-                            Id = 3,
-                            Name = "Test meal 3",
-                            Price = 123
-                        }
-                    }
-                };
+                //return new GetMealsQueryResponse
+                //{
+                //    Name = getMealsQuery.Name,
+                //    RestaurantId = getMealsQuery.RestaurantId,
+                //    PageSize = getMealsQuery.PageSize,
+                //    CurrentPage = getMealsQuery.PageNumber,
+                //    TotalPages = 2,
+                //    Meals = new List<MealDto>
+                //    {
+                //        new MealDto
+                //        {
+                //            Id = 1,
+                //            Name = "Test meal 1",
+                //            Price = 123
+                //        },
+                //        new MealDto
+                //        {
+                //            Id = 2,
+                //            Name = "Test meal 2",
+                //            Price = 123
+                //        },
+                //        new MealDto
+                //        {
+                //            Id = 3,
+                //            Name = "Test meal 3",
+                //            Price = 123
+                //        }
+                //    }
+                //};
+                return null;
             });
 
             return this;

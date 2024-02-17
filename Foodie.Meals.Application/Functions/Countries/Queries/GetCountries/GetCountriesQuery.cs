@@ -1,4 +1,4 @@
-﻿using Foodie.Shared.Queries;
+﻿using Foodie.Common.Application.Queries;
 using MediatR;
 
 namespace Foodie.Meals.Application.Functions.Countries.Queries.GetCountries

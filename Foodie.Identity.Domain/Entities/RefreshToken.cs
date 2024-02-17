@@ -1,9 +1,9 @@
-﻿using Foodie.Shared.Entities;
+﻿using Foodie.Common.Domain.Entities;
 using System;
 
 namespace Foodie.Identity.Domain.Entities
 {
-    public class RefreshToken : AuditableEntity
+    public class RefreshToken : BaseEntity
     {
         public string Token { get; set; }
         public DateTimeOffset? ExpirationTime { get; set; }

@@ -25,7 +25,8 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
         public string LocationEmail { get; set; }
         public int CityId { get; set; }
         public string CityName { get; set; }
-        public string LocationCountry { get; set; }
+        public int CountryId { get; set; }
+        public string CountryName { get; set; }
         private readonly List<OrderItemDTO> _orderItems;
         public IEnumerable<OrderItemDTO> OrderItems => _orderItems;
 
@@ -36,7 +37,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
 
         public CreateOrderCommand(string userId, string userFirstName, string userLastName, string userPhoneNumber, string userEmail, string addressStreet, string addressCity,
             string addressCountry, int restaurantId, string restaurantName, int locationId, string locationAddress, 
-            string locationPhoneNumber, string locationEmail, int cityId, string cityName, string locationCountry, List<OrderItemDTO> orderItems) : this()
+            string locationPhoneNumber, string locationEmail, int cityId, string cityName, int countryId, string countryName, List<OrderItemDTO> orderItems) : this()
         {
             CustomerId = userId;
             CustomerFirstName = userFirstName;
@@ -54,7 +55,8 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
             LocationEmail = locationEmail;
             CityId = cityId;
             CityName = cityName;
-            LocationCountry = locationCountry;
+            CountryId = countryId;
+            CountryName = countryName;
             _orderItems = orderItems;
         }
 

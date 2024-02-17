@@ -1,9 +1,9 @@
-﻿using Foodie.Shared.Commands;
+﻿using Foodie.Common.Application.Commands;
 using MediatR;
 
 namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
 {
-    public class UpdateAdminCommand : AuditableUpdateCommand, IRequest<UpdateAdminCommandResponse>
+    public class UpdateAdminCommand : AuditableCommand, IRequest<UpdateAdminCommandResponse>
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

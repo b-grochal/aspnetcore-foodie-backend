@@ -1,13 +1,13 @@
-﻿using Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccount;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Enums;
+using Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccount;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.ChangeEmail;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.ChangePassword;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.ResetPassword;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.SetPassword;
 using Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData;
 using Foodie.Identity.Application.Functions.MyAccount.Queries.GetAccountData;
-using Foodie.Shared.Attributes;
-using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
+using Foodie.Common.Api.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

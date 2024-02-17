@@ -1,6 +1,7 @@
-﻿using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Collections;
+using Foodie.Common.Linq;
+using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
-using Foodie.Shared.Types.Pagination;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
     {
         public CitiesRepository(MealsDbContext dbContext) : base(dbContext) { }
 
-        public async Task<PagedResult<City>> GetAllAsync(int pageNumber, int pageSize, string name, int? countryId)
+        public async Task<PagedList<City>> GetAllAsync(int pageNumber, int pageSize, string name, int? countryId)
         {
             return dbContext.Cities
                 .Where(c => name == null || c.Name.Equals(name))

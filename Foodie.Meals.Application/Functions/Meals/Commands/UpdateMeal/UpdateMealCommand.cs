@@ -1,14 +1,9 @@
-﻿using Foodie.Shared.Commands;
+﻿using Foodie.Common.Application.Commands;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal
 {
-    public class UpdateMealCommand : AuditableUpdateCommand, IRequest<UpdateMealCommandResponse>
+    public class UpdateMealCommand : AuditableCommand, IRequest<UpdateMealCommandResponse>
     {
         public int Id { get; set; }
         public string Name { get; set; }

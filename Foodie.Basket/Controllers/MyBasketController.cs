@@ -2,18 +2,11 @@
 using Foodie.Basket.API.Functions.CustomerBaskets.Commands.DeleteCustomerBasket;
 using Foodie.Basket.API.Functions.CustomerBaskets.Commands.UpdateCustomerBasket;
 using Foodie.Basket.API.Functions.CustomerBaskets.Queries.GetCustomerBasketByCustomerId;
-using Foodie.Basket.Repositories.Interfaces;
-using Foodie.Shared.Attributes;
-using Foodie.Shared.Authorization;
-using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
-using Foodie.Shared.Extensions.Attributes;
-using IdentityGrpc;
-using MassTransit;
-using MealsGrpc;
+using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
+using Foodie.Common.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Basket.Controllers

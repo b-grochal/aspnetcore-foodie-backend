@@ -1,6 +1,6 @@
 ﻿using Foodie.Orders.Application.Contracts.Infrastructure.Context;
 using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Orders.Domain.AggregatesModel.BuyerAggregate;
+using Foodie.Orders.Domain.Buyers;
 using Foodie.Orders.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;

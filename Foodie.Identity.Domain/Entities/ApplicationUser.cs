@@ -1,9 +1,9 @@
-﻿using Foodie.Shared.Entities;
-using Foodie.Shared.Enums;
+﻿using Foodie.Common.Domain.Entities;
+using Foodie.Common.Enums;
 
 namespace Foodie.Identity.Domain.Entities
 {
-    public class ApplicationUser : AuditableEntity
+    public class ApplicationUser : BaseEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

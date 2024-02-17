@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using Foodie.Common.Enums;
+using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Application.Exceptions;
 using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Cache;
-using Foodie.Shared.Enums;
 using Foodie.Templates.Services;
 using Hangfire;
 using MediatR;

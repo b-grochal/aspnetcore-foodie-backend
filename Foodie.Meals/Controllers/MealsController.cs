@@ -1,11 +1,11 @@
-﻿using Foodie.Meals.Application.Functions.Meals.Commands.CreateMeal;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
+using Foodie.Common.Enums;
+using Foodie.Meals.Application.Functions.Meals.Commands.CreateMeal;
 using Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal;
 using Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal;
 using Foodie.Meals.Application.Functions.Meals.Queries.GetMealById;
 using Foodie.Meals.Application.Functions.Meals.Queries.GetMeals;
-using Foodie.Shared.Attributes;
-using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -23,7 +23,7 @@ namespace Foodie.Meals.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateMeal([FromBody] CreateMealCommand createMealCommand)
         {
-            createMealCommand.CreatedBy = Email;
+            createMealCommand.User = Email;
             var result = await mediator.Send(createMealCommand);
             return Ok(result);
         }
@@ -38,7 +38,7 @@ namespace Foodie.Meals.Controllers
                 return BadRequest();
             }
 
-            updateMealCommand.LastModifiedBy = Email;
+            updateMealCommand.User = Email;
             var result = await mediator.Send(updateMealCommand);
             return Ok(result);
         }

@@ -1,6 +1,7 @@
 ﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Orders.Domain.AggregatesModel.BuyerAggregate;
-using Foodie.Orders.Domain.Events;
+using Foodie.Orders.Domain.Buyers;
+using Foodie.Orders.Domain.Buyers.DomainEvents;
+using Foodie.Orders.Domain.Orders.DomainEvents;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
 
             if (!buyerOriginallyExisted)
             {
-                buyer = new Buyer(orderStartedDomainEvent.CustomerId, orderStartedDomainEvent.CustomerFirstName, orderStartedDomainEvent.CustomerLastName, orderStartedDomainEvent.CustomerPhoneNumber, orderStartedDomainEvent.CustomerEmail);
+                buyer = Buyer.Create(orderStartedDomainEvent.CustomerId, orderStartedDomainEvent.CustomerFirstName, orderStartedDomainEvent.CustomerLastName, orderStartedDomainEvent.CustomerPhoneNumber, orderStartedDomainEvent.CustomerEmail);
             }
 
             var buyerUpdated = buyerOriginallyExisted ?

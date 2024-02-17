@@ -29,9 +29,9 @@ namespace Foodie.Orders.Application.Functions.Contractors.Queries.GetContractors
             {
                 TotalCount = contractors.TotalCount,
                 PageSize = contractors.PageSize,
-                CurrentPage = contractors.CurrentPage,
+                Page = contractors.Page,
                 TotalPages = (int)Math.Ceiling(contractors.TotalCount / (double)contractors.PageSize),
-                Contractors = _mapper.Map<IEnumerable<ContractorDto>>(contractors),
+                Items = _mapper.Map<IEnumerable<ContractorDto>>(contractors),
                 RestaurantId = request.RestaurantId,
                 LocationId = request.LocationId,
                 CityId = request.CityId

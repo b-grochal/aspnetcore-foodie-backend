@@ -1,7 +1,8 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Collections;
+using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Cache.Interfaces;
+using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Cache;
-using Foodie.Shared.Types.Pagination;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -31,12 +32,12 @@ namespace Foode.Identity.Infrastructure.Repositories
             await cacheService.RemoveByPrefixAsync(CachePrefixes.Admins);
         }
 
-        public async Task<PagedResult<Admin>> GetAllAsync(int pageNumber, int pageSize, string email)
+        public async Task<PagedList<Admin>> GetAllAsync(int pageNumber, int pageSize, string email)
         {
             return await cacheService.GetAsync(async () =>
             {
                 return await decoratedRepository.GetAllAsync(pageNumber, pageSize, email);
-            }, CachePrefixes.Admins, parameters: new string[] { nameof(pageNumber), pageNumber.ToString(), nameof(pageSize), pageSize.ToString(), nameof(email), email});
+            }, CachePrefixes.Admins, parameters: new string[] { nameof(pageNumber), pageNumber.ToString(), nameof(pageSize), pageSize.ToString(), nameof(email), email });
         }
 
         public async Task<IReadOnlyList<Admin>> GetAllAsync()

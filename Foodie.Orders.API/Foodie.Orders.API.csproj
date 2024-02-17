@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Foodie.Common.Api\Foodie.Common.Api.csproj" />
     <ProjectReference Include="..\Foodie.EventBus\Foodie.EventBus.csproj" />
     <ProjectReference Include="..\Foodie.Orders.Application\Foodie.Orders.Application.csproj" />
     <ProjectReference Include="..\Foodie.Orders.Infrastructure\Foodie.Orders.Infrastructure.csproj" />

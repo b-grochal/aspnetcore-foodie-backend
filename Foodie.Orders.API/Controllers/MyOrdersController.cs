@@ -1,11 +1,10 @@
-﻿using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderById;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
+using Foodie.Common.Enums;
+using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderById;
 using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrders;
-using Foodie.Shared.Attributes;
-using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Foodie.Orders.API.Controllers

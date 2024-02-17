@@ -1,11 +1,9 @@
-﻿using Foodie.Shared.Responses;
-using System.Collections.Generic;
+﻿using Foodie.Common.Application.Responses;
 
 namespace Foodie.Meals.Application.Functions.Meals.Queries.GetMeals
 {
-    public class GetMealsQueryResponse : PagedResponse
+    public class GetMealsQueryResponse : PagedResponse<MealDto>
     {
-        public IEnumerable<MealDto> Meals { get; set; }
         public int? RestaurantId { get; set; }
         public string Name { get; set; }
     }

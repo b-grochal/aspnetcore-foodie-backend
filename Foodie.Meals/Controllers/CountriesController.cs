@@ -1,11 +1,11 @@
-﻿using Foodie.Meals.Application.Functions.Countries.Commands.CreateCountry;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
+using Foodie.Common.Enums;
+using Foodie.Meals.Application.Functions.Countries.Commands.CreateCountry;
 using Foodie.Meals.Application.Functions.Countries.Commands.DeleteCountry;
 using Foodie.Meals.Application.Functions.Countries.Commands.UpdateCountry;
 using Foodie.Meals.Application.Functions.Countries.Queries.GetCountries;
 using Foodie.Meals.Application.Functions.Countries.Queries.GetCountryById;
-using Foodie.Shared.Attributes;
-using Foodie.Shared.Controllers;
-using Foodie.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -22,7 +22,7 @@ namespace Foodie.Meals.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateCountry([FromBody] CreateCountryCommand createCountryCommand)
         {
-            createCountryCommand.CreatedBy = Email;
+            createCountryCommand.User = Email;
             var result = await mediator.Send(createCountryCommand);
             return Ok(result);
         }
@@ -37,7 +37,7 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateCountryCommand.LastModifiedBy = Email;
+            updateCountryCommand.User = Email;
             var result = await mediator.Send(updateCountryCommand);
             return Ok(result);
         }

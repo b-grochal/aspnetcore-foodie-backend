@@ -1,5 +1,5 @@
-﻿using Foodie.Identity.Domain.Entities;
-using Foodie.Shared.Enums;
+﻿using Foodie.Common.Enums;
+using Foodie.Identity.Domain.Entities;
 using System;
 using System.Collections.Generic;
 namespace Foode.Identity.Infrastructure.DummyData

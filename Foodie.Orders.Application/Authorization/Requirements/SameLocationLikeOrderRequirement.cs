@@ -1,9 +1,7 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Shared.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Foodie.Common.Application.Authorization;
+using Foodie.Common.Application.Authorization.Interfaces;
+using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,10 +24,10 @@ namespace Foodie.Orders.Application.Authorization.Requirements
             _contractorsRepository = contractorsRepository;
         }
 
-        public async Task<AuthorizationResult> Handle(SameLocationLikeOrderRequirement request, CancellationToken cancellationToken)
+        public async Task<IAuthorizationResult> Handle(SameLocationLikeOrderRequirement request, CancellationToken cancellationToken)
         {
             var order = await _ordersRepository.GetByIdAsync(request.OrderId);
-            var contractor = await _contractorsRepository.GetByIdAsync(order.GetContractorId.Value);
+            var contractor = await _contractorsRepository.GetByIdAsync(order.ContractorId.Value);
 
             if (contractor.LocationId != request.LocationId)
                 return AuthorizationResult.Fail("Access forbidden");

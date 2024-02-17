@@ -1,11 +1,9 @@
-﻿using Foodie.Shared.Responses;
-using System.Collections.Generic;
+﻿using Foodie.Common.Application.Responses;
 
 namespace Foodie.Meals.Application.Functions.Countries.Queries.GetCountries
 {
-    public class GetCountriesQueryResponse : PagedResponse
+    public class GetCountriesQueryResponse : PagedResponse<CountryDto>
     {
-        public IEnumerable<CountryDto> Countries { get; set; }
         public string Name { get; set; }
     }
 
