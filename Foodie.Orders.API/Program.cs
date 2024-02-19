@@ -1,5 +1,5 @@
 using Foodie.Common.Api.Settings;
-using Foodie.Orders.Application.IntegrationEventsHandlers;
+using Foodie.Orders.Application.Functions.IntegrationEvents;
 using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;

@@ -1,4 +1,5 @@
-﻿using Foodie.EventBus.IntegrationEvents.Orders;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.EventBus.IntegrationEvents.Orders;
 using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.Orders;
 using Foodie.Orders.Domain.Orders.ValueObjects;
@@ -14,12 +15,14 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
         private readonly IOrdersRepository _ordersRepository;
         private readonly IPublishEndpoint _publishEndpoint;
         private readonly IMediator _mediator;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateOrderCommandHandler(IOrdersRepository ordersRepository, IPublishEndpoint publishEndpoint, IMediator mediator)
+        public CreateOrderCommandHandler(IOrdersRepository ordersRepository, IPublishEndpoint publishEndpoint, IMediator mediator, IUnitOfWork unitOfWork)
         {
             _ordersRepository = ordersRepository;
             _publishEndpoint = publishEndpoint;
             _mediator = mediator;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
@@ -40,7 +43,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder
 
             _ordersRepository.Create(order);
 
-            await _ordersRepository.UnitOfWork.SaveEntitiesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return Unit.Value;
         }

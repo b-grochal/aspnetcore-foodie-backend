@@ -1,4 +1,5 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.Buyers;
 using Foodie.Orders.Domain.Buyers.DomainEvents;
 using Foodie.Orders.Domain.Orders.DomainEvents;
@@ -11,10 +12,12 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
     public class ValidateOrAddBuyerAggregateWhenOrderStartedDomainEventHandler : INotificationHandler<OrderStartedDomainEvent>
     {
         private readonly IBuyersRepository _buyersRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ValidateOrAddBuyerAggregateWhenOrderStartedDomainEventHandler(IBuyersRepository buyerRepository)
+        public ValidateOrAddBuyerAggregateWhenOrderStartedDomainEventHandler(IBuyersRepository buyerRepository, IUnitOfWork unitOfWork)
         {
             _buyersRepository = buyerRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task Handle(OrderStartedDomainEvent orderStartedDomainEvent, CancellationToken cancellationToken)
@@ -24,7 +27,8 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
 
             if (!buyerOriginallyExisted)
             {
-                buyer = Buyer.Create(orderStartedDomainEvent.CustomerId, orderStartedDomainEvent.CustomerFirstName, orderStartedDomainEvent.CustomerLastName, orderStartedDomainEvent.CustomerPhoneNumber, orderStartedDomainEvent.CustomerEmail);
+                buyer = Buyer.Create(orderStartedDomainEvent.CustomerId, orderStartedDomainEvent.CustomerFirstName, 
+                    orderStartedDomainEvent.CustomerLastName, orderStartedDomainEvent.CustomerPhoneNumber, orderStartedDomainEvent.CustomerEmail);
             }
 
             var buyerUpdated = buyerOriginallyExisted ?
@@ -33,8 +37,7 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
 
             buyer.AddDomainEvent(new BuyerVerifiedDomainEvent(buyer, orderStartedDomainEvent.Order.Id));
 
-            await _buyersRepository.UnitOfWork
-                .SaveEntitiesAsync(cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

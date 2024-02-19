@@ -1,10 +1,7 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,10 +10,12 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.SetDeliveredOrderS
     public class SetDeliveredOrderStatusCommandHandler : IRequestHandler<SetDeliveredOrderStatusCommand>
     {
         private readonly IOrdersRepository _ordersRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SetDeliveredOrderStatusCommandHandler(IOrdersRepository ordersRepository)
+        public SetDeliveredOrderStatusCommandHandler(IOrdersRepository ordersRepository, IUnitOfWork unitOfWork)
         {
             _ordersRepository = ordersRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(SetDeliveredOrderStatusCommand request, CancellationToken cancellationToken)
@@ -27,7 +26,8 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.SetDeliveredOrderS
                 throw new OrderNotFoundException(request.Id);
 
             order.SetDeliveredStatus();
-            await _ordersRepository.UnitOfWork.SaveEntitiesAsync();
+
+            await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }
     }

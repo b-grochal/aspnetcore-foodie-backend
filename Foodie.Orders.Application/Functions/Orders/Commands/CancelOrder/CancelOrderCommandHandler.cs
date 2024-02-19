@@ -1,10 +1,7 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.Exceptions;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,6 +10,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CancelOrder
     public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand>
     {
         private readonly IOrdersRepository _ordersRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CancelOrderCommandHandler(IOrdersRepository ordersRepository)
         {
@@ -27,7 +25,8 @@ namespace Foodie.Orders.Application.Functions.Orders.Commands.CancelOrder
                 throw new OrderNotFoundException(request.Id);
 
             order.SetCancelledStatus();
-            await _ordersRepository.UnitOfWork.SaveEntitiesAsync();
+
+            await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }
     }

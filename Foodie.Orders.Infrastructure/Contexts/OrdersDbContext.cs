@@ -1,9 +1,8 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Context;
+﻿using Foodie.Common.Infrastructure.Database.Interfaces;
 using Foodie.Orders.Domain.Buyers;
 using Foodie.Orders.Domain.Contractors;
 using Foodie.Orders.Domain.Orders;
 using Foodie.Orders.Domain.Orders.Entities;
-using Foodie.Orders.Domain.Orders.Enumerations;
 using Foodie.Orders.Infrastructure.Configurations;
 using Foodie.Orders.Infrastructure.Extensions;
 using MediatR;
@@ -14,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Orders.Infrastructure.Contexts
 {
-    public class OrdersDbContext : DbContext, IUnitOfWork
+    public class OrdersDbContext : DbContext, IDbContext
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrdersItem { get; set; }
@@ -37,12 +36,11 @@ namespace Foodie.Orders.Infrastructure.Contexts
             modelBuilder.ApplyConfiguration(new ContractorEntityTypeConfiguration());
         }
 
-        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             await _mediator.DispatchDomainEventsAsync(this);
-            var result = await base.SaveChangesAsync(cancellationToken);
 
-            return true;
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }

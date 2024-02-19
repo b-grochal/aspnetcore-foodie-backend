@@ -2,14 +2,11 @@
 using Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder;
 using MassTransit;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static Foodie.Orders.Application.Functions.Orders.Commands.CreateOrder.CreateOrderCommand;
 
-namespace Foodie.Orders.Application.IntegrationEventsHandlers
+namespace Foodie.Orders.Application.Functions.IntegrationEvents
 {
     public class CustomerCheckoutIntegrationEventHandler : IConsumer<CustomerCheckoutIntegrationEvent>
     {
@@ -31,10 +28,10 @@ namespace Foodie.Orders.Application.IntegrationEventsHandlers
                 Quantity = o.Quantity
             }).ToList();
 
-            var createOrderCommand = new CreateOrderCommand(message.CustomerId, message.CustomerFirstName, 
-                message.CustomerLastName, message.CustomerPhoneNumber, message.CustomerEmail, message.AddressStreet, 
-                message.AddressCity, message.AddressCountry, message.RestaurantId, message.RestaurantName, 
-                message.LocationId, message.LocationAddress, message.LocationPhoneNumber, message.LocationEmail, 
+            var createOrderCommand = new CreateOrderCommand(message.CustomerId, message.CustomerFirstName,
+                message.CustomerLastName, message.CustomerPhoneNumber, message.CustomerEmail, message.AddressStreet,
+                message.AddressCity, message.AddressCountry, message.RestaurantId, message.RestaurantName,
+                message.LocationId, message.LocationAddress, message.LocationPhoneNumber, message.LocationEmail,
                 message.CityId, message.CityName, message.CountryId, message.CountryName, orderItems);
 
             await _medaitor.Send(createOrderCommand);

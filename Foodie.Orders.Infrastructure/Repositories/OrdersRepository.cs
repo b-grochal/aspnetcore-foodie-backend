@@ -1,5 +1,4 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Context;
-using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.Orders;
 using Foodie.Orders.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,6 @@ namespace Foodie.Orders.Infrastructure.Repositories
     public class OrdersRepository : IOrdersRepository
     {
         private readonly OrdersDbContext _ordersDbContext;
-        public IUnitOfWork UnitOfWork => _ordersDbContext;
 
         public OrdersRepository(OrdersDbContext ordersDbContext)
         {

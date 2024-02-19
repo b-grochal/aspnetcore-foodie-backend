@@ -1,4 +1,5 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.Contractors;
 using Foodie.Orders.Domain.Contractors.DomainEvents;
 using Foodie.Orders.Domain.Orders.DomainEvents;
@@ -11,10 +12,12 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
     public class ValidateOrAddContractorAggregateWhenOrderStartedDomainEventHandler : INotificationHandler<OrderStartedDomainEvent>
     {
         private readonly IContractorsRepository _contractorsRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ValidateOrAddContractorAggregateWhenOrderStartedDomainEventHandler(IContractorsRepository contractorsRepository)
+        public ValidateOrAddContractorAggregateWhenOrderStartedDomainEventHandler(IContractorsRepository contractorsRepository, IUnitOfWork unitOfWork)
         {
             _contractorsRepository = contractorsRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task Handle(OrderStartedDomainEvent orderStartedDomainEvent, CancellationToken cancellationToken)
@@ -35,8 +38,7 @@ namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStarted
 
             contractor.AddDomainEvent(new ContractorVerifiedDomainEvent(contractor, orderStartedDomainEvent.Order.Id));
 
-            await _contractorsRepository.UnitOfWork
-                .SaveEntitiesAsync(cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

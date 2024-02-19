@@ -6,7 +6,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Orders.Application.DomainEventsHandlers.OrderStatusChangedToInProgress
+namespace Foodie.Orders.Application.Functions.Orders.DomainEvents.OrderStatusChangedToInProgress
 {
     public class SendEmailToCustomerWhenOrderStatusChangedToInProgressDomainEventHandler : INotificationHandler<OrderStatusChangedToInProgressDomainEvent>
     {

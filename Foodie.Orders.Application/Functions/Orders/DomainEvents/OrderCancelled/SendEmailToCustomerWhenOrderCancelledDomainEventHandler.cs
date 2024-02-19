@@ -6,7 +6,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Orders.Application.DomainEventsHandlers.OrderCancelled
+namespace Foodie.Orders.Application.Functions.Orders.DomainEvents.OrderCancelled
 {
     public class SendEmailToCustomerWhenOrderCancelledDomainEventHandler : INotificationHandler<OrderCancelledDomainEvent>
     {
