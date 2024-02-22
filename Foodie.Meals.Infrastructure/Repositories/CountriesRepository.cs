@@ -2,6 +2,7 @@
 using Foodie.Common.Linq;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
+using Foodie.Meals.Infrastructure.Database;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
 
         public async Task<PagedList<Country>> GetAllAsync(int pageNumber, int pageSize, string name)
         {
-            return dbContext.Countries
+            return _dbContext.Countries
                 .Where(c => name == null || c.Name.Equals(name))
                 .Paginate(pageNumber, pageSize);
         }

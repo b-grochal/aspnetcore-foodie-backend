@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Exceptions;
 using MediatR;
@@ -9,25 +10,29 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.UpdateCity
 {
     public class UpdateCityCommandHandler : IRequestHandler<UpdateCityCommand, UpdateCityCommandResponse>
     {
-        private readonly ICitiesRepository citiesRepository;
-        private readonly IMapper mapper;
+        private readonly ICitiesRepository _citiesRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UpdateCityCommandHandler(ICitiesRepository citiesRepository, IMapper mapper)
+        public UpdateCityCommandHandler(ICitiesRepository citiesRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
-            this.citiesRepository = citiesRepository;
-            this.mapper = mapper;
+            _citiesRepository = citiesRepository;
+            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<UpdateCityCommandResponse> Handle(UpdateCityCommand request, CancellationToken cancellationToken)
         {
-            var city = await citiesRepository.GetByIdAsync(request.Id);
+            var city = await _citiesRepository.GetByIdAsync(request.Id);
 
             if (city == null)
                 throw new CityNotFoundException(request.Id);
 
-            var editedCity = mapper.Map(request, city);
-            await citiesRepository.UpdateAsync(editedCity);
-            return mapper.Map<UpdateCityCommandResponse>(editedCity);
+            var editedCity = _mapper.Map(request, city);
+            await _citiesRepository.UpdateAsync(editedCity);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return _mapper.Map<UpdateCityCommandResponse>(editedCity);
         }
     }
 }

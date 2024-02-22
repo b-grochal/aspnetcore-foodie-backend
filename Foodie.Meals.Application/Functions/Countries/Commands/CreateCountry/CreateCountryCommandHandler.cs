@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using MediatR;
@@ -9,20 +10,24 @@ namespace Foodie.Meals.Application.Functions.Countries.Commands.CreateCountry
 {
     public class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand, CreateCountryCommandResponse>
     {
-        private readonly ICountriesRepository countriesRepository;
-        private readonly IMapper mapper;
+        private readonly ICountriesRepository _countriesRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public CreateCountryCommandHandler(ICountriesRepository countriesRepository, IMapper mapper)
+        public CreateCountryCommandHandler(ICountriesRepository countriesRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
-            this.countriesRepository = countriesRepository;
-            this.mapper = mapper;
+            _countriesRepository = countriesRepository;
+            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CreateCountryCommandResponse> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
         {
-            var country = mapper.Map<Country>(request);
-            await countriesRepository.CreateAsync(country);
-            return mapper.Map<CreateCountryCommandResponse>(country);
+            var country = _mapper.Map<Country>(request);
+            await _countriesRepository.CreateAsync(country);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return _mapper.Map<CreateCountryCommandResponse>(country);
         }
     }
 }

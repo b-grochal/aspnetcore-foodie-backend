@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using MediatR;
@@ -13,20 +14,23 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.CreateMeal
 {
     public class CreateMealCommandHandler : IRequestHandler<CreateMealCommand, CreateMealCommandResponse>
     {
-        private readonly IMealsRepository mealsRepository;
-        private readonly IMapper mapper;
+        private readonly IMealsRepository _mealsRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public CreateMealCommandHandler(IMealsRepository mealsRepository, IMapper mapper)
+        public CreateMealCommandHandler(IMealsRepository mealsRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
-            this.mealsRepository = mealsRepository;
-            this.mapper = mapper;
+            _mealsRepository = mealsRepository;
+            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CreateMealCommandResponse> Handle(CreateMealCommand request, CancellationToken cancellationToken)
         {
-            var meal = mapper.Map<Meal>(request);
-            await mealsRepository.CreateAsync(meal);
-            return mapper.Map<CreateMealCommandResponse>(meal);
+            var meal = _mapper.Map<Meal>(request);
+            await _mealsRepository.CreateAsync(meal);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            return _mapper.Map<CreateMealCommandResponse>(meal);
         }
     }
 }

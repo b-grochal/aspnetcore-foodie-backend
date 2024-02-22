@@ -1,4 +1,5 @@
 ﻿using Foodie.Common.Domain.Entities.Interfaces;
+using Foodie.Common.Infrastructure.Database.Interfaces;
 using Foodie.Meals.Domain.Entities;
 using Foodie.Meals.Infrastructure.DummyData;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +8,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Infrastructure
+namespace Foodie.Meals.Infrastructure.Database
 {
-    public class MealsDbContext : DbContext
+    public class MealsDbContext : DbContext, IDbContext
     {
         public DbSet<Meal> Meals { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Linq;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Exceptions;
@@ -10,33 +11,36 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
 {
     public class UpdateRestaurantCommandHandler : IRequestHandler<UpdateRestaurantCommand, UpdateRestaurantCommandResponse>
     {
-        private readonly IRestaurantsRepository restaurantsRepository;
-        private readonly ICategoriesRepository categoriesRepository;
-        private readonly IMapper mapper;
+        private readonly IRestaurantsRepository _restaurantsRepository;
+        private readonly ICategoriesRepository _categoriesRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UpdateRestaurantCommandHandler(IRestaurantsRepository restaurantsRepository, ICategoriesRepository categoriesRepository, IMapper mapper)
+        public UpdateRestaurantCommandHandler(IRestaurantsRepository restaurantsRepository, ICategoriesRepository categoriesRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
-            this.restaurantsRepository = restaurantsRepository;
-            this.categoriesRepository = categoriesRepository;
-            this.mapper = mapper;
+            _restaurantsRepository = restaurantsRepository;
+            _categoriesRepository = categoriesRepository;
+            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<UpdateRestaurantCommandResponse> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
         {
-            var restaurant = await restaurantsRepository.GetByIdAsync(request.Id);
+            var restaurant = await _restaurantsRepository.GetByIdAsync(request.Id);
 
             if (restaurant == null)
                 throw new RestaurantNotFoundException(request.Id);
 
-            var editedRestaurant = mapper.Map(request, restaurant);
+            var editedRestaurant = _mapper.Map(request, restaurant);
 
-            var categories = await categoriesRepository.GetAllAsync(request.CategoriesIds);
+            var categories = await _categoriesRepository.GetAllAsync(request.CategoriesIds);
 
             editedRestaurant.Categories.Merge(categories);
 
-            await restaurantsRepository.UpdateAsync(editedRestaurant);
+            await _restaurantsRepository.UpdateAsync(editedRestaurant);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return mapper.Map<UpdateRestaurantCommandResponse>(editedRestaurant);
+            return _mapper.Map<UpdateRestaurantCommandResponse>(editedRestaurant);
         }
     }
 }

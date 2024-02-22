@@ -1,4 +1,5 @@
-﻿using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System;
@@ -12,21 +13,24 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaura
 {
     public class DeleteRestaurantCommandHandler : IRequestHandler<DeleteRestaurantCommand, DeleteRestaurantCommandResponse>
     {
-        private readonly IRestaurantsRepository restaurantRepository;
+        private readonly IRestaurantsRepository _restaurantRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteRestaurantCommandHandler(IRestaurantsRepository restaurantRepository)
+        public DeleteRestaurantCommandHandler(IRestaurantsRepository restaurantRepository, IUnitOfWork unitOfWork)
         {
-            this.restaurantRepository = restaurantRepository;
+            _restaurantRepository = restaurantRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<DeleteRestaurantCommandResponse> Handle(DeleteRestaurantCommand request, CancellationToken cancellationToken)
         {
-            var restaurantToDelete = await restaurantRepository.GetByIdAsync(request.Id);
+            var restaurantToDelete = await _restaurantRepository.GetByIdAsync(request.Id);
 
             if (restaurantToDelete == null)
                 throw new RestaurantNotFoundException(request.Id);
 
-            await restaurantRepository.DeleteAsync(restaurantToDelete);
+            await _restaurantRepository.DeleteAsync(restaurantToDelete);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return new DeleteRestaurantCommandResponse
             {

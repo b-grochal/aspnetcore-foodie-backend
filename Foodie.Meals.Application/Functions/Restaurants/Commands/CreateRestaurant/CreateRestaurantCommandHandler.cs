@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using MediatR;
@@ -13,21 +14,23 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaura
 {
     public class CreateRestaurantCommandHandler : IRequestHandler<CreateRestaurantCommand, CreateRestaurantCommandResponse>
     {
-        private readonly IRestaurantsRepository restaurantsRepository;
-        private readonly ICategoriesRepository categoriesRepository;
-        private readonly IMapper mapper;
+        private readonly IRestaurantsRepository _restaurantsRepository;
+        private readonly ICategoriesRepository _categoriesRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public CreateRestaurantCommandHandler(IRestaurantsRepository restaurantsRepository, ICategoriesRepository categoriesRepository, IMapper mapper)
+        public CreateRestaurantCommandHandler(IRestaurantsRepository restaurantsRepository, ICategoriesRepository categoriesRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
-            this.restaurantsRepository = restaurantsRepository;
-            this.categoriesRepository = categoriesRepository;
-            this.mapper = mapper;
+            _restaurantsRepository = restaurantsRepository;
+            _categoriesRepository = categoriesRepository;
+            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CreateRestaurantCommandResponse> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
         {
-            var restaurant = mapper.Map<Restaurant>(request);
-            var categories = await categoriesRepository.GetAllAsync(request.CategoriesIds);
+            var restaurant = _mapper.Map<Restaurant>(request);
+            var categories = await _categoriesRepository.GetAllAsync(request.CategoriesIds);
             restaurant.Categories = new List<Category>();
 
             foreach (var category in categories)
@@ -35,8 +38,9 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaura
                 restaurant.Categories.Add(category);
             }
 
-            await restaurantsRepository.CreateAsync(restaurant);
-            return mapper.Map<CreateRestaurantCommandResponse>(restaurant);
+            await _restaurantsRepository.CreateAsync(restaurant);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            return _mapper.Map<CreateRestaurantCommandResponse>(restaurant);
         }
     }
 }

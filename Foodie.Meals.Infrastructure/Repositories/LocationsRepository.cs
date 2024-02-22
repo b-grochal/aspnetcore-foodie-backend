@@ -2,6 +2,7 @@
 using Foodie.Common.Linq;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
+using Foodie.Meals.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
 
         public async Task<PagedList<Location>> GetAllAsync(int pageNumber, int pageSize, int? restaurantId, int? cityId)
         {
-            return dbContext.Locations
+            return _dbContext.Locations
                 .Where(l => restaurantId == null || l.RestaurantId == restaurantId)
                 .Where(l => cityId == null || l.CityId == cityId)
                 .Paginate(pageNumber, pageSize);
@@ -23,7 +24,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
 
         public async Task<IReadOnlyList<Location>> GetAllAsync(int restaurantId, int? cityId)
         {
-            var locations = dbContext.Locations
+            var locations = _dbContext.Locations
                 .Where(l => l.RestaurantId == restaurantId)
                 .Where(l => cityId == null || l.CityId == cityId);
 
@@ -32,7 +33,7 @@ namespace Foodie.Meals.Infrastructure.Repositories
 
         public async Task<Location> GetByIdWithRelatedDataAsync(int id)
         {
-            return await dbContext.Locations
+            return await _dbContext.Locations
                 .Include(l => l.City)
                 .Include(l => l.Restaurant)
                 .FirstOrDefaultAsync(l => l.Id == id);

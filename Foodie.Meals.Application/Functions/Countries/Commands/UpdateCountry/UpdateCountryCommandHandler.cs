@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Exceptions;
 using MediatR;
@@ -9,25 +10,28 @@ namespace Foodie.Meals.Application.Functions.Countries.Commands.UpdateCountry
 {
     public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryCommand, UpdateCountryCommandResponse>
     {
-        private readonly ICountriesRepository countriesRepository;
-        private readonly IMapper mapper;
+        private readonly ICountriesRepository _countriesRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UpdateCountryCommandHandler(ICountriesRepository countriesRepository, IMapper mapper)
+        public UpdateCountryCommandHandler(ICountriesRepository countriesRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
-            this.countriesRepository = countriesRepository;
-            this.mapper = mapper;
+            _countriesRepository = countriesRepository;
+            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<UpdateCountryCommandResponse> Handle(UpdateCountryCommand request, CancellationToken cancellationToken)
         {
-            var country = await countriesRepository.GetByIdAsync(request.Id);
+            var country = await _countriesRepository.GetByIdAsync(request.Id);
 
             if (country == null)
                 throw new CountryNotFoundException(request.Id);
 
-            country = mapper.Map(request, country);
-            await countriesRepository.UpdateAsync(country);
-            return mapper.Map<UpdateCountryCommandResponse>(country);
+            country = _mapper.Map(request, country);
+            await _countriesRepository.UpdateAsync(country);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            return _mapper.Map<UpdateCountryCommandResponse>(country);
         }
     }
 }
