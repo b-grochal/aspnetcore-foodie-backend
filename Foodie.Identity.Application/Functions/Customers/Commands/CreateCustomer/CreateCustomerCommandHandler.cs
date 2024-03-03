@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Enums;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
@@ -25,6 +26,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
         private readonly ICacheService _cacheService;
         private readonly IBackgroundJobClient _backgroundJobClient;
         private readonly IEmailsService _emailsService;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CreateCustomerCommandHandler(ICustomersRepository customersRepository,
                                             IApplicationUsersRepository applicationUsersRepository,
@@ -33,7 +35,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
                                             IMapper mapper,
                                             ICacheService cacheService,
                                             IBackgroundJobClient backgroundJobClient,
-                                            IEmailsService emailsService)
+                                            IEmailsService emailsService, IUnitOfWork unitOfWork)
         {
             _customersRepository = customersRepository;
             _applicationUsersRepository = applicationUsersRepository;
@@ -43,6 +45,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
             _cacheService = cacheService;
             _backgroundJobClient = backgroundJobClient;
             _emailsService = emailsService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CreateCustomerCommandResponse> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
@@ -63,6 +66,8 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
                 Token = null,
                 ExpirationTime = null
             });
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             var accountActivationToken = Guid.NewGuid().ToString();
             await _cacheService.SetAsync<ApplicationUser>(customer,

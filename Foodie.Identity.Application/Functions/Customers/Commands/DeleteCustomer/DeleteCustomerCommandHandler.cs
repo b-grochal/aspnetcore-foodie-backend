@@ -1,4 +1,5 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
 using MediatR;
 using System.Threading;
@@ -8,21 +9,25 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustome
 {
     internal class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, DeleteCustomerCommandResponse>
     {
-        private readonly ICustomersRepository customersRepository;
+        private readonly ICustomersRepository _customersRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteCustomerCommandHandler(ICustomersRepository customersRepository)
+        public DeleteCustomerCommandHandler(ICustomersRepository customersRepository, IUnitOfWork unitOfWork)
         {
-            this.customersRepository = customersRepository;
+            _customersRepository = customersRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<DeleteCustomerCommandResponse> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
         {
-            var customer = await customersRepository.GetByIdAsync(request.Id);
+            var customer = await _customersRepository.GetByIdAsync(request.Id);
 
             if (customer == null)
                 throw new ApplicationUserNotFoundException(request.Id);
 
-            await customersRepository.DeleteAsync(customer);
+            await _customersRepository.DeleteAsync(customer);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return new DeleteCustomerCommandResponse
             {

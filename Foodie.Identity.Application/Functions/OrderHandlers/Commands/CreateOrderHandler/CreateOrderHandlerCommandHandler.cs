@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Enums;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
@@ -25,8 +26,9 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
         private readonly ICacheService _cacheService;
         private readonly IBackgroundJobClient _backgroundJobClient;
         private readonly IEmailsService _emailsService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateOrderHandlerCommandHandler(IOrderHandlersRepository orderHandlersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository refreshTokensRepository, IPasswordService passwordService, IMapper mapper, ICacheService cacheService, IBackgroundJobClient backgroundJobClient, IEmailsService emailsService)
+        public CreateOrderHandlerCommandHandler(IOrderHandlersRepository orderHandlersRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository refreshTokensRepository, IPasswordService passwordService, IMapper mapper, ICacheService cacheService, IBackgroundJobClient backgroundJobClient, IEmailsService emailsService, IUnitOfWork unitOfWork)
         {
             _orderHandlersRepository = orderHandlersRepository;
             _applicationUsersRepository = applicationUsersRepository;
@@ -36,6 +38,7 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
             _cacheService = cacheService;
             _backgroundJobClient = backgroundJobClient;
             _emailsService = emailsService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CreateOrderHandlerCommandResponse> Handle(CreateOrderHandlerCommand request, CancellationToken cancellationToken)
@@ -56,6 +59,8 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
                 Token = null,
                 ExpirationTime = null
             });
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             var accountActivationToken = Guid.NewGuid().ToString();
             await _cacheService.SetAsync<ApplicationUser>(orderHandler,

@@ -1,4 +1,5 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
 using MediatR;
 using System.Threading;
@@ -8,16 +9,18 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.RevokeRefreshToken
 {
     public class RevokeRefreshTokenCommandHandler : IRequestHandler<RevokeRefreshTokenCommand>
     {
-        private readonly IRefreshTokensRepository refreshTokensRepository;
+        private readonly IRefreshTokensRepository _refreshTokensRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RevokeRefreshTokenCommandHandler(IRefreshTokensRepository refreshTokensRepository)
+        public RevokeRefreshTokenCommandHandler(IRefreshTokensRepository refreshTokensRepository, IUnitOfWork unitOfWork)
         {
-            this.refreshTokensRepository = refreshTokensRepository;
+            _refreshTokensRepository = refreshTokensRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(RevokeRefreshTokenCommand request, CancellationToken cancellationToken)
         {
-            var refreshToken = await refreshTokensRepository.GetByApplicationUserIdAsync(request.ApplicationUserId);
+            var refreshToken = await _refreshTokensRepository.GetByApplicationUserIdAsync(request.ApplicationUserId);
 
             if (refreshToken is null)
                 throw new RefreshTokenForApplicationUserNotFoundException(request.ApplicationUserId);
@@ -25,7 +28,9 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.RevokeRefreshToken
             refreshToken.Token = null;
             refreshToken.ExpirationTime = null;
 
-            await refreshTokensRepository.UpdateAsync(refreshToken);
+            await _refreshTokensRepository.UpdateAsync(refreshToken);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

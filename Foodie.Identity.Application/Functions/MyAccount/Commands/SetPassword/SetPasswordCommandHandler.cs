@@ -1,4 +1,5 @@
-﻿using Foodie.Common.Infrastructure.Cache;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
@@ -15,12 +16,14 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.SetPassword
         private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly ICacheService _cacheService;
         private readonly IPasswordService _passwordService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SetPasswordCommandHandler(IApplicationUsersRepository applicationUsersRepository, ICacheService cacheService, IPasswordService passwordService)
+        public SetPasswordCommandHandler(IApplicationUsersRepository applicationUsersRepository, ICacheService cacheService, IPasswordService passwordService, IUnitOfWork unitOfWork)
         {
             _applicationUsersRepository = applicationUsersRepository;
             _cacheService = cacheService;
             _passwordService = passwordService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(SetPasswordCommand request, CancellationToken cancellationToken)
@@ -41,6 +44,8 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.SetPassword
             applicationUser.PasswordHash = _passwordService.HashPassword(request.Password);
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             await _cacheService.RemoveAsync(CachePrefixes.SetPasswordToken, string.Empty, CacheParameters.SetPasswordToken,
                                                           request.SetPasswordToken);

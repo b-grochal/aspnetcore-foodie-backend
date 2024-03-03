@@ -6,34 +6,37 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 
 namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
 {
     public class SignInCommandHandler : IRequestHandler<SignInCommand, SignInCommandResponse>
     {
-        private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IRefreshTokensRepository refreshTokensRepository;
-        private readonly IPasswordService passwordService;
-        private readonly IJwtService jwtService;
-        private readonly IRefreshTokenService refreshTokenService;
+        private readonly IApplicationUsersRepository _applicationUsersRepository;
+        private readonly IRefreshTokensRepository _refreshTokensRepository;
+        private readonly IPasswordService _passwordService;
+        private readonly IJwtService _jwtService;
+        private readonly IRefreshTokenService _refreshTokenService;
+        private readonly IUnitOfWork _unitOfWork;
 
         public SignInCommandHandler(
             IApplicationUsersRepository applicationUserRolesRepository,
             IRefreshTokensRepository refreshTokensRepository,
-            IPasswordService passwordService, 
-            IJwtService jwtService, 
-            IRefreshTokenService refreshTokenService)
+            IPasswordService passwordService,
+            IJwtService jwtService,
+            IRefreshTokenService refreshTokenService, IUnitOfWork unitOfWork)
         {
-            this.applicationUsersRepository = applicationUserRolesRepository;
-            this.refreshTokensRepository = refreshTokensRepository;
-            this.passwordService = passwordService;
-            this.jwtService = jwtService;
-            this.refreshTokenService = refreshTokenService;
+            _applicationUsersRepository = applicationUserRolesRepository;
+            _refreshTokensRepository = refreshTokensRepository;
+            _passwordService = passwordService;
+            _jwtService = jwtService;
+            _refreshTokenService = refreshTokenService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<SignInCommandResponse> Handle(SignInCommand request, CancellationToken cancellationToken)
         {
-            var applicationUser = await applicationUsersRepository.GetByEmailAsync(request.Email);
+            var applicationUser = await _applicationUsersRepository.GetByEmailAsync(request.Email);
 
             if (applicationUser == null)
                 throw new ApplicationUserNotFoundException(request.Email);
@@ -44,16 +47,18 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
             if (!applicationUser.IsActive)
                 throw new ApplicationUserNotActivatedException(request.Email);
 
-            if (!passwordService.VerifyPassword(request.Password, applicationUser.PasswordHash))
+            if (!_passwordService.VerifyPassword(request.Password, applicationUser.PasswordHash))
                 await HandleInvalidAuthentication(applicationUser);
 
-            var refreshTokenData = refreshTokenService.GenerateRefreshToken();
+            var refreshTokenData = _refreshTokenService.GenerateRefreshToken();
 
             await UpdateRefreshTokenForApplicationUser(applicationUser.Id, refreshTokenData);
 
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
             return new SignInCommandResponse
             {
-                JwtToken = jwtService.GenerateToken(applicationUser),
+                JwtToken = _jwtService.GenerateToken(applicationUser),
                 RefreshToken = refreshTokenData.RefreshToken
             };
         }
@@ -65,19 +70,19 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
             if (applicationUser.AccessFailedCount == 5)
                 applicationUser.IsLocked = true;
 
-            await applicationUsersRepository.UpdateAsync(applicationUser);
+            await _applicationUsersRepository.UpdateAsync(applicationUser);
 
             throw new ApplicationUserNotAuthenticatedException(applicationUser.Email);
         }
 
         private async Task UpdateRefreshTokenForApplicationUser(int applicationUserId, (string RefreshToken, DateTimeOffset ExpirationDate) refreshTokenData)
         {
-            var refreshToken = await refreshTokensRepository.GetByApplicationUserIdAsync(applicationUserId);
+            var refreshToken = await _refreshTokensRepository.GetByApplicationUserIdAsync(applicationUserId);
 
             refreshToken.Token = refreshTokenData.RefreshToken;
             refreshToken.ExpirationTime = refreshTokenData.ExpirationDate;
 
-            await refreshTokensRepository.UpdateAsync(refreshToken);
+            await _refreshTokensRepository.UpdateAsync(refreshToken);
         }
     }
 }

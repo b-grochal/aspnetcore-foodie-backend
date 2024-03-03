@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
 using MediatR;
@@ -9,26 +10,30 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
 {
     public class UpdateAdminCommandHandler : IRequestHandler<UpdateAdminCommand, UpdateAdminCommandResponse>
     {
-        private readonly IAdminsRepository adminsRepository;
-        private readonly IMapper mapper;
+        private readonly IAdminsRepository _adminsRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UpdateAdminCommandHandler(IAdminsRepository adminsRepository, IMapper mapper)
+        public UpdateAdminCommandHandler(IAdminsRepository adminsRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
-            this.adminsRepository = adminsRepository;
-            this.mapper = mapper;
+            _adminsRepository = adminsRepository;
+            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<UpdateAdminCommandResponse> Handle(UpdateAdminCommand request, CancellationToken cancellationToken)
         {
-            var admin = await adminsRepository.GetByIdAsync(request.Id);
+            var admin = await _adminsRepository.GetByIdAsync(request.Id);
 
             if (admin == null)
                 throw new ApplicationUserNotFoundException(request.Id);
 
-            var updatedAdmin = mapper.Map(request, admin);
-            await adminsRepository.UpdateAsync(updatedAdmin);
+            var updatedAdmin = _mapper.Map(request, admin);
+            await _adminsRepository.UpdateAsync(updatedAdmin);
 
-            return mapper.Map<UpdateAdminCommandResponse>(updatedAdmin);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return _mapper.Map<UpdateAdminCommandResponse>(updatedAdmin);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Application.Exceptions;
 using MediatR;
@@ -11,11 +12,13 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ChangePasswor
     {
         private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly IPasswordService _passwordService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ChangePasswordCommandHandler(IApplicationUsersRepository applicationUsersRepository, IPasswordService passwordService)
+        public ChangePasswordCommandHandler(IApplicationUsersRepository applicationUsersRepository, IPasswordService passwordService, IUnitOfWork unitOfWork)
         {
             _applicationUsersRepository = applicationUsersRepository;
             _passwordService = passwordService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
@@ -28,6 +31,9 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ChangePasswor
             applicationUser.PasswordHash = _passwordService.HashPassword(request.Password);
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
             return Unit.Value;
         }
     }

@@ -1,4 +1,5 @@
-﻿using Foodie.Common.Infrastructure.Cache;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
@@ -18,13 +19,15 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ChangeEmail
         private readonly ICacheService _cacheService;
         private readonly IBackgroundJobClient _backgroundJobClient;
         private readonly IEmailsService _emailsService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ChangeEmailCommandHandler(IApplicationUsersRepository applicationUsersRepository, ICacheService cacheService, IBackgroundJobClient backgroundJobClient, IEmailsService emailsService)
+        public ChangeEmailCommandHandler(IApplicationUsersRepository applicationUsersRepository, ICacheService cacheService, IBackgroundJobClient backgroundJobClient, IEmailsService emailsService, IUnitOfWork unitOfWork)
         {
             _applicationUsersRepository = applicationUsersRepository;
             _cacheService = cacheService;
             _backgroundJobClient = backgroundJobClient;
             _emailsService = emailsService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(ChangeEmailCommand request, CancellationToken cancellationToken)
@@ -41,6 +44,8 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ChangeEmail
             applicationUser.IsActive = false;
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             var accountActivationToken = Guid.NewGuid().ToString();
 

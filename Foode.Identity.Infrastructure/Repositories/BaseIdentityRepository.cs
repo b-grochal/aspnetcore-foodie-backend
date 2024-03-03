@@ -17,21 +17,17 @@ namespace Foode.Identity.Infrastructure.Repositories
         public async Task<T> CreateAsync(T entity)
         {
             await dbContext.Set<T>().AddAsync(entity);
-            await dbContext.SaveChangesAsync();
-
             return entity;
         }
 
         public async Task DeleteAsync(T entity)
         {
             dbContext.Set<T>().Remove(entity);
-            await dbContext.SaveChangesAsync();
         }
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
             return await dbContext.Set<T>().ToListAsync();
-
         }
 
         public async Task<T> GetByIdAsync(int id)
@@ -42,7 +38,6 @@ namespace Foode.Identity.Infrastructure.Repositories
         public async Task UpdateAsync(T entity)
         {
             dbContext.Set<T>().Update(entity);
-            await dbContext.SaveChangesAsync();
         }
     }
 }

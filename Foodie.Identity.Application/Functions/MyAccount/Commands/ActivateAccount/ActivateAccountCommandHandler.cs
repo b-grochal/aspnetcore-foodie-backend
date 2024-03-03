@@ -1,4 +1,5 @@
-﻿using Foodie.Common.Infrastructure.Cache;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
@@ -13,11 +14,13 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccou
     {
         private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly ICacheService _cacheService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ActivateAccountCommandHandler(IApplicationUsersRepository applicationUsersRepository, ICacheService cacheService)
+        public ActivateAccountCommandHandler(IApplicationUsersRepository applicationUsersRepository, ICacheService cacheService, IUnitOfWork unitOfWork)
         {
             _applicationUsersRepository = applicationUsersRepository;
             _cacheService = cacheService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(ActivateAccountCommand request, CancellationToken cancellationToken)
@@ -35,6 +38,8 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccou
             applicationUser.IsActive = true;
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             await _cacheService.RemoveAsync(CachePrefixes.AccountActivationTokens, string.Empty, CacheParameters.AccountActivationToken, request.AccountActivationToken);
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Enums;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
@@ -20,13 +21,14 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
         private readonly IAdminsRepository _adminsRepository;
         private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly IRefreshTokensRepository _applicationUserRefreshTokensRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPasswordService _passwordService;
         private readonly IMapper _mapper;
         private readonly ICacheService _cacheService;
         private readonly IBackgroundJobClient _backgroundJobClient;
         private readonly IEmailsService _emailsService;
 
-        public CreateAdminCommandHandler(IAdminsRepository adminsRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper, ICacheService cacheService, IBackgroundJobClient backgroundJobClient, IEmailsService emailsService)
+        public CreateAdminCommandHandler(IAdminsRepository adminsRepository, IApplicationUsersRepository applicationUsersRepository, IRefreshTokensRepository applicationUserRefreshTokensRepository, IPasswordService passwordService, IMapper mapper, ICacheService cacheService, IBackgroundJobClient backgroundJobClient, IEmailsService emailsService, IUnitOfWork unitOfWork)
         {
             _adminsRepository = adminsRepository;
             _applicationUsersRepository = applicationUsersRepository;
@@ -36,6 +38,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
             _cacheService = cacheService;
             _backgroundJobClient = backgroundJobClient;
             _emailsService = emailsService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CreateAdminCommandResponse> Handle(CreateAdminCommand request, CancellationToken cancellationToken)
@@ -63,6 +66,9 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
                                                           string.Empty,
                                                           CacheParameters.AccountActivationToken,
                                                           accountActivationToken);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
             _backgroundJobClient.Enqueue(() => _emailsService.SendAccountActivationEmail(admin.Email, accountActivationToken));
 
             return _mapper.Map<CreateAdminCommandResponse>(admin);

@@ -1,4 +1,5 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
 using Foodie.Identity.Application.Exceptions;
 using MediatR;
@@ -10,26 +11,28 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.RefreshJwtToken
 {
     public class RefreshJwtTokenCommandHandler : IRequestHandler<RefreshJwtTokenCommand, RefreshJwtTokenCommandResponse>
     {
-        private readonly IRefreshTokensRepository refreshTokensRepository;
-        private readonly IApplicationUsersRepository applicationUsersRepository;
-        private readonly IJwtService jwtService;
-        private readonly IRefreshTokenService refreshTokenService;
+        private readonly IRefreshTokensRepository _refreshTokensRepository;
+        private readonly IApplicationUsersRepository _applicationUsersRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IJwtService _jwtService;
+        private readonly IRefreshTokenService _refreshTokenService;
 
-        public RefreshJwtTokenCommandHandler(IRefreshTokensRepository refreshTokensRepository, 
-            IApplicationUsersRepository applicationUsersRepository, 
-            IJwtService jwtService, 
-            IRefreshTokenService refreshTokenService)
+        public RefreshJwtTokenCommandHandler(IRefreshTokensRepository refreshTokensRepository,
+            IApplicationUsersRepository applicationUsersRepository,
+            IJwtService jwtService,
+            IRefreshTokenService refreshTokenService, IUnitOfWork unitOfWork)
         {
-            this.refreshTokensRepository = refreshTokensRepository;
-            this.applicationUsersRepository = applicationUsersRepository;
-            this.jwtService = jwtService;
-            this.refreshTokenService = refreshTokenService;
+            _refreshTokensRepository = refreshTokensRepository;
+            _applicationUsersRepository = applicationUsersRepository;
+            _jwtService = jwtService;
+            _refreshTokenService = refreshTokenService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<RefreshJwtTokenCommandResponse> Handle(RefreshJwtTokenCommand request, CancellationToken cancellationToken)
         {
-            var applicationUserId = jwtService.GetApplicationUserIdFromExpiredToken(request.JwtToken);
-            var refreshToken = await refreshTokensRepository.GetByApplicationUserIdAsync(applicationUserId);
+            var applicationUserId = _jwtService.GetApplicationUserIdFromExpiredToken(request.JwtToken);
+            var refreshToken = await _refreshTokensRepository.GetByApplicationUserIdAsync(applicationUserId);
 
             if (refreshToken == null)
                 throw new RefreshTokenForApplicationUserNotFoundException(applicationUserId);
@@ -37,14 +40,16 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.RefreshJwtToken
             if (refreshToken.Token != request.RefreshToken || refreshToken.ExpirationTime <= DateTimeOffset.Now)
                 throw new InvalidRefreshTokenException();
 
-            var applicationUser = await applicationUsersRepository.GetByIdAsync(applicationUserId);
-            var newJwtToken = jwtService.GenerateToken(applicationUser);
-            var newRefreshTokenData = refreshTokenService.GenerateRefreshToken();
+            var applicationUser = await _applicationUsersRepository.GetByIdAsync(applicationUserId);
+            var newJwtToken = _jwtService.GenerateToken(applicationUser);
+            var newRefreshTokenData = _refreshTokenService.GenerateRefreshToken();
 
             refreshToken.Token = newRefreshTokenData.RefreshToken;
             refreshToken.ExpirationTime = newRefreshTokenData.ExpirationDate;
 
-            await refreshTokensRepository.UpdateAsync(refreshToken);
+            await _refreshTokensRepository.UpdateAsync(refreshToken);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return new RefreshJwtTokenCommandResponse
             {
