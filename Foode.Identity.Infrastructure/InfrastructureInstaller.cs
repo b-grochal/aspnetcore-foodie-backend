@@ -1,5 +1,7 @@
-﻿using Foode.Identity.Infrastructure.Repositories;
+﻿using Foode.Identity.Infrastructure.Database;
+using Foode.Identity.Infrastructure.Repositories;
 using Foode.Identity.Infrastructure.Services;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
@@ -27,6 +29,7 @@ namespace Foode.Identity.Infrastructure
 
             services.AddCache(configuration);
 
+            services.AddScoped<IUnitOfWork, IdentityUnitOfWork>();
             services.AddTransient<IApplicationUsersRepository, ApplicationUsersRepository>();
             services.AddTransient<IAdminsRepository, AdminsRepository>();
             services.Decorate<IAdminsRepository, CachedAdminsRepository>();

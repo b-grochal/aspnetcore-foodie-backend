@@ -1,5 +1,6 @@
 ﻿using Foode.Identity.Infrastructure.DummyData;
 using Foode.Identity.Infrastructure.Services;
+using Foodie.Common.Infrastructure.Database.Interfaces;
 using Foodie.Identity.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Foode.Identity.Infrastructure
 {
-    public class IdentityDbContext : DbContext
+    public class IdentityDbContext : DbContext, IDbContext
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Admin> Admins { get; set; }
