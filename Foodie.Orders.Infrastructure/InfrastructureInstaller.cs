@@ -6,6 +6,7 @@ using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Contractors;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
 using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Infrastructure.Contexts;
+using Foodie.Orders.Infrastructure.Database;
 using Foodie.Orders.Infrastructure.Queries;
 using Foodie.Orders.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,7 @@ namespace Foodie.Orders.Infrastructure
 
             services.AddSingleton<DapperContext>();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, OrdersUnitOfWork>();
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IBuyersRepository, BuyersRepository>();
             services.AddScoped<IContractorsRepository, ContractorsRepository>();

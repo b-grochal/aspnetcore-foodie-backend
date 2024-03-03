@@ -11,7 +11,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Orders.Infrastructure.Contexts
+namespace Foodie.Orders.Infrastructure.Database
 {
     public class OrdersDbContext : DbContext, IDbContext
     {

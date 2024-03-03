@@ -1,6 +1,6 @@
 ﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Domain.Contractors;
-using Foodie.Orders.Infrastructure.Contexts;
+using Foodie.Orders.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
