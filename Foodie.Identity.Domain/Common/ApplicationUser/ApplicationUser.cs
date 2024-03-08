@@ -1,19 +1,36 @@
-﻿using Foodie.Common.Domain.Entities;
+﻿using Foodie.Common.Domain.AggregateRoots;
 using Foodie.Common.Enums;
+using Foodie.Identity.Domain.Common.ApplicationUser.ValueObjects;
 
-namespace Foodie.Identity.Domain.Entities
+namespace Foodie.Identity.Domain.Common.ApplicationUser
 {
-    public class ApplicationUser : BaseEntity
+    public abstract class ApplicationUser : AggregateRoot
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string PasswordHash { get; set; }
-        public int AccessFailedCount { get; set; }
-        public bool IsLocked { get; set; }
-        public bool IsActive { get; set; }
-        public ApplicationUserRole Role { get; set; }
-        public RefreshToken RefreshToken { get; set; }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public string Email { get; }
+        public string PhoneNumber { get; }
+        public string PasswordHash { get; }
+        public int AccessFailedCount { get; }
+        public bool IsLocked { get; }
+        public bool IsActive { get; }
+        public ApplicationUserRole Role { get; }
+        public RefreshToken RefreshToken { get; }
+
+        protected ApplicationUser(string firstName, string lastName, string email,
+            string phoneNumber, string passwordHash, int accessFailedCount,
+            bool isLocked, bool isActive, ApplicationUserRole role, RefreshToken refreshToken)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            PasswordHash = passwordHash;
+            AccessFailedCount = accessFailedCount;
+            IsLocked = isLocked;
+            IsActive = isActive;
+            Role = role;
+            RefreshToken = refreshToken;
+        }
     }
 }

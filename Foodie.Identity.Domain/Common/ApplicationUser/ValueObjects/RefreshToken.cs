@@ -1,13 +1,31 @@
-﻿using Foodie.Common.Domain.Entities;
+﻿using Foodie.Common.Domain.ValueObjects;
 using System;
+using System.Collections.Generic;
 
-namespace Foodie.Identity.Domain.Entities
+namespace Foodie.Identity.Domain.Common.ApplicationUser.ValueObjects
 {
-    public class RefreshToken : BaseEntity
+    public class RefreshToken : ValueObject
     {
-        public string Token { get; set; }
-        public DateTimeOffset? ExpirationTime { get; set; }
-        public int ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public string Token { get; }
+
+        public DateTimeOffset? ExpirationTime { get; }
+
+        private RefreshToken(string token, DateTimeOffset? expirationTime)
+        {
+            Token = token;
+            ExpirationTime = expirationTime;
+        }
+
+        public static RefreshToken Create(string token, DateTimeOffset? expirationTime,
+            int applicationUserId, ApplicationUser applicationUser)
+        {
+            return new RefreshToken(token, expirationTime);
+        }
+
+        public override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Token;
+            yield return ExpirationTime;
+        }
     }
 }
