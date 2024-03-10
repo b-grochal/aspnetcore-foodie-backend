@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Domain.AggregateRoots;
 using Foodie.Common.Enums;
+using Foodie.Identity.Domain.Common.ApplicationUser.DomainEvents;
 using Foodie.Identity.Domain.Common.ApplicationUser.ValueObjects;
 
 namespace Foodie.Identity.Domain.Common.ApplicationUser
@@ -18,19 +19,21 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
         public RefreshToken RefreshToken { get; }
 
         protected ApplicationUser(string firstName, string lastName, string email,
-            string phoneNumber, string passwordHash, int accessFailedCount,
-            bool isLocked, bool isActive, ApplicationUserRole role, RefreshToken refreshToken)
+            string phoneNumber, string passwordHash, ApplicationUserRole role, 
+            RefreshToken refreshToken)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             PhoneNumber = phoneNumber;
             PasswordHash = passwordHash;
-            AccessFailedCount = accessFailedCount;
-            IsLocked = isLocked;
-            IsActive = isActive;
+            AccessFailedCount = 0;
+            IsLocked = false;
+            IsActive = false;
             Role = role;
             RefreshToken = refreshToken;
+
+            AddDomainEvent(new ApplicationUserCreatedDomainEvent(email));
         }
     }
 }

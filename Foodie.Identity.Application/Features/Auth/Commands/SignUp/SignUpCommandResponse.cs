@@ -1,4 +1,4 @@
-﻿namespace Foodie.Identity.Application.Functions.Auth.Commands.SignUp
+﻿namespace Foodie.Identity.Application.Features.Auth.Commands.SignUp
 {
     public class SignUpCommandResponse
     {

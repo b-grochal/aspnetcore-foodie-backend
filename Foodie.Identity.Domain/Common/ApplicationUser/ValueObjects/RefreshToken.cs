@@ -16,10 +16,14 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser.ValueObjects
             ExpirationTime = expirationTime;
         }
 
-        public static RefreshToken Create(string token, DateTimeOffset? expirationTime,
-            int applicationUserId, ApplicationUser applicationUser)
+        public static RefreshToken Create(string token, DateTimeOffset? expirationTime)
         {
             return new RefreshToken(token, expirationTime);
+        }
+
+        public static RefreshToken CreateEmpty()
+        {
+            return new RefreshToken(null, null);
         }
 
         public override IEnumerable<object> GetEqualityComponents()
