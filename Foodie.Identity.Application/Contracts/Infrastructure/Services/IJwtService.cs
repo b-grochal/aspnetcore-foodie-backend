@@ -1,4 +1,4 @@
-﻿using Foodie.Identity.Domain.Entities;
+﻿using Foodie.Identity.Domain.Common.ApplicationUser;
 
 namespace Foodie.Identity.Application.Contracts.Infrastructure.Services
 {

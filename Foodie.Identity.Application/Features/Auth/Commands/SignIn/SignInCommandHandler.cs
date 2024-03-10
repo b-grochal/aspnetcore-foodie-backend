@@ -1,16 +1,15 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Domain.Results;
+using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Identity.Domain.Entities;
-using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Foodie.Common.Application.Contracts.Infrastructure.Database;
 
-namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
+namespace Foodie.Identity.Application.Features.Auth.Commands.SignIn
 {
-    public class SignInCommandHandler : IRequestHandler<SignInCommand, SignInCommandResponse>
+    public class SignInCommandHandler : IRequestHandler<SignInCommand, Result<SignInCommandResponse>>
     {
         private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly IRefreshTokensRepository _refreshTokensRepository;
@@ -34,25 +33,31 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<SignInCommandResponse> Handle(SignInCommand request, CancellationToken cancellationToken)
+        public async Task<Result<SignInCommandResponse>> Handle(SignInCommand request, CancellationToken cancellationToken)
         {
             var applicationUser = await _applicationUsersRepository.GetByEmailAsync(request.Email);
 
-            if (applicationUser == null)
-                throw new ApplicationUserNotFoundException(request.Email);
+            if (applicationUser is null)
+                return Result.Failure<SignInCommandResponse>(ApplicationUserErrors.ApplicationUserNotFoundByEmail(request.Email));
 
             if (applicationUser.IsLocked)
-                throw new ApplicationUserLockedException(request.Email);
+                return Result.Failure<SignInCommandResponse>(ApplicationUserErrors.ApplicationUserLocked(request.Email));
 
             if (!applicationUser.IsActive)
-                throw new ApplicationUserNotActivatedException(request.Email);
+                return Result.Failure<SignInCommandResponse>(ApplicationUserErrors.ApplicationUserNotActivated(request.Email));
 
             if (!_passwordService.VerifyPassword(request.Password, applicationUser.PasswordHash))
-                await HandleInvalidAuthentication(applicationUser);
+            {
+                applicationUser.NoteInvalidAuthentication();
+
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+                return Result.Failure<SignInCommandResponse>(ApplicationUserErrors.ApplicationUserNotAuthenticated(request.Email));
+            }
 
             var refreshTokenData = _refreshTokenService.GenerateRefreshToken();
 
-            await UpdateRefreshTokenForApplicationUser(applicationUser.Id, refreshTokenData);
+            applicationUser.UpdateRefreshToken(refreshTokenData.RefreshToken, refreshTokenData.ExpirationDate);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
@@ -61,28 +66,6 @@ namespace Foodie.Identity.Application.Functions.Auth.Commands.SignIn
                 JwtToken = _jwtService.GenerateToken(applicationUser),
                 RefreshToken = refreshTokenData.RefreshToken
             };
-        }
-
-        private async Task HandleInvalidAuthentication(ApplicationUser applicationUser)
-        {
-            applicationUser.AccessFailedCount++;
-
-            if (applicationUser.AccessFailedCount == 5)
-                applicationUser.IsLocked = true;
-
-            await _applicationUsersRepository.UpdateAsync(applicationUser);
-
-            throw new ApplicationUserNotAuthenticatedException(applicationUser.Email);
-        }
-
-        private async Task UpdateRefreshTokenForApplicationUser(int applicationUserId, (string RefreshToken, DateTimeOffset ExpirationDate) refreshTokenData)
-        {
-            var refreshToken = await _refreshTokensRepository.GetByApplicationUserIdAsync(applicationUserId);
-
-            refreshToken.Token = refreshTokenData.RefreshToken;
-            refreshToken.ExpirationTime = refreshTokenData.ExpirationDate;
-
-            await _refreshTokensRepository.UpdateAsync(refreshToken);
         }
     }
 }
