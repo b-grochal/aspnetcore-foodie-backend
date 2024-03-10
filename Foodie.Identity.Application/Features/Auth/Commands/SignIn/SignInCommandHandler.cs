@@ -2,6 +2,7 @@
 using Foodie.Common.Domain.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+using Foodie.Identity.Domain.Common.ApplicationUser;
 using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
@@ -47,13 +48,7 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.SignIn
                 return Result.Failure<SignInCommandResponse>(ApplicationUserErrors.ApplicationUserNotActivated(request.Email));
 
             if (!_passwordService.VerifyPassword(request.Password, applicationUser.PasswordHash))
-            {
-                applicationUser.NoteInvalidAuthentication();
-
-                await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-                return Result.Failure<SignInCommandResponse>(ApplicationUserErrors.ApplicationUserNotAuthenticated(request.Email));
-            }
+                return await HandleInvalidAuthentication(applicationUser, cancellationToken);
 
             var refreshTokenData = _refreshTokenService.GenerateRefreshToken();
 
@@ -66,6 +61,15 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.SignIn
                 JwtToken = _jwtService.GenerateToken(applicationUser),
                 RefreshToken = refreshTokenData.RefreshToken
             };
+        }
+
+        private async Task<Result<SignInCommandResponse>> HandleInvalidAuthentication(ApplicationUser applicationUser, CancellationToken cancellationToken)
+        {
+            applicationUser.NoteInvalidAuthentication();
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return Result.Failure<SignInCommandResponse>(ApplicationUserErrors.ApplicationUserNotAuthenticated(applicationUser.Email));
         }
     }
 }
