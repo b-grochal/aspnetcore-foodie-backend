@@ -21,7 +21,7 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
 
         protected ApplicationUser(string firstName, string lastName, string email,
             string phoneNumber, string passwordHash, ApplicationUserRole role, 
-            RefreshToken refreshToken)
+            RefreshToken refreshToken = null)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -49,6 +49,11 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
         public void UpdateRefreshToken(string token, DateTimeOffset expirationTime)
         {
             RefreshToken = RefreshToken.Create(token, expirationTime);
+        }
+
+        public void RevokeRefreshToken()
+        {
+            RefreshToken = null;
         }
     }
 }

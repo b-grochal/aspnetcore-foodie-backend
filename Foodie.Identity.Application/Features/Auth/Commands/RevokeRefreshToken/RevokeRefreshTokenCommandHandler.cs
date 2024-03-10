@@ -1,38 +1,36 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Domain.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.Auth.Commands.RevokeRefreshToken
 {
-    public class RevokeRefreshTokenCommandHandler : IRequestHandler<RevokeRefreshTokenCommand>
+    public class RevokeRefreshTokenCommandHandler : IRequestHandler<RevokeRefreshTokenCommand, Result>
     {
-        private readonly IRefreshTokensRepository _refreshTokensRepository;
+        private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RevokeRefreshTokenCommandHandler(IRefreshTokensRepository refreshTokensRepository, IUnitOfWork unitOfWork)
+        public RevokeRefreshTokenCommandHandler(IApplicationUsersRepository applicationUsersRepository, IUnitOfWork unitOfWork)
         {
-            _refreshTokensRepository = refreshTokensRepository;
+            _applicationUsersRepository = applicationUsersRepository;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(RevokeRefreshTokenCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(RevokeRefreshTokenCommand request, CancellationToken cancellationToken)
         {
-            var refreshToken = await _refreshTokensRepository.GetByApplicationUserIdAsync(request.ApplicationUserId);
+            var applicationUser = await _applicationUsersRepository.GetByIdAsync(request.ApplicationUserId);
 
-            if (refreshToken is null)
-                throw new RefreshTokenForApplicationUserNotFoundException(request.ApplicationUserId);
+            if (applicationUser is null)
+                return Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundById(request.ApplicationUserId));
 
-            refreshToken.Token = null;
-            refreshToken.ExpirationTime = null;
-
-            await _refreshTokensRepository.UpdateAsync(refreshToken);
+            applicationUser.RevokeRefreshToken();
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

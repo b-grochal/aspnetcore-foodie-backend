@@ -8,10 +8,9 @@ namespace Foodie.Identity.Domain.Admins
     {
         public Admin(string firstName, string lastName, 
             string email, string phoneNumber, string passwordHash,
-            int accessFailedCount, bool isLocked, bool isActive, 
             ApplicationUserRole role, RefreshToken refreshToken) 
             : base(firstName, lastName, email, phoneNumber, passwordHash, 
-                  accessFailedCount, isLocked, isActive, role, refreshToken)
+                  role, refreshToken)
         {
         }
 
