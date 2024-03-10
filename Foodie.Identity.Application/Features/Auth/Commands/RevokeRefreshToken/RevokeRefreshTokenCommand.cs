@@ -2,7 +2,7 @@
 using MediatR;
 using System.Text.Json.Serialization;
 
-namespace Foodie.Identity.Application.Functions.Auth.Commands.RevokeRefreshToken
+namespace Foodie.Identity.Application.Features.Auth.Commands.RevokeRefreshToken
 {
     public class RevokeRefreshTokenCommand : IRequest<Result>
     {

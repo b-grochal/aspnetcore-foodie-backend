@@ -6,7 +6,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Application.Functions.Auth.Commands.RevokeRefreshToken
+namespace Foodie.Identity.Application.Features.Auth.Commands.RevokeRefreshToken
 {
     public class RevokeRefreshTokenCommandHandler : IRequestHandler<RevokeRefreshTokenCommand, Result>
     {
