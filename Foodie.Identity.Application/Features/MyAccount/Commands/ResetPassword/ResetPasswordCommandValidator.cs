@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ResetPassword
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.ResetPassword
 {
     public class ResetPasswordCommandValidator : AbstractValidator<ResetPasswordCommand>
     {

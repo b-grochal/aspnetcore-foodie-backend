@@ -1,7 +1,9 @@
-﻿using Foodie.Common.Infrastructure.Cache;
+﻿using Foodie.Common.Domain.Results;
+using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using Foodie.Templates.Services;
 using Hangfire;
 using MediatR;
@@ -9,9 +11,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ResetPassword
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.ResetPassword
 {
-    public class ResetPasswordCommandHandler : IRequestHandler<ResetPasswordCommand>
+    public class ResetPasswordCommandHandler : IRequestHandler<ResetPasswordCommand, Result>
     {
         private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly ICacheService _cacheService;
@@ -26,12 +28,12 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ResetPassword
             _emailsService = emailsService;
         }
 
-        public async Task<Unit> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
         {
             var applicationUser = await _applicationUsersRepository.GetByEmailAsync(request.Email);
 
             if (applicationUser is null)
-                throw new ApplicationUserNotFoundException(request.Email);
+                return Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundByEmail(request.Email));
 
             var setPasswordToken = Guid.NewGuid().ToString();
             await _cacheService.SetAsync(applicationUser,
@@ -42,7 +44,7 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ResetPassword
 
             _backgroundJobClient.Enqueue(() => _emailsService.SendAccountActivationEmail(applicationUser.Email, setPasswordToken));
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

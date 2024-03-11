@@ -14,17 +14,12 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.ChangeEmail
     public class ChangeEmailCommandHandler : IRequestHandler<ChangeEmailCommand, Result>
     {
         private readonly IApplicationUsersRepository _applicationUsersRepository;
-        private readonly ICacheService _cacheService;
-        private readonly IBackgroundJobClient _backgroundJobClient;
-        private readonly IEmailsService _emailsService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ChangeEmailCommandHandler(IApplicationUsersRepository applicationUsersRepository, ICacheService cacheService, IBackgroundJobClient backgroundJobClient, IEmailsService emailsService, IUnitOfWork unitOfWork)
+        public ChangeEmailCommandHandler(IApplicationUsersRepository applicationUsersRepository,
+            IUnitOfWork unitOfWork)
         {
             _applicationUsersRepository = applicationUsersRepository;
-            _cacheService = cacheService;
-            _backgroundJobClient = backgroundJobClient;
-            _emailsService = emailsService;
             _unitOfWork = unitOfWork;
         }
 
