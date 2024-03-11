@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using Foodie.Common.Domain.Results;
+using MediatR;
 using System.Text.Json.Serialization;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.UpdateAccountData
 {
-    public class UpdateAccountDataCommand : IRequest
+    public class UpdateAccountDataCommand : IRequest<Result>
     {
         [JsonIgnore]
         public int ApplicationUserId { get; set; }

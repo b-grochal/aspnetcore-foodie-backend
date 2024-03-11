@@ -8,10 +8,10 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
 {
     public abstract class ApplicationUser : AggregateRoot
     {
-        public string FirstName { get; }
-        public string LastName { get; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
         public string Email { get; private set; }
-        public string PhoneNumber { get; }
+        public string PhoneNumber { get; private set; }
         public string PasswordHash { get; private set; }
         public int AccessFailedCount { get; private set; }
         public bool IsLocked { get; private set; }
@@ -72,6 +72,13 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
         public void ChangePassword(string passwordHash)
         {
             PasswordHash = passwordHash;
+        }
+
+        public void Update(string firstName, string lastName, string phoneNumber)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
         }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Domain.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.UpdateAccountData
 {
-    public class UpdateAccountDataCommandHandler : IRequestHandler<UpdateAccountDataCommand>
+    public class UpdateAccountDataCommandHandler : IRequestHandler<UpdateAccountDataCommand, Result>
     {
         private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -21,19 +22,19 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccount
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(UpdateAccountDataCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(UpdateAccountDataCommand request, CancellationToken cancellationToken)
         {
             var applicationUser = await _applicationUsersRepository.GetByIdAsync(request.ApplicationUserId);
 
-            if (applicationUser == null)
-                throw new ApplicationUserNotFoundException(request.ApplicationUserId);
+            if (applicationUser is null)
+                Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundById(request.ApplicationUserId));
 
-            applicationUser = _mapper.Map(request, applicationUser);
+            applicationUser.Update(request.FirstName, request.LastName, request.PhoneNumber);
             await _applicationUsersRepository.UpdateAsync(applicationUser);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.UpdateAccountData
 {
     public class UpdateAccountDataCommandValidator : AbstractValidator<UpdateAccountDataCommand>
     {
