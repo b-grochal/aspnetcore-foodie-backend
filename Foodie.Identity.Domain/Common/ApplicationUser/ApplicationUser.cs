@@ -10,9 +10,9 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
     {
         public string FirstName { get; }
         public string LastName { get; }
-        public string Email { get; }
+        public string Email { get; private set; }
         public string PhoneNumber { get; }
-        public string PasswordHash { get; }
+        public string PasswordHash { get; private set; }
         public int AccessFailedCount { get; private set; }
         public bool IsLocked { get; private set; }
         public bool IsActive { get; private set; }
@@ -59,6 +59,12 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
         public void Activate()
         {
             IsActive = true;
+        }
+
+        public void ChangeEmail(string email)
+        {
+            Email = email;
+            IsActive = false;
         }
     }
 }

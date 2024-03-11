@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ChangeEmail
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.ChangeEmail
 {
     public class ChangeEmailCommandValidator : AbstractValidator<ChangeEmailCommand>
     {

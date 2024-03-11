@@ -39,5 +39,9 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser.Errors
         public static Error InvalidAccountActivationToken() =>
             Error.Failure("ApplicationUsers.InvalidAccountActivationToken",
                 "Invalid account activation token.");
+
+        public static Error SameEmailAsOldOne() =>
+            Error.Failure("ApplicationUsers.SameEmailAsOldOne",
+                "Email address is the same like the old one.");
     }
 }

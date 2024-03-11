@@ -1,19 +1,17 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
-using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Domain.Results;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Exceptions;
-using Foodie.Identity.Domain.Entities;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using Foodie.Templates.Services;
 using Hangfire;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ChangeEmail
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.ChangeEmail
 {
-    public class ChangeEmailCommandHandler : IRequestHandler<ChangeEmailCommand>
+    public class ChangeEmailCommandHandler : IRequestHandler<ChangeEmailCommand, Result>
     {
         private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly ICacheService _cacheService;
@@ -30,34 +28,23 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ChangeEmail
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(ChangeEmailCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(ChangeEmailCommand request, CancellationToken cancellationToken)
         {
             var applicationUser = await _applicationUsersRepository.GetByIdAsync(request.ApplicationUserId);
 
             if (applicationUser is null)
-                throw new ApplicationUserNotFoundException(request.ApplicationUserId);
+                return Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundById(request.ApplicationUserId));
 
             if (applicationUser.Email == request.Email)
-                throw new SameEmailAsOldOneException();
+                return Result.Failure(ApplicationUserErrors.SameEmailAsOldOne());
 
-            applicationUser.Email = request.Email;
-            applicationUser.IsActive = false;
+            applicationUser.ChangeEmail(request.Email);
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            var accountActivationToken = Guid.NewGuid().ToString();
-
-            await _cacheService.SetAsync<ApplicationUser>(applicationUser,
-                                                          CachePrefixes.AccountActivationTokens,
-                                                          string.Empty,
-                                                          CacheParameters.AccountActivationToken,
-                                                          accountActivationToken);
-
-            _backgroundJobClient.Enqueue(() => _emailsService.SendAccountActivationEmail(applicationUser.Email, accountActivationToken));
-
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

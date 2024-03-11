@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using Foodie.Common.Domain.Results;
+using MediatR;
 using System.Text.Json.Serialization;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ChangeEmail
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.ChangeEmail
 {
-    public class ChangeEmailCommand : IRequest
+    public class ChangeEmailCommand : IRequest<Result>
     {
         [JsonIgnore]
         public int ApplicationUserId { get; set; }
