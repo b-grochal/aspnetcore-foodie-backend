@@ -65,6 +65,8 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
         {
             Email = email;
             IsActive = false;
+
+            AddDomainEvent(new ApplicationUserEmailChangedDomainEvent(email));
         }
     }
 }
