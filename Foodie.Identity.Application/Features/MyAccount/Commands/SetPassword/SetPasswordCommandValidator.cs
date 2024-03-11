@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.SetPassword
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.SetPassword
 {
     public class SetPasswordCommandValidator : AbstractValidator<SetPasswordCommand>
     {

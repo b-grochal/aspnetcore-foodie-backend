@@ -36,7 +36,7 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.ResetPassword
                 return Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundByEmail(request.Email));
 
             var setPasswordToken = Guid.NewGuid().ToString();
-            await _cacheService.SetAsync(applicationUser,
+            await _cacheService.SetAsync(applicationUser.Email,
                                                           CachePrefixes.SetPasswordToken,
                                                           string.Empty,
                                                           CacheParameters.SetPasswordToken,

@@ -43,5 +43,9 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser.Errors
         public static Error SameEmailAsOldOne() =>
             Error.Failure("ApplicationUsers.SameEmailAsOldOne",
                 "Email address is the same like the old one.");
+
+        public static Error InvalidSetPasswordToken() =>
+            Error.Failure("ApplicationUsers.InvalidSetPasswordToken",
+                "Invalid set password token.");
     }
 }
