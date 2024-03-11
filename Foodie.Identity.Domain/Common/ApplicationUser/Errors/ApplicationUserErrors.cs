@@ -35,5 +35,9 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser.Errors
         public static Error InvalidRefreshToken() =>
             Error.Failure("ApplicationUsers.InvalidRefreshToken",
                 "Invalid refresh token.");
+
+        public static Error InvalidAccountActivationToken() =>
+            Error.Failure("ApplicationUsers.InvalidAccountActivationToken",
+                "Invalid account activation token.");
     }
 }

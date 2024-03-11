@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Foodie.Common.Domain.Results;
+using MediatR;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccount
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.ActivateAccount
 {
-    public class ActivateAccountCommand : IRequest
+    public class ActivateAccountCommand : IRequest<Result>
     {
         public string AccountActivationToken { get; set; }
     }

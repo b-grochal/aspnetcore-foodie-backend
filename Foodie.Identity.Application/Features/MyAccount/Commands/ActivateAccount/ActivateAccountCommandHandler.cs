@@ -1,16 +1,16 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Domain.Results;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Exceptions;
-using Foodie.Identity.Domain.Entities;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccount
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.ActivateAccount
 {
-    public class ActivateAccountCommandHandler : IRequestHandler<ActivateAccountCommand>
+    public class ActivateAccountCommandHandler : IRequestHandler<ActivateAccountCommand, Result>
     {
         private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly ICacheService _cacheService;
@@ -23,19 +23,19 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccou
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(ActivateAccountCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(ActivateAccountCommand request, CancellationToken cancellationToken)
         {
-            var applicationUser = await _cacheService.GetAsync<ApplicationUser>(CachePrefixes.AccountActivationTokens, string.Empty, CacheParameters.AccountActivationToken, request.AccountActivationToken);
+            var applicationUserEmail = await _cacheService.GetAsync<string>(CachePrefixes.AccountActivationTokens, string.Empty, CacheParameters.AccountActivationToken, request.AccountActivationToken);
+
+            if (applicationUserEmail is null)
+                return Result.Failure(ApplicationUserErrors.InvalidAccountActivationToken());
+
+            var applicationUser = await _applicationUsersRepository.GetByEmailAsync(applicationUserEmail);
 
             if (applicationUser is null)
-                throw new InvalidAccountActivationTokenException();
+                return Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundByEmail(applicationUserEmail));
 
-            applicationUser = await _applicationUsersRepository.GetByIdAsync(applicationUser.Id);
-
-            if (applicationUser is null)
-                throw new ApplicationUserNotFoundException();
-
-            applicationUser.IsActive = true;
+            applicationUser.Activate();
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
 
@@ -43,7 +43,7 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ActivateAccou
 
             await _cacheService.RemoveAsync(CachePrefixes.AccountActivationTokens, string.Empty, CacheParameters.AccountActivationToken, request.AccountActivationToken);
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

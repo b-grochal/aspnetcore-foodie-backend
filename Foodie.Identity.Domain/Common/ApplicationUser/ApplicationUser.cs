@@ -15,7 +15,7 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
         public string PasswordHash { get; }
         public int AccessFailedCount { get; private set; }
         public bool IsLocked { get; private set; }
-        public bool IsActive { get; }
+        public bool IsActive { get; private set; }
         public ApplicationUserRole Role { get; }
         public RefreshToken RefreshToken { get; private set; }
 
@@ -54,6 +54,11 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
         public void RevokeRefreshToken()
         {
             RefreshToken = null;
+        }
+
+        public void Activate()
+        {
+            IsActive = true;
         }
     }
 }
