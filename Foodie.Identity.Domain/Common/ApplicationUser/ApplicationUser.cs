@@ -68,5 +68,10 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
 
             AddDomainEvent(new ApplicationUserEmailChangedDomainEvent(email));
         }
+
+        public void ChangePassword(string passwordHash)
+        {
+            PasswordHash = passwordHash;
+        }
     }
 }

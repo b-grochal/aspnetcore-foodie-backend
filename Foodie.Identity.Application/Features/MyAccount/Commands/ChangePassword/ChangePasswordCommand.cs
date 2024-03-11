@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using Foodie.Common.Domain.Results;
+using MediatR;
 using System.Text.Json.Serialization;
 
-namespace Foodie.Identity.Application.Functions.MyAccount.Commands.ChangePassword
+namespace Foodie.Identity.Application.Features.MyAccount.Commands.ChangePassword
 {
-    public class ChangePasswordCommand : IRequest
+    public class ChangePasswordCommand : IRequest<Result>
     {
         [JsonIgnore]
         public int ApplicationUserId { get; set; }
