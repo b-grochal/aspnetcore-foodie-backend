@@ -1,4 +1,4 @@
-﻿namespace Foodie.Identity.Application.Functions.Auth.Commands.RefreshJwtToken
+﻿namespace Foodie.Identity.Application.Features.Auth.Commands.RefreshJwtToken
 {
     public class RefreshJwtTokenCommandResponse
     {
