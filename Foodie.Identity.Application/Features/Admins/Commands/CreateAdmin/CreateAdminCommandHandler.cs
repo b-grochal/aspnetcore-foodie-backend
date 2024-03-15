@@ -1,22 +1,20 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
-using Foodie.Common.Enums;
-using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Identity.Application.Exceptions;
-using Foodie.Identity.Domain.Entities;
+using Foodie.Identity.Domain.Admins;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using Foodie.Templates.Services;
 using Hangfire;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
 {
-    public class CreateAdminCommandHandler : IRequestHandler<CreateAdminCommand, CreateAdminCommandResponse>
+    public class CreateAdminCommandHandler : IRequestHandler<CreateAdminCommand, Result<CreateAdminCommandResponse>>
     {
         private readonly IAdminsRepository _adminsRepository;
         private readonly IApplicationUsersRepository _applicationUsersRepository;
@@ -41,35 +39,18 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CreateAdminCommandResponse> Handle(CreateAdminCommand request, CancellationToken cancellationToken)
+        public async Task<Result<CreateAdminCommandResponse>> Handle(CreateAdminCommand request, CancellationToken cancellationToken)
         {
-            if ((await _applicationUsersRepository.GetByEmailAsync(request.Email)) is not null)
-                throw new ApplicationUserAlreadyExistsException(request.Email);
+            if (!await _applicationUsersRepository.IsEmailUniqueAsync(request.Email))
+                return Result.Failure<CreateAdminCommandResponse>(ApplicationUserErrors.ApplicationUserAlreadyExists(request.Email));
 
-            var admin = _mapper.Map<Admin>(request);
+            var passwordHash = _passwordService.HashPassword(request.Password);
 
-            admin.PasswordHash = _passwordService.HashPassword(request.Password);
-            admin.Role = ApplicationUserRole.Admin;
+            var admin = Admin.Create(request.FirstName, request.LastName, request.Email, request.PhoneNumber, passwordHash);
 
             await _adminsRepository.CreateAsync(admin);
 
-            await _applicationUserRefreshTokensRepository.CreateAsync(new RefreshToken
-            {
-                ApplicationUserId = admin.Id,
-                Token = null,
-                ExpirationTime = null
-            });
-
-            var accountActivationToken = Guid.NewGuid().ToString();
-            await _cacheService.SetAsync<ApplicationUser>(admin,
-                                                          CachePrefixes.AccountActivationTokens,
-                                                          string.Empty,
-                                                          CacheParameters.AccountActivationToken,
-                                                          accountActivationToken);
-
             await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-            _backgroundJobClient.Enqueue(() => _emailsService.SendAccountActivationEmail(admin.Email, accountActivationToken));
 
             return _mapper.Map<CreateAdminCommandResponse>(admin);
         }

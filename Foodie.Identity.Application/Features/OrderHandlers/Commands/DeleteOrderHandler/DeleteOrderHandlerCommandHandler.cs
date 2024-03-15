@@ -1,13 +1,15 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrderHandler
 {
-    public class DeleteOrderHandlerCommandHandler : IRequestHandler<DeleteOrderHandlerCommand, DeleteOrderHandlerCommandResponse>
+    public class DeleteOrderHandlerCommandHandler : IRequestHandler<DeleteOrderHandlerCommand, Result<DeleteOrderHandlerCommandResponse>>
     {
         private readonly IOrderHandlersRepository _orderHandlersRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -18,12 +20,12 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrd
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<DeleteOrderHandlerCommandResponse> Handle(DeleteOrderHandlerCommand request, CancellationToken cancellationToken)
+        public async Task<Result<DeleteOrderHandlerCommandResponse>> Handle(DeleteOrderHandlerCommand request, CancellationToken cancellationToken)
         {
             var orderHandler = await _orderHandlersRepository.GetByIdAsync(request.Id);
 
-            if (orderHandler == null)
-                throw new ApplicationUserNotFoundException(request.Id);
+            if (orderHandler is null)
+                return Result.Failure<DeleteOrderHandlerCommandResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.Id));
 
             await _orderHandlersRepository.DeleteAsync(orderHandler);
 

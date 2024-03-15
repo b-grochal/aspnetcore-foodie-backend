@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Foodie.Common.Results;
+using MediatR;
 
 namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById
 {
-    public class GetAdminByIdQuery : IRequest<GetAdminByIdQueryResponse>
+    public class GetAdminByIdQuery : IRequest<Result<GetAdminByIdQueryResponse>>
     {
         public int Id { get; }
 

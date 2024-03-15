@@ -1,9 +1,10 @@
 ﻿using Foodie.Common.Application.Queries;
+using Foodie.Common.Results;
 using MediatR;
 
 namespace Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlers
 {
-    public class GetOrderHandlersQuery : PagedQuery, IRequest<GetOrderHandlersQueryResponse>
+    public class GetOrderHandlersQuery : PagedQuery, IRequest<Result<GetOrderHandlersQueryResponse>>
     {
         public string Email { get; set; }
     }

@@ -80,5 +80,15 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
             LastName = lastName;
             PhoneNumber = phoneNumber;
         }
+
+        public void Update(string firstName, string lastName, string phoneNumber, string email)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
+            Email = email;
+
+            AddDomainEvent(new ApplicationUserEmailChangedDomainEvent(email));
+        }
     }
 }

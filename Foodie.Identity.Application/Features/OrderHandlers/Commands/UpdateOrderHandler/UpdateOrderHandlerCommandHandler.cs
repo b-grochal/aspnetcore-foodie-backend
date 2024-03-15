@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHandler
 {
-    public class UpdateOrderHandlerCommandHandler : IRequestHandler<UpdateOrderHandlerCommand, UpdateOrderHandlerCommandResponse>
+    public class UpdateOrderHandlerCommandHandler : IRequestHandler<UpdateOrderHandlerCommand, Result<UpdateOrderHandlerCommandResponse>>
     {
         private readonly IOrderHandlersRepository _orderHandlersRepository;
         private readonly IMapper _mapper;
@@ -21,19 +22,20 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrd
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UpdateOrderHandlerCommandResponse> Handle(UpdateOrderHandlerCommand request, CancellationToken cancellationToken)
+        public async Task<Result<UpdateOrderHandlerCommandResponse>> Handle(UpdateOrderHandlerCommand request, CancellationToken cancellationToken)
         {
             var orderHandler = await _orderHandlersRepository.GetByIdAsync(request.Id);
 
-            if (orderHandler == null)
-                throw new ApplicationUserNotFoundException(request.Id);
+            if (orderHandler is null)
+                return Result.Failure<UpdateOrderHandlerCommandResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.Id));
 
-            var updatedOrderHandler = _mapper.Map(request, orderHandler);
-            await _orderHandlersRepository.UpdateAsync(updatedOrderHandler);
+            orderHandler.Update(request.FirstName, request.LastName, request.PhoneNumber, request.Email, request.LocationId);
+
+            await _orderHandlersRepository.UpdateAsync(orderHandler);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<UpdateOrderHandlerCommandResponse>(updatedOrderHandler);
+            return _mapper.Map<UpdateOrderHandlerCommandResponse>(orderHandler);
         }
     }
 }

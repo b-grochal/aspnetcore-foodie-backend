@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
 {
-    public class UpdateAdminCommandHandler : IRequestHandler<UpdateAdminCommand, UpdateAdminCommandResponse>
+    public class UpdateAdminCommandHandler : IRequestHandler<UpdateAdminCommand, Result<UpdateAdminCommandResponse>>
     {
         private readonly IAdminsRepository _adminsRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -21,19 +22,20 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UpdateAdminCommandResponse> Handle(UpdateAdminCommand request, CancellationToken cancellationToken)
+        public async Task<Result<UpdateAdminCommandResponse>> Handle(UpdateAdminCommand request, CancellationToken cancellationToken)
         {
             var admin = await _adminsRepository.GetByIdAsync(request.Id);
 
-            if (admin == null)
-                throw new ApplicationUserNotFoundException(request.Id);
+            if (admin is null)
+                return Result.Failure<UpdateAdminCommandResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.Id));
 
-            var updatedAdmin = _mapper.Map(request, admin);
-            await _adminsRepository.UpdateAsync(updatedAdmin);
+            admin.Update(request.FirstName, request.LastName, request.PhoneNumber, request.Email);
+
+            await _adminsRepository.UpdateAsync(admin);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<UpdateAdminCommandResponse>(updatedAdmin);
+            return _mapper.Map<UpdateAdminCommandResponse>(admin);
         }
     }
 }

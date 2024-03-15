@@ -1,9 +1,10 @@
 ﻿using Foodie.Common.Application.Commands;
+using Foodie.Common.Results;
 using MediatR;
 
 namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHandler
 {
-    public class UpdateOrderHandlerCommand : AuditableCommand, IRequest<UpdateOrderHandlerCommandResponse>
+    public class UpdateOrderHandlerCommand : AuditableCommand, IRequest<Result<UpdateOrderHandlerCommandResponse>>
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

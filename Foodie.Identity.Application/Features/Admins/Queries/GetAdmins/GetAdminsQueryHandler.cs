@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using MediatR;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins
 {
-    public class GetAdminsQueryHandler : IRequestHandler<GetAdminsQuery, GetAdminsQueryResponse>
+    public class GetAdminsQueryHandler : IRequestHandler<GetAdminsQuery, Result<GetAdminsQueryResponse>>
     {
         private readonly IAdminsRepository adminsRepository;
         private readonly IMapper mapper;
@@ -19,7 +20,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins
             this.mapper = mapper;
         }
 
-        public async Task<GetAdminsQueryResponse> Handle(GetAdminsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetAdminsQueryResponse>> Handle(GetAdminsQuery request, CancellationToken cancellationToken)
         {
             var result = await adminsRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Email);
 

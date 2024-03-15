@@ -3,10 +3,11 @@ using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Enums;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Identity.Application.Exceptions;
-using Foodie.Identity.Domain.Entities;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
+using Foodie.Identity.Domain.OrderHandlers;
 using Foodie.Templates.Services;
 using Hangfire;
 using MediatR;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler
 {
-    public class CreateOrderHandlerCommandHandler : IRequestHandler<CreateOrderHandlerCommand, CreateOrderHandlerCommandResponse>
+    public class CreateOrderHandlerCommandHandler : IRequestHandler<CreateOrderHandlerCommand, Result<CreateOrderHandlerCommandResponse>>
     {
         private readonly IOrderHandlersRepository _orderHandlersRepository;
         private readonly IApplicationUsersRepository _applicationUsersRepository;
@@ -41,34 +42,18 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CreateOrderHandlerCommandResponse> Handle(CreateOrderHandlerCommand request, CancellationToken cancellationToken)
+        public async Task<Result<CreateOrderHandlerCommandResponse>> Handle(CreateOrderHandlerCommand request, CancellationToken cancellationToken)
         {
-            if ((await _applicationUsersRepository.GetByEmailAsync(request.Email)) is not null)
-                throw new ApplicationUserAlreadyExistsException(request.Email);
+            if (!await _applicationUsersRepository.IsEmailUniqueAsync(request.Email))
+                return Result.Failure<CreateOrderHandlerCommandResponse>(ApplicationUserErrors.ApplicationUserAlreadyExists(request.Email));
 
-            var orderHandler = _mapper.Map<OrderHandler>(request);
+            var passwordHash = _passwordService.HashPassword(request.Password);
 
-            orderHandler.PasswordHash = _passwordService.HashPassword(request.Password);
-            orderHandler.Role = ApplicationUserRole.OrderHandler;
+            var orderHandler = OrderHandler.Create(request.FirstName, request.LastName, request.Email, request.PhoneNumber, passwordHash, request.LocationId);
 
             await _orderHandlersRepository.CreateAsync(orderHandler);
 
-            await _refreshTokensRepository.CreateAsync(new RefreshToken
-            {
-                ApplicationUserId = orderHandler.Id,
-                Token = null,
-                ExpirationTime = null
-            });
-
             await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-            var accountActivationToken = Guid.NewGuid().ToString();
-            await _cacheService.SetAsync<ApplicationUser>(orderHandler,
-                                                          CachePrefixes.AccountActivationTokens,
-                                                          string.Empty,
-                                                          CacheParameters.AccountActivationToken,
-                                                          accountActivationToken);
-            _backgroundJobClient.Enqueue(() => _emailsService.SendAccountActivationEmail(orderHandler.Email, accountActivationToken));
 
             return _mapper.Map<CreateOrderHandlerCommandResponse>(orderHandler);
         }

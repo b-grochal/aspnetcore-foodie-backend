@@ -1,13 +1,9 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Foodie.Common.Results;
+using MediatR;
 
 namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrderHandler
 {
-    public class DeleteOrderHandlerCommand : IRequest<DeleteOrderHandlerCommandResponse>
+    public class DeleteOrderHandlerCommand : IRequest<Result<DeleteOrderHandlerCommandResponse>>
     {
         public int Id { get; set; }
 

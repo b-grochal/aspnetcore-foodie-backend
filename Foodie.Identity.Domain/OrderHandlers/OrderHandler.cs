@@ -1,16 +1,15 @@
 ﻿using Foodie.Common.Enums;
 using Foodie.Identity.Domain.Common.ApplicationUser;
-using Foodie.Identity.Domain.Common.ApplicationUser.ValueObjects;
 
 namespace Foodie.Identity.Domain.OrderHandlers
 {
     public class OrderHandler : ApplicationUser
     {
-        public int LocationId { get; }
+        public int LocationId { get; private set; }
 
-        private OrderHandler(string firstName, string lastName, 
+        private OrderHandler(string firstName, string lastName,
             string email, string phoneNumber, string passwordHash,
-            int locationId) : base(firstName, lastName, email, 
+            int locationId) : base(firstName, lastName, email,
                 phoneNumber, passwordHash, ApplicationUserRole.OrderHandler)
         {
             LocationId = locationId;
@@ -21,6 +20,13 @@ namespace Foodie.Identity.Domain.OrderHandlers
         {
             return new OrderHandler(firstName, lastName, email, phoneNumber,
                 passwordHash, locationId);
+        }
+
+        public void Update(string firstName, string lastName, string phoneNumber, string email, int locationId)
+        {
+            Update(firstName, lastName, phoneNumber, email);
+
+            LocationId = locationId;
         }
     }
 }

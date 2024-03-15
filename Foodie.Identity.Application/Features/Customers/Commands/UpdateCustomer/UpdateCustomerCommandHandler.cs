@@ -1,14 +1,16 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer
 {
-    public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, UpdateCustomerCommandResponse>
+    public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Result<UpdateCustomerCommandResponse>>
     {
         private readonly ICustomersRepository _customersRepository;
         private readonly IMapper _mapper;
@@ -21,19 +23,20 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustome
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UpdateCustomerCommandResponse> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Result<UpdateCustomerCommandResponse>> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = await _customersRepository.GetByIdAsync(request.Id);
 
-            if (customer == null)
-                throw new ApplicationUserNotFoundException(request.Id);
+            if (customer is null)
+                return Result.Failure<UpdateCustomerCommandResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.Id));
 
-            var updatedCustomer = _mapper.Map(request, customer);
-            await _customersRepository.UpdateAsync(updatedCustomer);
+            customer.Update(request.FirstName, request.LastName, request.Email, request.Email);
+
+            await _customersRepository.UpdateAsync(customer);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<UpdateCustomerCommandResponse>(updatedCustomer);
+            return _mapper.Map<UpdateCustomerCommandResponse>(customer);
         }
     }
 }

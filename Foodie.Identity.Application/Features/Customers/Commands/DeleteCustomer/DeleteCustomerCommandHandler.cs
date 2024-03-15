@@ -1,13 +1,15 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustomer
 {
-    internal class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, DeleteCustomerCommandResponse>
+    internal class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand, Result<DeleteCustomerCommandResponse>>
     {
         private readonly ICustomersRepository _customersRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -18,12 +20,12 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustome
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<DeleteCustomerCommandResponse> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Result<DeleteCustomerCommandResponse>> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = await _customersRepository.GetByIdAsync(request.Id);
 
-            if (customer == null)
-                throw new ApplicationUserNotFoundException(request.Id);
+            if (customer is null)
+                return Result.Failure<DeleteCustomerCommandResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.Id));
 
             await _customersRepository.DeleteAsync(customer);
 

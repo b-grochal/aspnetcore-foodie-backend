@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers
 {
-    public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, GetCustomersQueryResponse>
+    public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQuery, Result<GetCustomersQueryResponse>>
     {
         private readonly ICustomersRepository customersRepository;
         private readonly IMapper mapper;
@@ -19,7 +19,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers
             this.mapper = mapper;
         }
 
-        public async Task<GetCustomersQueryResponse> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetCustomersQueryResponse>> Handle(GetCustomersQuery request, CancellationToken cancellationToken)
         {
             var result = await customersRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Email);
 

@@ -1,13 +1,14 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin
 {
-    public class DeleteAdminCommandHandler : IRequestHandler<DeleteAdminCommand, DeleteAdminCommandResponse>
+    public class DeleteAdminCommandHandler : IRequestHandler<DeleteAdminCommand, Result<DeleteAdminCommandResponse>>
     {
         private readonly IAdminsRepository _adminsRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -18,12 +19,12 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<DeleteAdminCommandResponse> Handle(DeleteAdminCommand request, CancellationToken cancellationToken)
+        public async Task<Result<DeleteAdminCommandResponse>> Handle(DeleteAdminCommand request, CancellationToken cancellationToken)
         {
             var admin = await _adminsRepository.GetByIdAsync(request.Id);
 
-            if (admin == null)
-                throw new ApplicationUserNotFoundException(request.Id);
+            if (admin is null)
+                return Result.Failure<DeleteAdminCommandResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.Id));
 
             await _adminsRepository.DeleteAsync(admin);
 
