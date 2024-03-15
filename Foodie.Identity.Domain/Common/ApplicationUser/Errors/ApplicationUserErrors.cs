@@ -1,4 +1,4 @@
-﻿using Foodie.Common.Domain.Results;
+﻿using Foodie.Common.Results;
 
 namespace Foodie.Identity.Domain.Common.ApplicationUser.Errors
 {

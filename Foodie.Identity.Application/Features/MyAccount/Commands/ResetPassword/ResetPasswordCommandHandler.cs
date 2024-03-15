@@ -1,8 +1,7 @@
-﻿using Foodie.Common.Domain.Results;
-using Foodie.Common.Infrastructure.Cache;
+﻿using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Exceptions;
 using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using Foodie.Templates.Services;
 using Hangfire;

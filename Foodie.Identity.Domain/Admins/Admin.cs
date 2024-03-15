@@ -7,20 +7,17 @@ namespace Foodie.Identity.Domain.Admins
     public class Admin : ApplicationUser
     {
         public Admin(string firstName, string lastName, 
-            string email, string phoneNumber, string passwordHash,
-            ApplicationUserRole role, RefreshToken refreshToken) 
+            string email, string phoneNumber, string passwordHash) 
             : base(firstName, lastName, email, phoneNumber, passwordHash, 
-                  role, refreshToken)
+                  ApplicationUserRole.Admin)
         {
         }
 
         public static Admin Create(string firstName, string lastName,
-            string email, string phoneNumber, string passwordHash,
-            int accessFailedCount, bool isLocked, bool isActive,
-            ApplicationUserRole role, RefreshToken refreshToken)
+            string email, string phoneNumber, string passwordHash)
         {
             return new Admin(firstName, lastName, email, phoneNumber,
-                passwordHash, accessFailedCount, isLocked, isActive, role, refreshToken);
+                passwordHash);
         }
     }
 }

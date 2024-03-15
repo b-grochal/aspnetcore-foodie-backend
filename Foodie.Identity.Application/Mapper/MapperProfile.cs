@@ -1,20 +1,23 @@
 ﻿using AutoMapper;
+using Foodie.Identity.Application.Features.Auth.Commands.SignUp;
+using Foodie.Identity.Application.Features.MyAccount.Commands.UpdateAccountData;
 using Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin;
 using Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin;
 using Foodie.Identity.Application.Functions.Admins.Queries.GetAdminById;
 using Foodie.Identity.Application.Functions.Admins.Queries.GetAdmins;
-using Foodie.Identity.Application.Functions.Auth.Commands.SignUp;
 using Foodie.Identity.Application.Functions.Customers.Commands.CreateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomerById;
 using Foodie.Identity.Application.Functions.Customers.Queries.GetCustomers;
-using Foodie.Identity.Application.Functions.MyAccount.Commands.UpdateAccountData;
 using Foodie.Identity.Application.Functions.MyAccount.Queries.GetAccountData;
 using Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler;
 using Foodie.Identity.Application.Functions.OrderHandlers.Commands.UpdateOrderHandler;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlerById;
 using Foodie.Identity.Application.Functions.OrderHandlers.Queries.GetOrderHandlers;
-using Foodie.Identity.Domain.Entities;
+using Foodie.Identity.Domain.Admins;
+using Foodie.Identity.Domain.Common.ApplicationUser;
+using Foodie.Identity.Domain.Customers;
+using Foodie.Identity.Domain.OrderHandlers;
 
 namespace Foodie.Identity.Application.Mapper
 {

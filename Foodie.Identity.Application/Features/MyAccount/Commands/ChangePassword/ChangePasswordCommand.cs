@@ -1,4 +1,4 @@
-﻿using Foodie.Common.Domain.Results;
+﻿using Foodie.Common.Results;
 using MediatR;
 using System.Text.Json.Serialization;
 

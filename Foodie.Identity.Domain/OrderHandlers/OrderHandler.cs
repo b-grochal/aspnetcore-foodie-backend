@@ -9,23 +9,18 @@ namespace Foodie.Identity.Domain.OrderHandlers
         public int LocationId { get; }
 
         private OrderHandler(string firstName, string lastName, 
-            string email, string phoneNumber, string passwordHash, 
-            int accessFailedCount, bool isLocked, bool isActive, 
-            ApplicationUserRole role, RefreshToken refreshToken, int locationId) 
-            : base(firstName, lastName, email, phoneNumber, passwordHash, 
-                  accessFailedCount, isLocked, isActive, role, refreshToken)
+            string email, string phoneNumber, string passwordHash,
+            int locationId) : base(firstName, lastName, email, 
+                phoneNumber, passwordHash, ApplicationUserRole.OrderHandler)
         {
             LocationId = locationId;
         }
 
         public static OrderHandler Create(string firstName, string lastName,
-            string email, string phoneNumber, string passwordHash,
-            int accessFailedCount, bool isLocked, bool isActive,
-            ApplicationUserRole role, RefreshToken refreshToken, int locationId)
+            string email, string phoneNumber, string passwordHash, int locationId)
         {
             return new OrderHandler(firstName, lastName, email, phoneNumber,
-                passwordHash, accessFailedCount, isLocked, isActive, role, 
-                refreshToken, locationId);
+                passwordHash, locationId);
         }
     }
 }

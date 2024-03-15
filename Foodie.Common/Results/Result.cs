@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Foodie.Common.Domain.Results
+namespace Foodie.Common.Results
 {
     public class Result
     {

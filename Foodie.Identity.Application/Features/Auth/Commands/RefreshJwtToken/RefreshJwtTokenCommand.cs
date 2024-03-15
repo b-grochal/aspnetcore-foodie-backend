@@ -1,4 +1,4 @@
-﻿using Foodie.Common.Domain.Results;
+﻿using Foodie.Common.Results;
 using MediatR;
 
 namespace Foodie.Identity.Application.Features.Auth.Commands.RefreshJwtToken
