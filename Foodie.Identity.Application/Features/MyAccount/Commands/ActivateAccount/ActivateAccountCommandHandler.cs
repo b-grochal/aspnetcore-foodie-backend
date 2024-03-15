@@ -7,6 +7,8 @@ using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Foodie.Identity.Application.Features.MyAccount.Errors;
+using Foodie.Identity.Application.Features.Common;
 
 namespace Foodie.Identity.Application.Features.MyAccount.Commands.ActivateAccount
 {
@@ -28,12 +30,12 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.ActivateAccoun
             var applicationUserEmail = await _cacheService.GetAsync<string>(CachePrefixes.AccountActivationTokens, string.Empty, CacheParameters.AccountActivationToken, request.AccountActivationToken);
 
             if (applicationUserEmail is null)
-                return Result.Failure(ApplicationUserErrors.InvalidAccountActivationToken());
+                return Result.Failure(TokenErrors.InvalidAccountActivationToken());
 
             var applicationUser = await _applicationUsersRepository.GetByEmailAsync(applicationUserEmail);
-
+            
             if (applicationUser is null)
-                return Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundByEmail(applicationUserEmail));
+                return Result.Failure(Common.ApplicationUserErrors.ApplicationUserNotFoundByEmail(applicationUserEmail));
 
             applicationUser.Activate();
 

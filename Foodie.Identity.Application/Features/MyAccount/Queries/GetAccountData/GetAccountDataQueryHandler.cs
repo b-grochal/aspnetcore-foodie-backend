@@ -1,13 +1,15 @@
 ﻿using AutoMapper;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Application.Features.Common;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Identity.Application.Functions.MyAccount.Queries.GetAccountData
 {
-    public class GetAccountDataQueryHandler : IRequestHandler<GetAccountDataQuery, GetAccountDataQueryResponse>
+    public class GetAccountDataQueryHandler : IRequestHandler<GetAccountDataQuery, Result<GetAccountDataQueryResponse>>
     {
         private readonly IApplicationUsersRepository _applicationUsersRepository;
         private readonly IMapper _mapper;
@@ -18,12 +20,12 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Queries.GetAccountData
             _mapper = mapper;
         }
 
-        public async Task<GetAccountDataQueryResponse> Handle(GetAccountDataQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetAccountDataQueryResponse>> Handle(GetAccountDataQuery request, CancellationToken cancellationToken)
         {
             var applicationUser = await _applicationUsersRepository.GetByIdAsync(request.ApplicationUserId);
 
             if(applicationUser is null)
-                throw new ApplicationUserNotFoundException(request.ApplicationUserId);
+                return Result.Failure<GetAccountDataQueryResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.ApplicationUserId));
 
             return _mapper.Map<GetAccountDataQueryResponse>(applicationUser);
         }

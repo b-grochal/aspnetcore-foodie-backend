@@ -2,6 +2,7 @@
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Identity.Application.Features.Common;
 using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
@@ -27,7 +28,7 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.UpdateAccountD
             var applicationUser = await _applicationUsersRepository.GetByIdAsync(request.ApplicationUserId);
 
             if (applicationUser is null)
-                Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundById(request.ApplicationUserId));
+                Result.Failure(Common.ApplicationUserErrors.ApplicationUserNotFoundById(request.ApplicationUserId));
 
             applicationUser.Update(request.FirstName, request.LastName, request.PhoneNumber);
             await _applicationUsersRepository.UpdateAsync(applicationUser);

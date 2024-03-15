@@ -2,6 +2,7 @@
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Identity.Application.Features.Common;
 using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
@@ -27,7 +28,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
             var admin = await _adminsRepository.GetByIdAsync(request.Id);
 
             if (admin is null)
-                return Result.Failure<UpdateAdminCommandResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.Id));
+                return Result.Failure<UpdateAdminCommandResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.Id)); ;
 
             admin.Update(request.FirstName, request.LastName, request.PhoneNumber, request.Email);
 

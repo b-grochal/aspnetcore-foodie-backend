@@ -2,8 +2,7 @@
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Exceptions;
-using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
+using Foodie.Identity.Application.Features.Common;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

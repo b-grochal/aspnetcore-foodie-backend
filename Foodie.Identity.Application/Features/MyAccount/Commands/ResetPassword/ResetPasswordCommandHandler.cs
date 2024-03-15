@@ -2,6 +2,7 @@
 using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Identity.Application.Features.Common;
 using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using Foodie.Templates.Services;
 using Hangfire;
@@ -32,7 +33,7 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.ResetPassword
             var applicationUser = await _applicationUsersRepository.GetByEmailAsync(request.Email);
 
             if (applicationUser is null)
-                return Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundByEmail(request.Email));
+                return Result.Failure(Common.ApplicationUserErrors.ApplicationUserNotFoundByEmail(request.Email));
 
             var setPasswordToken = Guid.NewGuid().ToString();
             await _cacheService.SetAsync(applicationUser.Email,

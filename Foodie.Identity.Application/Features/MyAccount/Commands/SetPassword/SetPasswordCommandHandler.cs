@@ -8,6 +8,8 @@ using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
+using Foodie.Identity.Application.Features.MyAccount.Errors;
+using Foodie.Identity.Application.Features.Common;
 
 namespace Foodie.Identity.Application.Features.MyAccount.Commands.SetPassword
 {
@@ -34,12 +36,12 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.SetPassword
                                                           request.SetPasswordToken);
 
             if (applicationUserEmail is null)
-                return Result.Failure(ApplicationUserErrors.InvalidSetPasswordToken());
+                return Result.Failure(TokenErrors.InvalidSetPasswordToken());
 
             var applicationUser = await _applicationUsersRepository.GetByEmailAsync(applicationUserEmail);
 
             if (applicationUserEmail is null)
-                return Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundByEmail(applicationUserEmail));
+                return Result.Failure(Common.ApplicationUserErrors.ApplicationUserNotFoundByEmail(applicationUserEmail));
 
             applicationUser.ChangePassword(_passwordService.HashPassword(request.Password));
 

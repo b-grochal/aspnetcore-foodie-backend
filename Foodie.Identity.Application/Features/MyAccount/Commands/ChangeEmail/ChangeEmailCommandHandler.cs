@@ -1,6 +1,7 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Identity.Application.Features.Common;
 using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System.Threading;
@@ -25,10 +26,10 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.ChangeEmail
             var applicationUser = await _applicationUsersRepository.GetByIdAsync(request.ApplicationUserId);
 
             if (applicationUser is null)
-                return Result.Failure(ApplicationUserErrors.ApplicationUserNotFoundById(request.ApplicationUserId));
+                return Result.Failure(Common.ApplicationUserErrors.ApplicationUserNotFoundById(request.ApplicationUserId));
 
             if (applicationUser.Email == request.Email)
-                return Result.Failure(ApplicationUserErrors.SameEmailAsOldOne());
+                return Result.Failure(ApplicationUserDomainErrors.SameEmailAsOldOne());
 
             applicationUser.ChangeEmail(request.Email);
 

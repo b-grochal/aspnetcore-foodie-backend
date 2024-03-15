@@ -2,6 +2,7 @@
 using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+using Foodie.Identity.Application.Features.Auth.Errors;
 using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using MediatR;
 using System;
@@ -35,10 +36,10 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.RefreshJwtToken
             var applicationUser = await _applicationUsersRepository.GetByIdAsync(applicationUserId);
 
             if (applicationUser.RefreshToken is null)
-                return Result.Failure<RefreshJwtTokenCommandResponse>(ApplicationUserErrors.RefreshTokenNotFound(applicationUserId));
+                return Result.Failure<RefreshJwtTokenCommandResponse>(AuthErrors.RefreshTokenNotFound(applicationUserId));
 
             if (applicationUser.RefreshToken.Token != request.RefreshToken || applicationUser.RefreshToken.ExpirationTime <= DateTimeOffset.Now)
-                return Result.Failure<RefreshJwtTokenCommandResponse>(ApplicationUserErrors.InvalidRefreshToken());
+                return Result.Failure<RefreshJwtTokenCommandResponse>(AuthErrors.InvalidRefreshToken());
 
             var newJwtToken = _jwtService.GenerateToken(applicationUser);
             var newRefreshTokenData = _refreshTokenService.GenerateRefreshToken();

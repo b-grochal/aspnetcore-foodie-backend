@@ -1,17 +1,14 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
-using Foodie.Common.Enums;
-using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
+using Foodie.Identity.Application.Features.Common;
 using Foodie.Identity.Domain.OrderHandlers;
 using Foodie.Templates.Services;
 using Hangfire;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
