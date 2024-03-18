@@ -1,7 +1,8 @@
-﻿using Foode.Identity.Infrastructure.DummyData;
-using Foode.Identity.Infrastructure.Services;
-using Foodie.Common.Infrastructure.Database.Interfaces;
-using Foodie.Identity.Domain.Entities;
+﻿using Foodie.Common.Infrastructure.Database.Interfaces;
+using Foodie.Identity.Domain.Admins;
+using Foodie.Identity.Domain.Common.ApplicationUser;
+using Foodie.Identity.Domain.Customers;
+using Foodie.Identity.Domain.OrderHandlers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
@@ -15,7 +16,6 @@ namespace Foode.Identity.Infrastructure
         public DbSet<Admin> Admins { get; set; }
         public DbSet<OrderHandler> OrderHandlers { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public IdentityDbContext(DbContextOptions options) : base(options) { }
 
@@ -47,7 +47,7 @@ namespace Foode.Identity.Infrastructure
 
             var passwordService = new PasswordService();
 
-            foreach (var admin in DummyAdmins.Get())
+            foreach (var admin in AdminsSeed.Get())
             {
                 admin.PasswordHash = passwordService.HashPassword("P@ssw0rd");
                 modelBuilder.Entity<Admin>().HasData(admin);

@@ -2,7 +2,7 @@
 
 namespace Foodie.Meals.Infrastructure.Database
 {
-    public class MealsUnitOfWork : UnitOfWork
+    public class MealsUnitOfWork : BaseUnitOfWork
     {
         public MealsUnitOfWork(MealsDbContext dbContext) : base(dbContext)
         {
