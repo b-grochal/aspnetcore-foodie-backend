@@ -1,6 +1,8 @@
 ﻿using Foodie.Common.Domain.AggregateRoots;
 using Foodie.Common.Enums;
+using Foodie.Common.Results;
 using Foodie.Identity.Domain.Common.ApplicationUser.DomainEvents;
+using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
 using Foodie.Identity.Domain.Common.ApplicationUser.ValueObjects;
 using System;
 
@@ -61,12 +63,17 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
             IsActive = true;
         }
 
-        public void ChangeEmail(string email)
+        public Result ChangeEmail(string email)
         {
+            if (Email == email)
+                return Result.Failure(ApplicationUserDomainErrors.SameEmailAsOldOne());
+
             Email = email;
             IsActive = false;
 
             AddDomainEvent(new ApplicationUserEmailChangedDomainEvent(email));
+
+            return Result.Success();
         }
 
         public void ChangePassword(string passwordHash)
