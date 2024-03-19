@@ -2,8 +2,8 @@
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Common.Results;
-using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
+using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Identity.Application.Features.Common;
 using Foodie.Identity.Domain.Customers;
 using Foodie.Templates.Services;
@@ -18,17 +18,12 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.SignUp
     {
         private readonly ICustomersRepository _customersRepository;
         private readonly IApplicationUsersRepository _applicationUsersRepository;
-        private readonly IRefreshTokensRepository _refreshTokensRepository;
         private readonly IPasswordService _passwordService;
         private readonly IMapper _mapper;
-        private readonly ICacheService _cacheService;
-        private readonly IBackgroundJobClient _backgroundJobClient;
-        private readonly IEmailsService _emailsService;
         private readonly IUnitOfWork _unitOfWork;
 
         public SignUpCommandHandler(ICustomersRepository customersRepository,
                                     IApplicationUsersRepository applicationUsersRepository,
-                                    IRefreshTokensRepository refreshTokensRepository,
                                     IPasswordService passwordService,
                                     IMapper mapper,
                                     ICacheService cacheService,
@@ -37,12 +32,8 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.SignUp
         {
             _customersRepository = customersRepository;
             _applicationUsersRepository = applicationUsersRepository;
-            _refreshTokensRepository = refreshTokensRepository;
             _passwordService = passwordService;
             _mapper = mapper;
-            _cacheService = cacheService;
-            _backgroundJobClient = backgroundJobClient;
-            _emailsService = emailsService;
             _unitOfWork = unitOfWork;
         }
 

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Common.Results;
-using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Exceptions;
+using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Identity.Application.Features.Common;
 using MediatR;
 using System.Threading;
@@ -24,7 +23,7 @@ namespace Foodie.Identity.Application.Functions.MyAccount.Queries.GetAccountData
         {
             var applicationUser = await _applicationUsersRepository.GetByIdAsync(request.ApplicationUserId);
 
-            if(applicationUser is null)
+            if (applicationUser is null)
                 return Result.Failure<GetAccountDataQueryResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.ApplicationUserId));
 
             return _mapper.Map<GetAccountDataQueryResponse>(applicationUser);

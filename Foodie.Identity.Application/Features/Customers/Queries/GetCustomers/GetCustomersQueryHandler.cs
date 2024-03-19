@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Common.Results;
-using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;

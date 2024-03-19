@@ -1,15 +1,13 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
-using Foodie.Common.Results;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
-using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Contracts.Infrastructure.Services;
-using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
+using Foodie.Common.Results;
+using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
+using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
+using Foodie.Identity.Application.Features.MyAccount.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using Foodie.Identity.Application.Features.MyAccount.Errors;
-using Foodie.Identity.Application.Features.Common;
 
 namespace Foodie.Identity.Application.Features.MyAccount.Commands.SetPassword
 {
@@ -20,7 +18,10 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.SetPassword
         private readonly IPasswordService _passwordService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public SetPasswordCommandHandler(IApplicationUsersRepository applicationUsersRepository, ICacheService cacheService, IPasswordService passwordService, IUnitOfWork unitOfWork)
+        public SetPasswordCommandHandler(IApplicationUsersRepository applicationUsersRepository, 
+            ICacheService cacheService, 
+            IPasswordService passwordService, 
+            IUnitOfWork unitOfWork)
         {
             _applicationUsersRepository = applicationUsersRepository;
             _cacheService = cacheService;

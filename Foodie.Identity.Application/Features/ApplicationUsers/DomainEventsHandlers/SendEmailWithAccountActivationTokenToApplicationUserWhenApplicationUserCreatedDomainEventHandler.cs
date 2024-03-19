@@ -1,6 +1,6 @@
 ﻿using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
-using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
 using Foodie.Identity.Domain.Common.ApplicationUser.DomainEvents;
 using Foodie.Templates.Services;
 using MediatR;
@@ -15,7 +15,10 @@ namespace Foodie.Identity.Application.Features.ApplicationUsers.DomainEventsHand
         private readonly ICacheService _cacheService;
         private readonly IEmailsService _emailsService;
 
-        public SendEmailWithAccountActivationTokenToApplicationUserWhenApplicationUserCreatedDomainEventHandler(IAccountTokensService accountTokensService, ICacheService cacheService, IEmailsService emailsService)
+        public SendEmailWithAccountActivationTokenToApplicationUserWhenApplicationUserCreatedDomainEventHandler(
+            IAccountTokensService accountTokensService, 
+            ICacheService cacheService, 
+            IEmailsService emailsService)
         {
             _accountTokensService = accountTokensService;
             _cacheService = cacheService;
@@ -25,7 +28,7 @@ namespace Foodie.Identity.Application.Features.ApplicationUsers.DomainEventsHand
         public async Task Handle(ApplicationUserCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
             var accountActivationToken = _accountTokensService.GenerateAccountActivationToken();
-            
+
             await _cacheService.SetAsync<string>(notification.ApplicationUserEmail,
                                                           CachePrefixes.AccountActivationTokens,
                                                           string.Empty,

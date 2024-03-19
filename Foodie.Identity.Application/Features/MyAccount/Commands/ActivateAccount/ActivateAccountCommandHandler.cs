@@ -1,14 +1,12 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
-using Foodie.Common.Results;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
-using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Domain.Common.ApplicationUser.Errors;
+using Foodie.Common.Results;
+using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
+using Foodie.Identity.Application.Features.MyAccount.Errors;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using Foodie.Identity.Application.Features.MyAccount.Errors;
-using Foodie.Identity.Application.Features.Common;
 
 namespace Foodie.Identity.Application.Features.MyAccount.Commands.ActivateAccount
 {
@@ -18,7 +16,9 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.ActivateAccoun
         private readonly ICacheService _cacheService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ActivateAccountCommandHandler(IApplicationUsersRepository applicationUsersRepository, ICacheService cacheService, IUnitOfWork unitOfWork)
+        public ActivateAccountCommandHandler(
+            IApplicationUsersRepository applicationUsersRepository, 
+            ICacheService cacheService, IUnitOfWork unitOfWork)
         {
             _applicationUsersRepository = applicationUsersRepository;
             _cacheService = cacheService;
@@ -33,7 +33,7 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.ActivateAccoun
                 return Result.Failure(TokenErrors.InvalidAccountActivationToken());
 
             var applicationUser = await _applicationUsersRepository.GetByEmailAsync(applicationUserEmail);
-            
+
             if (applicationUser is null)
                 return Result.Failure(Common.ApplicationUserErrors.ApplicationUserNotFoundByEmail(applicationUserEmail));
 

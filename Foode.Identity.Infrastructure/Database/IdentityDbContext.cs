@@ -1,4 +1,5 @@
 ﻿using Foode.Identity.Infrastructure.Database.Configurations;
+using Foode.Identity.Infrastructure.Database.Seed;
 using Foodie.Common.Domain.Entities;
 using Foodie.Common.Domain.Entities.Interfaces;
 using Foodie.Common.Infrastructure.Database.Interfaces;
