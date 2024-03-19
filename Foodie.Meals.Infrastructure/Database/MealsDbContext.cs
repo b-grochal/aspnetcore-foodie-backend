@@ -28,10 +28,10 @@ namespace Foodie.Meals.Infrastructure.Database
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedDate = DateTime.Now;
+                        entry.Property(nameof(IIsAuditable.CreatedDate)).CurrentValue = DateTimeOffset.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedDate = DateTime.Now;
+                        entry.Property(nameof(IIsAuditable.CreatedDate)).CurrentValue = DateTimeOffset.Now;
                         break;
                 }
             }

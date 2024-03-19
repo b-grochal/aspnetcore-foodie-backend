@@ -1,4 +1,6 @@
 ﻿using Foode.Identity.Infrastructure.Database.Configurations;
+using Foodie.Common.Domain.Entities;
+using Foodie.Common.Domain.Entities.Interfaces;
 using Foodie.Common.Infrastructure.Database.Interfaces;
 using Foodie.Identity.Domain.Admins;
 using Foodie.Identity.Domain.Common.ApplicationUser;
@@ -27,10 +29,10 @@ namespace Foode.Identity.Infrastructure
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedDate = DateTimeOffset.Now;
+                        entry.Property(nameof(IIsAuditable.CreatedDate)).CurrentValue = DateTimeOffset.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedDate = DateTimeOffset.Now;
+                        entry.Property(nameof(IIsAuditable.CreatedDate)).CurrentValue = DateTimeOffset.Now;
                         break;
                 }
             }
