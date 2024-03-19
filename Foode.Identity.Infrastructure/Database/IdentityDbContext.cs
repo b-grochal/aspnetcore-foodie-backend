@@ -1,4 +1,5 @@
-﻿using Foodie.Common.Infrastructure.Database.Interfaces;
+﻿using Foode.Identity.Infrastructure.Database.Configurations;
+using Foodie.Common.Infrastructure.Database.Interfaces;
 using Foodie.Identity.Domain.Admins;
 using Foodie.Identity.Domain.Common.ApplicationUser;
 using Foodie.Identity.Domain.Customers;
@@ -40,10 +41,10 @@ namespace Foode.Identity.Infrastructure
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ApplicationUser>().ToTable("ApplicationUsers");
-            modelBuilder.Entity<Admin>().ToTable("Admins");
-            modelBuilder.Entity<OrderHandler>().ToTable("OrderHandlers");
-            modelBuilder.Entity<Customer>().ToTable("Customers");
+            modelBuilder.ApplyConfiguration(new ApplicationUserEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new AdminEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderHandlerEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CustomerEntityTypeConfiguration());
 
             var passwordService = new PasswordService();
 

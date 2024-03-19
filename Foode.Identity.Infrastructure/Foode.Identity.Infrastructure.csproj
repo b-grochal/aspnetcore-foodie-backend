@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Foodie.Identity.Application\Foodie.Identity.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Database\Configurations\" />
-  </ItemGroup>
-
 </Project>
