@@ -35,7 +35,7 @@ namespace Foode.Identity.Infrastructure.ApplicationUserUtilities
         public int GetApplicationUserIdFromExpiredToken(string token)
         {
             var applicationUserId = GetClaimsPrincipalFromExpiredToken(token)
-                .FindFirstValue(ApplicationUserClaim.ApplicationUserId);
+                .FindFirstValue(ApplicationUserClaim.Id);
 
             if (applicationUserId is null)
                 throw new SecurityTokenException("Invalid token");
@@ -72,7 +72,7 @@ namespace Foode.Identity.Infrastructure.ApplicationUserUtilities
         {
             var applicationUserClaims = new List<Claim>
             {
-                new Claim(ApplicationUserClaim.ApplicationUserId, applicationUser.Id.ToString()),
+                new Claim(ApplicationUserClaim.Id, applicationUser.Id.ToString()),
                 new Claim(ApplicationUserClaim.Email, applicationUser.Email),
                 new Claim(ApplicationUserClaim.Role, applicationUser.Role.ToString())
             };

@@ -27,6 +27,6 @@ namespace Foodie.Common.Api.Controllers
             User.Claims.FirstOrDefault(c => c.Type == ApplicationUserClaim.Email).Value;
 
         protected int? ApplicationUserId =>
-            int.TryParse(User.Claims.FirstOrDefault(c => c.Type == ApplicationUserClaim.ApplicationUserId).Value, out var applicationUserId) ? applicationUserId : null;
+            int.TryParse(User.Claims.FirstOrDefault(c => c.Type == ApplicationUserClaim.Id).Value, out var applicationUserId) ? applicationUserId : null;
     }
 }
