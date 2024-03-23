@@ -1,6 +1,6 @@
 ﻿using Foodie.Common.Collections;
 using Foodie.Common.Linq;
-using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Identity.Domain.Customers;
 using System.Linq;
 using System.Threading.Tasks;

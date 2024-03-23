@@ -1,4 +1,4 @@
-﻿using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Identity.Domain.Common.ApplicationUser;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;

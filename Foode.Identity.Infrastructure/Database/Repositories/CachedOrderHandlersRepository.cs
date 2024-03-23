@@ -1,7 +1,7 @@
 ﻿using Foodie.Common.Collections;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Cache.Interfaces;
-using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Identity.Domain.OrderHandlers;
 using System.Collections.Generic;
 using System.Threading.Tasks;

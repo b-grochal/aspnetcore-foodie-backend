@@ -1,8 +1,8 @@
 ﻿using Foodie.Common.Api.Controllers;
-using Foodie.Identity.Application.Functions.Auth.Commands.RefreshJwtToken;
-using Foodie.Identity.Application.Functions.Auth.Commands.RevokeRefreshToken;
-using Foodie.Identity.Application.Functions.Auth.Commands.SignIn;
-using Foodie.Identity.Application.Functions.Auth.Commands.SignUp;
+using Foodie.Identity.Application.Features.Auth.Commands.RefreshJwtToken;
+using Foodie.Identity.Application.Features.Auth.Commands.RevokeRefreshToken;
+using Foodie.Identity.Application.Features.Auth.Commands.SignIn;
+using Foodie.Identity.Application.Features.Auth.Commands.SignUp;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

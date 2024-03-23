@@ -1,5 +1,5 @@
 ﻿using Foodie.Common.Infrastructure.Authentication;
-using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
 using Microsoft.Extensions.Options;
 using System;
 using System.Security.Cryptography;

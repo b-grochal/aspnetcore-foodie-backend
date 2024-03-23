@@ -22,7 +22,6 @@ namespace Foodie.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)
         {
-            createCustomerCommand.User = Email;
             var result = await mediator.Send(createCustomerCommand);
             return Ok(result);
         }
@@ -36,7 +35,6 @@ namespace Foodie.Identity.Controllers
                 return BadRequest();
             }
 
-            updateUserCommand.User = Email;
             var result = await mediator.Send(updateUserCommand);
             return Ok(result);
         }

@@ -1,5 +1,5 @@
 ﻿using Foodie.Common.Infrastructure.Authentication;
-using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
 using Foodie.Identity.Domain.Common.ApplicationUser;
 using Foodie.Identity.Domain.OrderHandlers;
 using Microsoft.Extensions.Options;

@@ -1,10 +1,10 @@
-﻿using Foode.Identity.Infrastructure.Database;
-using Foode.Identity.Infrastructure.Repositories;
-using Foode.Identity.Infrastructure.Services;
+﻿using Foode.Identity.Infrastructure.ApplicationUserUtilities;
+using Foode.Identity.Infrastructure.Database.Repositories;
+using Foode.Identity.Infrastructure.Database.UnitOfWork;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Cache;
-using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Identity.Application.Contracts.Infrastructure.Services;
+using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
+using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -37,7 +37,6 @@ namespace Foode.Identity.Infrastructure
             services.Decorate<ICustomersRepository, CachedCustomersRepository>();
             services.AddTransient<IOrderHandlersRepository, OrderHandlersRepository>();
             services.Decorate<IOrderHandlersRepository, CachedOrderHandlersRepository>();
-            services.AddTransient<IRefreshTokensRepository, RefreshTokensRepository>();
             services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<IPasswordService, PasswordService>();
             services.AddTransient<IRefreshTokenService, RefreshTokenService>();

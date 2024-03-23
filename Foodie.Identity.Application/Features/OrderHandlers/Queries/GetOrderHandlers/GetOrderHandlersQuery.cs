@@ -1,4 +1,4 @@
-﻿using Foodie.Common.Application.Queries;
+﻿using Foodie.Common.Application.Requests.Queries.Abstractions;
 using Foodie.Common.Results;
 using MediatR;
 

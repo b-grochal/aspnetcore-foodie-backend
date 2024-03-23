@@ -25,9 +25,6 @@ namespace Foodie.Orders.API.Controllers
         {
             var command = new CancelOrderCommand(id);
 
-            if (Role == ApplicationUserRole.OrderHandler)
-                command.LocationId = LocationId;
-
             await mediator.Send(command);
             return Ok();
         }
@@ -37,9 +34,6 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> SetDeliveredStatus(int id)
         {
             var command = new SetDeliveredOrderStatusCommand(id);
-
-            if (Role == ApplicationUserRole.OrderHandler)
-                command.LocationId = LocationId;
 
             await mediator.Send(command);
             return Ok();
@@ -51,9 +45,6 @@ namespace Foodie.Orders.API.Controllers
         {
             var command = new SetInDeliveryOrderStatusCommand(id);
 
-            if (Role == ApplicationUserRole.OrderHandler)
-                command.LocationId = LocationId;
-
             await mediator.Send(command);
             return Ok();
         }
@@ -63,9 +54,6 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> SetInProgressStatus(int id)
         {
             var command = new SetInProgressOrderStatusCommand(id);
-
-            if (Role == ApplicationUserRole.OrderHandler)
-                command.LocationId = LocationId;
 
             await mediator.Send(command);
             return Ok();
@@ -77,9 +65,6 @@ namespace Foodie.Orders.API.Controllers
         {
             var query = new GetOrderByIdQuery(id);
 
-            if (Role == ApplicationUserRole.OrderHandler)
-                query.LocationId = LocationId;
-
             var result = await mediator.Send(query);
             return Ok(result);
         }
@@ -88,9 +73,6 @@ namespace Foodie.Orders.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrders([FromQuery] GetOrdersQuery getOrdersQuery)
         {
-            if (Role == ApplicationUserRole.OrderHandler)
-                getOrdersQuery.LocationId = LocationId;
-
             var result = await mediator.Send(getOrdersQuery);
             return Ok(result);
         }

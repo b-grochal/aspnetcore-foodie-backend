@@ -1,16 +1,13 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Foodie.Common.Application.Requests.Abstractions;
+using MediatR;
 
 namespace Foodie.Orders.Application.Functions.Orders.Commands.SetInProgressOrderStatus
 {
-    public class SetInProgressOrderStatusCommand : IRequest
+    public class SetInProgressOrderStatusCommand : ILocationRequest, IRequest
     {
         public int Id { get; set; }
-        public int? LocationId { get; set; }
+
+        public int LocationId { get; set; }
 
         public SetInProgressOrderStatusCommand(int id)
         {
