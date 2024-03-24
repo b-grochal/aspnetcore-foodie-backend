@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Foodie.Orders.Application.Functions.Orders.Commands.CancelOrder
 {
-    public class CancelOrderCommand : ILocationRequest, IRequest
+    public class CancelOrderCommand : IApplicationUserLocationRequest, IRequest
     {
         public int Id { get; set; }
 

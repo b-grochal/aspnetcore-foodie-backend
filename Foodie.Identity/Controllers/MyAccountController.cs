@@ -33,7 +33,7 @@ namespace Foodie.Identity.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler, ApplicationUserRole.Customer)]
         public async Task<IActionResult> GetAccountData()
         {
-            var result = await mediator.Send(new GetAccountDataQuery(ApplicationUserId.Value));
+            var result = await mediator.Send(new GetAccountDataQuery());
             return Ok(result);
         }
 
@@ -41,7 +41,6 @@ namespace Foodie.Identity.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler, ApplicationUserRole.Customer)]
         public async Task<IActionResult> UpdateAccountData([FromBody] UpdateAccountDataCommand updateAccountDataCommand)
         {
-            updateAccountDataCommand.ApplicationUserId = ApplicationUserId.Value;
             await mediator.Send(updateAccountDataCommand);
             return NoContent();
         }
@@ -51,7 +50,6 @@ namespace Foodie.Identity.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler, ApplicationUserRole.Customer)]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand changePassowrdCommand)
         {
-            changePassowrdCommand.ApplicationUserId = ApplicationUserId.Value;
             await mediator.Send(changePassowrdCommand);
             return NoContent();
         }
@@ -61,7 +59,6 @@ namespace Foodie.Identity.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler, ApplicationUserRole.Customer)]
         public async Task<IActionResult> ChangeEmail([FromBody] ChangeEmailCommand changeEmailCommand)
         {
-            changeEmailCommand.ApplicationUserId = ApplicationUserId.Value;
             await mediator.Send(changeEmailCommand);
             return NoContent();
         }

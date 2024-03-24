@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Foodie.Orders.Application.Functions.Orders.Commands.SetDeliveredOrderStatus
 {
-    public class SetDeliveredOrderStatusCommand : ILocationRequest, IRequest
+    public class SetDeliveredOrderStatusCommand : IApplicationUserLocationRequest, IRequest
     {
         public int Id { get; set; }
         public int LocationId { get; set; }

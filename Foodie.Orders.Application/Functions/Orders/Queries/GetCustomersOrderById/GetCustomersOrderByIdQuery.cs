@@ -1,21 +1,19 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Foodie.Common.Application.Requests.Abstractions;
+using MediatR;
+using System.Text.Json.Serialization;
 
 namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderById
 {
-    public class GetCustomersOrderByIdQuery : IRequest<GetCustomersOrderByIdQueryResponse>
+    public class GetCustomersOrderByIdQuery : IRequest<GetCustomersOrderByIdQueryResponse>, IApplicationUserIdRequest
     {
         public int Id { get; }
-        public int CustomerId { get; }
 
-        public GetCustomersOrderByIdQuery(int id, int customerId)
+        [JsonIgnore]
+        public int ApplicationUserId { get; set; }
+
+        public GetCustomersOrderByIdQuery(int id)
         {
-            this.Id = id;
-            this.CustomerId = customerId;
+            Id = id;
         }
     }
 }

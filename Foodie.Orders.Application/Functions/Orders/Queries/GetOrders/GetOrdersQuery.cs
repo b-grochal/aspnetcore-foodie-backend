@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Foodie.Orders.Application.Functions.Orders.Queries.GetOrders
 {
-    public class GetOrdersQuery : PagedQuery, ILocationRequest, IRequest<GetOrdersQueryResponse>
+    public class GetOrdersQuery : PagedQuery, IApplicationUserLocationRequest, IRequest<GetOrdersQueryResponse>
     {
         public string BuyerEmail { get; set; }
         public string OrderStatusName { get; set; } // TODO: Change to order status id

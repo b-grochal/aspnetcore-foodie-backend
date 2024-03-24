@@ -3,5 +3,7 @@
     public interface IAccountTokensService
     {
         string GenerateAccountActivationToken();
+
+        string GenerateSetPasswordToken();
     }
 }

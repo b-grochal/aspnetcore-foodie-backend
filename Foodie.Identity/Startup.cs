@@ -41,6 +41,7 @@ namespace Foodie.Identity
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuditableBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ApplicationUserLocationBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ApplicationUserIdBehaviour<,>));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

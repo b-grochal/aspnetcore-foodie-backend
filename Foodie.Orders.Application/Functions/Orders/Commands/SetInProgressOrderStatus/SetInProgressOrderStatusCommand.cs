@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Foodie.Orders.Application.Functions.Orders.Commands.SetInProgressOrderStatus
 {
-    public class SetInProgressOrderStatusCommand : ILocationRequest, IRequest
+    public class SetInProgressOrderStatusCommand : IApplicationUserLocationRequest, IRequest
     {
         public int Id { get; set; }
 

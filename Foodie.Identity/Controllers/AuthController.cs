@@ -43,7 +43,7 @@ namespace Foodie.Identity.Controllers
         [HttpPost("revoke-refresh-token")]
         public async Task<IActionResult> RevokeRefreshToken()
         {
-            await mediator.Send(new RevokeRefreshTokenCommand(ApplicationUserId.Value));
+            await mediator.Send(new RevokeRefreshTokenCommand());
             return NoContent();
         }
     }

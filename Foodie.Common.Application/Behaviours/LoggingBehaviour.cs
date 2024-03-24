@@ -18,7 +18,7 @@ namespace Foodie.Common.Application.Behaviours
 
         public LoggingBehaviour(ILogger<LoggingBehaviour<TRequest, TResponse>> logger)
         {
-            this._logger = logger;
+            _logger = logger;
         }
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)

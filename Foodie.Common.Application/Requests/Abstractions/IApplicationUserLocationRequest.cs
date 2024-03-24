@@ -1,6 +1,6 @@
 ﻿namespace Foodie.Common.Application.Requests.Abstractions
 {
-    public interface ILocationRequest
+    public interface IApplicationUserLocationRequest
     {
         public int LocationId { get; set; }
     }

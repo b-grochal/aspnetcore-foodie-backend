@@ -20,7 +20,7 @@ namespace Foodie.Orders.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCustomersOrder(int id)
         {
-            var query = new GetCustomersOrderByIdQuery(id, ApplicationUserId.Value);
+            var query = new GetCustomersOrderByIdQuery(id);
             var result = await mediator.Send(query);
             return Ok(result);
         }
@@ -29,7 +29,6 @@ namespace Foodie.Orders.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCustomersOrders([FromQuery] GetCustomersOrdersQuery getOrdersQuery)
         {
-            getOrdersQuery.CustomerId = ApplicationUserId.Value;
             var result = await mediator.Send(getOrdersQuery);
             return Ok(result);
         }
