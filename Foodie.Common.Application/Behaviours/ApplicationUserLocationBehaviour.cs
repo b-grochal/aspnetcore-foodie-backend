@@ -1,6 +1,7 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Authentication;
 using Foodie.Common.Application.Requests.Abstractions;
 using Foodie.Common.Enums;
+using Foodie.Common.Results;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,8 @@ namespace Foodie.Common.Application.Behaviours
 {
     public class ApplicationUserLocationBehaviour<TRequest, TResponse>
         : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IApplicationUserLocationRequest, IRequest<TResponse>
+        where TRequest : IRequest<TResponse>, IApplicationUserLocationRequest
+        where TResponse : Result
     {
         private readonly IApplicationUserContext _applicationUserContext;
 

@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Application.Authorization.Interfaces;
-using Foodie.Common.Exceptions;
+using Foodie.Common.Application.Behaviours;
+using Foodie.Common.Results;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,10 @@ using System.Threading.Tasks;
 
 namespace Foodie.Shared.Behaviours
 {
-    public class RequestAuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    public class RequestAuthorizationBehaviour<TRequest, TResponse>
+        : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
+        where TResponse : Result
     {
         private readonly IEnumerable<IAuthorizer<TRequest>> authorizers;
         private readonly IMediator mediator;
@@ -33,7 +37,7 @@ namespace Foodie.Shared.Behaviours
             {
                 var result = await mediator.Send(requirement, cancellationToken);
                 if (!result.IsAuthorized)
-                    throw new UnauthorizedException(result.FailureMessage);
+                    return (TResponse)Result.Failure(BehavioursErrors.UnauthorizedRequest(result.FailureMessage));
             }
 
             return await next();

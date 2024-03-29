@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
+using Foodie.Common.Application.Behaviours;
 using Foodie.Common.Exceptions;
+using Foodie.Common.Results;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,10 @@ using System.Threading.Tasks;
 
 namespace Foodie.Shared.Behaviours
 {
-    public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    public class ValidationBehaviour<TRequest, TResponse> 
+        : IPipelineBehavior<TRequest, TResponse> 
+        where TRequest : IRequest<TResponse>
+        where TResponse : Result
     {
         private readonly IEnumerable<IValidator<TRequest>> validators;
 
@@ -23,22 +28,14 @@ namespace Foodie.Shared.Behaviours
             {
                 var context = new ValidationContext<TRequest>(request);
 
-                var errorsDictionary = validators
+                var errors = validators
                     .Select(x => x.Validate(context))
                     .SelectMany(x => x.Errors)
                     .Where(x => x != null)
-                    .GroupBy(
-                        x => x.PropertyName,
-                        x => x.ErrorMessage,
-                        (propertyName, errorMessages) => new
-                        {
-                            Key = propertyName,
-                            Values = errorMessages.Distinct().ToArray()
-                        })
-                    .ToDictionary(x => x.Key, x => x.Values);
+                    .Select(x => $"{x.PropertyName} - {x.ErrorMessage}.");
 
-                if (errorsDictionary.Any())
-                    throw new ValidationFailureException(errorsDictionary);
+                if (errors.Any())
+                    return (TResponse)Result.Failure(BehavioursErrors.InvalidData(string.Join(' ', errors)));
             }
             return await next();
         }

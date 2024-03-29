@@ -30,5 +30,8 @@
 
         public static Error Failure(string code, string description) =>
             new(code, description, ErrorType.Failure);
+
+        public static Error Unauthorized(string code, string description) =>
+            new(code, description, ErrorType.Unauthorized);
     }
 }
