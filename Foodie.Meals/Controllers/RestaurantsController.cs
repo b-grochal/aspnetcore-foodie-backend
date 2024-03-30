@@ -25,7 +25,6 @@ namespace Foodie.Meals.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand createRestaurantCommand)
         {
-            createRestaurantCommand.User = Email;
             var result = await mediator.Send(createRestaurantCommand);
             return Ok(result);
         }
@@ -40,7 +39,6 @@ namespace Foodie.Meals.Controllers
                 return BadRequest();
             }
 
-            updateRestaurantCommand.User = Email;
             var result = await mediator.Send(updateRestaurantCommand);
             return Ok(result);
         }

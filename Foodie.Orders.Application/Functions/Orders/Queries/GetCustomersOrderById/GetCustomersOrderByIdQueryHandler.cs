@@ -24,7 +24,7 @@ namespace Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderBy
 
         public async Task<GetCustomersOrderByIdQueryResponse> Handle(GetCustomersOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var customersOrder = await _orderQueries.GetByIdAsync(request.Id, request.CustomerId);
+            var customersOrder = await _orderQueries.GetByIdAsync(request.Id, request.ApplicationUserId);
 
             if (customersOrder == null)
                 throw new OrderNotFoundException(request.Id);

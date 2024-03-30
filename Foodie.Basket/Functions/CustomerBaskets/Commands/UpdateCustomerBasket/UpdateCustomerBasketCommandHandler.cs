@@ -20,7 +20,7 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.UpdateCustomerBas
 
         public async Task<UpdateCustomerBasketCommandResponse> Handle(UpdateCustomerBasketCommand request, CancellationToken cancellationToken)
         {
-            var result = await customerBasketsRepository.UpdateBasket(request.CustomerId, mapper.Map<CustomerBasket>(request));
+            var result = await customerBasketsRepository.UpdateBasket(request.ApplicationUserId, mapper.Map<CustomerBasket>(request));
             return mapper.Map<UpdateCustomerBasketCommandResponse>(result);
         }
     }

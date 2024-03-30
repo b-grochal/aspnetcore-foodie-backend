@@ -22,7 +22,6 @@ namespace Foodie.Meals.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateCountry([FromBody] CreateCountryCommand createCountryCommand)
         {
-            createCountryCommand.User = Email;
             var result = await mediator.Send(createCountryCommand);
             return Ok(result);
         }
@@ -37,7 +36,6 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateCountryCommand.User = Email;
             var result = await mediator.Send(updateCountryCommand);
             return Ok(result);
         }

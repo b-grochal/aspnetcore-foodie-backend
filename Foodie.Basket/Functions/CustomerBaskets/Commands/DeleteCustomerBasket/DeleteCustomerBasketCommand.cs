@@ -1,14 +1,10 @@
-﻿using MediatR;
+﻿using Foodie.Common.Application.Requests.Abstractions;
+using MediatR;
 
 namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.DeleteCustomerBasket
 {
-    public class DeleteCustomerBasketCommand : IRequest
+    public class DeleteCustomerBasketCommand : IRequest, IApplicationUserIdRequest
     {
-        public int CustomerId { get; set; }
-
-        public DeleteCustomerBasketCommand(int customerId)
-        {
-            CustomerId = customerId;
-        }
+        public int ApplicationUserId { get; set; }
     }
 }

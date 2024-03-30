@@ -23,7 +23,6 @@ namespace Foodie.Meals.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateCity([FromBody] CreateCityCommand createCityCommand)
         {
-            createCityCommand.User = Email;
             var result = await mediator.Send(createCityCommand);
             return Ok(result);
         }
@@ -38,7 +37,6 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateCityCommand.User = Email;
             var result = await mediator.Send(updateCityCommand);
             return Ok(result);
         }

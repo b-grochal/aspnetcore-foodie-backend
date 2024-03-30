@@ -10,7 +10,7 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.CheckoutCustomerB
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty");
 
-            RuleFor(c => c.CustomerId)
+            RuleFor(c => c.ApplicationUserId)
             .NotEmpty()
             .WithMessage("{PropertyName} should not be empty");
         }

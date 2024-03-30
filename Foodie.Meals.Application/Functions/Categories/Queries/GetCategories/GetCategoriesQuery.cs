@@ -1,4 +1,4 @@
-﻿using Foodie.Common.Application.Queries;
+﻿using Foodie.Common.Application.Requests.Queries.Abstractions;
 using MediatR;
 
 namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategories

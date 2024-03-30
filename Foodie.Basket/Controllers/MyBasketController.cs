@@ -20,14 +20,13 @@ namespace Foodie.Basket.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMyBasket()
         {
-            var result = await mediator.Send(new GetCustomerBasketByCustomerIdQuery(ApplicationUserId.Value));
+            var result = await mediator.Send(new GetCustomerBasketByCustomerIdQuery());
             return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateMyBasket([FromBody] UpdateCustomerBasketCommand updateCustomerBasketCommand)
         {
-            updateCustomerBasketCommand.CustomerId = ApplicationUserId.Value;
             var result = await mediator.Send(updateCustomerBasketCommand);
             return Ok(result);
         }
@@ -35,7 +34,7 @@ namespace Foodie.Basket.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteMyBasket()
         {
-            await mediator.Send(new DeleteCustomerBasketCommand(ApplicationUserId.Value));
+            await mediator.Send(new DeleteCustomerBasketCommand());
             return Ok();
         }
 
@@ -43,7 +42,6 @@ namespace Foodie.Basket.Controllers
         [HttpPost]
         public async Task<ActionResult> CheckoutMyBasket([FromBody] CheckoutCustomerBasketCommand checkoutCustomerBasketCommand)
         {
-            checkoutCustomerBasketCommand.CustomerId = ApplicationUserId.Value;
             await mediator.Send(checkoutCustomerBasketCommand);
             return Ok();
         }

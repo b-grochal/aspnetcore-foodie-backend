@@ -1,9 +1,9 @@
-﻿using Foodie.Common.Application.Commands;
+﻿using Foodie.Common.Application.Requests.Commands.Abstractions;
 using MediatR;
 
 namespace Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation
 {
-    public class UpdateLocationCommand : AuditableCommand, IRequest<UpdateLocationCommandResponse>
+    public class UpdateLocationCommand : IAuditableCommand, IRequest<UpdateLocationCommandResponse>
     {
         public int Id { get; set; }
         public string Address { get; set; }
@@ -11,5 +11,6 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation
         public string Email { get; set; }
         public int CityId { get; set; }
         public int RestaurantId { get; set; }
+        public string User { get; set; }
     }
 }

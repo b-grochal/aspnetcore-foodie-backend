@@ -23,7 +23,6 @@ namespace Foodie.Meals.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand createCategoryCommand)
         {
-            createCategoryCommand.User = Email;
             var result = await mediator.Send(createCategoryCommand);
             return Ok(result);
         }
@@ -38,7 +37,6 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateCategoryCommand.User = Email;
             var result = await mediator.Send(updateCategoryCommand);
             return Ok(result);
         }

@@ -20,10 +20,10 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Queries.GetCustomerBasketB
 
         public async Task<GetCustomerBasketByCustomerIdQueryResponse> Handle(GetCustomerBasketByCustomerIdQuery request, CancellationToken cancellationToken)
         {
-            var customerBasket = await customerBasketsRepository.GetByCustomerId(request.CustomerId);
+            var customerBasket = await customerBasketsRepository.GetByCustomerId(request.ApplicationUserId);
 
             if (customerBasket == null)
-                throw new CustomerBasketNotFoundException(request.CustomerId);
+                throw new CustomerBasketNotFoundException(request.ApplicationUserId);
 
             return mapper.Map<GetCustomerBasketByCustomerIdQueryResponse>(customerBasket);
         }

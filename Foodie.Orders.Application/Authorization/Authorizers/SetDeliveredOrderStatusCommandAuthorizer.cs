@@ -8,12 +8,11 @@ namespace Foodie.Orders.Application.Authorization.Authorizers
     {
         public override void BuildPolicy(SetDeliveredOrderStatusCommand request)
         {
-            if (request.LocationId.HasValue)
-                UseRequirement(new SameLocationLikeOrderRequirement
-                {
-                    LocationId = request.LocationId.Value,
-                    OrderId = request.Id
-                });
+            UseRequirement(new SameLocationLikeOrderRequirement
+            {
+                LocationId = request.LocationId,
+                OrderId = request.Id
+            });
         }
     }
 }

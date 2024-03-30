@@ -16,7 +16,7 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.DeleteCustomerBas
 
         public async Task<Unit> Handle(DeleteCustomerBasketCommand request, CancellationToken cancellationToken)
         {
-            await customerBasketsRepository.DeleteBasket(request.CustomerId);
+            await customerBasketsRepository.DeleteBasket(request.ApplicationUserId);
             return Unit.Value;
         }
     }

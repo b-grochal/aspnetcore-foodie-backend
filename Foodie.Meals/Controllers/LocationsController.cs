@@ -23,7 +23,6 @@ namespace Foodie.Meals.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateLocation([FromBody] CreateLocationCommand createLocationCommand)
         {
-            createLocationCommand.User = Email;
             var result = await mediator.Send(createLocationCommand);
             return Ok(result);
         }
@@ -38,7 +37,6 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateLocationCommand.User = Email;
             var result = await mediator.Send(updateLocationCommand);
             return Ok(result);
         }
