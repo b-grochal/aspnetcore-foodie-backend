@@ -35,7 +35,7 @@ namespace Foodie.Shared.Behaviours
                     .Select(x => $"{x.PropertyName} - {x.ErrorMessage}.");
 
                 if (errors.Any())
-                    return (TResponse)Result.Failure(BehavioursErrors.InvalidData(string.Join(' ', errors)));
+                    return (TResponse)Result.Failure(BehavioursErrors.InvalidRequestData(string.Join(' ', errors)));
             }
             return await next();
         }
