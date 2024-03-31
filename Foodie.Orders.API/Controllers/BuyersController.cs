@@ -1,6 +1,6 @@
 ﻿using Foodie.Common.Api.Controllers;
+using Foodie.Orders.Application.Features.Buyers.Queries.GetBuyers;
 using Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyerById;
-using Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

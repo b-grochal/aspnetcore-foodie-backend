@@ -1,6 +1,6 @@
 ﻿using Foodie.Common.Application.Authorization;
 using Foodie.Orders.Application.Authorization.Requirements;
-using Foodie.Orders.Application.Functions.Orders.Commands.SetInProgressOrderStatus;
+using Foodie.Orders.Application.Features.Orders.Commands.SetInProgressOrderStatus;
 
 namespace Foodie.Orders.Application.Authorization.Authorizers
 {

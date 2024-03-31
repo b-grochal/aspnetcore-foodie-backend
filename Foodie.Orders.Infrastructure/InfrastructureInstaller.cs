@@ -1,10 +1,10 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Database.Interfaces;
+using Foodie.Orders.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Buyers;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Contractors;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
-using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Orders.Infrastructure.Contexts;
 using Foodie.Orders.Infrastructure.Database;
 using Foodie.Orders.Infrastructure.Queries;

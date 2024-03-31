@@ -1,6 +1,6 @@
 ﻿using Foodie.Common.Api.Controllers;
+using Foodie.Orders.Application.Features.Contractors.Queries.GetContractors;
 using Foodie.Orders.Application.Functions.Contractors.Queries.GetContractorById;
-using Foodie.Orders.Application.Functions.Contractors.Queries.GetContractors;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

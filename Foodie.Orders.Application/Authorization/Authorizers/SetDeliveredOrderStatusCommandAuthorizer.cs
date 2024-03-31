@@ -1,6 +1,6 @@
 ﻿using Foodie.Common.Application.Authorization;
 using Foodie.Orders.Application.Authorization.Requirements;
-using Foodie.Orders.Application.Functions.Orders.Commands.SetDeliveredOrderStatus;
+using Foodie.Orders.Application.Features.Orders.Commands.SetDeliveredOrderStatus;
 
 namespace Foodie.Orders.Application.Authorization.Authorizers
 {

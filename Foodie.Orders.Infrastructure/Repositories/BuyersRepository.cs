@@ -1,4 +1,4 @@
-﻿using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
+﻿using Foodie.Orders.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Orders.Domain.Buyers;
 using Foodie.Orders.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
