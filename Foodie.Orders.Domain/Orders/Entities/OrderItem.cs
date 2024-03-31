@@ -1,5 +1,7 @@
 ﻿using Foodie.Common.Domain.Entities;
-using Foodie.Orders.Domain.Exceptions;
+using Foodie.Common.Results;
+using Foodie.Orders.Domain.Orders.Errors;
+using System;
 
 namespace Foodie.Orders.Domain.Orders.Entities
 {
@@ -17,7 +19,7 @@ namespace Foodie.Orders.Domain.Orders.Entities
         {
             if (quantity <= 0)
             {
-                throw new OrderingDomainException("Invalid number of units");
+                throw new ArgumentException("Quantity should be greater than zero.");
             }
 
             MealId = mealId;
@@ -31,14 +33,16 @@ namespace Foodie.Orders.Domain.Orders.Entities
             return new OrderItem(mealId, name, unitPrice, quantity);
         }
 
-        public void AddQuantity(int quantity)
+        public Result AddQuantity(int quantity)
         {
             if (quantity < 0)
             {
-                throw new OrderingDomainException("Invalid quantity");
+                return Result.Failure(OrderItemDomainErrors.QuantityLoweThanZero());
             }
 
             Quantity += quantity;
+
+            return Result.Success();
         }
     }
 }

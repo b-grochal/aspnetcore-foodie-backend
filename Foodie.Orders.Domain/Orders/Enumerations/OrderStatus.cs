@@ -1,5 +1,4 @@
 ﻿using Foodie.Common.Domain.Enumerations;
-using Foodie.Orders.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +24,7 @@ namespace Foodie.Orders.Domain.Orders.Enumerations
 
             if (state == null)
             {
-                throw new OrderingDomainException($"Possible values for OrderStatus: {String.Join(",", List().Select(s => s.Name))}");
+                throw new ArgumentException($"Wrong value for name. Possible values for name of OrderStatus: {String.Join(",", List().Select(s => s.Name))}");
             }
 
             return state;
@@ -37,7 +36,7 @@ namespace Foodie.Orders.Domain.Orders.Enumerations
 
             if (state == null)
             {
-                throw new OrderingDomainException($"Possible values for OrderStatus: {String.Join(",", List().Select(s => s.Name))}");
+                throw new ArgumentException($"Wrong value for id. Possible values for id of OrderStatus: {String.Join(",", List().Select(s => s.Id))}");
             }
 
             return state;
