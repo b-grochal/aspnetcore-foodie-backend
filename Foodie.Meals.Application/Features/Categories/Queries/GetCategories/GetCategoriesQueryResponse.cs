@@ -1,6 +1,6 @@
 ﻿using Foodie.Common.Application.Responses;
 
-namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategories
+namespace Foodie.Meals.Application.Features.Categories.Queries.GetCategories
 {
     public class GetCategoriesQueryResponse : PagedResponse<CategoryDto>
     {

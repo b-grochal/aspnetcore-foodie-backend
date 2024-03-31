@@ -1,4 +1,4 @@
-﻿namespace Foodie.Meals.Application.Functions.Categories.Commands.UpdateCategory
+﻿namespace Foodie.Meals.Application.Features.Categories.Commands.UpdateCategory
 {
     public class UpdateCategoryCommandResponse
     {

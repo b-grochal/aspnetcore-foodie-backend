@@ -1,18 +1,15 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory
+namespace Foodie.Meals.Application.Features.Categories.Commands.CreateCategory
 {
-    public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreateCategoryCommandResponse>
+    public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, Result<CreateCategoryCommandResponse>>
     {
         private readonly ICategoriesRepository _categoriesRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -25,7 +22,7 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CreateCategoryCommandResponse> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<Result<CreateCategoryCommandResponse>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = _mapper.Map<Category>(request);
             await _categoriesRepository.CreateAsync(category);

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Foodie.Meals.Application.Functions.Categories.Queries.GetCategories;
+using Foodie.Meals.Application.Features.Categories.Queries.GetCategories;
 using Foodie.Meals.Application.Mapper;
 using Foodie.Meals.UnitTests.Mocks.Repositories;
 using Moq;

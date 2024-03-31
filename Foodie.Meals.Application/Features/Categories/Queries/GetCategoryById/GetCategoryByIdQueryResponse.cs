@@ -1,4 +1,4 @@
-﻿namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById
+﻿namespace Foodie.Meals.Application.Features.Categories.Queries.GetCategoryById
 {
     public class GetCategoryByIdQueryResponse
     {

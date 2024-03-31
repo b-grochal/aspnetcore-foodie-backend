@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategories
+namespace Foodie.Meals.Application.Features.Categories.Queries.GetCategories
 {
-    public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, GetCategoriesQueryResponse>
+    public class GetCategoriesQueryHandler : IRequestHandler<GetCategoriesQuery, Result<GetCategoriesQueryResponse>>
     {
         private readonly ICategoriesRepository categoriesRepository;
         private readonly IMapper mapper;
@@ -19,7 +19,7 @@ namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategories
             this.mapper = mapper;
         }
 
-        public async Task<GetCategoriesQueryResponse> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetCategoriesQueryResponse>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
             var result = await categoriesRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Name);
 

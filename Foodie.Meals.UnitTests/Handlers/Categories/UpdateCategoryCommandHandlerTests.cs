@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Foodie.Meals.Application.Functions.Categories.Commands.UpdateCategory;
+using Foodie.Meals.Application.Features.Categories.Commands.UpdateCategory;
 using Foodie.Meals.Application.Mapper;
 using Foodie.Meals.Domain.Exceptions;
 using Foodie.Meals.UnitTests.Mocks.Repositories;

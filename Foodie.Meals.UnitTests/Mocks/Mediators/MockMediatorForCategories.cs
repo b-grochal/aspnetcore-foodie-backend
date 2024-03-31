@@ -1,7 +1,11 @@
-﻿using Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory;
+﻿using Foodie.Meals.Application.Features.Categories.Commands.CreateCategory;
+using Foodie.Meals.Application.Features.Categories.Commands.DeleteCategory;
+using Foodie.Meals.Application.Features.Categories.Commands.UpdateCategory;
+using Foodie.Meals.Application.Features.Categories.Queries.GetCategories;
+using Foodie.Meals.Application.Features.Categories.Queries.GetCategoryById;
+using Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory;
 using Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory;
 using Foodie.Meals.Application.Functions.Categories.Commands.UpdateCategory;
-using Foodie.Meals.Application.Functions.Categories.Queries.GetCategories;
 using Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById;
 using Foodie.Meals.Domain.Entities;
 using MediatR;

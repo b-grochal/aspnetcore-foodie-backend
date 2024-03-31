@@ -1,17 +1,14 @@
 ﻿using AutoMapper;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Meals.Domain.Exceptions;
+using Foodie.Meals.Application.Features.Categories.Errors;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById
+namespace Foodie.Meals.Application.Features.Categories.Queries.GetCategoryById
 {
-    public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery, GetCategoryByIdQueryResponse>
+    public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery, Result<GetCategoryByIdQueryResponse>>
     {
         private readonly ICategoriesRepository categoriesRepository;
         private readonly IMapper mapper;
@@ -22,12 +19,12 @@ namespace Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById
             this.mapper = mapper;
         }
 
-        public async Task<GetCategoryByIdQueryResponse> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetCategoryByIdQueryResponse>> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
             var category = await categoriesRepository.GetByIdAsync(request.Id);
 
-            if (category == null)
-                throw new CategoryNotFoundException(request.Id);
+            if (category is null)
+                return Result.Failure<GetCategoryByIdQueryResponse>(CategoryErrors.CategoryNotFoundById(request.Id));
 
             return mapper.Map<GetCategoryByIdQueryResponse>(category);
         }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory;
+using Foodie.Meals.Application.Features.Categories.Commands.CreateCategory;
 using Foodie.Meals.Application.Mapper;
 using Foodie.Meals.Domain.Entities;
 using Foodie.Meals.UnitTests.Mocks.Repositories;

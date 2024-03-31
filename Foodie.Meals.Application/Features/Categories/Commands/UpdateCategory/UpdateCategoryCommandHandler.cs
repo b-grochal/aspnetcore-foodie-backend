@@ -1,14 +1,16 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Application.Features.Categories.Errors;
 using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Meals.Application.Functions.Categories.Commands.UpdateCategory
+namespace Foodie.Meals.Application.Features.Categories.Commands.UpdateCategory
 {
-    public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, UpdateCategoryCommandResponse>
+    public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, Result<UpdateCategoryCommandResponse>>
     {
         private readonly ICategoriesRepository _categoriesRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -21,12 +23,12 @@ namespace Foodie.Meals.Application.Functions.Categories.Commands.UpdateCategory
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UpdateCategoryCommandResponse> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<Result<UpdateCategoryCommandResponse>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = await _categoriesRepository.GetByIdAsync(request.Id);
 
-            if (category == null)
-                throw new CategoryNotFoundException(request.Id);
+            if (category is null)
+                return Result.Failure<UpdateCategoryCommandResponse>(CategoryErrors.CategoryNotFoundById(request.Id));
 
             var editedCategory = _mapper.Map(request, category);
             await _categoriesRepository.UpdateAsync(editedCategory);

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Foodie.Meals.Application.Functions.Categories.Commands.CreateCategory
+namespace Foodie.Meals.Application.Features.Categories.Commands.CreateCategory
 {
     public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
     {
