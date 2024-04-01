@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Application.Features.Countries.Errors;
 using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System.Threading;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Countries.Commands.UpdateCountry
 {
-    public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryCommand, UpdateCountryCommandResponse>
+    public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryCommand, Result<UpdateCountryCommandResponse>>
     {
         private readonly ICountriesRepository _countriesRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -21,12 +23,12 @@ namespace Foodie.Meals.Application.Functions.Countries.Commands.UpdateCountry
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UpdateCountryCommandResponse> Handle(UpdateCountryCommand request, CancellationToken cancellationToken)
+        public async Task<Result<UpdateCountryCommandResponse>> Handle(UpdateCountryCommand request, CancellationToken cancellationToken)
         {
             var country = await _countriesRepository.GetByIdAsync(request.Id);
 
             if (country == null)
-                throw new CountryNotFoundException(request.Id);
+                return Result.Failure<UpdateCountryCommandResponse>(CountriesErrors.CountryNotFoundById(request.Id));
 
             country = _mapper.Map(request, country);
             await _countriesRepository.UpdateAsync(country);

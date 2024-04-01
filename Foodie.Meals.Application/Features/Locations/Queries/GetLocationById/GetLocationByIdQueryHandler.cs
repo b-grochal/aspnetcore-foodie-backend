@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Application.Features.Locations.Errors;
 using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById
 {
-    public class GetLocationByIdQueryHandler : IRequestHandler<GetLocationByIdQuery, GetLocationByIdQueryResponse>
+    public class GetLocationByIdQueryHandler : IRequestHandler<GetLocationByIdQuery, Result<GetLocationByIdQueryResponse>>
     {
         private readonly ILocationsRepository locationsRepository;
         private readonly IMapper mapper;
@@ -22,12 +24,12 @@ namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById
             this.mapper = mapper;
         }
 
-        public async Task<GetLocationByIdQueryResponse> Handle(GetLocationByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetLocationByIdQueryResponse>> Handle(GetLocationByIdQuery request, CancellationToken cancellationToken)
         {
             var location = await locationsRepository.GetByIdAsync(request.Id);
 
-            if (location == null)
-                throw new LocationNotFoundException(request.Id);
+            if (location is null)
+                return Result.Failure<GetLocationByIdQueryResponse>(LocationsErrors.LocationNotFoundById(request.Id));
 
             return mapper.Map<GetLocationByIdQueryResponse>(location);
         }

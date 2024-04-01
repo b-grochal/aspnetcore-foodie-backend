@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Linq;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Application.Features.Restaurants.Errors;
 using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System.Threading;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaurant
 {
-    public class UpdateRestaurantCommandHandler : IRequestHandler<UpdateRestaurantCommand, UpdateRestaurantCommandResponse>
+    public class UpdateRestaurantCommandHandler : IRequestHandler<UpdateRestaurantCommand, Result<UpdateRestaurantCommandResponse>>
     {
         private readonly IRestaurantsRepository _restaurantsRepository;
         private readonly ICategoriesRepository _categoriesRepository;
@@ -24,12 +26,12 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UpdateRestaurantCommandResponse> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
+        public async Task<Result<UpdateRestaurantCommandResponse>> Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
         {
             var restaurant = await _restaurantsRepository.GetByIdAsync(request.Id);
 
-            if (restaurant == null)
-                throw new RestaurantNotFoundException(request.Id);
+            if (restaurant is null)
+                return Result.Failure<UpdateRestaurantCommandResponse>(RestaurantsErrors.RestaurantNotFoundById(request.Id));
 
             var editedRestaurant = _mapper.Map(request, restaurant);
 

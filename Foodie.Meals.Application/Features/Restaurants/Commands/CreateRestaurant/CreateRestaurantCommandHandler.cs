@@ -1,18 +1,16 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaurant
 {
-    public class CreateRestaurantCommandHandler : IRequestHandler<CreateRestaurantCommand, CreateRestaurantCommandResponse>
+    public class CreateRestaurantCommandHandler : IRequestHandler<CreateRestaurantCommand, Result<CreateRestaurantCommandResponse>>
     {
         private readonly IRestaurantsRepository _restaurantsRepository;
         private readonly ICategoriesRepository _categoriesRepository;
@@ -27,7 +25,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaura
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CreateRestaurantCommandResponse> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
+        public async Task<Result<CreateRestaurantCommandResponse>> Handle(CreateRestaurantCommand request, CancellationToken cancellationToken)
         {
             var restaurant = _mapper.Map<Restaurant>(request);
             var categories = await _categoriesRepository.GetAllAsync(request.CategoriesIds);

@@ -9,8 +9,4 @@
     <ProjectReference Include="..\Foodie.Meals.Domain\Foodie.Meals.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Cities\Errors\" />
-  </ItemGroup>
-
 </Project>

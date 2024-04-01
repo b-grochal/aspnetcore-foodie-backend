@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using MediatR;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Countries.Queries.GetCountries
 {
-    public class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, GetCountriesQueryResponse>
+    public class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, Result<GetCountriesQueryResponse>>
     {
         private readonly ICountriesRepository countriesRepository;
         private readonly IMapper mapper;
@@ -19,7 +20,7 @@ namespace Foodie.Meals.Application.Functions.Countries.Queries.GetCountries
             this.mapper = mapper;
         }
 
-        public async Task<GetCountriesQueryResponse> Handle(GetCountriesQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetCountriesQueryResponse>> Handle(GetCountriesQuery request, CancellationToken cancellationToken)
         {
             var result = await countriesRepository.GetAllAsync(request.PageNumber, request.PageSize, request.Name);
 

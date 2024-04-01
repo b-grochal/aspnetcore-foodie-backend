@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using MediatR;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Countries.Commands.CreateCountry
 {
-    public class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand, CreateCountryCommandResponse>
+    public class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand, Result<CreateCountryCommandResponse>>
     {
         private readonly ICountriesRepository _countriesRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -21,7 +22,7 @@ namespace Foodie.Meals.Application.Functions.Countries.Commands.CreateCountry
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CreateCountryCommandResponse> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
+        public async Task<Result<CreateCountryCommandResponse>> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
         {
             var country = _mapper.Map<Country>(request);
             await _countriesRepository.CreateAsync(country);

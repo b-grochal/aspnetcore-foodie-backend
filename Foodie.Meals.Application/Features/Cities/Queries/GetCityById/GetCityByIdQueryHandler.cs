@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Application.Features.Cities.Errors;
 using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System.Threading;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCityById
 {
-    public class GetCityByIdQueryHandler : IRequestHandler<GetCityByIdQuery, GetCityByIdQueryResponse>
+    public class GetCityByIdQueryHandler : IRequestHandler<GetCityByIdQuery, Result<GetCityByIdQueryResponse>>
     {
         private readonly ICitiesRepository citiesRepository;
         private readonly IMapper mapper;
@@ -18,12 +20,12 @@ namespace Foodie.Meals.Application.Functions.Cities.Queries.GetCityById
             this.mapper = mapper;
         }
 
-        public async Task<GetCityByIdQueryResponse> Handle(GetCityByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetCityByIdQueryResponse>> Handle(GetCityByIdQuery request, CancellationToken cancellationToken)
         {
             var city = await citiesRepository.GetByIdAsync(request.Id);
 
-            if (city == null)
-                throw new CityNotFoundException(request.Id);
+            if (city is null)
+                return Result.Failure<GetCityByIdQueryResponse>(CitiesErrors.CityNotFoundById(request.Id));
 
             return mapper.Map<GetCityByIdQueryResponse>(city);
         }

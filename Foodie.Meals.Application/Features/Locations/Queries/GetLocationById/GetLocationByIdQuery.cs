@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Foodie.Common.Results;
+using MediatR;
 
 namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocationById
 {
-    public class GetLocationByIdQuery : IRequest<GetLocationByIdQueryResponse>
+    public class GetLocationByIdQuery : IRequest<Result<GetLocationByIdQueryResponse>>
     {
         public int Id { get; }
 

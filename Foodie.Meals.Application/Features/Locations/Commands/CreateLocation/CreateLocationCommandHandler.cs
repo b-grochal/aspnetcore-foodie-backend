@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using MediatR;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation
 {
-    public class CreateLocationCommandHandler : IRequestHandler<CreateLocationCommand, CreateLocationCommandResponse>
+    public class CreateLocationCommandHandler : IRequestHandler<CreateLocationCommand, Result<CreateLocationCommandResponse>>
     {
         private readonly ILocationsRepository _locationsRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -25,7 +26,7 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CreateLocationCommandResponse> Handle(CreateLocationCommand request, CancellationToken cancellationToken)
+        public async Task<Result<CreateLocationCommandResponse>> Handle(CreateLocationCommand request, CancellationToken cancellationToken)
         {
             var location = _mapper.Map<Location>(request);
             await _locationsRepository.CreateAsync(location);

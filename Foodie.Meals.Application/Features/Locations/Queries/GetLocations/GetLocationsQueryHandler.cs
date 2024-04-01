@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using MediatR;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocations
 {
-    public class GetLocationsQueryHandler : IRequestHandler<GetLocationsQuery, GetLocationsQueryResponse>
+    public class GetLocationsQueryHandler : IRequestHandler<GetLocationsQuery, Result<GetLocationsQueryResponse>>
     {
         private readonly ILocationsRepository locationsRepository;
         private readonly IMapper mapper;
@@ -21,7 +22,7 @@ namespace Foodie.Meals.Application.Functions.Locations.Queries.GetLocations
             this.mapper = mapper;
         }
 
-        public async Task<GetLocationsQueryResponse> Handle(GetLocationsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetLocationsQueryResponse>> Handle(GetLocationsQuery request, CancellationToken cancellationToken)
         {
             var result = await locationsRepository.GetAllAsync(request.PageNumber, request.PageSize, request.RestaurantId, request.CityId);
 

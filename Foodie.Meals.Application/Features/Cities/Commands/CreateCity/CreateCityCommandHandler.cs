@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Domain.Entities;
 using MediatR;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Meals.Application.Functions.Cities.Commands.CreateCity
 {
-    public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, CreateCityCommandResponse>
+    public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, Result<CreateCityCommandResponse>>
     {
         private readonly ICitiesRepository _citiesRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -21,7 +22,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.CreateCity
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CreateCityCommandResponse> Handle(CreateCityCommand request, CancellationToken cancellationToken)
+        public async Task<Result<CreateCityCommandResponse>> Handle(CreateCityCommand request, CancellationToken cancellationToken)
         {
             var city = _mapper.Map<City>(request);
             await _citiesRepository.CreateAsync(city);
