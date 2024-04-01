@@ -24,7 +24,7 @@ namespace Foodie.Meals.Application.Features.Categories.Queries.GetCategoryById
             var category = await categoriesRepository.GetByIdAsync(request.Id);
 
             if (category is null)
-                return Result.Failure<GetCategoryByIdQueryResponse>(CategoryErrors.CategoryNotFoundById(request.Id));
+                return Result.Failure<GetCategoryByIdQueryResponse>(CategoriesErrors.CategoryNotFoundById(request.Id));
 
             return mapper.Map<GetCategoryByIdQueryResponse>(category);
         }

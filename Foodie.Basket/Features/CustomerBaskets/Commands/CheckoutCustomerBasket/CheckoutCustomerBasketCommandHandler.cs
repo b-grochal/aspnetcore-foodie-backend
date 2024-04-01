@@ -1,4 +1,6 @@
-﻿using Foodie.Basket.Repositories.Interfaces;
+﻿using Foodie.Basket.API.Errors;
+using Foodie.Basket.Repositories.Interfaces;
+using Foodie.Common.Results;
 using Foodie.EventBus.IntegrationEvents.Basket;
 using IdentityGrpc;
 using MassTransit;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.CheckoutCustomerBasket
 {
-    public class CheckoutCustomerBasketCommandHandler : IRequestHandler<CheckoutCustomerBasketCommand>
+    public class CheckoutCustomerBasketCommandHandler : IRequestHandler<CheckoutCustomerBasketCommand, Result>
     {
         private readonly ICustomerBasketsRepository customerBasketsRepository;
         private readonly IdentityService.IdentityServiceClient identityServiceClient;
@@ -25,9 +27,12 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.CheckoutCustomerB
             this.publishEndpoint = publishEndpoint;
         }
 
-        public async Task<Unit> Handle(CheckoutCustomerBasketCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(CheckoutCustomerBasketCommand request, CancellationToken cancellationToken)
         {
             var customerBasket = await customerBasketsRepository.GetByCustomerId(request.ApplicationUserId);
+
+            if (customerBasket is null)
+                return Result.Failure(BasketsErrors.BasketNotFoundByApplicationUserId(request.ApplicationUserId));
 
             var identityServiceRequest = new GetCustomerRequest { Id = request.ApplicationUserId };
             var identityCall = await identityServiceClient.GetCustomerAsync(identityServiceRequest);
@@ -66,7 +71,7 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.CheckoutCustomerB
                 })
             });
 
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

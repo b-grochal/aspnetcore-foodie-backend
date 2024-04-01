@@ -1,11 +1,12 @@
 ﻿using Foodie.Basket.Repositories.Interfaces;
+using Foodie.Common.Results;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.DeleteCustomerBasket
 {
-    public class DeleteCustomerBasketCommandHandler : IRequestHandler<DeleteCustomerBasketCommand>
+    public class DeleteCustomerBasketCommandHandler : IRequestHandler<DeleteCustomerBasketCommand, Result>
     {
         private readonly ICustomerBasketsRepository customerBasketsRepository;
 
@@ -14,10 +15,10 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.DeleteCustomerBas
             this.customerBasketsRepository = customerBasketsRepository;
         }
 
-        public async Task<Unit> Handle(DeleteCustomerBasketCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteCustomerBasketCommand request, CancellationToken cancellationToken)
         {
             await customerBasketsRepository.DeleteBasket(request.ApplicationUserId);
-            return Unit.Value;
+            return Result.Success();
         }
     }
 }

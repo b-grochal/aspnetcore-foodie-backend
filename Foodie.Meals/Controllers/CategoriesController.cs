@@ -2,10 +2,10 @@
 using Foodie.Common.Api.Controllers;
 using Foodie.Common.Enums;
 using Foodie.Meals.Application.Features.Categories.Commands.CreateCategory;
+using Foodie.Meals.Application.Features.Categories.Commands.DeleteCategory;
 using Foodie.Meals.Application.Features.Categories.Commands.UpdateCategory;
 using Foodie.Meals.Application.Features.Categories.Queries.GetCategories;
-using Foodie.Meals.Application.Functions.Categories.Commands.DeleteCategory;
-using Foodie.Meals.Application.Functions.Categories.Queries.GetCategoryById;
+using Foodie.Meals.Application.Features.Categories.Queries.GetCategoryById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

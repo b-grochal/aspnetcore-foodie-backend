@@ -28,7 +28,7 @@ namespace Foodie.Meals.Application.Features.Categories.Commands.UpdateCategory
             var category = await _categoriesRepository.GetByIdAsync(request.Id);
 
             if (category is null)
-                return Result.Failure<UpdateCategoryCommandResponse>(CategoryErrors.CategoryNotFoundById(request.Id));
+                return Result.Failure<UpdateCategoryCommandResponse>(CategoriesErrors.CategoryNotFoundById(request.Id));
 
             var editedCategory = _mapper.Map(request, category);
             await _categoriesRepository.UpdateAsync(editedCategory);

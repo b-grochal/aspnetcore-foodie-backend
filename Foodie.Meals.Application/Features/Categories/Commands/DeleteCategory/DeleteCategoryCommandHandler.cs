@@ -25,7 +25,7 @@ namespace Foodie.Meals.Application.Features.Categories.Commands.DeleteCategory
             var categoryToDelete = await _categoriesRepository.GetByIdAsync(request.Id);
 
             if (categoryToDelete is null)
-                return Result.Failure<DeleteCategoryCommandResponse>(CategoryErrors.CategoryNotFoundById(request.Id));
+                return Result.Failure<DeleteCategoryCommandResponse>(CategoriesErrors.CategoryNotFoundById(request.Id));
 
             await _categoriesRepository.DeleteAsync(categoryToDelete);
 
