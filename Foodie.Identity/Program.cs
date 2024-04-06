@@ -50,7 +50,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,7 +61,7 @@ Log.Logger = new LoggerConfiguration()
     .Configuration(builder.Configuration)
     .CreateLogger();
 
-builder.Host.AddApplicationSettings();
+builder.Host.AddApplicationSettings(SettingsType.JwtToken, SettingsType.Cache, SettingsType.Smtp);
 
 builder.Host.UseSerilog();
 
