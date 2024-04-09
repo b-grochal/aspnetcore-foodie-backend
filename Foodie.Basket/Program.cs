@@ -72,7 +72,7 @@ builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddCache(builder.Configuration);
 builder.Services.AddScoped<ICustomerBasketsRepository, CustomerBasketsRepository>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 builder.Services.AddMassTransit(x =>

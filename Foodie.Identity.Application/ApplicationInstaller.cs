@@ -10,7 +10,7 @@ namespace Foodie.Identity.Application
         public static IServiceCollection AddIdentityApplication(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ApplicationInstaller).Assembly));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             return services;
