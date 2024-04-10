@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using Foodie.Meals.Application.Features.Categories.Commands.CreateCategory;
 using Foodie.Meals.Application.Features.Categories.Commands.DeleteCategory;
@@ -7,6 +8,7 @@ using Foodie.Meals.Application.Features.Categories.Commands.UpdateCategory;
 using Foodie.Meals.Application.Features.Categories.Queries.GetCategories;
 using Foodie.Meals.Application.Features.Categories.Queries.GetCategoryById;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -24,7 +26,10 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand createCategoryCommand)
         {
             var result = await mediator.Send(createCategoryCommand);
-            return Ok(result);
+            
+            return result.Match(
+                onSuccess: () => Ok(result), 
+                onFailure: HandleFailure);
         }
 
         // PUT api/categories/5
