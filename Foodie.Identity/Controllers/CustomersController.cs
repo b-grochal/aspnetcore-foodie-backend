@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using Foodie.Identity.Application.Functions.Customers.Commands.CreateCustomer;
 using Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustomer;
@@ -23,7 +24,10 @@ namespace Foodie.Identity.Controllers
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand createCustomerCommand)
         {
             var result = await mediator.Send(createCustomerCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // PUT api/customers/5
@@ -36,7 +40,10 @@ namespace Foodie.Identity.Controllers
             }
 
             var result = await mediator.Send(updateUserCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // DELETE api/customers/5
@@ -45,7 +52,10 @@ namespace Foodie.Identity.Controllers
         {
             var command = new DeleteCustomerCommand(id);
             var result = await mediator.Send(command);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/customers/5
@@ -54,7 +64,10 @@ namespace Foodie.Identity.Controllers
         {
             var query = new GetCustomerByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/customers
@@ -62,7 +75,10 @@ namespace Foodie.Identity.Controllers
         public async Task<IActionResult> GetCustomers([FromQuery] GetCustomersQuery getCustomersQuery)
         {
             var result = await mediator.Send(getCustomersQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

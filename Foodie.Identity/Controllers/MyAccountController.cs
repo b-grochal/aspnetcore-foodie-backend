@@ -1,6 +1,8 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
+using Foodie.Common.Results;
 using Foodie.Identity.Application.Features.MyAccount.Commands.ActivateAccount;
 using Foodie.Identity.Application.Features.MyAccount.Commands.ChangeEmail;
 using Foodie.Identity.Application.Features.MyAccount.Commands.ChangePassword;
@@ -26,7 +28,10 @@ namespace Foodie.Identity.API.Controllers
         public async Task<IActionResult> ActivateAccount([FromBody] ActivateAccountCommand createAdminCommand)
         {
             var result = await mediator.Send(createAdminCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: Ok,
+                onFailure: HandleFailure);
         }
 
         [HttpGet]
@@ -34,15 +39,21 @@ namespace Foodie.Identity.API.Controllers
         public async Task<IActionResult> GetAccountData()
         {
             var result = await mediator.Send(new GetAccountDataQuery());
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         [HttpPut]
         [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler, ApplicationUserRole.Customer)]
         public async Task<IActionResult> UpdateAccountData([FromBody] UpdateAccountDataCommand updateAccountDataCommand)
         {
-            await mediator.Send(updateAccountDataCommand);
-            return NoContent();
+            var result = await mediator.Send(updateAccountDataCommand);
+
+            return result.Match(
+                onSuccess: NoContent,
+                onFailure: HandleFailure);
         }
 
         [HttpPost]
@@ -50,8 +61,11 @@ namespace Foodie.Identity.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler, ApplicationUserRole.Customer)]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand changePassowrdCommand)
         {
-            await mediator.Send(changePassowrdCommand);
-            return NoContent();
+            var result = await mediator.Send(changePassowrdCommand);
+
+            return result.Match(
+                onSuccess: NoContent,
+                onFailure: HandleFailure);
         }
 
         [HttpPost]
@@ -59,24 +73,33 @@ namespace Foodie.Identity.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler, ApplicationUserRole.Customer)]
         public async Task<IActionResult> ChangeEmail([FromBody] ChangeEmailCommand changeEmailCommand)
         {
-            await mediator.Send(changeEmailCommand);
-            return NoContent();
+            var result = await mediator.Send(changeEmailCommand);
+
+            return result.Match(
+                onSuccess: NoContent,
+                onFailure: HandleFailure);
         }
 
         [HttpPost]
         [Route("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordCommand resetPasswordCommand)
         {
-            await mediator.Send(resetPasswordCommand);
-            return NoContent();
+            var result = await mediator.Send(resetPasswordCommand);
+            
+            return result.Match(
+                onSuccess: NoContent,
+                onFailure: HandleFailure);
         }
 
         [HttpPost]
         [Route("set-password")]
         public async Task<IActionResult> SetPassword([FromBody] SetPasswordCommand setPasswordCommand)
         {
-            await mediator.Send(setPasswordCommand);
-            return NoContent();
+            var result = await mediator.Send(setPasswordCommand);
+            
+            return result.Match(
+                onSuccess: NoContent,
+                onFailure: HandleFailure);
         }
     }
 }
