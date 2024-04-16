@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrderById;
 using Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrders;
@@ -22,7 +23,10 @@ namespace Foodie.Orders.API.Controllers
         {
             var query = new GetCustomersOrderByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/my-orders
@@ -30,7 +34,10 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> GetCustomersOrders([FromQuery] GetCustomersOrdersQuery getOrdersQuery)
         {
             var result = await mediator.Send(getOrdersQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

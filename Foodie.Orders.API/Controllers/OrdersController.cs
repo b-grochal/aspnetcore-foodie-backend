@@ -1,6 +1,7 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
 using Foodie.Common.Enums;
+using Foodie.Common.Api.Results;
 using Foodie.Orders.Application.Features.Orders.Commands.CancelOrder;
 using Foodie.Orders.Application.Features.Orders.Commands.SetDeliveredOrderStatus;
 using Foodie.Orders.Application.Features.Orders.Commands.SetInDeliveryOrderStatus;
@@ -25,8 +26,11 @@ namespace Foodie.Orders.API.Controllers
         {
             var command = new CancelOrderCommand(id);
 
-            await mediator.Send(command);
-            return Ok();
+            var result = await mediator.Send(command);
+
+            return result.Match(
+                onSuccess: Ok,
+                onFailure: HandleFailure);
         }
 
         // PUT api/orders/5/delivered
@@ -35,8 +39,11 @@ namespace Foodie.Orders.API.Controllers
         {
             var command = new SetDeliveredOrderStatusCommand(id);
 
-            await mediator.Send(command);
-            return Ok();
+            var result = await mediator.Send(command);
+
+            return result.Match(
+                onSuccess: Ok,
+                onFailure: HandleFailure);
         }
 
         // PUT api/orders/5/in-delivery
@@ -45,8 +52,11 @@ namespace Foodie.Orders.API.Controllers
         {
             var command = new SetInDeliveryOrderStatusCommand(id);
 
-            await mediator.Send(command);
-            return Ok();
+            var result = await mediator.Send(command);
+
+            return result.Match(
+                onSuccess: Ok,
+                onFailure: HandleFailure);
         }
 
         // PUT api/orders/5/in-progress
@@ -55,8 +65,11 @@ namespace Foodie.Orders.API.Controllers
         {
             var command = new SetInProgressOrderStatusCommand(id);
 
-            await mediator.Send(command);
-            return Ok();
+            var result = await mediator.Send(command);
+
+            return result.Match(
+                onSuccess: Ok,
+                onFailure: HandleFailure);
         }
 
         // GET api/orders/5
@@ -66,7 +79,10 @@ namespace Foodie.Orders.API.Controllers
             var query = new GetOrderByIdQuery(id);
 
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/orders
@@ -74,7 +90,10 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> GetOrders([FromQuery] GetOrdersQuery getOrdersQuery)
         {
             var result = await mediator.Send(getOrdersQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }
