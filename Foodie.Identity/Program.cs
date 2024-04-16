@@ -34,7 +34,7 @@
 //}
 
 using Foode.Identity.Infrastructure;
-using Foodie.Common.Api.Middlewares;
+using Foodie.Common.Api.Exceptions;
 using Foodie.Common.Api.Settings;
 using Foodie.Common.Application.Behaviours;
 using Foodie.Common.Infrastructure.Authentication;
@@ -89,6 +89,9 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddGrpc();
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 //app.UseSerilog();
@@ -100,7 +103,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Identity v1"));
 }
 
-app.UseMiddleware<ExceptionMiddleware>();
+//app.UseMiddleware<ExceptionMiddleware>();
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

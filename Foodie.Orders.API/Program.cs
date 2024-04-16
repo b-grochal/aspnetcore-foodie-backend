@@ -32,7 +32,7 @@
 //    }
 //}
 
-using Foodie.Common.Api.Middlewares;
+using Foodie.Common.Api.Exceptions;
 using Foodie.Common.Api.Settings;
 using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Hangfire;
@@ -58,7 +58,7 @@ Log.Logger = new LoggerConfiguration()
     .Configuration(builder.Configuration)
     .CreateLogger();
 
-builder.Host.AddApplicationSettings();
+builder.Host.AddApplicationSettings(SettingsType.JwtToken, SettingsType.Smtp);
 
 builder.Host.UseSerilog();
 
@@ -82,6 +82,9 @@ builder.Services.AddMassTransit(x =>
     x.UsingRabbitMq((context, cfg) => cfg.ConfigureEndpoints(context));
 });
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 //app.UseSerilog();
@@ -93,7 +96,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Orders.API v1"));
 }
 
-app.UseMiddleware<ExceptionMiddleware>();
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 

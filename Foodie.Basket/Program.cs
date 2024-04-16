@@ -36,14 +36,13 @@ using FluentValidation;
 using Foodie.Basket.API.IntegrationEventsHandlers;
 using Foodie.Basket.Repositories.Implementations;
 using Foodie.Basket.Repositories.Interfaces;
-using Foodie.Common.Api.Middlewares;
+using Foodie.Common.Api.Exceptions;
 using Foodie.Common.Api.Settings;
 using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Cache;
 using IdentityGrpc;
 using MassTransit;
 using MealsGrpc;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -98,6 +97,9 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Foodie.Basket", Version = "v1" });
 });
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 //app.UseSerilog();
@@ -109,7 +111,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foodie.Basket v1"));
 }
 
-app.UseMiddleware<ExceptionMiddleware>();
+//app.UseMiddleware<ExceptionMiddleware>();
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
@@ -118,10 +121,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.UseEndpoints(endpoints => { });
 
 app.Run();
 
