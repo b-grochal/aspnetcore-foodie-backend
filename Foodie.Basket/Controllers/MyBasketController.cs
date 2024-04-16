@@ -4,6 +4,7 @@ using Foodie.Basket.API.Functions.CustomerBaskets.Commands.UpdateCustomerBasket;
 using Foodie.Basket.API.Functions.CustomerBaskets.Queries.GetCustomerBasketByCustomerId;
 using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,29 +22,41 @@ namespace Foodie.Basket.Controllers
         public async Task<IActionResult> GetMyBasket()
         {
             var result = await mediator.Send(new GetCustomerBasketByCustomerIdQuery());
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateMyBasket([FromBody] UpdateCustomerBasketCommand updateCustomerBasketCommand)
         {
             var result = await mediator.Send(updateCustomerBasketCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteMyBasket()
         {
-            await mediator.Send(new DeleteCustomerBasketCommand());
-            return Ok();
+            var result = await mediator.Send(new DeleteCustomerBasketCommand());
+
+            return result.Match(
+                onSuccess: Ok,
+                onFailure: HandleFailure);
         }
 
         [Route("checkout")]
         [HttpPost]
-        public async Task<ActionResult> CheckoutMyBasket([FromBody] CheckoutCustomerBasketCommand checkoutCustomerBasketCommand)
+        public async Task<IActionResult> CheckoutMyBasket([FromBody] CheckoutCustomerBasketCommand checkoutCustomerBasketCommand)
         {
-            await mediator.Send(checkoutCustomerBasketCommand);
-            return Ok();
+            var result = await mediator.Send(checkoutCustomerBasketCommand);
+
+            return result.Match(
+                onSuccess: Ok,
+                onFailure: HandleFailure);
         }
     }
 }
