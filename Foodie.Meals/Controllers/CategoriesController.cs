@@ -8,7 +8,6 @@ using Foodie.Meals.Application.Features.Categories.Commands.UpdateCategory;
 using Foodie.Meals.Application.Features.Categories.Queries.GetCategories;
 using Foodie.Meals.Application.Features.Categories.Queries.GetCategoryById;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -26,9 +25,9 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand createCategoryCommand)
         {
             var result = await mediator.Send(createCategoryCommand);
-            
+
             return result.Match(
-                onSuccess: () => Ok(result), 
+                onSuccess: () => Ok(result.Value),
                 onFailure: HandleFailure);
         }
 
@@ -43,7 +42,10 @@ namespace Foodie.Meals.API.Controllers
             }
 
             var result = await mediator.Send(updateCategoryCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // DELETE api/categories/5
@@ -53,7 +55,10 @@ namespace Foodie.Meals.API.Controllers
         {
             var command = new DeleteCategoryCommand(id);
             var result = await mediator.Send(command);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/categories/5
@@ -62,7 +67,10 @@ namespace Foodie.Meals.API.Controllers
         {
             var query = new GetCategoryByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/categories
@@ -70,7 +78,10 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> GetCategories([FromQuery] GetCategoriesQuery getCategoriesQuery)
         {
             var result = await mediator.Send(getCategoriesQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

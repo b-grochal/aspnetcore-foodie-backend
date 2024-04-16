@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaurant;
 using Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaurant;
@@ -26,7 +27,10 @@ namespace Foodie.Meals.Controllers
         public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand createRestaurantCommand)
         {
             var result = await mediator.Send(createRestaurantCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // PUT api/restaurants/5
@@ -40,7 +44,10 @@ namespace Foodie.Meals.Controllers
             }
 
             var result = await mediator.Send(updateRestaurantCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // DELETE api/restaurants/5
@@ -50,7 +57,10 @@ namespace Foodie.Meals.Controllers
         {
             var command = new DeleteRestaurantCommand(id);
             var result = await mediator.Send(command);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/restaurants/5
@@ -59,7 +69,10 @@ namespace Foodie.Meals.Controllers
         {
             var query = new GetRestaurantByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/restaurants
@@ -67,7 +80,10 @@ namespace Foodie.Meals.Controllers
         public async Task<IActionResult> GetRestaurants([FromQuery] GetRestaurantsQuery getRestaurantsQuery)
         {
             var result = await mediator.Send(getRestaurantsQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/restaurants/5/meals
@@ -76,7 +92,10 @@ namespace Foodie.Meals.Controllers
         {
             var query = new GetRestaurantMealsQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/restaurants/5/locations
@@ -85,7 +104,10 @@ namespace Foodie.Meals.Controllers
         {
             var query = new GetRestaurantLocationsQuery(id, cityId);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation;
 using Foodie.Meals.Application.Functions.Locations.Commands.DeleteLocation;
@@ -24,7 +25,10 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> CreateLocation([FromBody] CreateLocationCommand createLocationCommand)
         {
             var result = await mediator.Send(createLocationCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // PUT api/locations/5
@@ -38,7 +42,10 @@ namespace Foodie.Meals.API.Controllers
             }
 
             var result = await mediator.Send(updateLocationCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // DELETE api/locations/5
@@ -48,7 +55,10 @@ namespace Foodie.Meals.API.Controllers
         {
             var command = new DeleteLocationCommand(id);
             var result = await mediator.Send(command);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/locations/5
@@ -57,7 +67,10 @@ namespace Foodie.Meals.API.Controllers
         {
             var query = new GetLocationByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/locations
@@ -65,7 +78,10 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> GetLocations([FromQuery] GetLocationsQuery getLocationsQuery)
         {
             var result = await mediator.Send(getLocationsQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

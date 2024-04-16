@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using Foodie.Meals.Application.Functions.Meals.Commands.CreateMeal;
 using Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal;
@@ -24,7 +25,10 @@ namespace Foodie.Meals.Controllers
         public async Task<IActionResult> CreateMeal([FromBody] CreateMealCommand createMealCommand)
         {
             var result = await mediator.Send(createMealCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // PUT api/meals/5
@@ -38,7 +42,10 @@ namespace Foodie.Meals.Controllers
             }
 
             var result = await mediator.Send(updateMealCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // DELETE api/meals/5
@@ -48,7 +55,10 @@ namespace Foodie.Meals.Controllers
         {
             var command = new DeleteMealCommand(id);
             var result = await mediator.Send(command);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/meals/5
@@ -57,7 +67,10 @@ namespace Foodie.Meals.Controllers
         {
             var query = new GetMealByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/meals
@@ -65,7 +78,10 @@ namespace Foodie.Meals.Controllers
         public async Task<IActionResult> GetMeals([FromQuery] GetMealsQuery getMealsQuery)
         {
             var result = await mediator.Send(getMealsQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

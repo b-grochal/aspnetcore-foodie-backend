@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using Foodie.Meals.Application.Functions.Countries.Commands.CreateCountry;
 using Foodie.Meals.Application.Functions.Countries.Commands.DeleteCountry;
@@ -23,7 +24,10 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> CreateCountry([FromBody] CreateCountryCommand createCountryCommand)
         {
             var result = await mediator.Send(createCountryCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // PUT api/countries/5
@@ -37,7 +41,10 @@ namespace Foodie.Meals.API.Controllers
             }
 
             var result = await mediator.Send(updateCountryCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // DELETE api/country/5
@@ -47,7 +54,10 @@ namespace Foodie.Meals.API.Controllers
         {
             var command = new DeleteCountryCommand(id);
             var result = await mediator.Send(command);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/countries/5
@@ -56,7 +66,10 @@ namespace Foodie.Meals.API.Controllers
         {
             var query = new GetCountryByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/countires
@@ -64,7 +77,10 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> GetCountries([FromQuery] GetCountriesQuery getCountriesQuery)
         {
             var result = await mediator.Send(getCountriesQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

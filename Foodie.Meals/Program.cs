@@ -61,7 +61,7 @@ Log.Logger = new LoggerConfiguration()
     .Configuration(builder.Configuration)
     .CreateLogger();
 
-builder.Host.AddApplicationSettings();
+builder.Host.AddApplicationSettings(SettingsType.JwtToken, SettingsType.Cache);
 
 builder.Host.UseSerilog();
 
