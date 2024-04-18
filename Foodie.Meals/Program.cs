@@ -34,6 +34,7 @@
 //    }
 //}
 
+using Foodie.Common.Api.Errors;
 using Foodie.Common.Api.Exceptions;
 using Foodie.Common.Api.Settings;
 using Foodie.Common.Application.Behaviours;
@@ -45,6 +46,7 @@ using Foodie.Shared.Behaviours;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -71,6 +73,7 @@ builder.Services.ConfigureApplicationSettings(builder.Configuration, SettingsTyp
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+builder.Services.AddSingleton<ProblemDetailsFactory, CustomProblemDetailsFactory>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>

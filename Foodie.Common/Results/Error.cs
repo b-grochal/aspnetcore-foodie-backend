@@ -1,4 +1,8 @@
-﻿namespace Foodie.Common.Results
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+namespace Foodie.Common.Results
 {
     public sealed record Error
     {
@@ -6,11 +10,12 @@
         
         public static readonly Error NullValue = new("Error.NullValue", "Null value was provided", ErrorType.Failure);
 
-        private Error(string code, string description, ErrorType type)
+        private Error(string code, string description, ErrorType type, IReadOnlyCollection<string> details = null)
         {
             Code = code;
             Description = description;
             Type = type;
+            Details = details;
         }
 
         public string Code { get; }
@@ -19,11 +24,13 @@
 
         public ErrorType Type { get; }
 
+        public IReadOnlyCollection<string> Details { get; }
+
         public static Error NotFound(string code, string description) =>
             new(code, description, ErrorType.NotFound);
 
-        public static Error Validation(string code, string description) =>
-            new(code, description, ErrorType.Validation);
+        public static Error Validation(string code, string description, IReadOnlyCollection<string> details) =>
+            new(code, description, ErrorType.Validation, details);
 
         public static Error Conflict(string code, string description) =>
             new(code, description, ErrorType.Conflict);

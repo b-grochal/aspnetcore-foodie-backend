@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Xml.Linq;
 
 namespace Foodie.Common.Api.Controllers
 {
@@ -22,6 +23,11 @@ namespace Foodie.Common.Api.Controllers
             if (result.IsSucess)
             {
                 throw new InvalidOperationException();
+            }
+
+            if(result.Error.Details is not null)
+            {
+                HttpContext.Items["errorDetails"] = result.Error.Details;
             }
 
             return Problem(
