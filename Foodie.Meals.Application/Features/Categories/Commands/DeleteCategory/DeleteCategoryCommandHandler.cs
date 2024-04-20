@@ -2,7 +2,6 @@
 using Foodie.Common.Results;
 using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
 using Foodie.Meals.Application.Features.Categories.Errors;
-using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,7 +28,7 @@ namespace Foodie.Meals.Application.Features.Categories.Commands.DeleteCategory
 
             await _categoriesRepository.DeleteAsync(categoryToDelete);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return new DeleteCategoryCommandResponse
             {

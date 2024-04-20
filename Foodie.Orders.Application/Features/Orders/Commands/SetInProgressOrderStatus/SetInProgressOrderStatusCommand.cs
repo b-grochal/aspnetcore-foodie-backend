@@ -10,6 +10,8 @@ namespace Foodie.Orders.Application.Features.Orders.Commands.SetInProgressOrderS
 
         public int LocationId { get; set; }
 
+        public string User { get; set; }
+
         public SetInProgressOrderStatusCommand(int id)
         {
             Id = id;

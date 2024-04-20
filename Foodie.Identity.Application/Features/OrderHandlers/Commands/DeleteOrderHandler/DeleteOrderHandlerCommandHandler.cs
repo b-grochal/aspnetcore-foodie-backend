@@ -28,7 +28,7 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrd
 
             await _orderHandlersRepository.DeleteAsync(orderHandler);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return new DeleteOrderHandlerCommandResponse
             {

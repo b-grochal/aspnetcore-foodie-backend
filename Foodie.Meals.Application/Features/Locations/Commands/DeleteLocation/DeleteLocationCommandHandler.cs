@@ -28,7 +28,7 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.DeleteLocation
                 return Result.Failure<DeleteLocationCommandResponse>(LocationsErrors.LocationNotFoundById(request.Id));
 
             await _locationsRepository.DeleteAsync(locationToDelete);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return new DeleteLocationCommandResponse
             {

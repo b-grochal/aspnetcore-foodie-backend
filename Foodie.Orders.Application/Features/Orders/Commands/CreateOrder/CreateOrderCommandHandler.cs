@@ -47,7 +47,7 @@ namespace Foodie.Orders.Application.Features.Orders.Commands.CreateOrder
 
             _ordersRepository.Create(order);
 
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.CommitChangesAsync(request.CustomerEmail, cancellationToken);
 
             return Result.Success();
         }

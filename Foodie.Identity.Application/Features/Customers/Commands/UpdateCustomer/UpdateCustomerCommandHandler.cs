@@ -33,7 +33,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustome
 
             await _customersRepository.UpdateAsync(customer);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return _mapper.Map<UpdateCustomerCommandResponse>(customer);
         }

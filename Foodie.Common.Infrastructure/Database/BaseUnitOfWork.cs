@@ -19,9 +19,9 @@ namespace Foodie.Common.Infrastructure.Database
             _dbContext.Dispose();
         }
 
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public async Task<int> CommitChangesAsync(string user, CancellationToken cancellationToken = default)
         {
-           return await _dbContext.SaveChangesAsync(cancellationToken);
+           return await _dbContext.CommitChangesAsync(user, cancellationToken);
         }
     }
 }

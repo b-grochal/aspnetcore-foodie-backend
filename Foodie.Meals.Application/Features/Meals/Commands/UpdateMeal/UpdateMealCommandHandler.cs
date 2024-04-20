@@ -32,7 +32,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.UpdateMeal
 
             var editedMeal = _mapper.Map(request, meal);
             await _mealsRepository.UpdateAsync(editedMeal);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
             return _mapper.Map<UpdateMealCommandResponse>(editedMeal);
         }
     }

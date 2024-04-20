@@ -37,7 +37,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.CreateRestaura
             }
 
             await _restaurantsRepository.CreateAsync(restaurant);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
             return _mapper.Map<CreateRestaurantCommandResponse>(restaurant);
         }
     }

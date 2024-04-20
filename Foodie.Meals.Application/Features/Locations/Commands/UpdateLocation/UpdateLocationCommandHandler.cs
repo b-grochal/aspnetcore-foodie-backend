@@ -33,7 +33,7 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.UpdateLocation
             var editedLocation = _mapper.Map(request, location);
             await _locationsRepository.UpdateAsync(editedLocation);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return _mapper.Map<UpdateLocationCommandResponse>(editedLocation);
         }

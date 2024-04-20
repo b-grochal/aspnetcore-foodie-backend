@@ -1,4 +1,5 @@
-﻿using Foodie.Common.Infrastructure.Database.Interfaces;
+﻿using Foodie.Common.Domain.Entities.Interfaces;
+using Foodie.Common.Infrastructure.Database.Interfaces;
 using Foodie.Orders.Domain.Buyers;
 using Foodie.Orders.Domain.Contractors;
 using Foodie.Orders.Domain.Orders;
@@ -41,6 +42,25 @@ namespace Foodie.Orders.Infrastructure.Database
             await _mediator.DispatchDomainEventsAsync(this);
 
             return await base.SaveChangesAsync(cancellationToken);
+        }
+
+        public Task<int> CommitChangesAsync(string user, CancellationToken cancellationToken)
+        {
+            foreach (var entry in ChangeTracker.Entries<IIsAuditable>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Property(nameof(IIsAuditable.CreatedDate)).CurrentValue = DateTimeOffset.Now;
+                        entry.Property(nameof(IIsAuditable.CreatedBy)).CurrentValue = user;
+                        break;
+                    case EntityState.Modified:
+                        entry.Property(nameof(IIsAuditable.LastModifiedDate)).CurrentValue = DateTimeOffset.Now;
+                        entry.Property(nameof(IIsAuditable.LastModifiedBy)).CurrentValue = user;
+                        break;
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

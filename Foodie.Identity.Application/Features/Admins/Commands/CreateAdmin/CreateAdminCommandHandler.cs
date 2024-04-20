@@ -45,7 +45,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
 
             await _adminsRepository.CreateAsync(admin);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return _mapper.Map<CreateAdminCommandResponse>(admin);
         }

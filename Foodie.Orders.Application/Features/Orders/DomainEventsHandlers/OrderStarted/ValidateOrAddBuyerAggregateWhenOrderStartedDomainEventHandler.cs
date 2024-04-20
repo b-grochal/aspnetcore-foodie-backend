@@ -37,7 +37,7 @@ namespace Foodie.Orders.Application.Features.Orders.DomainEventsHandlers.OrderSt
 
             buyer.AddDomainEvent(new BuyerVerifiedDomainEvent(buyer, orderStartedDomainEvent.Order.Id));
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(string.Empty, cancellationToken);
         }
     }
 }

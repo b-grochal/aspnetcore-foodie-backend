@@ -32,7 +32,7 @@ namespace Foodie.Meals.Application.Functions.Countries.Commands.UpdateCountry
 
             country = _mapper.Map(request, country);
             await _countriesRepository.UpdateAsync(country);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
             return _mapper.Map<UpdateCountryCommandResponse>(country);
         }
     }

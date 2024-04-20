@@ -50,7 +50,7 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrd
 
             await _orderHandlersRepository.CreateAsync(orderHandler);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return _mapper.Map<CreateOrderHandlerCommandResponse>(orderHandler);
         }

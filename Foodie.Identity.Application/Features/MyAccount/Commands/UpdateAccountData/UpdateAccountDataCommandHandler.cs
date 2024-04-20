@@ -31,7 +31,7 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.UpdateAccountD
             applicationUser.Update(request.FirstName, request.LastName, request.PhoneNumber);
             await _applicationUsersRepository.UpdateAsync(applicationUser);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return Result.Success();
         }

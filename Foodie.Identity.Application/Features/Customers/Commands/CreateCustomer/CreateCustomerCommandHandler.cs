@@ -54,7 +54,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.CreateCustome
 
             await _customersRepository.CreateAsync(customer);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return _mapper.Map<CreateCustomerCommandResponse>(customer);
         }

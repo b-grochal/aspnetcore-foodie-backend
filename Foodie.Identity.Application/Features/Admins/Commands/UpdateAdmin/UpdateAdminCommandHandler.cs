@@ -33,7 +33,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.UpdateAdmin
 
             await _adminsRepository.UpdateAsync(admin);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return _mapper.Map<UpdateAdminCommandResponse>(admin);
         }

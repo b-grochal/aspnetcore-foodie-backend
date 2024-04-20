@@ -28,7 +28,7 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.RevokeRefreshToken
 
             applicationUser.RevokeRefreshToken();
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(string.Empty, cancellationToken);
 
             return Result.Success();
         }

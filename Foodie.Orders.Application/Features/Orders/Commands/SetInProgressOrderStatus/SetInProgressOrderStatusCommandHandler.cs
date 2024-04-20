@@ -27,7 +27,7 @@ namespace Foodie.Orders.Application.Features.Orders.Commands.SetInProgressOrderS
                 return Result.Failure(OrderErrors.OrderNotFoundById(request.Id));
 
             order.SetInProgressStatus();
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
 
             return Result.Success();
         }

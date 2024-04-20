@@ -7,6 +7,8 @@ namespace Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrd
     {
         public int Id { get; set; }
 
+        public string User { get; set; }
+
         public DeleteOrderHandlerCommand(int id)
         {
             this.Id = id;

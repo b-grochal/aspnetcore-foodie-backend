@@ -26,7 +26,7 @@ namespace Foodie.Meals.Application.Features.Categories.Commands.CreateCategory
         {
             var category = _mapper.Map<Category>(request);
             await _categoriesRepository.CreateAsync(category);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
             return _mapper.Map<CreateCategoryCommandResponse>(category);
         }
     }

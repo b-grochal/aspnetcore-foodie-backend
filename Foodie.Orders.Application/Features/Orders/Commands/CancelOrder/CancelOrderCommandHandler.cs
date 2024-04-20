@@ -27,7 +27,7 @@ namespace Foodie.Orders.Application.Features.Orders.Commands.CancelOrder
 
             order.SetCancelledStatus();
 
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.CommitChangesAsync(request.User,cancellationToken);
             return Result.Success();
         }
     }

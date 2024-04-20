@@ -28,7 +28,7 @@ namespace Foodie.Orders.Application.Features.Orders.Commands.SetDeliveredOrderSt
 
             order.SetDeliveredStatus();
 
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
             return Result.Success();
         }
     }

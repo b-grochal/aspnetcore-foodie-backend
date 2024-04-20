@@ -79,5 +79,24 @@ namespace Foodie.Meals.Infrastructure.Database
                     CategoriesId = x.CategoryId
                 }).ToArray());
         }
+
+        public Task<int> CommitChangesAsync(string user, CancellationToken cancellationToken)
+        {
+            foreach (var entry in ChangeTracker.Entries<IIsAuditable>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Property(nameof(IIsAuditable.CreatedDate)).CurrentValue = DateTimeOffset.Now;
+                        entry.Property(nameof(IIsAuditable.CreatedBy)).CurrentValue = user;
+                        break;
+                    case EntityState.Modified:
+                        entry.Property(nameof(IIsAuditable.LastModifiedDate)).CurrentValue = DateTimeOffset.Now;
+                        entry.Property(nameof(IIsAuditable.LastModifiedBy)).CurrentValue = user;
+                        break;
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
+        }
     }
 }

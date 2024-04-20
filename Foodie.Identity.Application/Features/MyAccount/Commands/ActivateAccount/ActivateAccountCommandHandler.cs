@@ -41,7 +41,7 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.ActivateAccoun
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
 
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CommitChangesAsync(string.Empty, cancellationToken);
 
             await _cacheService.RemoveAsync(CachePrefixes.AccountActivationTokens, string.Empty, CacheParameters.AccountActivationToken, request.AccountActivationToken);
 

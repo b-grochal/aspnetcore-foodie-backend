@@ -7,6 +7,8 @@ namespace Foodie.Common.Infrastructure.Database.Interfaces
     {
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
+        Task<int> CommitChangesAsync(string user, CancellationToken cancellationToken);
+
         void Dispose();
     }
 }

@@ -35,7 +35,6 @@ namespace Foode.Identity.Infrastructure.Database.Repositories
         public async Task UpdateAsync(ApplicationUser entity)
         {
             dbContext.Entry(entity).State = EntityState.Modified;
-            await dbContext.SaveChangesAsync();
         }
     }
 }
