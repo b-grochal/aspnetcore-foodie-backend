@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Results;
-using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Meals.Domain.Entities;
 using MediatR;
 using System.Collections.Generic;

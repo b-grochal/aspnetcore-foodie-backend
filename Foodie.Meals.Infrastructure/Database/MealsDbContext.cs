@@ -1,7 +1,7 @@
 ﻿using Foodie.Common.Domain.Entities.Interfaces;
 using Foodie.Common.Infrastructure.Database.Interfaces;
 using Foodie.Meals.Domain.Entities;
-using Foodie.Meals.Infrastructure.DummyData;
+using Foodie.Meals.Infrastructure.Database.Seed;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -42,38 +42,38 @@ namespace Foodie.Meals.Infrastructure.Database
         {
             base.OnModelCreating(modelBuilder);
 
-            foreach (var category in DummyCategories.Get())
+            foreach (var category in CategoriesSeed.Get())
             {
                 modelBuilder.Entity<Category>().HasData(category);
             }
 
-            foreach (var country in DummyCountries.Get())
+            foreach (var country in CountriesSeed.Get())
             {
                 modelBuilder.Entity<Country>().HasData(country);
             }
 
-            foreach (var city in DummyCities.Get())
+            foreach (var city in CitiesSeed.Get())
             {
                 modelBuilder.Entity<City>().HasData(city);
             }
 
-            foreach (var location in DummyLocations.Get())
+            foreach (var location in LocationsSeed.Get())
             {
                 modelBuilder.Entity<Location>().HasData(location);
             }
 
-            foreach (var meal in DummyMeals.Get())
+            foreach (var meal in MealsSeed.Get())
             {
                 modelBuilder.Entity<Meal>().HasData(meal);
             }
 
-            foreach (var restaurant in DummyRestaurants.Get())
+            foreach (var restaurant in RestaurantsSeed.Get())
             {
                 modelBuilder.Entity<Restaurant>().HasData(restaurant);
             }
 
-            modelBuilder.Entity(DummyCategoryRestaurants.JoinTableName)
-                .HasData(DummyCategoryRestaurants.Get().Select(x => new
+            modelBuilder.Entity(CategoryRestaurantsSeed.JoinTableName)
+                .HasData(CategoryRestaurantsSeed.Get().Select(x => new
                 {
                     RestaurantsId = x.RestaurantId,
                     CategoriesId = x.CategoryId

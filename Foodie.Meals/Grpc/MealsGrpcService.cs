@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Application.Contracts.Infrastructure.Database.Repositories;
 using Grpc.Core;
 using MealsGrpc;
 using System;

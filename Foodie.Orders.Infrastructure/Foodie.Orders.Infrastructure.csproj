@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DummyData\" />
+    <Folder Include="Database\Seed\" />
   </ItemGroup>
 
 </Project>

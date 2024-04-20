@@ -2,9 +2,8 @@
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Linq;
 using Foodie.Common.Results;
-using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Meals.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Meals.Application.Features.Restaurants.Errors;
-using Foodie.Meals.Domain.Exceptions;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

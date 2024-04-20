@@ -4,7 +4,7 @@ using Foodie.Orders.Domain.Buyers;
 using Foodie.Orders.Domain.Contractors;
 using Foodie.Orders.Domain.Orders;
 using Foodie.Orders.Domain.Orders.Entities;
-using Foodie.Orders.Infrastructure.Configurations;
+using Foodie.Orders.Infrastructure.Database.Configurations;
 using Foodie.Orders.Infrastructure.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
