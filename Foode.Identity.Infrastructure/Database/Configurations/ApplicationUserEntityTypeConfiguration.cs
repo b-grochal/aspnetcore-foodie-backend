@@ -34,7 +34,12 @@ namespace Foode.Identity.Infrastructure.Database.Configurations
 
             builder.Property(o => o.IsActive);
 
-            builder.OwnsOne(o => o.RefreshToken);
+            builder.OwnsOne(o => o.RefreshToken, refreshTokenBuilder =>
+            {
+                refreshTokenBuilder.Property(r => r.Token);
+
+                refreshTokenBuilder.Property(r => r.ExpirationTime);
+            });
         }
     }
 }

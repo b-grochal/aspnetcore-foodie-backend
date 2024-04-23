@@ -8,7 +8,7 @@ namespace Foode.Identity.Infrastructure.Database.Configurations
     {
         public void Configure(EntityTypeBuilder<OrderHandler> builder)
         {
-            builder.ToTable("Customers");
+            builder.ToTable("OrderHandlers");
 
             builder.Property(o => o.LocationId);
         }
