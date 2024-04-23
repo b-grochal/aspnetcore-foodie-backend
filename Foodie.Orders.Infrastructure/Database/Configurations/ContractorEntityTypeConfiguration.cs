@@ -18,11 +18,25 @@ namespace Foodie.Orders.Infrastructure.Database.Configurations
             contractorConfiguration.Property(c => c.RestaurantId)
                 .IsRequired();
 
-            contractorConfiguration.Property(c => c.CityId)
-                .IsRequired();
+            contractorConfiguration.Property(c => c.Name);
 
             contractorConfiguration.Property(b => b.LocationId)
                 .IsRequired();
+
+            contractorConfiguration.Property(c => c.Address);
+
+            contractorConfiguration.Property(c => c.PhoneNumber);
+
+            contractorConfiguration.Property(c => c.Email);
+
+            contractorConfiguration.Property(c => c.CityId)
+                .IsRequired();
+
+            contractorConfiguration.Property(c => c.City);
+
+            contractorConfiguration.Property(c => c.CountryId);
+
+            contractorConfiguration.Property(c => c.Country);
         }
     }
 }

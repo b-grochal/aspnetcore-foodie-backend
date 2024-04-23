@@ -18,6 +18,14 @@ namespace Foodie.Orders.Infrastructure.Database.Configurations
             buyerConfiguration.Property(b => b.CustomerId)
                 .HasMaxLength(200)
                 .IsRequired();
+
+            buyerConfiguration.Property(o => o.FirstName);
+
+            buyerConfiguration.Property(o => o.LastName);
+
+            buyerConfiguration.Property(o => o.PhoneNumber);
+
+            buyerConfiguration.Property(o => o.Email);
         }
     }
 }

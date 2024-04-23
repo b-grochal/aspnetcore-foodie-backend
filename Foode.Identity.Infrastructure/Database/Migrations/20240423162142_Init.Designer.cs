@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Foode.Identity.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20240420192824_Init")]
+    [Migration("20240423162142_Init")]
     partial class Init
     {
         /// <inheritdoc />
