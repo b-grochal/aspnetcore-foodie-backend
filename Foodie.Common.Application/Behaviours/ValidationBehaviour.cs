@@ -31,7 +31,7 @@ namespace Foodie.Shared.Behaviours
                     .Select(x => x.Validate(context))
                     .SelectMany(x => x.Errors)
                     .Where(x => x != null)
-                    .Select(x => $"{x.ErrorMessage}.")
+                    .Select(x => new ErrorDetail(x.PropertyName, x.ErrorMessage))
                     .ToList();
 
                 if (errors.Any())
@@ -41,12 +41,12 @@ namespace Foodie.Shared.Behaviours
             return await next();
         }
 
-        private TResult CreateValidationResult<TResult>(IEnumerable<string> errors)
+        private TResult CreateValidationResult<TResult>(IReadOnlyCollection<ErrorDetail> errors)
             where TResult : Result
         {
             if (typeof(TResult) == typeof(Result))
             {
-                return (Result.Failure(BehavioursErrors.InvalidRequestData("Invalid request data.", errors.ToList())) as TResult)!;
+                return (Result.Failure(BehavioursErrors.InvalidRequestData("Invalid request data.", errors)) as TResult)!;
             }
 
             object validationResult = typeof(Result<>)
@@ -56,7 +56,7 @@ namespace Foodie.Shared.Behaviours
                 .GetMethods()
                 .Single(m => m.Name == nameof(Result.Failure) && m.IsGenericMethodDefinition)
                 .MakeGenericMethod(typeof(TResult).GenericTypeArguments[0])
-                .Invoke(null, [BehavioursErrors.InvalidRequestData("Invalid request data.", errors.ToList())]);
+                .Invoke(null, [BehavioursErrors.InvalidRequestData("Invalid request data.", errors)]);
 
             return (TResult)validationResult;
         }

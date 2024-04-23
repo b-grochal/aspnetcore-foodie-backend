@@ -5,7 +5,7 @@ namespace Foodie.Common.Application.Behaviours
 {
     public static class BehavioursErrors
     {
-        public static Error InvalidRequestData(string message, IReadOnlyCollection<string> details) =>
+        public static Error InvalidRequestData(string message, IReadOnlyCollection<ErrorDetail> details) =>
             Error.Validation("RequestValidation.InvalidRequestData", message, details);
 
         public static Error UnauthorizedRequest(string message) =>

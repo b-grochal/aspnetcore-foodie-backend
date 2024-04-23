@@ -10,7 +10,7 @@ namespace Foodie.Common.Results
         
         public static readonly Error NullValue = new("Error.NullValue", "Null value was provided", ErrorType.Failure);
 
-        private Error(string code, string description, ErrorType type, IReadOnlyCollection<string> details = null)
+        private Error(string code, string description, ErrorType type, IReadOnlyCollection<ErrorDetail> details = null)
         {
             Code = code;
             Description = description;
@@ -24,12 +24,12 @@ namespace Foodie.Common.Results
 
         public ErrorType Type { get; }
 
-        public IReadOnlyCollection<string> Details { get; }
+        public IReadOnlyCollection<ErrorDetail> Details { get; }
 
         public static Error NotFound(string code, string description) =>
             new(code, description, ErrorType.NotFound);
 
-        public static Error Validation(string code, string description, IReadOnlyCollection<string> details) =>
+        public static Error Validation(string code, string description, IReadOnlyCollection<ErrorDetail> details) =>
             new(code, description, ErrorType.Validation, details);
 
         public static Error Conflict(string code, string description) =>

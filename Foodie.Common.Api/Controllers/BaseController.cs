@@ -1,10 +1,10 @@
-﻿using Foodie.Common.Api.Results;
-using Foodie.Common.Results;
+﻿using Foodie.Common.Results;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
-using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace Foodie.Common.Api.Controllers
 {
@@ -25,7 +25,12 @@ namespace Foodie.Common.Api.Controllers
                 throw new InvalidOperationException();
             }
 
-            if(result.Error.Details is not null)
+            if (result.Error.Type == ErrorType.Validation)
+            {
+                return ValidationProblem(result.Error.Details);
+            }
+
+            if (result.Error.Details is not null)
             {
                 HttpContext.Items["errorDetails"] = result.Error.Details;
             }
@@ -35,6 +40,20 @@ namespace Foodie.Common.Api.Controllers
                 title: GetTitleForFailedResult(result),
                 type: GetTypeForFailedResult(result),
                 detail: GetDescriptionForFailedResult(result));
+        }
+
+        private IActionResult ValidationProblem(IReadOnlyCollection<ErrorDetail> errors)
+        {
+            var modelStateDictionary = new ModelStateDictionary();
+
+            foreach (var error in errors)
+            {
+                modelStateDictionary.AddModelError(
+                    error.Title,
+                    error.Description);
+            }
+
+            return ValidationProblem(modelStateDictionary);
         }
 
         private int GetStatusCodeForFailedResult(Result result) =>
