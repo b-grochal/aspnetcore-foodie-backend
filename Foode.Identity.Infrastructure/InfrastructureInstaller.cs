@@ -1,7 +1,9 @@
 ﻿using Foode.Identity.Infrastructure.ApplicationUserUtilities;
 using Foode.Identity.Infrastructure.Database.Repositories;
 using Foode.Identity.Infrastructure.Database.UnitOfWork;
+using Foodie.Common.Application.Contracts.Infrastructure.Authentication;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
 using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
@@ -41,6 +43,8 @@ namespace Foode.Identity.Infrastructure
             services.AddTransient<IPasswordService, PasswordService>();
             services.AddTransient<IRefreshTokenService, RefreshTokenService>();
             services.AddTransient<IAccountTokensService, AccountTokensService>();
+            services.AddTransient<IApplicationUserContext, ApplicationUserContext>();
+            services.AddHttpContextAccessor();
 
             return services;
         }

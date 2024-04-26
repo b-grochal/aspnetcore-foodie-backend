@@ -28,8 +28,10 @@ namespace Foode.Identity.Infrastructure.Database.Repositories
 
         public async Task<bool> IsEmailUniqueAsync(string email)
         {
-            return await dbContext.Set<ApplicationUser>()
-                .AnyAsync(x => x.Email == email);
+            // TODO: Add None method to LINQ extensions as a opposite
+            // method to Any method
+            return !(await dbContext.Set<ApplicationUser>()
+                .AnyAsync(x => x.Email == email));
         }
 
         public async Task UpdateAsync(ApplicationUser entity)

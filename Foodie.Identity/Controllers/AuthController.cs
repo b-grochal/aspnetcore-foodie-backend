@@ -57,7 +57,7 @@ namespace Foodie.Identity.Controllers
             var result = await mediator.Send(new RevokeRefreshTokenCommand());
             
             return result.Match(
-                onSuccess: Ok,
+                onSuccess: NoContent,
                 onFailure: HandleFailure);
         }
     }

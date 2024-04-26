@@ -35,7 +35,7 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.RefreshJwtToken
             var applicationUser = await _applicationUsersRepository.GetByIdAsync(applicationUserId);
 
             if (applicationUser.RefreshToken is null)
-                return Result.Failure<RefreshJwtTokenCommandResponse>(ApplicationUserErrors.RefreshTokenNotFound(applicationUserId));
+                return Result.Failure<RefreshJwtTokenCommandResponse>(ApplicationUserErrors.RefreshTokenNotFound());
 
             if (applicationUser.RefreshToken.Token != request.RefreshToken || applicationUser.RefreshToken.ExpirationTime <= DateTimeOffset.Now)
                 return Result.Failure<RefreshJwtTokenCommandResponse>(ApplicationUserErrors.InvalidRefreshToken());
