@@ -29,7 +29,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.UpdateCustome
             if (customer is null)
                 return Result.Failure<UpdateCustomerCommandResponse>(ApplicationUserErrors.ApplicationUserNotFoundById(request.Id));
 
-            customer.Update(request.FirstName, request.LastName, request.Email, request.Email);
+            customer.Update(request.FirstName, request.LastName, request.PhoneNumber, request.Email);
 
             await _customersRepository.UpdateAsync(customer);
 

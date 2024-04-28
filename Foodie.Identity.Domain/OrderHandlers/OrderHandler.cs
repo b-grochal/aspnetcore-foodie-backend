@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Enums;
 using Foodie.Identity.Domain.Common.ApplicationUser;
+using System.Text.Json.Serialization;
 
 namespace Foodie.Identity.Domain.OrderHandlers
 {
@@ -7,6 +8,7 @@ namespace Foodie.Identity.Domain.OrderHandlers
     {
         public int LocationId { get; private set; }
 
+        [JsonConstructor]
         private OrderHandler(string firstName, string lastName,
             string email, string phoneNumber, string passwordHash,
             int locationId) : base(firstName, lastName, email,
