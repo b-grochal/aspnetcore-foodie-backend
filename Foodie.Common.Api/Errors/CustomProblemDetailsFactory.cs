@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Foodie.Common.Api.Errors
 {
@@ -84,6 +85,8 @@ namespace Foodie.Common.Api.Errors
             {
                 problemDetails.Extensions.Add("details", errorDetails);
             }
+
+            problemDetails.Extensions.Add("traceId", Activity.Current?.Id ?? httpContext?.TraceIdentifier);
         }
     }
 }

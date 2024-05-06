@@ -34,6 +34,7 @@
 //}
 
 using Foode.Identity.Infrastructure;
+using Foodie.Common.Api.Errors;
 using Foodie.Common.Api.Exceptions;
 using Foodie.Common.Api.Settings;
 using Foodie.Common.Application.Behaviours;
@@ -45,6 +46,7 @@ using Foodie.Identity.Application;
 using Foodie.Shared.Behaviours;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -77,6 +79,7 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavi
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuditableBehaviour<,>));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ApplicationUserLocationBehaviour<,>));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ApplicationUserIdBehaviour<,>));
+builder.Services.AddSingleton<ProblemDetailsFactory, CustomProblemDetailsFactory>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>

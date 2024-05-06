@@ -53,7 +53,9 @@ namespace Foodie.Common.Api.Controllers
                     error.Description);
             }
 
-            return ValidationProblem(modelStateDictionary);
+            return ValidationProblem(
+                modelStateDictionary: modelStateDictionary, 
+                type: "https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1");
         }
 
         private int GetStatusCodeForFailedResult(Result result) =>
