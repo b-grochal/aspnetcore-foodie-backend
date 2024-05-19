@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Foodie.Identity.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using Grpc.Core;
 using IdentityGrpc;
 using System;
@@ -9,13 +9,13 @@ namespace Foodie.Identity.API.Grpc
 {
     public class IdentityGrpcService : IdentityService.IdentityServiceBase
     {
-        private readonly ICustomersRepository customersRepository;
-        private readonly IMapper mapper;
+        private readonly ICustomersRepository _customersRepository;
+        private readonly IMapper _mapper;
 
         public IdentityGrpcService(ICustomersRepository customersRepository, IMapper mapper)
         {
-            this.customersRepository = customersRepository;
-            this.mapper = mapper;
+            _customersRepository = customersRepository;
+            _mapper = mapper;
         }
 
         public override async Task<GetCustomerResponse> GetCustomer(GetCustomerRequest request, ServerCallContext context)
@@ -24,10 +24,10 @@ namespace Foodie.Identity.API.Grpc
             {
                 if (request.Id != null)
                 {
-                    var customer = await customersRepository.GetByIdAsync(request.Id);
+                    var customer = await _customersRepository.GetByIdAsync(request.Id);
                     return new GetCustomerResponse
                     {
-                        Customer = mapper.Map<Customer>(customer)
+                        Customer = _mapper.Map<Customer>(customer)
                     };
                 }
                 else

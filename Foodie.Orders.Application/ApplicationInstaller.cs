@@ -10,7 +10,7 @@ namespace Foodie.Orders.Application
     {
         public static IServiceCollection AddOrdersApplication(this IServiceCollection services)
         {
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ApplicationInstaller).Assembly));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestAuthorizationBehaviour<,>)); // TODO: Move it to API project 
             services.AddAuthorizersFromAssembly(Assembly.GetExecutingAssembly());

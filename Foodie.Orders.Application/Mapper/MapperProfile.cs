@@ -2,19 +2,19 @@
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Buyers;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Contractors;
-using Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyerById;
-using Foodie.Orders.Application.Functions.Buyers.Queries.GetBuyers;
-using Foodie.Orders.Application.Functions.Contractors.Queries.GetContractorById;
-using Foodie.Orders.Application.Functions.Contractors.Queries.GetContractors;
-using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderById;
-using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrders;
-using Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById;
-using Foodie.Orders.Application.Functions.Orders.Queries.GetOrders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Foodie.Orders.Application.Features.Buyers.Queries.GetBuyerById;
+using Foodie.Orders.Application.Features.Buyers.Queries.GetBuyers;
+using Foodie.Orders.Application.Features.Contractors.Queries.GetContractorById;
+using Foodie.Orders.Application.Features.Contractors.Queries.GetContractors;
+using Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrderById;
+using Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrders;
+using Foodie.Orders.Application.Features.Orders.Queries.GetOrderById;
+using Foodie.Orders.Application.Features.Orders.Queries.GetOrders;
 
 namespace Foodie.Orders.Application.Mapper
 {

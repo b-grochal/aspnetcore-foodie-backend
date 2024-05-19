@@ -1,4 +1,5 @@
 ﻿using Foodie.Common.Domain.AggregateRoots;
+using Foodie.Common.Results;
 using Foodie.Orders.Domain.Orders.DomainEvents;
 using Foodie.Orders.Domain.Orders.Entities;
 using Foodie.Orders.Domain.Orders.Enumerations;
@@ -44,63 +45,80 @@ namespace Foodie.Orders.Domain.Orders
             return order;
         }
 
-        public void AddOrderItem(int mealId, string mealName, decimal unitPrice, int quantity = 1)
+        public Result AddOrderItem(int mealId, string mealName, decimal unitPrice, int quantity = 1)
         {
             var existingOrderForProduct = _orderItems.Where(o => o.MealId == mealId)
                 .SingleOrDefault();
 
             if (existingOrderForProduct != null)
             {
-                existingOrderForProduct.AddQuantity(quantity);
+                var result = existingOrderForProduct.AddQuantity(quantity);
+
+                if(result.IsFailure)
+                    return result;
             }
             else
             {
                 var orderItem = OrderItem.Create(mealId, mealName, unitPrice, quantity);
                 _orderItems.Add(orderItem);
             }
+
+            return Result.Success();
         }
 
-        public void SetBuyerId(int id)
+        public Result SetBuyerId(int id)
         {
             BuyerId = id;
+
+            return Result.Success();
         }
 
-        public void SetContractorId(int id)
+        public Result SetContractorId(int id)
         {
             ContractorId = id;
+
+            return Result.Success();
         }
 
-        public void SetInProgressStatus()
+        public Result SetInProgressStatus()
         {
             if (OrderStatus == OrderStatus.Started)
             {
                 AddDomainEvent(new OrderStatusChangedToInProgressDomainEvent(this));
                 OrderStatus = OrderStatus.InProgress;
             }
+
+            return Result.Success();
         }
 
-        public void SetInDeliveryStatus()
+        public Result SetInDeliveryStatus()
         {
             if (OrderStatus == OrderStatus.InProgress)
             {
                 AddDomainEvent(new OrderStatusChangedToInDeliveryDomainEvent(this));
                 OrderStatus = OrderStatus.InDelivery;
             }
+
+            return Result.Success();
         }
 
-        public void SetDeliveredStatus()
+        public Result SetDeliveredStatus()
         {
             if (OrderStatus == OrderStatus.InDelivery)
             {
                 AddDomainEvent(new OrderDeliveredDomainEvent(this));
                 OrderStatus = OrderStatus.Delivered;
             }
+
+            return Result.Success();
         }
 
-        public void SetCancelledStatus()
+        public Result SetCancelledStatus()
         {
             AddDomainEvent(new OrderCancelledDomainEvent(this));
             OrderStatus = OrderStatus.Cancelled;
+
+            return Result.Success();
         }
 
         public decimal GetTotal()

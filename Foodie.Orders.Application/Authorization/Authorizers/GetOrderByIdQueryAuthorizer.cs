@@ -1,6 +1,6 @@
 ﻿using Foodie.Common.Application.Authorization;
 using Foodie.Orders.Application.Authorization.Requirements;
-using Foodie.Orders.Application.Functions.Orders.Queries.GetOrderById;
+using Foodie.Orders.Application.Features.Orders.Queries.GetOrderById;
 
 namespace Foodie.Orders.Application.Authorization.Authorizers
 {
@@ -8,12 +8,11 @@ namespace Foodie.Orders.Application.Authorization.Authorizers
     {
         public override void BuildPolicy(GetOrderByIdQuery request)
         {
-            if (request.LocationId.HasValue)
-                UseRequirement(new SameLocationLikeOrderRequirement
-                {
-                    LocationId = request.LocationId.Value,
-                    OrderId = request.Id
-                });
+            UseRequirement(new SameLocationLikeOrderRequirement
+            {
+                LocationId = request.LocationId,
+                OrderId = request.Id
+            });
         }
     }
 }

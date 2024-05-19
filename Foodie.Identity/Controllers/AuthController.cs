@@ -1,8 +1,10 @@
 ﻿using Foodie.Common.Api.Controllers;
-using Foodie.Identity.Application.Functions.Auth.Commands.RefreshJwtToken;
-using Foodie.Identity.Application.Functions.Auth.Commands.RevokeRefreshToken;
-using Foodie.Identity.Application.Functions.Auth.Commands.SignIn;
-using Foodie.Identity.Application.Functions.Auth.Commands.SignUp;
+using Foodie.Common.Api.Results;
+using Foodie.Common.Results;
+using Foodie.Identity.Application.Features.Auth.Commands.RefreshJwtToken;
+using Foodie.Identity.Application.Features.Auth.Commands.RevokeRefreshToken;
+using Foodie.Identity.Application.Features.Auth.Commands.SignIn;
+using Foodie.Identity.Application.Features.Auth.Commands.SignUp;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +22,10 @@ namespace Foodie.Identity.Controllers
         public async Task<IActionResult> SignIn([FromBody] SignInCommand signInCommand)
         {
             var result = await mediator.Send(signInCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // POST api/auth/sign-up
@@ -28,7 +33,10 @@ namespace Foodie.Identity.Controllers
         public async Task<IActionResult> SignUp([FromBody] SignUpCommand signUpCommand)
         {
             var result = await mediator.Send(signUpCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // POST api/auth/refresh-jwt-token
@@ -36,15 +44,21 @@ namespace Foodie.Identity.Controllers
         public async Task<IActionResult> RefreshJwtToken([FromBody] RefreshJwtTokenCommand refreshJwtTokenCommand)
         {
             var result = await mediator.Send(refreshJwtTokenCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         [Authorize]
         [HttpPost("revoke-refresh-token")]
         public async Task<IActionResult> RevokeRefreshToken()
         {
-            await mediator.Send(new RevokeRefreshTokenCommand(ApplicationUserId.Value));
-            return NoContent();
+            var result = await mediator.Send(new RevokeRefreshTokenCommand());
+            
+            return result.Match(
+                onSuccess: NoContent,
+                onFailure: HandleFailure);
         }
     }
 }

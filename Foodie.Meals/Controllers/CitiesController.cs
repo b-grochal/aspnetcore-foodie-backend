@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using Foodie.Meals.Application.Functions.Cities.Commands.CreateCity;
 using Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity;
@@ -23,9 +24,11 @@ namespace Foodie.Meals.API.Controllers
         [RequiredRoles(ApplicationUserRole.Admin)]
         public async Task<IActionResult> CreateCity([FromBody] CreateCityCommand createCityCommand)
         {
-            createCityCommand.User = Email;
             var result = await mediator.Send(createCityCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // PUT api/cities/5
@@ -38,9 +41,11 @@ namespace Foodie.Meals.API.Controllers
                 return BadRequest();
             }
 
-            updateCityCommand.User = Email;
             var result = await mediator.Send(updateCityCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // DELETE api/cities/5
@@ -50,7 +55,10 @@ namespace Foodie.Meals.API.Controllers
         {
             var command = new DeleteCityCommand(id);
             var result = await mediator.Send(command);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/cities/5
@@ -59,7 +67,10 @@ namespace Foodie.Meals.API.Controllers
         {
             var query = new GetCityByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/cities
@@ -67,7 +78,10 @@ namespace Foodie.Meals.API.Controllers
         public async Task<IActionResult> GetCities([FromQuery] GetCitiesQuery getCitiesQuery)
         {
             var result = await mediator.Send(getCitiesQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

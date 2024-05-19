@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using Foodie.Identity.Application.Functions.OrderHandlers.Commands.CreateOrderHandler;
 using Foodie.Identity.Application.Functions.OrderHandlers.Commands.DeleteOrderHandler;
@@ -22,9 +23,11 @@ namespace Foodie.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrderHandler([FromBody] CreateOrderHandlerCommand createOrderHandlerCommand)
         {
-            createOrderHandlerCommand.User = Email;
             var result = await mediator.Send(createOrderHandlerCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // PUT api/order-handlers/5
@@ -36,9 +39,11 @@ namespace Foodie.Identity.Controllers
                 return BadRequest();
             }
 
-            updateOrderHandlerCommand.User = Email;
             var result = await mediator.Send(updateOrderHandlerCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // DELETE api/order-handlers/5
@@ -47,7 +52,10 @@ namespace Foodie.Identity.Controllers
         {
             var command = new DeleteOrderHandlerCommand(id);
             var result = await mediator.Send(command);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/order-handlers/5
@@ -56,7 +64,10 @@ namespace Foodie.Identity.Controllers
         {
             var query = new GetOrderHandlerByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/order-handlers
@@ -64,7 +75,10 @@ namespace Foodie.Identity.Controllers
         public async Task<IActionResult> GetOrderHandlers([FromQuery] GetOrderHandlersQuery getOrderHandlersQuery)
         {
             var result = await mediator.Send(getOrderHandlersQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

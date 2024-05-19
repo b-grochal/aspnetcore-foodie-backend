@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin;
 using Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin;
@@ -22,9 +23,11 @@ namespace Foodie.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAdmin([FromBody] CreateAdminCommand createAdminCommand)
         {
-            createAdminCommand.User = Email;
             var result = await mediator.Send(createAdminCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // PUT api/admins/5
@@ -36,9 +39,11 @@ namespace Foodie.Identity.Controllers
                 return BadRequest();
             }
 
-            updateAdminCommand.User = Email;
             var result = await mediator.Send(updateAdminCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // DELETE api/admins/5
@@ -47,7 +52,10 @@ namespace Foodie.Identity.Controllers
         {
             var command = new DeleteAdminCommand(id);
             var result = await mediator.Send(command);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/admins/5
@@ -56,7 +64,10 @@ namespace Foodie.Identity.Controllers
         {
             var query = new GetAdminByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/admins
@@ -64,7 +75,10 @@ namespace Foodie.Identity.Controllers
         public async Task<IActionResult> GetAdmins([FromQuery] GetAdminsQuery getAdminsQuery)
         {
             var result = await mediator.Send(getAdminsQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

@@ -4,6 +4,7 @@ using Foodie.Basket.API.Functions.CustomerBaskets.Commands.UpdateCustomerBasket;
 using Foodie.Basket.API.Functions.CustomerBaskets.Queries.GetCustomerBasketByCustomerId;
 using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,32 +21,42 @@ namespace Foodie.Basket.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMyBasket()
         {
-            var result = await mediator.Send(new GetCustomerBasketByCustomerIdQuery(ApplicationUserId.Value));
-            return Ok(result);
+            var result = await mediator.Send(new GetCustomerBasketByCustomerIdQuery());
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateMyBasket([FromBody] UpdateCustomerBasketCommand updateCustomerBasketCommand)
         {
-            updateCustomerBasketCommand.CustomerId = ApplicationUserId.Value;
             var result = await mediator.Send(updateCustomerBasketCommand);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteMyBasket()
         {
-            await mediator.Send(new DeleteCustomerBasketCommand(ApplicationUserId.Value));
-            return Ok();
+            var result = await mediator.Send(new DeleteCustomerBasketCommand());
+
+            return result.Match(
+                onSuccess: Ok,
+                onFailure: HandleFailure);
         }
 
         [Route("checkout")]
         [HttpPost]
-        public async Task<ActionResult> CheckoutMyBasket([FromBody] CheckoutCustomerBasketCommand checkoutCustomerBasketCommand)
+        public async Task<IActionResult> CheckoutMyBasket([FromBody] CheckoutCustomerBasketCommand checkoutCustomerBasketCommand)
         {
-            checkoutCustomerBasketCommand.CustomerId = ApplicationUserId.Value;
-            await mediator.Send(checkoutCustomerBasketCommand);
-            return Ok();
+            var result = await mediator.Send(checkoutCustomerBasketCommand);
+
+            return result.Match(
+                onSuccess: Ok,
+                onFailure: HandleFailure);
         }
     }
 }

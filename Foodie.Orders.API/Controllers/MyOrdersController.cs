@@ -1,8 +1,9 @@
 ﻿using Foodie.Common.Api.Authorization;
 using Foodie.Common.Api.Controllers;
+using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
-using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrderById;
-using Foodie.Orders.Application.Functions.Orders.Queries.GetCustomersOrders;
+using Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrderById;
+using Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -20,18 +21,23 @@ namespace Foodie.Orders.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCustomersOrder(int id)
         {
-            var query = new GetCustomersOrderByIdQuery(id, ApplicationUserId.Value);
+            var query = new GetCustomersOrderByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/my-orders
         [HttpGet]
         public async Task<IActionResult> GetCustomersOrders([FromQuery] GetCustomersOrdersQuery getOrdersQuery)
         {
-            getOrdersQuery.CustomerId = ApplicationUserId.Value;
             var result = await mediator.Send(getOrdersQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

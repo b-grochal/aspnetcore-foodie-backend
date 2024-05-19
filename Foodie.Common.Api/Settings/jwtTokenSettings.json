@@ -1,6 +1,6 @@
 ﻿{
   "JwtTokenSettings": {
-    "Secret": "1234567890123456789",
+    "Secret": "123456789012345678912345678901234567891234567890123456789",
     "Issuer": "Foodie",
     "Audience": "Foodie",
     "AccessTokenExpiration": 60,

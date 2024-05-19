@@ -1,6 +1,6 @@
 ﻿using Foodie.Common.Application.Authorization;
 using Foodie.Common.Application.Authorization.Interfaces;
-using Foodie.Orders.Application.Contracts.Infrastructure.Repositories;
+using Foodie.Orders.Application.Contracts.Infrastructure.Database.Repositories;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;

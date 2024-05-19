@@ -1,6 +1,9 @@
-﻿using Foodie.Common.Infrastructure.Cache;
-using Foodie.Meals.Application.Contracts.Infrastructure.Repositories;
-using Foodie.Meals.Infrastructure.Repositories;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Infrastructure.Cache;
+using Foodie.Meals.Application.Contracts.Infrastructure.Database.Repositories;
+using Foodie.Meals.Infrastructure.Database;
+using Foodie.Meals.Infrastructure.Database.Repositories;
+using Foodie.Meals.Infrastructure.Database.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +21,7 @@ namespace Foodie.Meals.Infrastructure
 
             services.AddCache(configuration);
 
+            services.AddScoped<IUnitOfWork, MealsUnitOfWork>();
             services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             services.Decorate<ICategoriesRepository, CachedCategoriesRepository>();
             services.AddScoped<ICitiesRepository, CitiesRepository>();

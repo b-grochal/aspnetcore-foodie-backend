@@ -1,6 +1,7 @@
 ﻿using Foodie.Common.Api.Controllers;
-using Foodie.Orders.Application.Functions.Contractors.Queries.GetContractorById;
-using Foodie.Orders.Application.Functions.Contractors.Queries.GetContractors;
+using Foodie.Common.Api.Results;
+using Foodie.Orders.Application.Features.Contractors.Queries.GetContractorById;
+using Foodie.Orders.Application.Features.Contractors.Queries.GetContractors;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -19,7 +20,10 @@ namespace Foodie.Orders.API.Controllers
         {
             var query = new GetContractorByIdQuery(id);
             var result = await mediator.Send(query);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
 
         // GET api/contractors
@@ -27,7 +31,10 @@ namespace Foodie.Orders.API.Controllers
         public async Task<IActionResult> GetBuyers([FromQuery] GetContractorsQuery getBuyersQuery)
         {
             var result = await mediator.Send(getBuyersQuery);
-            return Ok(result);
+
+            return result.Match(
+                onSuccess: () => Ok(result.Value),
+                onFailure: HandleFailure);
         }
     }
 }

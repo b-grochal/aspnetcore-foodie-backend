@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Foodie.Common.Collections;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Contractors;
-using Foodie.Orders.Infrastructure.Contexts;
+using Foodie.Orders.Infrastructure.Database;
 using System.Linq;
 using System.Threading.Tasks;
 using static Dapper.SqlBuilder;
@@ -10,9 +10,9 @@ namespace Foodie.Orders.Infrastructure.Queries
 {
     public class ContractorsQueries : IContractorsQueries
     {
-        private readonly DapperContext _dapperContext;
+        private readonly OrdersDbConnectionFactory _dapperContext;
 
-        public ContractorsQueries(DapperContext dapperContext)
+        public ContractorsQueries(OrdersDbConnectionFactory dapperContext)
         {
             _dapperContext = dapperContext;
         }

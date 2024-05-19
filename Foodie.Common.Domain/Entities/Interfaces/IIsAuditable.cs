@@ -4,12 +4,12 @@ namespace Foodie.Common.Domain.Entities.Interfaces
 {
     public interface IIsAuditable
     {
-        string CreatedBy { get; set; }
+        string CreatedBy { get; }
 
-        DateTimeOffset CreatedDate { get; set; }
+        DateTimeOffset CreatedDate { get; }
 
-        string LastModifiedBy { get; set; }
+        string LastModifiedBy { get; }
 
-        DateTimeOffset? LastModifiedDate { get; set; }
+        DateTimeOffset? LastModifiedDate { get; }
     }
 }

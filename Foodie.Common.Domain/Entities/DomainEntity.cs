@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Foodie.Common.Domain.Entities
 {
-    public abstract class DomainEntity : IHasDomainEvents
+    public abstract class DomainEntity : IHasDomainEvents, IIsAuditable
     {
         public int Id { get; protected set; }
 
