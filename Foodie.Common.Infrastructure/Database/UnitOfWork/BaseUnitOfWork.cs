@@ -3,7 +3,7 @@ using Foodie.Common.Infrastructure.Database.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Foodie.Common.Infrastructure.Database
+namespace Foodie.Common.Infrastructure.Database.UnitOfWork
 {
     public class BaseUnitOfWork : IUnitOfWork
     {
@@ -21,7 +21,7 @@ namespace Foodie.Common.Infrastructure.Database
 
         public async Task<int> CommitChangesAsync(string user, CancellationToken cancellationToken = default)
         {
-           return await _dbContext.CommitChangesAsync(user, cancellationToken);
+            return await _dbContext.CommitChangesAsync(user, cancellationToken);
         }
     }
 }
