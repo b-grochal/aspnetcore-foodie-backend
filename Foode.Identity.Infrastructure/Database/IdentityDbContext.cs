@@ -1,6 +1,6 @@
 ﻿using Foode.Identity.Infrastructure.Database.Configurations;
 using Foodie.Common.Domain.Entities.Interfaces;
-using Foodie.Common.Infrastructure.Database.Interfaces;
+using Foodie.Common.Infrastructure.Database.Contexts.Interfaces;
 using Foodie.Identity.Domain.Admins;
 using Foodie.Identity.Domain.Common.ApplicationUser;
 using Foodie.Identity.Domain.Customers;

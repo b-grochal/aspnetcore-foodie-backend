@@ -1,5 +1,5 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
-using Foodie.Common.Infrastructure.Database.Interfaces;
+using Foodie.Common.Infrastructure.Database.Contexts.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 

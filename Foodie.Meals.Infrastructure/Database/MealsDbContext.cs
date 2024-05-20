@@ -1,5 +1,5 @@
 ﻿using Foodie.Common.Domain.Entities.Interfaces;
-using Foodie.Common.Infrastructure.Database.Interfaces;
+using Foodie.Common.Infrastructure.Database.Contexts.Interfaces;
 using Foodie.Meals.Domain.Entities;
 using Foodie.Meals.Infrastructure.Database.Seed;
 using Microsoft.EntityFrameworkCore;

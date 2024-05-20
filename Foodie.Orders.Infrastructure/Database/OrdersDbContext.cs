@@ -1,5 +1,5 @@
 ﻿using Foodie.Common.Domain.Entities.Interfaces;
-using Foodie.Common.Infrastructure.Database.Interfaces;
+using Foodie.Common.Infrastructure.Database.Contexts.Interfaces;
 using Foodie.Orders.Domain.Buyers;
 using Foodie.Orders.Domain.Contractors;
 using Foodie.Orders.Domain.Orders;
