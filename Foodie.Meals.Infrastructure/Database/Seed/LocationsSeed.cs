@@ -17,9 +17,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     PhoneNumber = "123-123-213",
                     Email = "kfc.lasvegas@email.com",
                     CityId = SeedConsts.LasVegasCity,
-                    RestaurantId = SeedConsts.KfcRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    RestaurantId = SeedConsts.KfcRestaurant
                 },
                 new Location
                 {
@@ -28,9 +26,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     PhoneNumber = "123-123-213",
                     Email = "kfc.losangeles@email.com",
                     CityId = SeedConsts.LosAngelesCity,
-                    RestaurantId = SeedConsts.KfcRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    RestaurantId = SeedConsts.KfcRestaurant
                 },
                 new Location
                 {
@@ -39,9 +35,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     PhoneNumber = "123-123-213",
                     Email = "kfc.newyork@email.com",
                     CityId = SeedConsts.NewYorkCity,
-                    RestaurantId = SeedConsts.KfcRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    RestaurantId = SeedConsts.KfcRestaurant
                 },
                 new Location
                 {
@@ -50,9 +44,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     PhoneNumber = "123-123-213",
                     Email = "pizzahut.lasvegas@email.com",
                     CityId = SeedConsts.LasVegasCity,
-                    RestaurantId = SeedConsts.PizzaHutRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    RestaurantId = SeedConsts.PizzaHutRestaurant
                 },
                 new Location
                 {
@@ -61,9 +53,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     PhoneNumber = "123-123-213",
                     Email = "pizzahut.losangeles@email.com",
                     CityId = SeedConsts.LosAngelesCity,
-                    RestaurantId = SeedConsts.PizzaHutRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    RestaurantId = SeedConsts.PizzaHutRestaurant
                 },
                 new Location
                 {
@@ -72,9 +62,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     PhoneNumber = "123-123-213",
                     Email = "mcdonalds.lasvegas@email.com",
                     CityId = SeedConsts.LasVegasCity,
-                    RestaurantId = SeedConsts.McDonaldsRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    RestaurantId = SeedConsts.McDonaldsRestaurant
                 }
             };
         }

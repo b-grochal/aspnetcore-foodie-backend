@@ -13,23 +13,17 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                 new Restaurant()
                 {
                     Id =  SeedConsts.KfcRestaurant,
-                    Name = "KFC",
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    Name = "KFC"
                 },
                 new Restaurant()
                 {
                     Id =  SeedConsts.PizzaHutRestaurant,
-                    Name = "Pizza Hut",
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    Name = "Pizza Hut"
                 },
                 new Restaurant()
                 {
                     Id =  SeedConsts.McDonaldsRestaurant,
-                    Name = "McDonald's",
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    Name = "McDonald's"
                 }
             };
         }

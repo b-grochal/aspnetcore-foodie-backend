@@ -32,14 +32,6 @@ namespace Foodie.Orders.Infrastructure.Database.Configurations
                 .HasConversion(x => x.Name, x => OrderStatus.FromName(x))
                 .IsRequired();
 
-            builder.Property(o => o.CreatedBy);
-
-            builder.Property(o => o.CreatedDate);
-
-            builder.Property(o => o.LastModifiedBy);
-
-            builder.Property(o => o.LastModifiedDate);
-
             builder.OwnsOne(o => o.DeliveryAddress, deliveryAddressBuilder =>
             {
                 deliveryAddressBuilder
