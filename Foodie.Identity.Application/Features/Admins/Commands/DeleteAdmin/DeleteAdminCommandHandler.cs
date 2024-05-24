@@ -28,7 +28,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.DeleteAdmin
 
             await _adminsRepository.DeleteAsync(admin);
 
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return new DeleteAdminCommandResponse
             {

@@ -27,7 +27,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.DeleteCity
                 return Result.Failure<DeleteCityCommandResponse>(CitiesErrors.CityNotFoundById(request.Id));
 
             await _citiesRepository.DeleteAsync(city);
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return new DeleteCityCommandResponse
             {

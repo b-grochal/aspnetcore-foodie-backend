@@ -6,13 +6,11 @@ namespace Foodie.Common.Infrastructure.Database.Audits
     {
         public int Id { get; set; }
 
-        public int? ApplicationUserId { get; set; }
-
-        public string ApplicationUserEmail { get; set; }
-
         public AuditType Type { get; set; }
 
         public DateTimeOffset ModificationDate {  get; set; }
+
+        public string ModifiedBy { get; set; }
 
         public string TableName { get; set; }
 

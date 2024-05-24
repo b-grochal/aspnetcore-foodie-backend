@@ -28,7 +28,7 @@ namespace Foodie.Meals.Application.Features.Categories.Commands.DeleteCategory
 
             await _categoriesRepository.DeleteAsync(categoryToDelete);
 
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return new DeleteCategoryCommandResponse
             {

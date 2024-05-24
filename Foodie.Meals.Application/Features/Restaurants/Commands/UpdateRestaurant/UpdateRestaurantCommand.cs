@@ -1,4 +1,4 @@
-﻿using Foodie.Common.Application.Requests.Commands.Abstractions;
+﻿using Foodie.Common.Application.Requests.Commands.Interfaces;
 using Foodie.Common.Results;
 using MediatR;
 using System.Collections.Generic;
@@ -10,6 +10,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
         public int Id { get; set; }
         public string Name { get; set; }
         public IReadOnlyCollection<int> CategoriesIds { get; set; }
-        public string User { get; set; }
+        public int ApplicationUserId { get; set; }
+        public string ApplicationUserEmail { get; set; }
     }
 }

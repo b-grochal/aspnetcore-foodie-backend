@@ -34,7 +34,7 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.ChangeEmail
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
 
-            await _unitOfWork.CommitChangesAsync(request.ConfirmEmail, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(GetType().Name, cancellationToken);
 
             return Result.Success();
         }

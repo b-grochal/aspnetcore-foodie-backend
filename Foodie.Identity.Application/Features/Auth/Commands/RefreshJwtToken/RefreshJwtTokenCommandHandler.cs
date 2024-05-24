@@ -45,7 +45,7 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.RefreshJwtToken
 
             applicationUser.UpdateRefreshToken(newRefreshTokenData.RefreshToken, newRefreshTokenData.ExpirationDate);
 
-            await _unitOfWork.CommitChangesAsync(string.Empty, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(GetType().Name, cancellationToken);
 
             return new RefreshJwtTokenCommandResponse
             {

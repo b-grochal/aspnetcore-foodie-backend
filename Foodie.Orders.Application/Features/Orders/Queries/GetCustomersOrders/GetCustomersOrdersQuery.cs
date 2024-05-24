@@ -1,5 +1,5 @@
-﻿using Foodie.Common.Application.Requests.Abstractions;
-using Foodie.Common.Application.Requests.Queries.Abstractions;
+﻿using Foodie.Common.Application.Requests.Interfaces;
+using Foodie.Common.Application.Requests.Queries.Interfaces;
 using Foodie.Common.Results;
 using MediatR;
 using System.Text.Json.Serialization;

@@ -44,10 +44,10 @@ namespace Foodie.Meals.Application.Mapper
         private void ConfigureCategoriesMapping()
         {
             CreateMap<CreateCategoryCommand, Category>()
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<Category, CreateCategoryCommandResponse>();
             CreateMap<UpdateCategoryCommand, Category>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<Category, UpdateCategoryCommandResponse>();
             CreateMap<Category, CategoryDto>();
             CreateMap<Category, GetCategoryByIdQueryResponse>();
@@ -56,10 +56,10 @@ namespace Foodie.Meals.Application.Mapper
         private void ConfigureCitiesMapping()
         {
             CreateMap<CreateCityCommand, City>()
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<City, CreateCityCommandResponse>();
             CreateMap<UpdateCityCommand, City>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<City, UpdateCityCommandResponse>();
             CreateMap<City, CityDto>();
             CreateMap<City, GetCityByIdQueryResponse>();
@@ -68,10 +68,10 @@ namespace Foodie.Meals.Application.Mapper
         private void ConfiureLocationsMapping()
         {
             CreateMap<CreateLocationCommand, Location>()
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<Location, CreateLocationCommandResponse>();
             CreateMap<UpdateLocationCommand, Location>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<Location, UpdateLocationCommandResponse>()
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
                 .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name));
@@ -88,10 +88,10 @@ namespace Foodie.Meals.Application.Mapper
         private void ConfigureMealsMapping()
         {
             CreateMap<CreateMealCommand, Meal>()
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<Meal, CreateMealCommandResponse>();
             CreateMap<UpdateMealCommand, Meal>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<Meal, UpdateMealCommandResponse>();
             CreateMap<Meal, MealDto>();
             CreateMap<Meal, GetMealByIdQueryResponse>();
@@ -101,10 +101,10 @@ namespace Foodie.Meals.Application.Mapper
         private void ConfigureRestaurantsMapping()
         {
             CreateMap<CreateRestaurantCommand, Restaurant>()
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<Restaurant, CreateRestaurantCommandResponse>();
             CreateMap<UpdateRestaurantCommand, Restaurant>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<Restaurant, UpdateRestaurantCommandResponse>();
             CreateMap<Restaurant, RestaurantDto>();
             CreateMap<Restaurant, GetRestaurantByIdQueryResponse>();
@@ -113,10 +113,10 @@ namespace Foodie.Meals.Application.Mapper
         private void ConfigureCountriesMapping()
         {
             CreateMap<CreateCountryCommand, Country>()
-                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<Country, CreateCountryCommandResponse>();
             CreateMap<UpdateCountryCommand, Country>()
-                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.User));
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.MapFrom(src => src.ApplicationUserEmail));
             CreateMap<Country, UpdateCountryCommandResponse>();
             CreateMap<Country, CountryDto>();
             CreateMap<Country, GetCountryByIdQueryResponse>();

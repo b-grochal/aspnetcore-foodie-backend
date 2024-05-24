@@ -28,7 +28,7 @@ namespace Foodie.Meals.Application.Functions.Countries.Commands.DeleteCountry
 
             await _countriesRepository.DeleteAsync(country);
 
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return new DeleteCountryCommandResponse
             {

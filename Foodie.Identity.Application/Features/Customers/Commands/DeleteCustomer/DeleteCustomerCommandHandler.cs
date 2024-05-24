@@ -28,7 +28,7 @@ namespace Foodie.Identity.Application.Functions.Customers.Commands.DeleteCustome
 
             await _customersRepository.DeleteAsync(customer);
 
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return new DeleteCustomerCommandResponse
             {

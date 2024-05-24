@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Database\Interceptors\" />
     <Folder Include="Emails\Interfaces\" />
     <Folder Include="Repositories\" />
   </ItemGroup>

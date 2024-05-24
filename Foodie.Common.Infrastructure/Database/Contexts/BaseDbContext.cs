@@ -1,17 +1,23 @@
 ﻿using Foodie.Common.Infrastructure.Database.Audits;
+using Foodie.Common.Infrastructure.Database.Contexts.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Foodie.Common.Infrastructure.Database.Contexts
 {
-    public class BaseDbContext : DbContext
+    public class BaseDbContext : DbContext, IDbContext
     {
         public DbSet<Audit> Audits { get; set; }
 
-        public void PrepareAuditsForEntities(int applicationUserId, string applicationUserEmail)
+        public BaseDbContext(DbContextOptions options) : base(options) { }
+
+        // TODO: refactor methods for preparing audits, extract common code
+        public void PrepareAuditsForEntities(int applicationUserId, string applicationUserEmail, string handlerName)
         {
             var modifiedEntites = ChangeTracker
                 .Entries()
@@ -27,11 +33,51 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
                 var audit = new Audit
                 {
                     TableName = modifiedEntity.Entity.GetType().Name,
-                    ApplicationUserId = applicationUserId,
-                    ApplicationUserEmail = applicationUserEmail
+                    ModifiedBy = $"ApplicationUserId: {applicationUserId}, ApplicationUserEmail: {applicationUserEmail}, Handler: {handlerName}"
                 };
 
                 switch(modifiedEntity.State)
+                {
+                    case EntityState.Added:
+                        audit.Type = AuditType.Create;
+                        audit.NewValues = GetNewValues(modifiedEntity);
+                        break;
+                    case EntityState.Modified:
+                        audit.Type = AuditType.Update;
+                        audit.NewValues = GetNewValues(modifiedEntity);
+                        audit.OldValues = GetOldValues(modifiedEntity);
+                        audit.ModifiedColumns = GetChangedColumns(modifiedEntity);
+                        break;
+                    case EntityState.Deleted:
+                        audit.Type = AuditType.Delete;
+                        audit.OldValues = GetOldValues(modifiedEntity);
+                        break;
+                }
+            }
+
+            Audits.AddRangeAsync(audits);
+        }
+
+        public void PrepareAuditsForEntities(string handlerName)
+        {
+            var modifiedEntites = ChangeTracker
+                .Entries()
+                .Where(e => e.State == EntityState.Added
+                || e.State == EntityState.Modified
+                || e.State == EntityState.Deleted)
+                .ToList();
+
+            var audits = new List<Audit>();
+
+            foreach (var modifiedEntity in modifiedEntites)
+            {
+                var audit = new Audit
+                {
+                    TableName = modifiedEntity.Entity.GetType().Name,
+                    ModifiedBy = $"Handler: {handlerName}"
+                };
+
+                switch (modifiedEntity.State)
                 {
                     case EntityState.Added:
                         audit.Type = AuditType.Create;
@@ -87,6 +133,18 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
             }
 
             return changedCloumns.Count == 0 ? null : JsonSerializer.Serialize(changedCloumns);
+        }
+
+        public Task<int> CommitChangesAsync(string handlerName, CancellationToken cancellationToken)
+        {
+            PrepareAuditsForEntities(handlerName);
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        public Task<int> CommitChangesAsync(int applicationUserId, string applicationUserEmail, string handlerName, CancellationToken cancellationToken)
+        {
+            PrepareAuditsForEntities(applicationUserId, applicationUserEmail, handlerName);
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

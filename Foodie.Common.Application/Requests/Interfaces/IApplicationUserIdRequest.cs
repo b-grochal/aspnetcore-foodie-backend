@@ -1,4 +1,4 @@
-﻿namespace Foodie.Common.Application.Requests.Abstractions
+﻿namespace Foodie.Common.Application.Requests.Interfaces
 {
     public interface IApplicationUserIdRequest
     {

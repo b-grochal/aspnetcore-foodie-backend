@@ -26,7 +26,7 @@ namespace Foodie.Meals.Application.Functions.Countries.Commands.CreateCountry
         {
             var country = _mapper.Map<Country>(request);
             await _countriesRepository.CreateAsync(country);
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return _mapper.Map<CreateCountryCommandResponse>(country);
         }

@@ -51,7 +51,7 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.SignIn
 
             applicationUser.UpdateRefreshToken(refreshTokenData.RefreshToken, refreshTokenData.ExpirationDate);
 
-            await _unitOfWork.CommitChangesAsync(request.Email, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(GetType().Name, cancellationToken);
 
             return new SignInCommandResponse
             {
@@ -64,7 +64,7 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.SignIn
         {
             applicationUser.NoteInvalidAuthentication();
 
-            await _unitOfWork.CommitChangesAsync(applicationUser.Email, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(GetType().Name, cancellationToken);
 
             return Result.Failure<SignInCommandResponse>(ApplicationUserErrors.ApplicationUserNotAuthenticated(applicationUser.Email));
         }

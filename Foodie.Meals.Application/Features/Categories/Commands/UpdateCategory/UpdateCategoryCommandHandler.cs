@@ -31,7 +31,7 @@ namespace Foodie.Meals.Application.Features.Categories.Commands.UpdateCategory
 
             var editedCategory = _mapper.Map(request, category);
             await _categoriesRepository.UpdateAsync(editedCategory);
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return _mapper.Map<UpdateCategoryCommandResponse>(editedCategory);
         }

@@ -1,5 +1,5 @@
-﻿using Foodie.Common.Application.Requests.Abstractions;
-using Foodie.Common.Application.Requests.Commands.Abstractions;
+﻿using Foodie.Common.Application.Requests.Interfaces;
+using Foodie.Common.Application.Requests.Commands.Interfaces;
 using Foodie.Common.Results;
 using MediatR;
 using System.Text.Json.Serialization;
@@ -13,6 +13,6 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.UpdateAccountD
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
-        public string User { get; set; }
+        public string ApplicationUserEmail { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Authentication;
-using Foodie.Common.Application.Requests.Commands.Abstractions;
+using Foodie.Common.Application.Requests.Commands.Interfaces;
 using Foodie.Common.Results;
 using MediatR;
 using System.Threading;
@@ -21,7 +21,8 @@ namespace Foodie.Common.Application.Behaviours
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
-            request.User = _applicationUserContext.Email;
+            request.ApplicationUserId = _applicationUserContext.Id;
+            request.ApplicationUserEmail = _applicationUserContext.Email;
 
             return await next();
         }
