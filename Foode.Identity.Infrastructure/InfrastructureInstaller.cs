@@ -5,6 +5,7 @@ using Foodie.Common.Application.Contracts.Infrastructure.Authentication;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Database.Interceptors;
 using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
 using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +20,12 @@ namespace Foode.Identity.Infrastructure
     {
         public static IServiceCollection AddIdentityInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IdentityDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DbConnection")));
+            services.AddSingleton<SoftDeleteForDomainEntitiesInterceptor>();
+
+            services.AddDbContext<IdentityDbContext>((sp, options) => options
+                .UseSqlServer(configuration.GetConnectionString("DbConnection"))
+                .AddInterceptors(
+                    sp.GetRequiredService<SoftDeleteForDomainEntitiesInterceptor>()));
 
             services.Configure<IdentityOptions>(options =>
             {

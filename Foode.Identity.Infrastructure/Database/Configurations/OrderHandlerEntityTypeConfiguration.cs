@@ -11,6 +11,8 @@ namespace Foode.Identity.Infrastructure.Database.Configurations
             builder.ToTable("OrderHandlers");
 
             builder.Property(o => o.LocationId);
+
+            builder.HasQueryFilter(o => !o.IsDeleted);
         }
     }
 }

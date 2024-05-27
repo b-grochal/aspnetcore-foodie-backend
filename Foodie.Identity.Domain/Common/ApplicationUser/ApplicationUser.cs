@@ -1,4 +1,5 @@
 ﻿using Foodie.Common.Domain.AggregateRoots;
+using Foodie.Common.Domain.Entities.Interfaces;
 using Foodie.Common.Enums;
 using Foodie.Common.Results;
 using Foodie.Identity.Domain.Common.ApplicationUser.DomainEvents;
@@ -8,7 +9,7 @@ using System;
 
 namespace Foodie.Identity.Domain.Common.ApplicationUser
 {
-    public abstract class ApplicationUser : AggregateRoot
+    public abstract class ApplicationUser : AggregateRoot, ISoftDeletableDomainEntity
     {
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
@@ -20,6 +21,7 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
         public bool IsActive { get; private set; }
         public ApplicationUserRole Role { get; }
         public RefreshToken RefreshToken { get; private set; }
+        public bool IsDeleted {get; private set; }
 
         protected ApplicationUser(string firstName, string lastName, string email,
             string phoneNumber, string passwordHash, ApplicationUserRole role, 
@@ -96,6 +98,11 @@ namespace Foodie.Identity.Domain.Common.ApplicationUser
             Email = email;
 
             AddDomainEvent(new ApplicationUserEmailChangedDomainEvent(email));
+        }
+
+        public void MarkAsDeleted()
+        {
+            IsDeleted = true;
         }
     }
 }

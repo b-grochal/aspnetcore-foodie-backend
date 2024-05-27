@@ -12,8 +12,6 @@ namespace Foodie.Common.Domain.Entities
 
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-        public bool IsDeleted { get; private set; }
-
         public override bool Equals(object? obj)
         {
             return obj is DomainEntity entity && Id.Equals(entity.Id);
@@ -47,11 +45,6 @@ namespace Foodie.Common.Domain.Entities
         public void ClearDomainEvents()
         {
             _domainEvents.Clear();
-        }
-
-        public void MarkAsDeleted()
-        {
-            IsDeleted = true;
         }
     }
 }
