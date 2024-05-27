@@ -4,13 +4,15 @@ using System.Collections.Generic;
 
 namespace Foodie.Common.Domain.Entities
 {
-    public abstract class DomainEntity : IHasDomainEvents
+    public abstract class DomainEntity : IHasDomainEvents, ISoftDeletableDomainEntity
     {
         public int Id { get; protected set; }
 
         private readonly List<IDomainEvent> _domainEvents = new();
 
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+        public bool IsDeleted { get; private set; }
 
         public override bool Equals(object? obj)
         {
@@ -45,6 +47,11 @@ namespace Foodie.Common.Domain.Entities
         public void ClearDomainEvents()
         {
             _domainEvents.Clear();
+        }
+
+        public void MarkAsDeleted()
+        {
+            IsDeleted = true;
         }
     }
 }
