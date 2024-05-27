@@ -57,6 +57,30 @@ namespace Foodie.Meals.Infrastructure.Database
                     RestaurantsId = x.RestaurantId,
                     CategoriesId = x.CategoryId
                 }).ToArray());
+
+            modelBuilder
+                .Entity<Category>()
+                .HasQueryFilter(e => !e.IsDeleted);
+
+            modelBuilder
+                .Entity<Country>()
+                .HasQueryFilter(e => !e.IsDeleted);
+
+            modelBuilder
+                .Entity<City>()
+                .HasQueryFilter(e => !e.IsDeleted);
+
+            modelBuilder
+                .Entity<Location>()
+                .HasQueryFilter(e => !e.IsDeleted);
+
+            modelBuilder
+                .Entity<Meal>()
+                .HasQueryFilter(e => !e.IsDeleted);
+
+            modelBuilder
+                .Entity<Restaurant>()
+                .HasQueryFilter(e => !e.IsDeleted);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Foodie.Common.Domain.Entities
 {
-    public abstract class DomainEntity : IHasDomainEvents, ISoftDeletableDomainEntity
+    public abstract class DomainEntity : IHasDomainEvents
     {
         public int Id { get; protected set; }
 

@@ -1,5 +1,6 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Database.Interceptors;
 using Foodie.Meals.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Meals.Infrastructure.Database;
 using Foodie.Meals.Infrastructure.Database.Repositories;
@@ -14,9 +15,13 @@ namespace Foodie.Meals.Infrastructure
     {
         public static IServiceCollection AddMealsInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<MealsDbContext>(options => options
+            services.AddSingleton<SoftDeleteForBaseEntitiesInterceptor>();
+
+            services.AddDbContext<MealsDbContext>((sp, options) => options
                 .UseLazyLoadingProxies()
                 .UseSqlServer(configuration.GetConnectionString("DbConnection"))
+                .AddInterceptors(
+                    sp.GetRequiredService<SoftDeleteForBaseEntitiesInterceptor>())
             );
 
             services.AddCache(configuration);
