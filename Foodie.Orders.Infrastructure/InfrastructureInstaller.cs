@@ -1,5 +1,7 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Database;
+using Foodie.Common.Infrastructure.Database.Connections;
+using Foodie.Common.Infrastructure.Database.Connections.Interfaces;
 using Foodie.Common.Infrastructure.Database.Contexts.Interfaces;
 using Foodie.Orders.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Buyers;
@@ -24,7 +26,7 @@ namespace Foodie.Orders.Infrastructure
 
             services.AddScoped<IDbContext, OrdersDbContext>();
 
-            services.AddSingleton<OrdersDbConnectionFactory>();
+            services.AddSingleton<IDbConnecionFactory, DbConnectionFactory>();
 
             services.AddScoped<IUnitOfWork, OrdersUnitOfWork>();
             services.AddScoped<IOrdersRepository, OrdersRepository>();
