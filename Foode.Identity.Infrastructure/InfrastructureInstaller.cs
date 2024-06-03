@@ -5,6 +5,8 @@ using Foodie.Common.Application.Contracts.Infrastructure.Authentication;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Database.Connections.Interfaces;
+using Foodie.Common.Infrastructure.Database.Connections;
 using Foodie.Common.Infrastructure.Database.Interceptors;
 using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
 using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
@@ -50,6 +52,7 @@ namespace Foode.Identity.Infrastructure
             services.AddTransient<IRefreshTokenService, RefreshTokenService>();
             services.AddTransient<IAccountTokensService, AccountTokensService>();
             services.AddTransient<IApplicationUserContext, ApplicationUserContext>();
+            services.AddSingleton<IDbConnecionFactory, DbConnectionFactory>();
             services.AddHttpContextAccessor();
 
             return services;

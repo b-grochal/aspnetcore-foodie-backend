@@ -37,47 +37,55 @@ namespace Foodie.Common.Infrastructure.Database.Outbox
 
         public async Task ProcessAsync()
         {
-            _logger.LogInformation("Beginning to process outbox messages.");
-
-            using IDbConnection dbConnection = _dbConnecionFactory.CreateConnection();
-            using IDbTransaction dbTransaction = dbConnection.BeginTransaction();
-
-            IReadOnlyList<OutboxMessageResponse> outboxMessages = await GetOutboxMessagesAsync(dbConnection, dbTransaction);
-
-            if(!outboxMessages.Any())
+            try
             {
-                _logger.LogInformation("Completed processing outbox messages - no messages to process.");
+                _logger.LogInformation("Beginning to process outbox messages.");
 
+                using IDbConnection dbConnection = _dbConnecionFactory.CreateConnection();
+                dbConnection.Open();
+                using IDbTransaction dbTransaction = dbConnection.BeginTransaction();
+
+                IReadOnlyList<OutboxMessageResponse> outboxMessages = await GetOutboxMessagesAsync(dbConnection, dbTransaction);
+
+                if (!outboxMessages.Any())
+                {
+                    _logger.LogInformation("Completed processing outbox messages - no messages to process.");
+
+                    return;
+                }
+
+                foreach (var outboxMessage in outboxMessages)
+                {
+                    Exception? exception = null;
+
+                    try
+                    {
+                        IDomainEvent domainEvent = JsonConvert.DeserializeObject<IDomainEvent>(
+                            outboxMessage.Content,
+                            _jsonSerializerSettings);
+
+                        await _publisher.Publish(domainEvent);
+                    }
+                    catch (Exception caughtException)
+                    {
+                        _logger.LogError(caughtException,
+                            "Exception while processing outbox message {MessageId}.",
+                            outboxMessage.Id);
+
+                        exception = caughtException;
+                    }
+
+                    await UpdateOutboxMessageAsync(dbConnection, dbTransaction, outboxMessage, exception);
+                }
+
+                dbTransaction.Commit();
+
+                _logger.LogInformation("Completed processing outbox messages.");
+            }
+            catch(Exception ex) 
+            {
                 return;
             }
-
-            foreach(var outboxMessage in outboxMessages) 
-            {
-                Exception? exception = null;
-
-                try
-                {
-                    IDomainEvent domainEvent = JsonConvert.DeserializeObject<IDomainEvent>(
-                        outboxMessage.Content,
-                        _jsonSerializerSettings);
-
-                    await _publisher.Publish(domainEvent);
-                }
-                catch(Exception caughtException)
-                {
-                    _logger.LogError(caughtException, 
-                        "Exception while processing outbox message {MessageId}.", 
-                        outboxMessage.Id);
-
-                    exception = caughtException;
-                }
-
-                await UpdateOutboxMessageAsync(dbConnection, dbTransaction, outboxMessage, exception);
-            }
-
-            dbTransaction.Commit();
-
-            _logger.LogInformation("Completed processing outbox messages.");
         }
 
         private async Task<IReadOnlyList<OutboxMessageResponse>> GetOutboxMessagesAsync(
@@ -85,12 +93,10 @@ namespace Foodie.Common.Infrastructure.Database.Outbox
             IDbTransaction dbTransaction)
         {
             string sql = """
-                        SELECT Id, Content
-                        FROM OutboxMessages
-                        WHERE ProcessedDate is null
+                        SELECT TOP (@BatchSize) Id, Content
+                        FROM OutboxMessages WITH (UPDLOCK, READPAST)
+                        WHERE ProcessedDate IS NULL
                         ORDER BY OccurrenceDate
-                        LIMIT @BatchSize
-                        WITH (UPDLOCK, READPAST)
                         """;
 
             IEnumerable<OutboxMessageResponse> outboxMessages = await dbConnection.QueryAsync<OutboxMessageResponse>(
