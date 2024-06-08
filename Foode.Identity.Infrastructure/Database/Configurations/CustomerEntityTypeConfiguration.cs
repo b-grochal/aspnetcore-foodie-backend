@@ -9,8 +9,6 @@ namespace Foode.Identity.Infrastructure.Database.Configurations
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
             builder.ToTable("Customers");
-
-            builder.HasQueryFilter(o => !o.IsDeleted);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Foode.Identity.Infrastructure.Database.Configurations;
 using Foodie.Common.Infrastructure.Database.Contexts;
+using Foodie.Common.Infrastructure.Database.Outbox;
 using Foodie.Identity.Domain.Admins;
 using Foodie.Identity.Domain.Common.ApplicationUser;
 using Foodie.Identity.Domain.Customers;
@@ -14,6 +15,7 @@ namespace Foode.Identity.Infrastructure
         public DbSet<Admin> Admins { get; set; }
         public DbSet<OrderHandler> OrderHandlers { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<OutboxMessage> OutboxMessages { get; set; }
 
         public IdentityDbContext(DbContextOptions options) : base(options) { }
 
