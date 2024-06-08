@@ -23,11 +23,9 @@ namespace Foodie.Common.Infrastructure.Database.Interceptors
             InterceptionResult<int> result,
             CancellationToken cancellationToken = default)
         {
-            var outboxDbContext = eventData.Context as IOutboxDbContext;
-
-            if (outboxDbContext is not null)
+            if (eventData.Context is not null)
             {
-                //InsertOutboxMessages(outboxDbContext);
+                InsertOutboxMessages(eventData.Context);
             }
 
             return base.SavingChangesAsync(eventData, result, cancellationToken);

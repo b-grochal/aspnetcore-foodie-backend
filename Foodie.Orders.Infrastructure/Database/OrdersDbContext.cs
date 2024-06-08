@@ -4,7 +4,6 @@ using Foodie.Orders.Domain.Contractors;
 using Foodie.Orders.Domain.Orders;
 using Foodie.Orders.Domain.Orders.Entities;
 using Foodie.Orders.Infrastructure.Database.Configurations;
-using Foodie.Orders.Infrastructure.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -38,8 +37,6 @@ namespace Foodie.Orders.Infrastructure.Database
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            await _mediator.DispatchDomainEventsAsync(this);
-
             return await base.SaveChangesAsync(cancellationToken);
         }
     }
