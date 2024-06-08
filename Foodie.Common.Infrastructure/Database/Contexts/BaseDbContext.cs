@@ -53,9 +53,11 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
                         audit.OldValues = GetOldValues(modifiedEntity);
                         break;
                 }
+
+                audits.Add(audit);
             }
 
-            Audits.AddRangeAsync(audits);
+            Audits.AddRange(audits);
         }
 
         public void PrepareAuditsForEntities(string handlerName)

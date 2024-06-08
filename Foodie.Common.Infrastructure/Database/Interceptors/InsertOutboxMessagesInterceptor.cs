@@ -1,5 +1,4 @@
 ﻿using Foodie.Common.Domain.Entities;
-using Foodie.Common.Infrastructure.Database.Contexts.Interfaces;
 using Foodie.Common.Infrastructure.Database.Outbox;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;

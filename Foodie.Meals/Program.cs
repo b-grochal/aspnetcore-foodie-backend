@@ -73,6 +73,7 @@ builder.Services.ConfigureApplicationSettings(builder.Configuration, SettingsTyp
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuditableBehaviour<,>));
 builder.Services.AddSingleton<ProblemDetailsFactory, CustomProblemDetailsFactory>();
 
 builder.Services.AddControllers();

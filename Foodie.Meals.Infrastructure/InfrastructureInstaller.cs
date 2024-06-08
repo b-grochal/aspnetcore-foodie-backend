@@ -1,4 +1,6 @@
-﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Authentication;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Cache;
 using Foodie.Common.Infrastructure.Database.Interceptors;
 using Foodie.Meals.Application.Contracts.Infrastructure.Database.Repositories;
@@ -39,6 +41,8 @@ namespace Foodie.Meals.Infrastructure
             services.Decorate<IRestaurantsRepository, CachedRestaurantsRepository>();
             services.AddScoped<ICountriesRepository, CountriesRepository>();
             services.Decorate<ICountriesRepository, CachedCountriesRepository>();
+            services.AddTransient<IApplicationUserContext, ApplicationUserContext>();
+            services.AddHttpContextAccessor();
 
             return services;
         }

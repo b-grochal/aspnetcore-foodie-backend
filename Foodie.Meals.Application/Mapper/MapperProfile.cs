@@ -92,6 +92,7 @@ namespace Foodie.Meals.Application.Mapper
 
         private void ConfigureCountriesMapping()
         {
+            CreateMap<CreateCountryCommand, Country>();
             CreateMap<Country, CreateCountryCommandResponse>();
             CreateMap<Country, UpdateCountryCommandResponse>();
             CreateMap<Country, CountryDto>();
