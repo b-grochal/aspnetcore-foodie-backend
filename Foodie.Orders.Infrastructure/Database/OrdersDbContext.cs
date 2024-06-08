@@ -1,4 +1,5 @@
 ﻿using Foodie.Common.Infrastructure.Database.Contexts;
+using Foodie.Common.Infrastructure.Database.Outbox;
 using Foodie.Orders.Domain.Buyers;
 using Foodie.Orders.Domain.Contractors;
 using Foodie.Orders.Domain.Orders;
@@ -18,15 +19,9 @@ namespace Foodie.Orders.Infrastructure.Database
         public DbSet<OrderItem> OrdersItem { get; set; }
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Contractor> Contractors { get; set; }
-
-        private readonly IMediator _mediator;
+        public DbSet<OutboxMessage> OutboxMessages { get; set; }
 
         public OrdersDbContext(DbContextOptions<OrdersDbContext> options) : base(options) { }
-
-        public OrdersDbContext(DbContextOptions<OrdersDbContext> options, IMediator mediator) : base(options)
-        {
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
