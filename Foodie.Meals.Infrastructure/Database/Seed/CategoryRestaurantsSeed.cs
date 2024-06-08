@@ -10,9 +10,9 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
         {
             return new List<dynamic>
             {
-                new { CategoryId = SeedConsts.BurgerCategory, RestaurantId = SeedConsts.KfcRestaurant },
-                new { CategoryId = SeedConsts.PizzaCategory, RestaurantId = SeedConsts.PizzaHutRestaurant },
-                new { CategoryId = SeedConsts.BurgerCategory, RestaurantId = SeedConsts.McDonaldsRestaurant }
+                new { CategoryId = SeedConsts.BurgerCategory, RestaurantId = SeedConsts.KfcRestaurant, IsDeleted = false },
+                new { CategoryId = SeedConsts.PizzaCategory, RestaurantId = SeedConsts.PizzaHutRestaurant, IsDeleted = false },
+                new { CategoryId = SeedConsts.BurgerCategory, RestaurantId = SeedConsts.McDonaldsRestaurant, IsDeleted = false }
             };
         }
     }

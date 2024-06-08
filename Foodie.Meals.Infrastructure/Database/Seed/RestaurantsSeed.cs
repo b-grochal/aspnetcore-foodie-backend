@@ -13,17 +13,20 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                 new Restaurant()
                 {
                     Id =  SeedConsts.KfcRestaurant,
-                    Name = "KFC"
+                    Name = "KFC",
+                    IsDeleted = false
                 },
                 new Restaurant()
                 {
                     Id =  SeedConsts.PizzaHutRestaurant,
-                    Name = "Pizza Hut"
+                    Name = "Pizza Hut",
+                    IsDeleted = false
                 },
                 new Restaurant()
                 {
                     Id =  SeedConsts.McDonaldsRestaurant,
-                    Name = "McDonald's"
+                    Name = "McDonald's",
+                    IsDeleted = false
                 }
             };
         }

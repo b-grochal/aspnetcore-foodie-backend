@@ -12,12 +12,14 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                 new Country
                 {
                     Id = SeedConsts.UsaCountry,
-                    Name = "USA"
+                    Name = "USA",
+                    IsDeleted = false
                 },
                 new Country
                 {
                     Id = SeedConsts.GermanyCountry,
-                    Name = "Germany"
+                    Name = "Germany",
+                    IsDeleted = false
                 }
             };
         }

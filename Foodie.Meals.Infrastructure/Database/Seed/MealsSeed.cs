@@ -16,7 +16,8 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Name = "Longer",
                     Description = "Longer",
                     Price = 12,
-                    RestaurantId = SeedConsts.KfcRestaurant
+                    RestaurantId = SeedConsts.KfcRestaurant,
+                    IsDeleted = false
                 },
                 new Meal()
                 {
@@ -24,7 +25,8 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Name = "Zinger",
                     Description = "Zinger",
                     Price = 10,
-                    RestaurantId = SeedConsts.KfcRestaurant
+                    RestaurantId = SeedConsts.KfcRestaurant,
+                    IsDeleted = false
                 },
                 new Meal()
                 {
@@ -32,7 +34,8 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Name = "Pizza Texas",
                     Description = "Pizza Texas",
                     Price = 12,
-                    RestaurantId = SeedConsts.PizzaHutRestaurant
+                    RestaurantId = SeedConsts.PizzaHutRestaurant,
+                    IsDeleted = false
                 },
                 new Meal()
                 {
@@ -40,7 +43,8 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Name = "Pizza Carbonara",
                     Description = "Pizza Carbonara",
                     Price = 12,
-                    RestaurantId = SeedConsts.PizzaHutRestaurant
+                    RestaurantId = SeedConsts.PizzaHutRestaurant,
+                    IsDeleted = false
                 },
                 new Meal()
                 {
@@ -48,7 +52,8 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Name = "Big Mac",
                     Description = "Big Mac",
                     Price = 15,
-                    RestaurantId = SeedConsts.McDonaldsRestaurant
+                    RestaurantId = SeedConsts.McDonaldsRestaurant,
+                    IsDeleted = false
                 },
                 new Meal()
                 {
@@ -56,7 +61,8 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Name = "McRoyal",
                     Description = "McRoyal",
                     Price = 10,
-                    RestaurantId = SeedConsts.McDonaldsRestaurant
+                    RestaurantId = SeedConsts.McDonaldsRestaurant,
+                    IsDeleted = false
                 },
             };
         }

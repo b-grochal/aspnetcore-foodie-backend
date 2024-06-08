@@ -13,22 +13,26 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                 new Category
                 {
                     Id = SeedConsts.PastaCategory,
-                    Name = "Pasta"
+                    Name = "Pasta",
+                    IsDeleted = false
                 },
                 new Category
                 {
                     Id = SeedConsts.BurgerCategory,
-                    Name = "Burger"
+                    Name = "Burger",
+                    IsDeleted = false
                 },
                 new Category
                 {
                     Id = SeedConsts.PizzaCategory,
-                    Name = "Pizza"
+                    Name = "Pizza",
+                    IsDeleted = false
                 },
                 new Category
                 {
                     Id = SeedConsts.SaladCategory,
-                    Name = "Salad"
+                    Name = "Salad",
+                    IsDeleted = false
                 },
             };
         }

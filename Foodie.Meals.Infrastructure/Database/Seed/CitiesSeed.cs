@@ -14,19 +14,22 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                 {
                     Id = SeedConsts.LasVegasCity,
                     Name = "Las Vegas",
-                    CountryId = SeedConsts.UsaCountry
+                    CountryId = SeedConsts.UsaCountry,
+                    IsDeleted = false
                 },
                 new City
                 {
                     Id = SeedConsts.LosAngelesCity,
                     Name = "Los Angeles",
-                    CountryId = SeedConsts.UsaCountry
+                    CountryId = SeedConsts.UsaCountry,
+                    IsDeleted = false
                 },
                 new City
                 {
                     Id = SeedConsts.NewYorkCity,
                     Name = "New York",
-                    CountryId = SeedConsts.UsaCountry
+                    CountryId = SeedConsts.UsaCountry,
+                    IsDeleted = false
                 }
             };
         }
