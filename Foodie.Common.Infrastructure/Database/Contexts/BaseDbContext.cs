@@ -17,7 +17,7 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
         public BaseDbContext(DbContextOptions options) : base(options) { }
 
         // TODO: refactor methods for preparing audits, extract common code
-        public void PrepareAuditsForEntities(int applicationUserId, string applicationUserEmail, string handlerName)
+        public async Task PrepareAuditsForEntities(int applicationUserId, string applicationUserEmail, string handlerName)
         {
             var modifiedEntites = ChangeTracker
                 .Entries()
@@ -57,7 +57,7 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
                 audits.Add(audit);
             }
 
-            Audits.AddRange(audits);
+            await Audits.AddRangeAsync(audits);
         }
 
         public void PrepareAuditsForEntities(string handlerName)
@@ -143,10 +143,10 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
             return base.SaveChangesAsync(cancellationToken);
         }
 
-        public Task<int> CommitChangesAsync(int applicationUserId, string applicationUserEmail, string handlerName, CancellationToken cancellationToken)
+        public async Task<int> CommitChangesAsync(int applicationUserId, string applicationUserEmail, string handlerName, CancellationToken cancellationToken)
         {
-            PrepareAuditsForEntities(applicationUserId, applicationUserEmail, handlerName);
-            return base.SaveChangesAsync(cancellationToken);
+            await PrepareAuditsForEntities(applicationUserId, applicationUserEmail, handlerName);
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }
