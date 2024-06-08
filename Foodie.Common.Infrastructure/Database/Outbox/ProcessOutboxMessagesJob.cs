@@ -126,7 +126,7 @@ namespace Foodie.Common.Infrastructure.Database.Outbox
                 {
                     outboxMessage.Id,
                     ProcessedDate = DateTimeOffset.Now,
-                    Exception = exception?.ToString()
+                    Error = exception?.ToString()
                 },
                 transaction: dbTransaction);
         }

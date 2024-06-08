@@ -23,11 +23,13 @@ namespace Foode.Identity.Infrastructure
         public static IServiceCollection AddIdentityInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<SoftDeleteForDomainEntitiesInterceptor>();
+            services.AddSingleton<InsertOutboxMessagesInterceptor>();
 
             services.AddDbContext<IdentityDbContext>((sp, options) => options
                 .UseSqlServer(configuration.GetConnectionString("DbConnection"))
                 .AddInterceptors(
-                    sp.GetRequiredService<SoftDeleteForDomainEntitiesInterceptor>()));
+                    sp.GetRequiredService<SoftDeleteForDomainEntitiesInterceptor>(),
+                    sp.GetRequiredService<InsertOutboxMessagesInterceptor>()));
 
             services.Configure<IdentityOptions>(options =>
             {

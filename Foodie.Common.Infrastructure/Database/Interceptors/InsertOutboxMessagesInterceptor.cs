@@ -38,7 +38,7 @@ namespace Foodie.Common.Infrastructure.Database.Interceptors
                 .Select(entry => entry.Entity)
                 .SelectMany(entity =>
                 {
-                    var domainEvents = entity.DomainEvents;
+                    var domainEvents = entity.DomainEvents.ToList();
 
                     entity.ClearDomainEvents();
 
