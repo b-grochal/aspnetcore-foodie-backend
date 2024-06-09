@@ -48,7 +48,7 @@ namespace Foodie.Identity.Application.Features.Auth.Commands.SignUp
 
             await _customersRepository.CreateAsync(customer);
 
-            await _unitOfWork.CommitChangesAsync(string.Empty, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(handlerName: GetType().Name, cancellationToken: cancellationToken);
 
             return _mapper.Map<SignUpCommandResponse>(customer);
         }

@@ -18,8 +18,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Email = "kfc.lasvegas@email.com",
                     CityId = SeedConsts.LasVegasCity,
                     RestaurantId = SeedConsts.KfcRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    IsDeleted = false
                 },
                 new Location
                 {
@@ -29,8 +28,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Email = "kfc.losangeles@email.com",
                     CityId = SeedConsts.LosAngelesCity,
                     RestaurantId = SeedConsts.KfcRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    IsDeleted = false
                 },
                 new Location
                 {
@@ -40,8 +38,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Email = "kfc.newyork@email.com",
                     CityId = SeedConsts.NewYorkCity,
                     RestaurantId = SeedConsts.KfcRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    IsDeleted = false
                 },
                 new Location
                 {
@@ -51,8 +48,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Email = "pizzahut.lasvegas@email.com",
                     CityId = SeedConsts.LasVegasCity,
                     RestaurantId = SeedConsts.PizzaHutRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    IsDeleted = false
                 },
                 new Location
                 {
@@ -62,8 +58,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Email = "pizzahut.losangeles@email.com",
                     CityId = SeedConsts.LosAngelesCity,
                     RestaurantId = SeedConsts.PizzaHutRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    IsDeleted = false
                 },
                 new Location
                 {
@@ -73,8 +68,7 @@ namespace Foodie.Meals.Infrastructure.Database.Seed
                     Email = "mcdonalds.lasvegas@email.com",
                     CityId = SeedConsts.LasVegasCity,
                     RestaurantId = SeedConsts.McDonaldsRestaurant,
-                    CreatedBy = "Seed",
-                    CreatedDate = DateTimeOffset.Now,
+                    IsDeleted = false
                 }
             };
         }

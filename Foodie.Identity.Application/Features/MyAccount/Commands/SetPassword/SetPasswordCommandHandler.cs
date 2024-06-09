@@ -48,7 +48,7 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.SetPassword
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
 
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             await _cacheService.RemoveAsync(CachePrefixes.SetPasswordToken, string.Empty, CacheParameters.SetPasswordToken,
                                                           request.SetPasswordToken);

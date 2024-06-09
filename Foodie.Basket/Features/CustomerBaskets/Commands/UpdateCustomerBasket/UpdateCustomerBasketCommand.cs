@@ -1,5 +1,5 @@
 ﻿using Foodie.Basket.API.Dtos;
-using Foodie.Common.Application.Requests.Abstractions;
+using Foodie.Common.Application.Requests.Interfaces;
 using Foodie.Common.Results;
 using MediatR;
 using System.Collections.Generic;

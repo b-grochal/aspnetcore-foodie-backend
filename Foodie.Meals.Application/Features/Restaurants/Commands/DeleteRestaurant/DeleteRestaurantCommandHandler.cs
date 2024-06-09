@@ -27,7 +27,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.DeleteRestaura
                 return Result.Failure<DeleteRestaurantCommandResponse>(RestaurantsErrors.RestaurantNotFoundById(request.Id));
 
             await _restaurantRepository.DeleteAsync(restaurantToDelete);
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return new DeleteRestaurantCommandResponse
             {

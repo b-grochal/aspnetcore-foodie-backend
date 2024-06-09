@@ -30,7 +30,7 @@ namespace Foodie.Meals.Application.Functions.Locations.Commands.CreateLocation
         {
             var location = _mapper.Map<Location>(request);
             await _locationsRepository.CreateAsync(location);
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
             return _mapper.Map<CreateLocationCommandResponse>(location);
         }
     }

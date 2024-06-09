@@ -39,11 +39,14 @@ using Foodie.Common.Api.Exceptions;
 using Foodie.Common.Api.Settings;
 using Foodie.Common.Application.Behaviours;
 using Foodie.Common.Infrastructure.Authentication;
+using Foodie.Common.Infrastructure.Database.Outbox;
+using Foodie.Common.Infrastructure.Database.Outbox.Interfaces;
 using Foodie.Common.Infrastructure.Hangfire;
 using Foodie.Emails;
 using Foodie.Identity.API.Grpc;
 using Foodie.Identity.Application;
 using Foodie.Shared.Behaviours;
+using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -80,6 +83,7 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuditableBeha
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ApplicationUserLocationBehaviour<,>));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ApplicationUserIdBehaviour<,>));
 builder.Services.AddSingleton<ProblemDetailsFactory, CustomProblemDetailsFactory>();
+builder.Services.AddScoped<IProcessOutboxMessagesJob, ProcessOutboxMessagesJob>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
@@ -121,5 +125,14 @@ app.UseEndpoints(endpoints =>
     endpoints.MapGrpcService<IdentityGrpcService>();
     endpoints.MapControllers();
 });
+
+app.UseHangifreDashboardTool();
+
+app.Services
+    .GetRequiredService<IRecurringJobManager>()
+    .AddOrUpdate<IProcessOutboxMessagesJob>(
+    "outbox-processor",
+    job => job.ProcessAsync(),
+    app.Configuration["BackgroundJobs:Outbox:Schedule"]);
 
 app.Run();

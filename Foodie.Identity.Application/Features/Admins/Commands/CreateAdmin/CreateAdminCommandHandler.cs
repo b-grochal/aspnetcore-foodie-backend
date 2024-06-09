@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
-using Foodie.Common.Infrastructure.Cache.Interfaces;
 using Foodie.Common.Results;
 using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
 using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Identity.Application.Features.Common;
 using Foodie.Identity.Domain.Admins;
-using Foodie.Templates.Services;
-using Hangfire;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,8 +19,8 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
         private readonly IPasswordService _passwordService;
         private readonly IMapper _mapper;
 
-        public CreateAdminCommandHandler(IAdminsRepository adminsRepository, 
-            IApplicationUsersRepository applicationUsersRepository, 
+        public CreateAdminCommandHandler(IAdminsRepository adminsRepository,
+            IApplicationUsersRepository applicationUsersRepository,
             IPasswordService passwordService, IMapper mapper,
             IUnitOfWork unitOfWork)
         {
@@ -45,7 +42,7 @@ namespace Foodie.Identity.Application.Functions.Admins.Commands.CreateAdmin
 
             await _adminsRepository.CreateAsync(admin);
 
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return _mapper.Map<CreateAdminCommandResponse>(admin);
         }

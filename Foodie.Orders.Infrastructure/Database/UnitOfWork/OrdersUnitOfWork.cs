@@ -1,4 +1,4 @@
-﻿using Foodie.Common.Infrastructure.Database;
+﻿using Foodie.Common.Infrastructure.Database.UnitOfWork;
 
 namespace Foodie.Orders.Infrastructure.Database.UnitOfWork
 {

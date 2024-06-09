@@ -6,6 +6,10 @@ namespace Foodie.Common.Application.Contracts.Infrastructure.Database
 {
     public interface IUnitOfWork : IDisposable
     {
-        Task<int> CommitChangesAsync(string user, CancellationToken cancellationToken = default);
+        Task<int> CommitChangesAsync(
+            int? applicationUserId = null, 
+            string applcationUserEmail = null, 
+            string handlerName = null, 
+            CancellationToken cancellationToken = default);
     }
 }

@@ -34,6 +34,69 @@ namespace Foodie.Orders.Infrastructure.Database.Migrations
             modelBuilder.HasSequence("OrdersSequence")
                 .IncrementsBy(10);
 
+            modelBuilder.Entity("Foodie.Common.Infrastructure.Database.Audits.Audit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("ModificationDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedColumns")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewValues")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OldValues")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrimaryKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TableName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Audits");
+                });
+
+            modelBuilder.Entity("Foodie.Common.Infrastructure.Database.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Error")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("OccurrenceDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("ProcessedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OutboxMessages");
+                });
+
             modelBuilder.Entity("Foodie.Orders.Domain.Buyers.Buyer", b =>
                 {
                     b.Property<int>("Id")
@@ -41,12 +104,6 @@ namespace Foodie.Orders.Infrastructure.Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "BuyersSequence");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CustomerId")
                         .IsRequired()
@@ -58,12 +115,6 @@ namespace Foodie.Orders.Infrastructure.Database.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("LastModifiedDate")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -99,20 +150,8 @@ namespace Foodie.Orders.Infrastructure.Database.Migrations
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("LastModifiedDate")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
@@ -145,18 +184,6 @@ namespace Foodie.Orders.Infrastructure.Database.Migrations
                     b.Property<int?>("ContractorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("LastModifiedDate")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<string>("OrderStatus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -187,18 +214,6 @@ namespace Foodie.Orders.Infrastructure.Database.Migrations
                                 .HasColumnType("int");
 
                             SqlServerPropertyBuilderExtensions.UseHiLo(b1.Property<int>("Id"), "OrderItemsSequence");
-
-                            b1.Property<string>("CreatedBy")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTimeOffset>("CreatedDate")
-                                .HasColumnType("datetimeoffset");
-
-                            b1.Property<string>("LastModifiedBy")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTimeOffset?>("LastModifiedDate")
-                                .HasColumnType("datetimeoffset");
 
                             b1.Property<int>("MealId")
                                 .HasColumnType("int");

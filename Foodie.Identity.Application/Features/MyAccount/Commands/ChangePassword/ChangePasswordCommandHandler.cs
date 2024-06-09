@@ -32,7 +32,7 @@ namespace Foodie.Identity.Application.Features.MyAccount.Commands.ChangePassword
 
             await _applicationUsersRepository.UpdateAsync(applicationUser);
 
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return Result.Success();
         }

@@ -27,7 +27,7 @@ namespace Foodie.Meals.Application.Functions.Meals.Commands.DeleteMeal
                 return Result.Failure<DeleteMealCommandResponse>(MealsErrors.MealNotFoundById(request.Id));
 
             await _mealsRepository.DeleteAsync(mealToDelete);
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return new DeleteMealCommandResponse
             {

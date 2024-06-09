@@ -35,6 +35,8 @@
 using Foodie.Common.Api.Exceptions;
 using Foodie.Common.Api.Settings;
 using Foodie.Common.Infrastructure.Authentication;
+using Foodie.Common.Infrastructure.Database.Outbox.Interfaces;
+using Foodie.Common.Infrastructure.Database.Outbox;
 using Foodie.Common.Infrastructure.Hangfire;
 using Foodie.Emails;
 using Foodie.Orders.Application;
@@ -47,6 +49,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,6 +71,8 @@ builder.Services.ConfigureApplicationSettings(builder.Configuration, SettingsTyp
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddEmails();
 builder.Services.AddHangfire(builder.Configuration);
+
+builder.Services.AddScoped<IProcessOutboxMessagesJob, ProcessOutboxMessagesJob>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
@@ -111,5 +116,12 @@ app.UseEndpoints(endpoints =>
 });
 
 app.UseHangifreDashboardTool();
+
+app.Services
+    .GetRequiredService<IRecurringJobManager>()
+    .AddOrUpdate<IProcessOutboxMessagesJob>(
+    "outbox-processor",
+    job => job.ProcessAsync(),
+    app.Configuration["BackgroundJobs:Outbox:Schedule"]);
 
 app.Run();

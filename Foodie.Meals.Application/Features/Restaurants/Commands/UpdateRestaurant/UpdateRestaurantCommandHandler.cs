@@ -39,7 +39,7 @@ namespace Foodie.Meals.Application.Functions.Restaurants.Commands.UpdateRestaura
             editedRestaurant.Categories.Merge(categories);
 
             await _restaurantsRepository.UpdateAsync(editedRestaurant);
-            await _unitOfWork.CommitChangesAsync(request.User, cancellationToken);
+            await _unitOfWork.CommitChangesAsync(request.ApplicationUserId, request.ApplicationUserEmail, GetType().Name, cancellationToken);
 
             return _mapper.Map<UpdateRestaurantCommandResponse>(editedRestaurant);
         }

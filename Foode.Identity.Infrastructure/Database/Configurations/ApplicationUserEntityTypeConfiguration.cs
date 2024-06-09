@@ -28,6 +28,10 @@ namespace Foode.Identity.Infrastructure.Database.Configurations
 
             builder.Property(o => o.IsActive);
 
+            builder.Property(o => o.IsDeleted);
+
+            builder.HasQueryFilter(o => !o.IsDeleted);
+
             builder
                 .Property(o => o.Role)
                 .HasConversion<string>();

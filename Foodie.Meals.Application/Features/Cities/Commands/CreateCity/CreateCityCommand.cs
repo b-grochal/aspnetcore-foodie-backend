@@ -1,4 +1,4 @@
-﻿using Foodie.Common.Application.Requests.Commands.Abstractions;
+﻿using Foodie.Common.Application.Requests.Commands.Interfaces;
 using Foodie.Common.Results;
 using MediatR;
 
@@ -8,6 +8,7 @@ namespace Foodie.Meals.Application.Functions.Cities.Commands.CreateCity
     {
         public string Name { get; set; }
         public int CountryId { get; set; }
-        public string User { get; set; }
+        public int ApplicationUserId { get; set; }
+        public string ApplicationUserEmail { get; set; }
     }
 }

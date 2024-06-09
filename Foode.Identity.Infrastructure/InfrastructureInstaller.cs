@@ -5,6 +5,9 @@ using Foodie.Common.Application.Contracts.Infrastructure.Authentication;
 using Foodie.Common.Application.Contracts.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Cache;
+using Foodie.Common.Infrastructure.Database.Connections.Interfaces;
+using Foodie.Common.Infrastructure.Database.Connections;
+using Foodie.Common.Infrastructure.Database.Interceptors;
 using Foodie.Identity.Application.Contracts.Infrastructure.ApplicationUserUtilities;
 using Foodie.Identity.Application.Contracts.Infrastructure.Database.Repositories;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +22,14 @@ namespace Foode.Identity.Infrastructure
     {
         public static IServiceCollection AddIdentityInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<IdentityDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DbConnection")));
+            services.AddSingleton<SoftDeleteForDomainEntitiesInterceptor>();
+            services.AddSingleton<InsertOutboxMessagesInterceptor>();
+
+            services.AddDbContext<IdentityDbContext>((sp, options) => options
+                .UseSqlServer(configuration.GetConnectionString("DbConnection"))
+                .AddInterceptors(
+                    sp.GetRequiredService<SoftDeleteForDomainEntitiesInterceptor>(),
+                    sp.GetRequiredService<InsertOutboxMessagesInterceptor>()));
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -44,6 +54,7 @@ namespace Foode.Identity.Infrastructure
             services.AddTransient<IRefreshTokenService, RefreshTokenService>();
             services.AddTransient<IAccountTokensService, AccountTokensService>();
             services.AddTransient<IApplicationUserContext, ApplicationUserContext>();
+            services.AddSingleton<IDbConnecionFactory, DbConnectionFactory>();
             services.AddHttpContextAccessor();
 
             return services;

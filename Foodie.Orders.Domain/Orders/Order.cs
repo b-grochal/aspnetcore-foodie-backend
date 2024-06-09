@@ -29,7 +29,6 @@ namespace Foodie.Orders.Domain.Orders
         {
             OrderStatus = OrderStatus.Started;
             DeliveryAddress = deliveryAddress;
-            CreatedBy = customerEmail;
             BuyerId = buyerId;
             ContractorId = contractorId;
         }

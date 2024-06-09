@@ -57,6 +57,43 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Foodie.Common.Infrastructure.Database.Audits.Audit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("ModificationDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedColumns")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewValues")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OldValues")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrimaryKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TableName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Audits");
+                });
+
             modelBuilder.Entity("Foodie.Meals.Domain.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -65,17 +102,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("LastModifiedDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -88,29 +116,25 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(6880), new TimeSpan(0, 2, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "Pasta"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(6946), new TimeSpan(0, 2, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "Burger"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(6949), new TimeSpan(0, 2, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "Pizza"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(6952), new TimeSpan(0, 2, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "Salad"
                         });
                 });
@@ -126,17 +150,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("LastModifiedDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -152,24 +167,21 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         {
                             Id = 1,
                             CountryId = 1,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7180), new TimeSpan(0, 2, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "Las Vegas"
                         },
                         new
                         {
                             Id = 2,
                             CountryId = 1,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7186), new TimeSpan(0, 2, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "Los Angeles"
                         },
                         new
                         {
                             Id = 3,
                             CountryId = 1,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7189), new TimeSpan(0, 2, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "New York"
                         });
                 });
@@ -182,17 +194,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("LastModifiedDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -205,13 +208,13 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "USA"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "Germany"
                         });
                 });
@@ -230,20 +233,11 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("LastModifiedDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -265,9 +259,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                             Id = 1,
                             Address = "Kfc Las Vegas",
                             CityId = 1,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7272), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "kfc.lasvegas@email.com",
+                            IsDeleted = false,
                             PhoneNumber = "123-123-213",
                             RestaurantId = 1
                         },
@@ -276,9 +269,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                             Id = 2,
                             Address = "Kfc Los Angeles",
                             CityId = 2,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7278), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "kfc.losangeles@email.com",
+                            IsDeleted = false,
                             PhoneNumber = "123-123-213",
                             RestaurantId = 1
                         },
@@ -287,9 +279,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                             Id = 3,
                             Address = "Kfc New York",
                             CityId = 3,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7281), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "kfc.newyork@email.com",
+                            IsDeleted = false,
                             PhoneNumber = "123-123-213",
                             RestaurantId = 1
                         },
@@ -298,9 +289,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                             Id = 4,
                             Address = "Pizza Hut Las Vegas",
                             CityId = 1,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7284), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "pizzahut.lasvegas@email.com",
+                            IsDeleted = false,
                             PhoneNumber = "123-123-213",
                             RestaurantId = 2
                         },
@@ -309,9 +299,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                             Id = 5,
                             Address = "Pizza Hut Los Angeles",
                             CityId = 2,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7288), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "pizzahut.losangeles@email.com",
+                            IsDeleted = false,
                             PhoneNumber = "123-123-213",
                             RestaurantId = 2
                         },
@@ -320,9 +309,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                             Id = 6,
                             Address = "McDonald's Las Vegas",
                             CityId = 1,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7296), new TimeSpan(0, 2, 0, 0, 0)),
                             Email = "mcdonalds.lasvegas@email.com",
+                            IsDeleted = false,
                             PhoneNumber = "123-123-213",
                             RestaurantId = 3
                         });
@@ -336,20 +324,11 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("LastModifiedDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -370,9 +349,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7385), new TimeSpan(0, 2, 0, 0, 0)),
                             Description = "Longer",
+                            IsDeleted = false,
                             Name = "Longer",
                             Price = 12m,
                             RestaurantId = 1
@@ -380,9 +358,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7393), new TimeSpan(0, 2, 0, 0, 0)),
                             Description = "Zinger",
+                            IsDeleted = false,
                             Name = "Zinger",
                             Price = 10m,
                             RestaurantId = 1
@@ -390,9 +367,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7396), new TimeSpan(0, 2, 0, 0, 0)),
                             Description = "Pizza Texas",
+                            IsDeleted = false,
                             Name = "Pizza Texas",
                             Price = 12m,
                             RestaurantId = 2
@@ -400,9 +376,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7400), new TimeSpan(0, 2, 0, 0, 0)),
                             Description = "Pizza Carbonara",
+                            IsDeleted = false,
                             Name = "Pizza Carbonara",
                             Price = 12m,
                             RestaurantId = 2
@@ -410,9 +385,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7403), new TimeSpan(0, 2, 0, 0, 0)),
                             Description = "Big Mac",
+                            IsDeleted = false,
                             Name = "Big Mac",
                             Price = 15m,
                             RestaurantId = 3
@@ -420,9 +394,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7407), new TimeSpan(0, 2, 0, 0, 0)),
                             Description = "McRoyal",
+                            IsDeleted = false,
                             Name = "McRoyal",
                             Price = 10m,
                             RestaurantId = 3
@@ -437,17 +410,8 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset?>("LastModifiedDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -460,22 +424,19 @@ namespace Foodie.Meals.Infrastructure.Database.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7493), new TimeSpan(0, 2, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "KFC"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7498), new TimeSpan(0, 2, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "Pizza Hut"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedBy = "Seed",
-                            CreatedDate = new DateTimeOffset(new DateTime(2024, 4, 23, 18, 19, 15, 410, DateTimeKind.Unspecified).AddTicks(7501), new TimeSpan(0, 2, 0, 0, 0)),
+                            IsDeleted = false,
                             Name = "McDonald's"
                         });
                 });

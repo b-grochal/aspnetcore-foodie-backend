@@ -1,5 +1,5 @@
 ﻿using Foodie.Common.Application.Contracts.Infrastructure.Authentication;
-using Foodie.Common.Application.Requests.Abstractions;
+using Foodie.Common.Application.Requests.Interfaces;
 using Foodie.Common.Enums;
 using Foodie.Common.Results;
 using MediatR;
