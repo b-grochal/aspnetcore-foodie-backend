@@ -17,7 +17,11 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
         public BaseDbContext(DbContextOptions options) : base(options) { }
 
         // TODO: refactor methods for preparing audits, extract common code
-        public async Task PrepareAuditsForEntities(int applicationUserId, string applicationUserEmail, string handlerName)
+        public async Task PrepareAuditsForEntities(
+            int? applicationUserId = null,
+            string applicationUserEmail = null,
+            string handlerName = null,
+            CancellationToken cancellationToken = default)
         {
             var modifiedEntites = ChangeTracker
                 .Entries()
@@ -33,10 +37,10 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
                 var audit = new Audit
                 {
                     TableName = modifiedEntity.Entity.GetType().Name,
-                    ModifiedBy = $"ApplicationUserId: {applicationUserId}, ApplicationUserEmail: {applicationUserEmail}, Handler: {handlerName}"
+                    ModifiedBy = GetModifiedByValue(applicationUserId, applicationUserEmail, handlerName)
                 };
 
-                switch(modifiedEntity.State)
+                switch (modifiedEntity.State)
                 {
                     case EntityState.Added:
                         audit.Type = AuditType.Create;
@@ -60,52 +64,36 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
             await Audits.AddRangeAsync(audits);
         }
 
-        public void PrepareAuditsForEntities(string handlerName)
+        private string GetModifiedByValue(
+            int? applicationUserId = null,
+            string applicationUserEmail = null,
+            string handlerName = null)
         {
-            var modifiedEntites = ChangeTracker
-                .Entries()
-                .Where(e => e.State == EntityState.Added
-                || e.State == EntityState.Modified
-                || e.State == EntityState.Deleted)
-                .ToList();
+            List<string> modifiedByDetails = new List<string>();
 
-            var audits = new List<Audit>();
-
-            foreach (var modifiedEntity in modifiedEntites)
+            if (applicationUserId is not null)
             {
-                var audit = new Audit
-                {
-                    TableName = modifiedEntity.Entity.GetType().Name,
-                    ModifiedBy = $"Handler: {handlerName}"
-                };
-
-                switch (modifiedEntity.State)
-                {
-                    case EntityState.Added:
-                        audit.Type = AuditType.Create;
-                        audit.NewValues = GetNewValues(modifiedEntity);
-                        break;
-                    case EntityState.Modified:
-                        audit.Type = AuditType.Update;
-                        audit.NewValues = GetNewValues(modifiedEntity);
-                        audit.OldValues = GetOldValues(modifiedEntity);
-                        audit.ModifiedColumns = GetChangedColumns(modifiedEntity);
-                        break;
-                    case EntityState.Deleted:
-                        audit.Type = AuditType.Delete;
-                        audit.OldValues = GetOldValues(modifiedEntity);
-                        break;
-                }
+                modifiedByDetails.Add($"ApplicationUserId: {applicationUserId}");
             }
 
-            Audits.AddRangeAsync(audits);
+            if (applicationUserEmail is not null)
+            {
+                modifiedByDetails.Add($"ApplicationUserEmail: {applicationUserEmail}");
+            }
+
+            if (handlerName is not null)
+            {
+                modifiedByDetails.Add($"Handler: {handlerName}");
+            }
+
+            return string.Join(", ", modifiedByDetails);
         }
 
         private string GetOldValues(EntityEntry entityEntry)
         {
             var oldValues = new Dictionary<string, object>();
 
-            foreach(var property in entityEntry.Properties)
+            foreach (var property in entityEntry.Properties)
             {
                 oldValues[property.Metadata.Name] = property.OriginalValue;
             }
@@ -137,13 +125,11 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
             return changedCloumns.Count == 0 ? null : JsonSerializer.Serialize(changedCloumns);
         }
 
-        public Task<int> CommitChangesAsync(string handlerName, CancellationToken cancellationToken)
-        {
-            PrepareAuditsForEntities(handlerName);
-            return base.SaveChangesAsync(cancellationToken);
-        }
-
-        public async Task<int> CommitChangesAsync(int applicationUserId, string applicationUserEmail, string handlerName, CancellationToken cancellationToken)
+        public async Task<int> CommitChangesAsync(
+            int? applicationUserId = null,
+            string applicationUserEmail = null,
+            string handlerName = null,
+            CancellationToken cancellationToken = default)
         {
             await PrepareAuditsForEntities(applicationUserId, applicationUserEmail, handlerName);
             return await base.SaveChangesAsync(cancellationToken);

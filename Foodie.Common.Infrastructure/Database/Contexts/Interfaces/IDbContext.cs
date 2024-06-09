@@ -5,9 +5,11 @@ namespace Foodie.Common.Infrastructure.Database.Contexts.Interfaces
 {
     public interface IDbContext
     {
-        Task<int> CommitChangesAsync(int applicationuserId, string applicationUserEmail, string handlerName, CancellationToken cancellationToken);
-
-        Task<int> CommitChangesAsync(string handlerName, CancellationToken cancellationToken);
+        Task<int> CommitChangesAsync(
+            int? applicationuserId = null, 
+            string applicationUserEmail = null, 
+            string handlerName = null, 
+            CancellationToken cancellationToken = default);
 
         void Dispose();
     }
