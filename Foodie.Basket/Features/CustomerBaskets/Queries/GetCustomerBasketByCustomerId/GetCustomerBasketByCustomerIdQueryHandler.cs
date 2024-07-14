@@ -10,23 +10,23 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Queries.GetCustomerBasketB
 {
     public class GetCustomerBasketByCustomerIdQueryHandler : IRequestHandler<GetCustomerBasketByCustomerIdQuery, Result<GetCustomerBasketByCustomerIdQueryResponse>>
     {
-        private readonly ICustomerBasketsRepository customerBasketsRepository;
-        private readonly IMapper mapper;
+        private readonly ICustomerBasketsRepository _customerBasketsRepository;
+        private readonly IMapper _mapper;
 
         public GetCustomerBasketByCustomerIdQueryHandler(ICustomerBasketsRepository customerBasketsRepository, IMapper mapper)
         {
-            this.customerBasketsRepository = customerBasketsRepository;
-            this.mapper = mapper;
+            _customerBasketsRepository = customerBasketsRepository;
+            _mapper = mapper;
         }
 
         public async Task<Result<GetCustomerBasketByCustomerIdQueryResponse>> Handle(GetCustomerBasketByCustomerIdQuery request, CancellationToken cancellationToken)
         {
-            var customerBasket = await customerBasketsRepository.GetByCustomerId(request.ApplicationUserId);
+            var customerBasket = await _customerBasketsRepository.GetByCustomerId(request.ApplicationUserId);
 
             if (customerBasket == null)
                 return Result.Failure<GetCustomerBasketByCustomerIdQueryResponse>(BasketsErrors.BasketNotFoundByApplicationUserId(request.ApplicationUserId));
 
-            return mapper.Map<GetCustomerBasketByCustomerIdQueryResponse>(customerBasket);
+            return _mapper.Map<GetCustomerBasketByCustomerIdQueryResponse>(customerBasket);
         }
     }
 }

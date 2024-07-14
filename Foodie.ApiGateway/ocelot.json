@@ -145,7 +145,7 @@
       "UpstreamHost": null,
       "UpstreamHttpMethod": [
         "GET",
-        "POST",
+        "PUT",
         "DELETE"
       ],
       "UpstreamPathTemplate": "/foodie/my-basket"

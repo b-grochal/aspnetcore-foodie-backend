@@ -38,11 +38,15 @@ using Foodie.Basket.Repositories.Implementations;
 using Foodie.Basket.Repositories.Interfaces;
 using Foodie.Common.Api.Exceptions;
 using Foodie.Common.Api.Settings;
+using Foodie.Common.Application.Behaviours;
+using Foodie.Common.Application.Contracts.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Cache;
+using Foodie.Shared.Behaviours;
 using IdentityGrpc;
 using MassTransit;
 using MealsGrpc;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -70,9 +74,14 @@ builder.Services.ConfigureApplicationSettings(builder.Configuration, SettingsTyp
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddCache(builder.Configuration);
 builder.Services.AddScoped<ICustomerBasketsRepository, CustomerBasketsRepository>();
+builder.Services.AddTransient<IApplicationUserContext, ApplicationUserContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ApplicationUserIdBehaviour<,>));
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddMassTransit(x =>
 {
@@ -121,7 +130,10 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints => { });
+app.UseEndpoints(endpoints => 
+{
+    endpoints.MapControllers();
+});
 
 app.Run();
 

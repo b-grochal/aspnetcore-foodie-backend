@@ -138,7 +138,7 @@ namespace Foodie.Orders.Infrastructure.Queries
             builder.InnerJoin("Buyers b on o.BuyerId = b.Id");
             builder.InnerJoin("Contractors c on o.ContractorId = c.Id");
             builder.InnerJoin("OrderStatuses os on o.OrderStatusId = os.Id");
-            builder.OrderBy("o.Id");
+            builder.OrderBy("o.Id desc");
             builder.Where("b.UserId = @userId", new { customerId });
 
             if (orderStatusId != null)
