@@ -19,7 +19,7 @@ namespace Foodie.Common.Api.Exceptions
 
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-            _logger.LogError($"Exception occured: {exception}");
+             _logger.LogError($"Exception occured: {exception}");
 
             var problemDetails = new ProblemDetails
             {

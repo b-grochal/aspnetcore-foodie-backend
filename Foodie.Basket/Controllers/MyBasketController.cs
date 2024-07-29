@@ -28,7 +28,7 @@ namespace Foodie.Basket.Controllers
                 onFailure: HandleFailure);
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> UpdateMyBasket([FromBody] UpdateCustomerBasketCommand updateCustomerBasketCommand)
         {
             var result = await mediator.Send(updateCustomerBasketCommand);
@@ -44,7 +44,7 @@ namespace Foodie.Basket.Controllers
             var result = await mediator.Send(new DeleteCustomerBasketCommand());
 
             return result.Match(
-                onSuccess: Ok,
+                onSuccess: NoContent,
                 onFailure: HandleFailure);
         }
 
@@ -55,7 +55,7 @@ namespace Foodie.Basket.Controllers
             var result = await mediator.Send(checkoutCustomerBasketCommand);
 
             return result.Match(
-                onSuccess: Ok,
+                onSuccess: NoContent,
                 onFailure: HandleFailure);
         }
     }

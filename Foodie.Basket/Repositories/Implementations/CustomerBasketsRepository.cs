@@ -17,17 +17,17 @@ namespace Foodie.Basket.Repositories.Implementations
 
         public async Task DeleteBasket(int customerId)
         {
-            await cacheService.RemoveAsync(CachePrefixes.Basket, nameof(CustomerBasketsRepository), new string[] { nameof(customerId), customerId.ToString() });
+            await cacheService.RemoveAsync(CachePrefixes.Basket, nameof(CustomerBasketsRepository), [nameof(customerId), customerId.ToString()]);
         }
 
         public async Task<CustomerBasket> GetByCustomerId(int customerId)
         {
-            return await cacheService.GetAsync<CustomerBasket>(CachePrefixes.Basket, nameof(CustomerBasketsRepository), new string[] { nameof(customerId), customerId.ToString() });
+            return await cacheService.GetAsync<CustomerBasket>(CachePrefixes.Basket, nameof(CustomerBasketsRepository), [nameof(customerId), customerId.ToString()]);
         }
 
         public async Task<CustomerBasket> UpdateBasket(int customerId, CustomerBasket basket)
         {
-            await cacheService.SetAsync<CustomerBasket>(basket, CachePrefixes.Basket, nameof(CustomerBasketsRepository), new string[] { nameof(customerId), customerId.ToString() });
+            await cacheService.SetAsync<CustomerBasket>(basket, CachePrefixes.Basket, nameof(CustomerBasketsRepository), [nameof(customerId), customerId.ToString()]);
             return await GetByCustomerId(customerId);
         }
     }
