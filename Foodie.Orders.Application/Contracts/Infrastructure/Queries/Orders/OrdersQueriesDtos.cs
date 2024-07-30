@@ -21,12 +21,10 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders
     public record OrderDetailsQueryDto
     {
         public int OrderId { get; set; }
-        public DateTimeOffset OrderDate { get; set; }
         public string AddressStreet { get; set; }
         public string AddressCity { get; set; }
         public string AddressCountry { get; set; }
-        public int OrderStatusId { get; set; }
-        public string OrderStatusName { get; set; }
+        public string OrderStatus { get; set; }
         public int BuyerId { get; set; }
         public string BuyerFirstName { get; set; }
         public string BuyerLastName { get; set; }

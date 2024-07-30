@@ -1,4 +1,6 @@
-﻿using Foodie.Common.Application.Contracts.Infrastructure.Database;
+﻿using Foodie.Common.Application.Contracts.Infrastructure.Authentication;
+using Foodie.Common.Application.Contracts.Infrastructure.Database;
+using Foodie.Common.Infrastructure.Authentication;
 using Foodie.Common.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Database.Connections;
 using Foodie.Common.Infrastructure.Database.Connections.Interfaces;
@@ -32,9 +34,12 @@ namespace Foodie.Orders.Infrastructure
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IBuyersRepository, BuyersRepository>();
             services.AddScoped<IContractorsRepository, ContractorsRepository>();
-            services.AddScoped<IOrdersQueries, OrdersQueries>();
+            services.AddScoped<IOrdersReadServcie, OrdersReadService>();
             services.AddScoped<IContractorsQueries, ContractorsQueries>();
             services.AddScoped<IBuyersQueries, BuyersQueries>();
+            services.AddTransient<IApplicationUserContext, ApplicationUserContext>();
+            services.AddSingleton<IDbConnecionFactory, DbConnectionFactory>();
+            services.AddHttpContextAccessor();
 
             return services;
         }

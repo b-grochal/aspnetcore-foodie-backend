@@ -50,9 +50,9 @@ namespace Foodie.Orders.Application.Mapper
         private void ConfigureMyOrdersMapping()
         {
             CreateMap<OrderQueryDto, CustomersOrderDto>();
-            CreateMap<OrderDetailsQueryDto, GetCustomersOrderByIdQueryResponse>()
-                .ForMember(dest => dest.CustomersOrderItems, opt => opt.MapFrom(src => src.OrderItems));
-            CreateMap<OrderItemQueryDto, CustomersOrderItemDto>();
+            CreateMap<OrderDetailsQueryDto, GetMyOrderByIdQueryResponse>()
+                .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.OrderItems));
+            CreateMap<OrderItemQueryDto, MyOrderItemDto>();
         }
     }
 }

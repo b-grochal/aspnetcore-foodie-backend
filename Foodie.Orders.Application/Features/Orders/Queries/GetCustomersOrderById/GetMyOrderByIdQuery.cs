@@ -5,14 +5,14 @@ using System.Text.Json.Serialization;
 
 namespace Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrderById
 {
-    public class GetCustomersOrderByIdQuery : IRequest<Result<GetCustomersOrderByIdQueryResponse>>, IApplicationUserIdRequest
+    public class GetMyOrderByIdQuery : IRequest<Result<GetMyOrderByIdQueryResponse>>, IApplicationUserIdRequest
     {
         public int Id { get; }
 
         [JsonIgnore]
         public int ApplicationUserId { get; set; }
 
-        public GetCustomersOrderByIdQuery(int id)
+        public GetMyOrderByIdQuery(int id)
         {
             Id = id;
         }

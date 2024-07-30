@@ -3,15 +3,13 @@ using System.Collections.Generic;
 
 namespace Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrderById
 {
-    public class GetCustomersOrderByIdQueryResponse
+    public class GetMyOrderByIdQueryResponse
     {
         public int Id { get; set; }
-        public DateTimeOffset OrderDate { get; set; }
         public string AddressStreet { get; set; }
         public string AddressCity { get; set; }
         public string AddressCountry { get; set; }
-        public int OrderStatusId { get; set; }
-        public string OrderStatusName { get; set; }
+        public string OrderStatus { get; set; }
         public int ContractorId { get; set; }
         public string ContractorName { get; set; }
         public string ContractorAddress { get; set; }
@@ -19,10 +17,10 @@ namespace Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrderByI
         public string ContractorEmail { get; set; }
         public string ContractorCity { get; set; }
         public string ContractorCountry { get; set; }
-        public IList<CustomersOrderItemDto> CustomersOrderItems { get; set; }
+        public IList<MyOrderItemDto> Items { get; set; }
     }
 
-    public class CustomersOrderItemDto
+    public class MyOrderItemDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

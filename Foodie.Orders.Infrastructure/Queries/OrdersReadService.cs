@@ -2,7 +2,6 @@
 using Foodie.Common.Collections;
 using Foodie.Common.Infrastructure.Database.Connections.Interfaces;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
-using Foodie.Orders.Infrastructure.Database;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,11 +9,11 @@ using static Dapper.SqlBuilder;
 
 namespace Foodie.Orders.Infrastructure.Queries
 {
-    public class OrdersQueries : IOrdersQueries
+    public class OrdersReadService : IOrdersReadServcie
     {
         private readonly IDbConnecionFactory _dapperContext;
 
-        public OrdersQueries(IDbConnecionFactory dapperContext)
+        public OrdersReadService(IDbConnecionFactory dapperContext)
         {
             _dapperContext = dapperContext;
         }
@@ -72,9 +71,9 @@ namespace Foodie.Orders.Infrastructure.Queries
             return sqlQueryResult.FirstOrDefault();
         }
 
-        public async Task<OrderDetailsQueryDto> GetByIdAsync(int id, int customerId)
+        public async Task<OrderDetailsQueryDto> GetMyOrderByIdAsync(int orderId, int customerId)
         {
-            var selector = PrepareSqlTemplateForGettingOrderById(id, customerId);
+            var selector = PrepareSqlQueryForGettingMyOrderById(orderId, customerId);
 
             using var connection = _dapperContext.CreateConnection();
             connection.Open();
@@ -170,24 +169,23 @@ namespace Foodie.Orders.Infrastructure.Queries
             return selector;
         }
 
-        private Template PrepareSqlTemplateForGettingOrderById(int id, int customerId)
+        private Template PrepareSqlQueryForGettingMyOrderById(int orderId, int customerId)
         {
             var builder = new SqlBuilder();
 
-            var selector = builder.AddTemplate("Select /**select**/ from orders o /**innerjoin**/ /**where**/");
+            var selector = builder.AddTemplate("select /**select**/ from orders o /**innerjoin**/ /**where**/");
 
-            builder.Select("o.Id as OrderId, o.OrderDate as OrderDate, o.Address_Street as AddressStreet, o.Address_City as AddressCity, " +
-                "o.Address_Country as AddressCountry, os.Id as OrderStatusId, os.Name as OrderStatusName, b.Id as BuyerId, b.FirstName as BuyerFirstName, " +
+            builder.Select("o.Id as OrderId, o.DeliveryAddress_Street as AddressStreet, o.DeliveryAddress_City as AddressCity, " +
+                "o.DeliveryAddress_Country as AddressCountry, o.OrderStatus as OrderStatus, b.Id as BuyerId, b.FirstName as BuyerFirstName, " +
                 "b.LastName as BuyerLastName, b.PhoneNumber as BuyerPhoneNumber, b.Email as BuyerEmail, c.Id as ContractorId, c.Name as ContractorName, " +
                 "c.Address as ContractorAddress, c.PhoneNumber as ContractorPhoneNumber, c.Email as ContractorEmail, c.City as ContractorCity, " +
-                "c.Country as ContractorCountry, oi.Id as OrderItemId, oi.Name as Name, oi.Units as Units, oi.UnitPrice as UnitPrice");
+                "c.Country as ContractorCountry, oi.Id as OrderItemId, oi.Name as Name, oi.Quantity as Quantity, oi.UnitPrice as UnitPrice");
 
             builder.InnerJoin("Buyers b on o.BuyerId = b.Id");
             builder.InnerJoin("Contractors c on o.ContractorId = c.Id");
-            builder.InnerJoin("OrderStatuses os on o.OrderStatusId = os.Id");
             builder.InnerJoin("OrderItems oi on o.Id = oi.OrderId");
-            builder.Where("o.Id = @id", new { id });
-            builder.Where("b.UserId = @userId", new { customerId });
+            builder.Where("o.Id = @orderId", new { orderId });
+            builder.Where("b.CustomerId = @customerId", new { customerId });
 
             return selector;
         }
