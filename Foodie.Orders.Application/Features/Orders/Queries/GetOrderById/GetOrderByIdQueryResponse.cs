@@ -6,12 +6,10 @@ namespace Foodie.Orders.Application.Features.Orders.Queries.GetOrderById
     public class GetOrderByIdQueryResponse
     {
         public int Id { get; set; }
-        public DateTimeOffset OrderDate { get; set; }
         public string AddressStreet { get; set; }
         public string AddressCity { get; set; }
         public string AddressCountry { get; set; }
-        public int OrderStatusId { get; set; }
-        public string OrderStatusName { get; set; }
+        public string OrderStatus { get; set; }
         public int BuyerId { get; set; }
         public string BuyerFirstName { get; set; }
         public string BuyerLastName { get; set; }
@@ -24,7 +22,7 @@ namespace Foodie.Orders.Application.Features.Orders.Queries.GetOrderById
         public string ContractorEmail { get; set; }
         public string ContractorCity { get; set; }
         public string ContractorCountry { get; set; }
-        public IList<OrderItemDto> OrderItems { get; set; }
+        public IList<OrderItemDto> Items { get; set; }
     }
 
     public class OrderItemDto

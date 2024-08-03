@@ -37,10 +37,33 @@ namespace Foodie.Shared.Behaviours
             {
                 var result = await mediator.Send(requirement, cancellationToken);
                 if (!result.IsAuthorized)
-                    return (TResponse)Result.Failure(BehavioursErrors.UnauthorizedRequest(result.FailureMessage));
+                {
+                    //return (TResponse)Result.Failure(BehavioursErrors.UnauthorizedRequest(result.FailureMessage));
+                    return CreateValidationResult<TResponse>(result.FailureMessage);
+                }
             }
 
             return await next();
+        }
+
+        private TResult CreateValidationResult<TResult>(string failureMessage)
+            where TResult : Result
+        {
+            if (typeof(TResult) == typeof(Result))
+            {
+                return (Result.Failure(BehavioursErrors.UnauthorizedRequest(failureMessage)) as TResult)!;
+            }
+
+            object validationResult = typeof(Result<>)
+                .GetGenericTypeDefinition()
+                .MakeGenericType(typeof(TResult).GenericTypeArguments[0])
+                .BaseType
+                .GetMethods()
+                .Single(m => m.Name == nameof(Result.Failure) && m.IsGenericMethodDefinition)
+                .MakeGenericMethod(typeof(TResult).GenericTypeArguments[0])
+                .Invoke(null, [BehavioursErrors.UnauthorizedRequest(failureMessage)]);
+
+            return (TResult)validationResult;
         }
     }
 }

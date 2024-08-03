@@ -71,35 +71,6 @@ namespace Foodie.Orders.Infrastructure.Queries
             return sqlQueryResult.FirstOrDefault();
         }
 
-        public async Task<OrderDetailsQueryDto> GetMyOrderByIdAsync(int orderId, int customerId)
-        {
-            var selector = PrepareSqlQueryForGettingMyOrderById(orderId, customerId);
-
-            using var connection = _dapperContext.CreateConnection();
-            connection.Open();
-
-            var ordersMap = new Dictionary<int, OrderDetailsQueryDto>();
-            var sqlQueryResult = await connection.QueryAsync<OrderDetailsQueryDto, OrderItemQueryDto, OrderDetailsQueryDto>(selector.RawSql, param: selector.Parameters,
-                map: (orderDetails, orderItem) =>
-                {
-                    if (ordersMap.TryGetValue(orderDetails.OrderId, out OrderDetailsQueryDto existingOrder))
-                    {
-                        orderDetails = existingOrder;
-                    }
-                    else
-                    {
-                        orderDetails.OrderItems = new List<OrderItemQueryDto>();
-                        ordersMap.Add(orderDetails.OrderId, orderDetails);
-                    }
-
-                    orderDetails.OrderItems.Add(orderItem);
-                    return orderDetails;
-                },
-                splitOn: "OrderItemId");
-
-            return sqlQueryResult.FirstOrDefault();
-        }
-
         private Template PrepareSqlTemplateForGettingAllOrders(int pageNumber, int pageSize, string buyerEmail, string orderStatusName, string contractorName, int? locationId)
         {
             var builder = new SqlBuilder();
@@ -165,27 +136,6 @@ namespace Foodie.Orders.Infrastructure.Queries
             builder.InnerJoin("OrderStatuses os on o.OrderStatusId = os.Id");
             builder.InnerJoin("OrderItems oi on o.Id = oi.OrderId");
             builder.Where("o.Id = @id", new { id });
-
-            return selector;
-        }
-
-        private Template PrepareSqlQueryForGettingMyOrderById(int orderId, int customerId)
-        {
-            var builder = new SqlBuilder();
-
-            var selector = builder.AddTemplate("select /**select**/ from orders o /**innerjoin**/ /**where**/");
-
-            builder.Select("o.Id as OrderId, o.DeliveryAddress_Street as AddressStreet, o.DeliveryAddress_City as AddressCity, " +
-                "o.DeliveryAddress_Country as AddressCountry, o.OrderStatus as OrderStatus, b.Id as BuyerId, b.FirstName as BuyerFirstName, " +
-                "b.LastName as BuyerLastName, b.PhoneNumber as BuyerPhoneNumber, b.Email as BuyerEmail, c.Id as ContractorId, c.Name as ContractorName, " +
-                "c.Address as ContractorAddress, c.PhoneNumber as ContractorPhoneNumber, c.Email as ContractorEmail, c.City as ContractorCity, " +
-                "c.Country as ContractorCountry, oi.Id as OrderItemId, oi.Name as Name, oi.Quantity as Quantity, oi.UnitPrice as UnitPrice");
-
-            builder.InnerJoin("Buyers b on o.BuyerId = b.Id");
-            builder.InnerJoin("Contractors c on o.ContractorId = c.Id");
-            builder.InnerJoin("OrderItems oi on o.Id = oi.OrderId");
-            builder.Where("o.Id = @orderId", new { orderId });
-            builder.Where("b.CustomerId = @customerId", new { customerId });
 
             return selector;
         }

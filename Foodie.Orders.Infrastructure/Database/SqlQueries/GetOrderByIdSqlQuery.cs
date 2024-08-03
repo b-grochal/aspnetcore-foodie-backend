@@ -1,34 +1,31 @@
-﻿using AutoMapper;
-using Dapper;
+﻿using Dapper;
 using Foodie.Common.Infrastructure.Database.Connections.Interfaces;
 using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries;
-using Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrderById;
+using Foodie.Orders.Application.Features.Orders.Queries.GetOrderById;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using static Dapper.SqlBuilder;
 
 namespace Foodie.Orders.Infrastructure.Database.SqlQueries
 {
-    public class GetMyOrderByIdSqlQuery : IGetMyOrderByIdSqlQuery
+    public class GetOrderByIdSqlQuery : IGetOrderByIdSqlQuery
     {
         private readonly IDbConnecionFactory _dbConnectionFactory;
 
-        public GetMyOrderByIdSqlQuery(IDbConnecionFactory dapperContext)
+        public GetOrderByIdSqlQuery(IDbConnecionFactory dbConnectionFactory)
         {
-            _dbConnectionFactory = dapperContext;
+            _dbConnectionFactory = dbConnectionFactory;
         }
 
-        public async Task<GetMyOrderByIdQueryResponse> ExecuteAsync(GetMyOrderByIdQuery query)
+        public async Task<GetOrderByIdQueryResponse> ExecuteAsync(GetOrderByIdQuery query)
         {
-            var selector = PrepareSqlQueryTemplate(query.Id, query.ApplicationUserId);
+            var selector = PrepareSqlQueryTemplate(query.Id);
 
             using var connection = _dbConnectionFactory.CreateConnection();
             connection.Open();
 
             var ordersMap = new Dictionary<int, OrderDetailsQueryDto>();
-
             var sqlQueryResult = await connection.QueryAsync<OrderDetailsQueryDto, OrderItemQueryDto, OrderDetailsQueryDto>(selector.RawSql, param: selector.Parameters,
                 map: (orderDetails, orderItem) =>
                 {
@@ -52,7 +49,7 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries
             return firstResult is not null ? MapSqlQueryResult(firstResult) : null;
         }
 
-        private Template PrepareSqlQueryTemplate(int orderId, int customerId)
+        private Template PrepareSqlQueryTemplate(int orderId)
         {
             var builder = new SqlBuilder();
 
@@ -86,14 +83,13 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries
             builder.InnerJoin("Contractors c on o.ContractorId = c.Id");
             builder.InnerJoin("OrderItems oi on o.Id = oi.OrderId");
             builder.Where("o.Id = @orderId", new { orderId });
-            builder.Where("b.CustomerId = @customerId", new { customerId });
 
             return selector;
         }
 
-        private GetMyOrderByIdQueryResponse MapSqlQueryResult(OrderDetailsQueryDto data)
+        private GetOrderByIdQueryResponse MapSqlQueryResult(OrderDetailsQueryDto data)
         {
-            return new GetMyOrderByIdQueryResponse
+            return new GetOrderByIdQueryResponse
             {
                 Id = data.OrderId,
                 AddressStreet = data.AddressStreet,
@@ -107,7 +103,7 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries
                 ContractorEmail = data.ContractorEmail,
                 ContractorCity = data.ContractorCity,
                 ContractorCountry = data.ContractorCountry,
-                Items = data.OrderItems.Select(x => new MyOrderItemDto
+                Items = data.OrderItems.Select(x => new OrderItemDto
                 {
                     Id = x.OrderItemId,
                     Name = x.Name,

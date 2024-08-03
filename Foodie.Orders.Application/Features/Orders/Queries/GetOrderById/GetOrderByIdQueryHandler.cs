@@ -1,6 +1,5 @@
-﻿using AutoMapper;
-using Foodie.Common.Results;
-using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
+﻿using Foodie.Common.Results;
+using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries;
 using Foodie.Orders.Application.Features.Orders.Errors;
 using MediatR;
 using System.Threading;
@@ -10,23 +9,21 @@ namespace Foodie.Orders.Application.Features.Orders.Queries.GetOrderById
 {
     public class GetOrderByIdQueryHandler : IRequestHandler<GetOrderByIdQuery, Result<GetOrderByIdQueryResponse>>
     {
-        private readonly IOrdersReadServcie _orderQueries;
-        private readonly IMapper _mapper;
+        private readonly IGetOrderByIdSqlQuery _sqlQuery;
 
-        public GetOrderByIdQueryHandler(IOrdersReadServcie orderQueries, IMapper mapper)
+        public GetOrderByIdQueryHandler(IGetOrderByIdSqlQuery sqlQuery)
         {
-            _orderQueries = orderQueries;
-            _mapper = mapper;
+            _sqlQuery = sqlQuery;
         }
 
         public async Task<Result<GetOrderByIdQueryResponse>> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var order = await _orderQueries.GetByIdAsync(request.Id);
+            var result = await _sqlQuery.ExecuteAsync(request);
 
-            if (order is null)
+            if (result is null)
                 return Result.Failure<GetOrderByIdQueryResponse>(OrderErrors.OrderNotFoundById(request.Id));
 
-            return _mapper.Map<GetOrderByIdQueryResponse>(order);
+            return result;
         }
     }
 }

@@ -44,6 +44,7 @@ namespace Foodie.Orders.Infrastructure
             services.AddHttpContextAccessor();
 
             services.AddScoped<IGetMyOrderByIdSqlQuery, GetMyOrderByIdSqlQuery>();
+            services.AddScoped<IGetOrderByIdSqlQuery, GetOrderByIdSqlQuery>();
 
             return services;
         }
