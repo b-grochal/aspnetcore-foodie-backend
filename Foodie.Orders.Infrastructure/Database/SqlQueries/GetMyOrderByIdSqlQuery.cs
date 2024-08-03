@@ -4,6 +4,7 @@ using Foodie.Common.Infrastructure.Database.Connections.Interfaces;
 using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries;
 using Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrderById;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using static Dapper.SqlBuilder;
@@ -27,6 +28,7 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries
             connection.Open();
 
             var ordersMap = new Dictionary<int, OrderDetailsQueryDto>();
+
             var sqlQueryResult = await connection.QueryAsync<OrderDetailsQueryDto, OrderItemQueryDto, OrderDetailsQueryDto>(selector.RawSql, param: selector.Parameters,
                 map: (orderDetails, orderItem) =>
                 {
@@ -56,11 +58,29 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries
 
             var selector = builder.AddTemplate("select /**select**/ from orders o /**innerjoin**/ /**where**/");
 
-            builder.Select("o.Id as OrderId, o.DeliveryAddress_Street as AddressStreet, o.DeliveryAddress_City as AddressCity, " +
-                "o.DeliveryAddress_Country as AddressCountry, o.OrderStatus as OrderStatus, b.Id as BuyerId, b.FirstName as BuyerFirstName, " +
-                "b.LastName as BuyerLastName, b.PhoneNumber as BuyerPhoneNumber, b.Email as BuyerEmail, c.Id as ContractorId, c.Name as ContractorName, " +
-                "c.Address as ContractorAddress, c.PhoneNumber as ContractorPhoneNumber, c.Email as ContractorEmail, c.City as ContractorCity, " +
-                "c.Country as ContractorCountry, oi.Id as OrderItemId, oi.Name as Name, oi.Quantity as Quantity, oi.UnitPrice as UnitPrice");
+            builder.Select("""
+                o.Id as OrderId,
+                o.DeliveryAddress_Street as AddressStreet,
+                o.DeliveryAddress_City as AddressCity,            
+                o.DeliveryAddress_Country as AddressCountry,
+                o.OrderStatus as OrderStatus,
+                b.Id as BuyerId,
+                b.FirstName as BuyerFirstName,
+                b.LastName as BuyerLastName,
+                b.PhoneNumber as BuyerPhoneNumber,
+                b.Email as BuyerEmail,
+                c.Id as ContractorId,
+                c.Name as ContractorName,
+                c.Address as ContractorAddress,
+                c.PhoneNumber as ContractorPhoneNumber,
+                c.Email as ContractorEmail,
+                c.City as ContractorCity,
+                c.Country as ContractorCountry, 
+                oi.Id as OrderItemId, 
+                oi.Name as Name, 
+                oi.Quantity as Quantity, 
+                oi.UnitPrice as UnitPrice
+                """);
 
             builder.InnerJoin("Buyers b on o.BuyerId = b.Id");
             builder.InnerJoin("Contractors c on o.ContractorId = c.Id");
