@@ -111,7 +111,7 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries
                 {
                     Id = x.OrderItemId,
                     Name = x.Name,
-                    Units = x.Units,
+                    Quantity = x.Quantity,
                     UnitPrice = x.UnitPrice
                 }).ToList()
             };
@@ -143,7 +143,7 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries
         {
             public int OrderItemId { get; set; }
             public string Name { get; set; }
-            public int Units { get; set; }
+            public int Quantity { get; set; }
             public decimal UnitPrice { get; set; }
         }
     }

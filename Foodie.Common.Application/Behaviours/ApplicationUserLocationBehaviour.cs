@@ -22,6 +22,8 @@ namespace Foodie.Common.Application.Behaviours
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
+            request.Role = _applicationUserContext.Role;
+
             if (_applicationUserContext.Role == ApplicationUserRole.OrderHandler)
                 request.LocationId = _applicationUserContext.LocationId;
 

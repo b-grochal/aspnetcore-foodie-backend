@@ -29,7 +29,7 @@ namespace Foodie.Orders.Application.Features.Orders.Queries.GetOrderById
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Units { get; set; }
+        public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
     }
 }

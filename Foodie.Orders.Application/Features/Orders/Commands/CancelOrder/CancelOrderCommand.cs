@@ -2,6 +2,7 @@
 using Foodie.Common.Application.Requests.Commands.Interfaces;
 using Foodie.Common.Results;
 using MediatR;
+using Foodie.Common.Enums;
 
 namespace Foodie.Orders.Application.Features.Orders.Commands.CancelOrder
 {
@@ -13,6 +14,7 @@ namespace Foodie.Orders.Application.Features.Orders.Commands.CancelOrder
         public int ApplicationUserId { get; set; }
 
         public string ApplicationUserEmail { get; set; }
+        public ApplicationUserRole Role { get; set; }
 
         public CancelOrderCommand(int id)
         {

@@ -96,6 +96,11 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries
                 AddressCity = data.AddressCity,
                 AddressCountry = data.AddressCountry,
                 OrderStatus = data.OrderStatus,
+                BuyerId = data.BuyerId,
+                BuyerFirstName = data.BuyerFirstName,
+                BuyerLastName = data.BuyerLastName,
+                BuyerEmail = data.BuyerEmail,
+                BuyerPhoneNumber = data.BuyerPhoneNumber,
                 ContractorId = data.ContractorId,
                 ContractorName = data.ContractorName,
                 ContractorAddress = data.ContractorAddress,
@@ -107,7 +112,7 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries
                 {
                     Id = x.OrderItemId,
                     Name = x.Name,
-                    Units = x.Units,
+                    Quantity = x.Quantity,
                     UnitPrice = x.UnitPrice
                 }).ToList()
             };
@@ -139,7 +144,7 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries
         {
             public int OrderItemId { get; set; }
             public string Name { get; set; }
-            public int Units { get; set; }
+            public int Quantity { get; set; }
             public decimal UnitPrice { get; set; }
         }
     }
