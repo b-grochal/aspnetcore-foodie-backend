@@ -31,7 +31,7 @@ namespace Foodie.Orders.API.Controllers
 
         // GET api/my-orders
         [HttpGet]
-        public async Task<IActionResult> GetCustomersOrders([FromQuery] GetCustomersOrdersQuery getOrdersQuery)
+        public async Task<IActionResult> GetCustomersOrders([FromQuery] GetMyOrdersQuery getOrdersQuery)
         {
             var result = await mediator.Send(getOrdersQuery);
 

@@ -3,18 +3,17 @@ using System;
 
 namespace Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrders
 {
-    public class GetCustomersOrdersQueryResponse : PagedResponse<CustomersOrderDto>
+    public class GetMyOrdersQueryResponse : PagedResponse<MyOrderDto>
     {
-        public int? OrderStatusId { get; set; }
+        public string OrderStatus { get; set; }
         public string ContractorName { get; set; }
     }
 
-    public class CustomersOrderDto
+    public class MyOrderDto
     {
         public int Id { get; set; }
         public DateTimeOffset OrderDate { get; set; }
-        public int OrderStatusId { get; set; }
-        public string OrderStatusName { get; set; }
+        public string OrderStatus { get; set; }
         public int ContractorId { get; set; }
         public string ContractorName { get; set; }
     }
