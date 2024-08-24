@@ -8,7 +8,7 @@ namespace Foodie.Orders.Application.Features.Orders.Queries.GetOrders
     {
         public IEnumerable<OrderDto> Orders { get; set; }
         public string BuyerEmail { get; set; }
-        public string OrderStatusName { get; set; }
+        public string OrderStatus { get; set; }
         public string ContractorName { get; set; }
         public int? LocationId { get; set; }
     }
@@ -17,8 +17,7 @@ namespace Foodie.Orders.Application.Features.Orders.Queries.GetOrders
     {
         public int Id { get; set; }
         public DateTimeOffset OrderDate { get; set; }
-        public int OrderStatusId { get; set; }
-        public string OrderStatusName { get; set; }
+        public string OrderStatus { get; set; }
         public int BuyerId { get; set; }
         public string BuyerEmail { get; set; }
         public int ContractorId { get; set; }
