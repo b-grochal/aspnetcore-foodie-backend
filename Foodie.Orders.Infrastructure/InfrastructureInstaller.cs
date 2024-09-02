@@ -7,12 +7,16 @@ using Foodie.Common.Infrastructure.Database.Connections.Interfaces;
 using Foodie.Common.Infrastructure.Database.Contexts.Interfaces;
 using Foodie.Orders.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries;
+using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries.Buyers;
+using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries.Contractors;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Buyers;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Contractors;
 using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders;
 using Foodie.Orders.Infrastructure.Database;
 using Foodie.Orders.Infrastructure.Database.Repositories;
 using Foodie.Orders.Infrastructure.Database.SqlQueries;
+using Foodie.Orders.Infrastructure.Database.SqlQueries.Buyers;
+using Foodie.Orders.Infrastructure.Database.SqlQueries.Contractors;
 using Foodie.Orders.Infrastructure.Database.UnitOfWork;
 using Foodie.Orders.Infrastructure.Queries;
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +51,10 @@ namespace Foodie.Orders.Infrastructure
             services.AddScoped<IGetOrderByIdSqlQuery, GetOrderByIdSqlQuery>();
             services.AddScoped<IGetOrdersSqlQuery, GetOrdersSqlQuery>();
             services.AddScoped<IGetMyOrdersSqlQuery, GetMyOrdersSqlQuery>();
-
+            services.AddScoped<IGetBuyerByIdSqlQuery, GetBuyerByIdSqlQuery>();
+            services.AddScoped<IGetBuyersSqlQuery, GetBuyersSqlQuery>();
+            services.AddScoped<IGetContractorsSqlQuery, GetContractorsSqlQuery>();
+            services.AddScoped<IGetContractorByIdSqlQuery, GetContractorByIdSqlQuery>();
 
             return services;
         }
