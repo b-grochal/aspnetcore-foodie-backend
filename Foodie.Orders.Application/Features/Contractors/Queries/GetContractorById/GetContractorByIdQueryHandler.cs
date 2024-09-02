@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using Foodie.Common.Results;
-using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Contractors;
+﻿using Foodie.Common.Results;
+using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries.Contractors;
 using Foodie.Orders.Application.Features.Contractors.Errors;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,23 +9,21 @@ namespace Foodie.Orders.Application.Features.Contractors.Queries.GetContractorBy
 {
     public class GetContractorByIdQueryHandler : IRequestHandler<GetContractorByIdQuery, Result<GetContractorByIdQueryResponse>>
     {
-        private readonly IContractorsQueries _contractorsQueries;
-        private readonly IMapper _mapper;
+        private readonly IGetContractorByIdSqlQuery _sqlQuery;
 
-        public GetContractorByIdQueryHandler(IContractorsQueries contractorsQueries, IMapper mapper)
+        public GetContractorByIdQueryHandler(IGetContractorByIdSqlQuery sqlQuery)
         {
-            _contractorsQueries = contractorsQueries;
-            _mapper = mapper;
+            _sqlQuery = sqlQuery;
         }
 
         public async Task<Result<GetContractorByIdQueryResponse>> Handle(GetContractorByIdQuery request, CancellationToken cancellationToken)
         {
-            var contractor = await _contractorsQueries.GetByIdAsync(request.Id);
+            var result = await _sqlQuery.ExecuteAsync(request);
 
-            if (contractor is null)
+            if (result is null)
                 return Result.Failure<GetContractorByIdQueryResponse>(ContractorErrors.ContractorNotFoundById(request.Id));
 
-            return _mapper.Map<GetContractorByIdQueryResponse>(contractor);
+            return result;
         }
     }
 }
