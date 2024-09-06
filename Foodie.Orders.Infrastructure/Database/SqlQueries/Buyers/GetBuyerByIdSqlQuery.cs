@@ -27,7 +27,7 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries.Buyers
             return sqlQueryResult is null ? null : MapSqlQueryResult(sqlQueryResult);
         }
 
-        private Template PrepareSqlQueryTemplate(int orderId)
+        private Template PrepareSqlQueryTemplate(int buyerId)
         {
             var builder = new SqlBuilder();
 
@@ -46,7 +46,7 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries.Buyers
                 b.Email as Email
                 """);
 
-            builder.Where("b.Id = @id", new { orderId });
+            builder.Where("b.Id = @buyerId", new { buyerId });
 
             return selector;
         }

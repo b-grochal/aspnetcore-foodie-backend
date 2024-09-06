@@ -3632,7 +3632,7 @@
       },
       "RequestIdKey": null,
       "RouteClaimsRequirement": {
-        "Role": "Admin"
+        "Role": "Admin, OrderHandler"
       },
       "RouteIsCaseSensitive": false,
       "SecurityOptions": {
@@ -3707,7 +3707,7 @@
       },
       "RequestIdKey": null,
       "RouteClaimsRequirement": {
-        "Role": "Admin"
+        "Role": "Admin, OrderHandler"
       },
       "RouteIsCaseSensitive": false,
       "SecurityOptions": {

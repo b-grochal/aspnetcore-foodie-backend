@@ -5,6 +5,7 @@ using Foodie.Common.Infrastructure.Database;
 using Foodie.Common.Infrastructure.Database.Connections;
 using Foodie.Common.Infrastructure.Database.Connections.Interfaces;
 using Foodie.Common.Infrastructure.Database.Contexts.Interfaces;
+using Foodie.Common.Infrastructure.Database.Interceptors;
 using Foodie.Orders.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries;
 using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries.Buyers;
@@ -29,8 +30,12 @@ namespace Foodie.Orders.Infrastructure
     {
         public static IServiceCollection AddOrdersInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<OrdersDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DbConnection")));
+            services.AddSingleton<InsertOutboxMessagesInterceptor>();
+
+            services.AddDbContext<OrdersDbContext>((sp, options) => options
+                .UseSqlServer(configuration.GetConnectionString("DbConnection"))
+                .AddInterceptors(
+                    sp.GetRequiredService<InsertOutboxMessagesInterceptor>()));
 
             services.AddScoped<IDbContext, OrdersDbContext>();
 
