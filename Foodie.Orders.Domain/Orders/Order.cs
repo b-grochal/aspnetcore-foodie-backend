@@ -6,6 +6,7 @@ using Foodie.Orders.Domain.Orders.Enumerations;
 using Foodie.Orders.Domain.Orders.ValueObjects;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace Foodie.Orders.Domain.Orders
 {
@@ -24,6 +25,12 @@ namespace Foodie.Orders.Domain.Orders
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
         private Order() { }
+
+        [JsonConstructor]
+        private Order(int id) 
+        {
+            Id = id;
+        }
 
         private Order(DeliveryAddress deliveryAddress, string customerEmail, int? buyerId = null, int? contractorId = null)
         {

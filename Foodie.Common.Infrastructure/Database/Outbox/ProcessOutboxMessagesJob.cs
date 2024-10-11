@@ -10,6 +10,8 @@ using System.Linq;
 using Newtonsoft.Json;
 using Dapper;
 using Foodie.Common.Domain.DomainEvents.Interfaces;
+using Newtonsoft.Json.Serialization;
+using System.Reflection;
 
 namespace Foodie.Common.Infrastructure.Database.Outbox
 {
@@ -19,7 +21,8 @@ namespace Foodie.Common.Infrastructure.Database.Outbox
         //TODO: Use System.Text.Json instead of Newtonsoft
         private readonly JsonSerializerSettings _jsonSerializerSettings = new()
         {
-            TypeNameHandling = TypeNameHandling.All
+            TypeNameHandling = TypeNameHandling.All,
+            ContractResolver = new PrivateResolver()
         };
         private readonly IDbConnecionFactory _dbConnecionFactory;
         private readonly IPublisher _publisher;
@@ -134,5 +137,20 @@ namespace Foodie.Common.Infrastructure.Database.Outbox
 
         // TODO: Maybe move it somewhere
         internal sealed record OutboxMessageResponse(Guid Id, string Content);
+    }
+
+    public class PrivateResolver : DefaultContractResolver
+    {
+        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+        {
+            var prop = base.CreateProperty(member, memberSerialization);
+            if (!prop.Writable)
+            {
+                var property = member as PropertyInfo;
+                var hasPrivateSetter = property?.GetSetMethod(true) != null;
+                prop.Writable = hasPrivateSetter;
+            }
+            return prop;
+        }
     }
 }
