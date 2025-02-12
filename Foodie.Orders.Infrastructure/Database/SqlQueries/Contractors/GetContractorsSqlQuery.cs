@@ -83,6 +83,9 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries.Contractors
                     Id = x.Id,
                     Name = x.Name,
                     Address = x.Address,
+                    RestaurantId = x.RestaurantId,
+                    LocationId = x.LocationId,
+                    CityId = x.CityId,
                     City = x.City,
                     Country = x.Country,
                 }),
@@ -97,6 +100,9 @@ namespace Foodie.Orders.Infrastructure.Database.SqlQueries.Contractors
             public int Id { get; set; }
             public string Name { get; private set; }
             public string Address { get; private set; }
+            public int RestaurantId { get; private set; }
+            public int LocationId { get; private set; }
+            public int CityId { get; private set; }
             public string City { get; private set; }
             public string Country { get; private set; }
         }
