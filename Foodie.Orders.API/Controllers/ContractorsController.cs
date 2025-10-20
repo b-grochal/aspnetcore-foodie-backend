@@ -18,7 +18,7 @@ namespace Foodie.Orders.API.Controllers
 
         // GET api/contractors/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBuyer(int id)
+        public async Task<IActionResult> GetContractor(int id)
         {
             var query = new GetContractorByIdQuery(id);
             var result = await mediator.Send(query);
@@ -30,7 +30,7 @@ namespace Foodie.Orders.API.Controllers
 
         // GET api/contractors
         [HttpGet]
-        public async Task<IActionResult> GetBuyers([FromQuery] GetContractorsQuery getBuyersQuery)
+        public async Task<IActionResult> GetContractors([FromQuery] GetContractorsQuery getBuyersQuery)
         {
             var result = await mediator.Send(getBuyersQuery);
 
