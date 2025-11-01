@@ -2,9 +2,11 @@
 using Foodie.Common.Api.Controllers;
 using Foodie.Common.Api.Results;
 using Foodie.Common.Enums;
+using Foodie.Common.Results;
 using Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrderById;
 using Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrders;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -31,6 +33,7 @@ namespace Foodie.Orders.API.Controllers
 
         // GET api/my-orders
         [HttpGet]
+        [ProducesResponseType(typeof(GetMyOrdersQueryResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCustomersOrders([FromQuery] GetMyOrdersQuery getOrdersQuery)
         {
             var result = await mediator.Send(getOrdersQuery);
