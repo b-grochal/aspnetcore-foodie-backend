@@ -2,7 +2,7 @@ USE [Foodie.Orders]
 GO
 
 INSERT INTO Buyers (Id, CustomerId, FirstName, LastName, PhoneNumber, Email) 
-VALUES (1, '3', 'Jim', 'Halpert', '123-456-789', 'jimhal123@foodie.com')
+VALUES (1, 3, 'Jim', 'Halpert', '123-456-789', 'jimhal123@foodie.com')
 
 INSERT INTO Contractors (Id, RestaurantId, Name, LocationId, Address, PhoneNumber, Email, CityId, City, CountryId, Country) 
 VALUES (1, 1, 'KFC', 1, 'Kfc Las Vegas', '123-123-213', 'kfc.lasvegas@email.com', 1, 'Las Vegas', 1, 'USA')

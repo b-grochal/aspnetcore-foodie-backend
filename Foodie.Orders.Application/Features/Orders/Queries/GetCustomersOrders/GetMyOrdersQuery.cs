@@ -6,11 +6,11 @@ using System.Text.Json.Serialization;
 
 namespace Foodie.Orders.Application.Features.Orders.Queries.GetCustomersOrders
 {
-    public class GetCustomersOrdersQuery : PagedQuery, IRequest<Result<GetCustomersOrdersQueryResponse>>, IApplicationUserIdRequest
+    public class GetMyOrdersQuery : PagedQuery, IRequest<Result<GetMyOrdersQueryResponse>>, IApplicationUserIdRequest
     {
         [JsonIgnore]
         public int ApplicationUserId { get; set; }
-        public int? OrderStatusId { get; set; }
+        public string OrderStatus { get; set; }
         public string ContractorName { get; set; }
     }
 }

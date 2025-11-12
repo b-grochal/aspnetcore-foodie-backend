@@ -45,8 +45,6 @@ namespace Foodie.Orders.Infrastructure.Database.Repositories
             {
                 await _ordersDbContext.Entry(order)
                     .Collection(i => i.OrderItems).LoadAsync();
-                await _ordersDbContext.Entry(order)
-                    .Reference(i => i.OrderStatus).LoadAsync();
             }
 
             return order;

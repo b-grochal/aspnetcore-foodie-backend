@@ -16,7 +16,6 @@ namespace Foodie.Orders.Infrastructure.Database.Configurations
             .UseHiLo("BuyersSequence");
 
             buyerConfiguration.Property(b => b.CustomerId)
-                .HasMaxLength(200)
                 .IsRequired();
 
             buyerConfiguration.Property(o => o.FirstName);

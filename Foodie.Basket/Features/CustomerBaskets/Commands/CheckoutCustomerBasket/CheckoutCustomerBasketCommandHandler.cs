@@ -44,7 +44,7 @@ namespace Foodie.Basket.API.Functions.CustomerBaskets.Commands.CheckoutCustomerB
 
             await publishEndpoint.Publish<CustomerCheckoutIntegrationEvent>(new
             {
-                CustomerId = "6a1ab648-6be8-44f1-87b7-394c34547589",
+                CustomerId = customer.Id,
                 CustomerFirstName = customer.FirstName,
                 CustomerLastName = customer.LastName,
                 CustomerPhoneNumber = customer.PhoneNumber,

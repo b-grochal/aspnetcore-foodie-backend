@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Foodie.Orders.Infrastructure.Database.Migrations
+namespace Foodie.Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(OrdersDbContext))]
     partial class OrdersDbContextModelSnapshot : ModelSnapshot
@@ -105,10 +105,8 @@ namespace Foodie.Orders.Infrastructure.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "BuyersSequence");
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");

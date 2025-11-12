@@ -6,7 +6,7 @@ namespace Foodie.Orders.Application.Features.Orders.Commands.CreateOrder
 {
     public class CreateOrderCommand : IRequest<Result>
     {
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public string CustomerFirstName { get; set; }
         public string CustomerLastName { get; set; }
         public string CustomerPhoneNumber { get; set; }
@@ -32,7 +32,7 @@ namespace Foodie.Orders.Application.Features.Orders.Commands.CreateOrder
             _orderItems = new List<OrderItemDTO>();
         }
 
-        public CreateOrderCommand(string userId, string userFirstName, string userLastName, string userPhoneNumber, string userEmail, string addressStreet, string addressCity,
+        public CreateOrderCommand(int userId, string userFirstName, string userLastName, string userPhoneNumber, string userEmail, string addressStreet, string addressCity,
             string addressCountry, int restaurantId, string restaurantName, int locationId, string locationAddress,
             string locationPhoneNumber, string locationEmail, int cityId, string cityName, int countryId, string countryName, List<OrderItemDTO> orderItems) : this()
         {

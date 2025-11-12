@@ -1,5 +1,7 @@
-﻿using Foodie.Common.Api.Controllers;
+﻿using Foodie.Common.Api.Authorization;
+using Foodie.Common.Api.Controllers;
 using Foodie.Common.Api.Results;
+using Foodie.Common.Enums;
 using Foodie.Orders.Application.Features.Buyers.Queries.GetBuyerById;
 using Foodie.Orders.Application.Features.Buyers.Queries.GetBuyers;
 using MediatR;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 namespace Foodie.Orders.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [RequiredRoles(ApplicationUserRole.Admin, ApplicationUserRole.OrderHandler)]
     public class BuyersController : BaseController
     {
         public BuyersController(IMediator mediator) : base(mediator) { }

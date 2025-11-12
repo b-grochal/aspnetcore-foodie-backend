@@ -10,8 +10,8 @@ namespace Foodie.Orders.Application.Features.Buyers.Queries.GetBuyers
     public class BuyerDto
     {
         public int Id { get; set; }
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public string Email { get; private set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
     }
 }

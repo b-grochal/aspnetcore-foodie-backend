@@ -37,7 +37,9 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
                 var audit = new Audit
                 {
                     TableName = modifiedEntity.Entity.GetType().Name,
-                    ModifiedBy = GetModifiedByValue(applicationUserId, applicationUserEmail, handlerName)
+                    ModifiedBy = GetModifiedByValue(applicationUserId, applicationUserEmail, handlerName),
+                    ModificationDate = System.DateTimeOffset.Now,
+                    PrimaryKey = GetPrimaryKeys(modifiedEntity)
                 };
 
                 switch (modifiedEntity.State)
@@ -123,6 +125,18 @@ namespace Foodie.Common.Infrastructure.Database.Contexts
             }
 
             return changedCloumns.Count == 0 ? null : JsonSerializer.Serialize(changedCloumns);
+        }
+
+        private string GetPrimaryKeys(EntityEntry entityEntry)
+        {
+            var primaryKeys = new Dictionary<string, object>();
+
+            foreach(var property in entityEntry.Properties.Where(p => p.Metadata.IsPrimaryKey()))
+            {
+                primaryKeys[property.Metadata.Name] = property.CurrentValue;
+            }
+
+            return JsonSerializer.Serialize(primaryKeys);
         }
 
         public async Task<int> CommitChangesAsync(

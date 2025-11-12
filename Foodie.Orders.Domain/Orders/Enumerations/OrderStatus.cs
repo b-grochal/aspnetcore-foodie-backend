@@ -7,11 +7,11 @@ namespace Foodie.Orders.Domain.Orders.Enumerations
 {
     public class OrderStatus : Enumeration
     {
-        public static OrderStatus Started = new OrderStatus(1, nameof(Started).ToLowerInvariant());
-        public static OrderStatus InProgress = new OrderStatus(2, nameof(InProgress).ToLowerInvariant());
-        public static OrderStatus InDelivery = new OrderStatus(3, nameof(InDelivery).ToLowerInvariant());
-        public static OrderStatus Delivered = new OrderStatus(4, nameof(Delivered).ToLowerInvariant());
-        public static OrderStatus Cancelled = new OrderStatus(5, nameof(Cancelled).ToLowerInvariant());
+        public static OrderStatus Started = new OrderStatus(1, nameof(Started));
+        public static OrderStatus InProgress = new OrderStatus(2, nameof(InProgress));
+        public static OrderStatus InDelivery = new OrderStatus(3, nameof(InDelivery));
+        public static OrderStatus Delivered = new OrderStatus(4, nameof(Delivered));
+        public static OrderStatus Cancelled = new OrderStatus(5, nameof(Cancelled));
 
         public OrderStatus(int id, string name) : base(id, name) { }
 

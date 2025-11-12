@@ -1,6 +1,5 @@
-﻿using AutoMapper;
-using Foodie.Common.Results;
-using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Buyers;
+﻿using Foodie.Common.Results;
+using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries.Buyers;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,28 +10,16 @@ namespace Foodie.Orders.Application.Features.Buyers.Queries.GetBuyers
 {
     public class GetBuyersQueryHandler : IRequestHandler<GetBuyersQuery, Result<GetBuyersQueryResponse>>
     {
-        private readonly IBuyersQueries _buyerQueries;
-        private readonly IMapper _mapper;
+        private readonly IGetBuyersSqlQuery _sqlQuery;
 
-        public GetBuyersQueryHandler(IBuyersQueries buyerQueries, IMapper mapper)
+        public GetBuyersQueryHandler(IGetBuyersSqlQuery sqlQuery)
         {
-            _buyerQueries = buyerQueries;
-            _mapper = mapper;
+            _sqlQuery = sqlQuery;
         }
 
         public async Task<Result<GetBuyersQueryResponse>> Handle(GetBuyersQuery request, CancellationToken cancellationToken)
         {
-            var buyers = await _buyerQueries.GetAllAsync(request.PageNumber, request.PageSize, request.Email);
-
-            return new GetBuyersQueryResponse
-            {
-                TotalCount = buyers.TotalCount,
-                PageSize = buyers.PageSize,
-                Page = buyers.Page,
-                TotalPages = (int)Math.Ceiling(buyers.TotalCount / (double)buyers.PageSize),
-                Items = _mapper.Map<IEnumerable<BuyerDto>>(buyers),
-                Email = request.Email
-            };
+            return await _sqlQuery.ExecuteAsync(request);
         }
     }
 }

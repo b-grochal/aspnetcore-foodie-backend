@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders
 {
@@ -18,15 +15,13 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders
         public string ContractorName { get; set; }
     }
 
-    public record OrderDetailsQueryDto
+    public class OrderDetailsQueryDto
     {
         public int OrderId { get; set; }
-        public DateTimeOffset OrderDate { get; set; }
         public string AddressStreet { get; set; }
         public string AddressCity { get; set; }
         public string AddressCountry { get; set; }
-        public int OrderStatusId { get; set; }
-        public string OrderStatusName { get; set; }
+        public string OrderStatus { get; set; }
         public int BuyerId { get; set; }
         public string BuyerFirstName { get; set; }
         public string BuyerLastName { get; set; }
@@ -42,7 +37,7 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Queries.Orders
         public IList<OrderItemQueryDto> OrderItems { get; set; }
     }
 
-    public record OrderItemQueryDto
+    public class OrderItemQueryDto
     {
         public int OrderItemId { get; set; }
         public string Name { get; set; }

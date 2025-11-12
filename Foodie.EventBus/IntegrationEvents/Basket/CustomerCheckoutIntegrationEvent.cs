@@ -5,7 +5,7 @@ namespace Foodie.EventBus.IntegrationEvents.Basket
 {
     public interface CustomerCheckoutIntegrationEvent : IntegrationEvent
     {
-        string CustomerId { get; set; }
+        int CustomerId { get; set; }
         string CustomerFirstName { get; set; }
         string CustomerLastName { get; set; }
         string CustomerPhoneNumber { get; set; }

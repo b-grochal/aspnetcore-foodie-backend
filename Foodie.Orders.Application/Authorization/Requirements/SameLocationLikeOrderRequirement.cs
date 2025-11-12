@@ -1,7 +1,7 @@
 ﻿using Foodie.Common.Application.Authorization;
 using Foodie.Common.Application.Authorization.Interfaces;
+using Foodie.Common.Enums;
 using Foodie.Orders.Application.Contracts.Infrastructure.Database.Repositories;
-using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,6 +11,7 @@ namespace Foodie.Orders.Application.Authorization.Requirements
     {
         public int OrderId { get; set; }
         public int LocationId { get; set; }
+        public ApplicationUserRole Role { get; set; }
     }
 
     public class SameLocationLikeOrderRequirementHandler : IAuthorizationHandler<SameLocationLikeOrderRequirement>
@@ -29,7 +30,7 @@ namespace Foodie.Orders.Application.Authorization.Requirements
             var order = await _ordersRepository.GetByIdAsync(request.OrderId);
             var contractor = await _contractorsRepository.GetByIdAsync(order.ContractorId.Value);
 
-            if (contractor.LocationId != request.LocationId)
+            if (request.Role == ApplicationUserRole.OrderHandler && contractor.LocationId != request.LocationId)
                 return AuthorizationResult.Fail("Access forbidden");
 
             return AuthorizationResult.Succeed();

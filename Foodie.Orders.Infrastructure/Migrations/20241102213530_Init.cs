@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Foodie.Orders.Infrastructure.Database.Migrations
+namespace Foodie.Orders.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -52,7 +52,7 @@ namespace Foodie.Orders.Infrastructure.Database.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),

@@ -2,6 +2,7 @@
 using Foodie.Common.Application.Requests.Commands.Interfaces;
 using Foodie.Common.Results;
 using MediatR;
+using Foodie.Common.Enums;
 
 namespace Foodie.Orders.Application.Features.Orders.Commands.SetInDeliveryOrderStatus
 {
@@ -14,6 +15,8 @@ namespace Foodie.Orders.Application.Features.Orders.Commands.SetInDeliveryOrderS
         public int ApplicationUserId { get; set; }
 
         public string ApplicationUserEmail { get; set; }
+
+        public ApplicationUserRole Role { get; set; }
 
         public SetInDeliveryOrderStatusCommand(int id)
         {

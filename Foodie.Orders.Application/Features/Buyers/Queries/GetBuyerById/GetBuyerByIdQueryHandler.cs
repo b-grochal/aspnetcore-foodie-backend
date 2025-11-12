@@ -1,6 +1,5 @@
-﻿using AutoMapper;
-using Foodie.Common.Results;
-using Foodie.Orders.Application.Contracts.Infrastructure.Queries.Buyers;
+﻿using Foodie.Common.Results;
+using Foodie.Orders.Application.Contracts.Infrastructure.Database.SqlQueries.Buyers;
 using Foodie.Orders.Application.Features.Buyers.Errors;
 using MediatR;
 using System.Threading;
@@ -10,23 +9,21 @@ namespace Foodie.Orders.Application.Features.Buyers.Queries.GetBuyerById
 {
     public class GetBuyerByIdQueryHandler : IRequestHandler<GetBuyerByIdQuery, Result<GetBuyerByIdQueryResponse>>
     {
-        private readonly IBuyersQueries _buyerQueries;
-        private readonly IMapper _mapper;
+        private readonly IGetBuyerByIdSqlQuery _sqlQuery;
 
-        public GetBuyerByIdQueryHandler(IBuyersQueries buyerQueries, IMapper mapper)
+        public GetBuyerByIdQueryHandler(IGetBuyerByIdSqlQuery sqlQuery)
         {
-            _buyerQueries = buyerQueries;
-            _mapper = mapper;
+            _sqlQuery = sqlQuery;
         }
 
         public async Task<Result<GetBuyerByIdQueryResponse>> Handle(GetBuyerByIdQuery request, CancellationToken cancellationToken)
         {
-            var buyer = await _buyerQueries.GetByIdAsync(request.Id);
+            var result = await _sqlQuery.ExecuteAsync(request);
 
-            if (buyer is null)
+            if (result is null)
                 return Result.Failure<GetBuyerByIdQueryResponse>(BuyerErrors.BuyerNotFoundById(request.Id));
 
-            return _mapper.Map<GetBuyerByIdQueryResponse>(buyer);
+            return result;
         }
     }
 }

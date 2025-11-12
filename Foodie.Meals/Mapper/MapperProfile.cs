@@ -10,7 +10,7 @@ namespace Foodie.Meals.API.Mapper
             CreateMap<Location, MealsGrpc.Location>()
                 .ForMember(dest => dest.RestaurantName, opt => opt.MapFrom(src => src.Restaurant.Name))
                 .ForMember(dest => dest.CityName, opt => opt.MapFrom(src => src.City.Name))
-                .ForMember(dest => dest.CityCountry, opt => opt.MapFrom(src => src.City.Country));
+                .ForMember(dest => dest.CityCountry, opt => opt.MapFrom(src => src.City.Country.Name));
         }
     }
 }

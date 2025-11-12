@@ -8,6 +8,6 @@ namespace Foodie.Orders.Application.Contracts.Infrastructure.Database.Repositori
         Buyer Create(Buyer buyer);
         Buyer Update(Buyer buyer);
         Task<Buyer> GetByIdAsync(int id);
-        Task<Buyer> GetByCustomerIdAsync(string userId);
+        Task<Buyer> GetByCustomerIdAsync(int userId);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Foodie.Orders.Application.Contracts.Infrastructure.Database.Repositories;
 using Foodie.Orders.Domain.Buyers;
-using Foodie.Orders.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -32,7 +31,7 @@ namespace Foodie.Orders.Infrastructure.Database.Repositories
         }
 
         //TODO: Change customerId from int to string
-        public async Task<Buyer> GetByCustomerIdAsync(string customerId)
+        public async Task<Buyer> GetByCustomerIdAsync(int customerId)
         {
             return await _ordersDbContext.Buyers.FirstOrDefaultAsync(x => x.CustomerId == customerId);
         }
