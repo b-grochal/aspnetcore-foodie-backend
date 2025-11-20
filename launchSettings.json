@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "foodie.apigateway": "StartDebugging",
+        "foodie.basket.api": "StartDebugging",
+        "foodie.identity.api": "StartDebugging",
+        "foodie.meals.api": "StartDebugging",
+        "foodie.orders.api": "StartDebugging"
+      }
+    }
+  }
+}

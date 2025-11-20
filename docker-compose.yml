@@ -1,0 +1,34 @@
+services:
+  foodie.apigateway:
+    image: ${DOCKER_REGISTRY-}foodieapigateway
+    build:
+      context: .
+      dockerfile: Foodie.ApiGateway/Dockerfile
+
+  foodie.basket.api:
+    image: ${DOCKER_REGISTRY-}foodiebasketapi
+    build:
+      context: .
+      dockerfile: Foodie.Basket/Dockerfile
+
+
+  foodie.identity.api:
+    image: ${DOCKER_REGISTRY-}foodieidentityapi
+    build:
+      context: .
+      dockerfile: Foodie.Identity/Dockerfile
+
+
+  foodie.meals.api:
+    image: ${DOCKER_REGISTRY-}foodiemealsapi
+    build:
+      context: .
+      dockerfile: Foodie.Meals/Dockerfile
+
+
+  foodie.orders.api:
+    image: ${DOCKER_REGISTRY-}foodieordersapi
+    build:
+      context: .
+      dockerfile: Foodie.Orders.API/Dockerfile
+

@@ -25,4 +25,10 @@
     <ProjectReference Include="..\Foodie.Common\Foodie.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Settings\*.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
 </Project>
