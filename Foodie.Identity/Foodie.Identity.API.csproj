@@ -5,6 +5,7 @@
     <UserSecretsId>4324072f-aa8b-4b03-8342-45d7a6b3336c</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <ContainerDevelopmentMode>Regular</ContainerDevelopmentMode>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +28,7 @@
     <ProjectReference Include="..\Foodie.Common.Api\Foodie.Common.Api.csproj" />
     <ProjectReference Include="..\Foodie.Identity.Application\Foodie.Identity.Application.csproj" />
   </ItemGroup>
-  
+ 
  <ItemGroup>
     <Protobuf Include="Protos\identity-service.proto" GrpcServices="Server" />
  </ItemGroup>

@@ -8,6 +8,7 @@
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>foodie.apigateway</DockerServiceName>
+    <DockerDevelopmentMode>Regular</DockerDevelopmentMode>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

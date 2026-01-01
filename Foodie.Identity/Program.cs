@@ -61,16 +61,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom
-    .Configuration(builder.Configuration)
-    .CreateLogger();
+//Log.Logger = new LoggerConfiguration()
+//    .ReadFrom
+//    .Configuration(builder.Configuration)
+//    .CreateLogger();
 
 builder.Host.AddApplicationSettings(SettingsType.JwtToken, SettingsType.Cache, SettingsType.Smtp);
 
 builder.Host.UseSerilog();
 
-builder.Services.AddIdentityApplication();
+//builder.Services.AddIdentityApplication();
 builder.Services.AddIdentityInfrastructure(builder.Configuration);
 builder.Services.ConfigureApplicationSettings(builder.Configuration, SettingsType.JwtToken, SettingsType.Smtp);
 builder.Services.AddJwtAuthentication(builder.Configuration);
@@ -83,7 +83,7 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuditableBeha
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ApplicationUserLocationBehaviour<,>));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ApplicationUserIdBehaviour<,>));
 builder.Services.AddSingleton<ProblemDetailsFactory, CustomProblemDetailsFactory>();
-builder.Services.AddScoped<IProcessOutboxMessagesJob, ProcessOutboxMessagesJob>();
+//builder.Services.AddScoped<IProcessOutboxMessagesJob, ProcessOutboxMessagesJob>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
@@ -128,11 +128,11 @@ app.UseEndpoints(endpoints =>
 
 app.UseHangifreDashboardTool();
 
-app.Services
-    .GetRequiredService<IRecurringJobManager>()
-    .AddOrUpdate<IProcessOutboxMessagesJob>(
-    "outbox-processor",
-    job => job.ProcessAsync(),
-    app.Configuration["BackgroundJobs:Outbox:Schedule"]);
+//app.Services
+//    .GetRequiredService<IRecurringJobManager>()
+//    .AddOrUpdate<IProcessOutboxMessagesJob>(
+//    "outbox-processor",
+//    job => job.ProcessAsync(),
+//    app.Configuration["BackgroundJobs:Outbox:Schedule"]);
 
 app.Run();

@@ -36,4 +36,5 @@ RUN dotnet publish "./Foodie.Identity.API.csproj" -c $BUILD_CONFIGURATION -o /ap
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY Foodie.Common.Api/Settings ./Settings
 ENTRYPOINT ["dotnet", "Foodie.Identity.API.dll"]

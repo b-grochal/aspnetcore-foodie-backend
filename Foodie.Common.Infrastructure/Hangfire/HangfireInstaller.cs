@@ -7,21 +7,23 @@ namespace Foodie.Common.Infrastructure.Hangfire
 {
     public static class HangfireInstaller
     {
+        // TODO: Enable Hangfire when needed
         public static IServiceCollection AddHangfire(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
-            serviceCollection.AddHangfire(x =>
-            {
-                x.UseSqlServerStorage(configuration.GetConnectionString("DbConnection"));
-            });
+            //serviceCollection.AddHangfire(x =>
+            //{
+            //    x.UseSqlServerStorage(configuration.GetConnectionString("DbConnection"));
+            //});
 
-            serviceCollection.AddHangfireServer();
+            //serviceCollection.AddHangfireServer();
 
             return serviceCollection;
         }
 
         public static IApplicationBuilder UseHangifreDashboardTool(this IApplicationBuilder applicationBuilder)
         {
-            return applicationBuilder.UseHangfireDashboard();
+            //return applicationBuilder.UseHangfireDashboard();
+            return applicationBuilder;
         }
     }
 }

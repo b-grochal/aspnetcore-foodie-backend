@@ -66,10 +66,10 @@ namespace Foodie.Common.Api.Settings
         {
             return settingsType switch
             {
-                SettingsType.JwtToken => Path.Combine(hostEnvironment.ContentRootPath, "..", "Foodie.Common.Api", "Settings", "jwtTokenSettings.json"),
-                SettingsType.Redis => Path.Combine(hostEnvironment.ContentRootPath, "..", "Foodie.Common.Api", "Settings", "redisSettings.json"),
-                SettingsType.Cache => Path.Combine(hostEnvironment.ContentRootPath, "..", "Foodie.Common.Api", "Settings", "cacheSettings.json"),
-                SettingsType.Smtp => Path.Combine(hostEnvironment.ContentRootPath, "..", "Foodie.Common.Api", "Settings", "smtpSettings.json"),
+                SettingsType.JwtToken => Path.Combine(hostEnvironment.ContentRootPath, "Settings", "jwtTokenSettings.json"),
+                SettingsType.Redis => Path.Combine(hostEnvironment.ContentRootPath, "Settings", "redisSettings.json"),
+                SettingsType.Cache => Path.Combine(hostEnvironment.ContentRootPath, "Settings", "cacheSettings.json"),
+                SettingsType.Smtp => Path.Combine(hostEnvironment.ContentRootPath, "Settings", "smtpSettings.json"),
                 _ => throw new ArgumentException($"Unsupported settings type: {settingsType}")
             };
         }
