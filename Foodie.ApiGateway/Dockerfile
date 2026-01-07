@@ -2,7 +2,11 @@
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
+ARG APP_UID=1000
+ARG APP_GID=1000
+# create group/user so we can own the files
+RUN groupadd -g $APP_GID appgroup || true \
+ && useradd -m -u $APP_UID -g $APP_GID app || true
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
@@ -26,5 +30,7 @@ RUN dotnet publish "./Foodie.ApiGateway.csproj" -c $BUILD_CONFIGURATION -o /app/
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+# copy published files and set ownership to the runtime user
+COPY --from=publish --chown=$APP_UID:$APP_GID /app/publish .
+USER app
 ENTRYPOINT ["dotnet", "Foodie.ApiGateway.dll"]

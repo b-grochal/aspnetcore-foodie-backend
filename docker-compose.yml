@@ -1,4 +1,10 @@
 services:
+  foodie.apigateway:
+    image: ${DOCKER_REGISTRY-}foodieapigateway
+    build:
+      context: .
+      dockerfile: Foodie.ApiGateway/Dockerfile
+
   foodie.identity.api:
     image: ${DOCKER_REGISTRY-}foodieidentityapi
     build:
