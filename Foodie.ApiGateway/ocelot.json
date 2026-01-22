@@ -240,14 +240,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -313,14 +313,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/admins",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -389,14 +389,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/admins/{adminId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -466,14 +466,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/auth/sign-in",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -539,14 +539,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/auth/sign-up",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -612,14 +612,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/auth/refresh-jwt-token",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -685,14 +685,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/auth/revoke-refresh-token",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -758,14 +758,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/order-handlers",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -834,14 +834,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/order-handlers/{orderHandlerId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -911,14 +911,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/customers",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -987,14 +987,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/customers/{customerId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -1059,19 +1059,19 @@
         "AuthenticationProviderKeys": []
       },
       "ChangeDownstreamPathTemplate": {},
-      "DangerousAcceptAnyServerCertificateValidator": false,
+      "DangerousAcceptAnyServerCertificateValidator": false،
       "DelegatingHandlers": [],
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/my-account/activate-account",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -1087,7 +1087,7 @@
       },
       "Key": null,
       "LoadBalancerOptions": {
-        "Expiry": 2147483647,
+        "Expiry": 2147483647،
         "Key": "",
         "Type": ""
       },
@@ -1137,14 +1137,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/my-account",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -1160,7 +1160,7 @@
       },
       "Key": null,
       "LoadBalancerOptions": {
-        "Expiry": 2147483647,
+        "Expiry": 2147483647،
         "Key": "",
         "Type": ""
       },
@@ -1213,14 +1213,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/my-account/change-password",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -1236,7 +1236,7 @@
       },
       "Key": null,
       "LoadBalancerOptions": {
-        "Expiry": 2147483647,
+        "Expiry": 2147483647،
         "Key": "",
         "Type": ""
       },
@@ -1288,14 +1288,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/my-account/change-email",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -1311,7 +1311,7 @@
       },
       "Key": null,
       "LoadBalancerOptions": {
-        "Expiry": 2147483647,
+        "Expiry": 2147483647،
         "Key": "",
         "Type": ""
       },
@@ -1363,14 +1363,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
-      "DownstreamPathTemplate": "/api/my-account/reset-password",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/auth/reset-password",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -1386,7 +1386,7 @@
       },
       "Key": null,
       "LoadBalancerOptions": {
-        "Expiry": 2147483647,
+        "Expiry": 2147483647،
         "Key": "",
         "Type": ""
       },
@@ -1436,14 +1436,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5004
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/my-account/set-password",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -1459,7 +1459,7 @@
       },
       "Key": null,
       "LoadBalancerOptions": {
-        "Expiry": 2147483647,
+        "Expiry": 2147483647،
         "Key": "",
         "Type": ""
       },
@@ -2031,157 +2031,6 @@
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
-      "DownstreamPathTemplate": "/api/cities",
-      "DownstreamScheme": "https",
-      "FileCacheOptions": {
-        "TtlSeconds": 0,
-        "Region": "",
-        "Header": null
-      },
-      "HttpHandlerOptions": {
-        "AllowAutoRedirect": false,
-        "MaxConnectionsPerServer": 2147483647,
-        "UseCookieContainer": false,
-        "UseProxy": true,
-        "UseTracing": false,
-        "PooledConnectionLifetimeSeconds": null
-      },
-      "Key": null,
-      "LoadBalancerOptions": {
-        "Expiry": 2147483647,
-        "Key": "",
-        "Type": ""
-      },
-      "Priority": 1,
-      "QoSOptions": {
-        "DurationOfBreak": 1,
-        "ExceptionsAllowedBeforeBreaking": 0,
-        "TimeoutValue": 0
-      },
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": false,
-        "Period": null,
-        "PeriodTimespan": 0.0,
-        "Limit": 0
-      },
-      "RequestIdKey": null,
-      "RouteClaimsRequirement": {
-        "Role": "Admin"
-      },
-      "RouteIsCaseSensitive": false,
-      "SecurityOptions": {
-        "IPAllowedList": [],
-        "IPBlockedList": [],
-        "ExcludeAllowedFromBlocked": false
-      },
-      "ServiceName": null,
-      "ServiceNamespace": null,
-      "Timeout": 0,
-      "UpstreamHeaderTransform": {},
-      "UpstreamHost": null,
-      "UpstreamHttpMethod": [
-        "POST"
-      ],
-      "UpstreamPathTemplate": "/foodie/cities"
-    },
-    {
-      "AddClaimsToRequest": {},
-      "AddHeadersToRequest": {},
-      "AddQueriesToRequest": {},
-      "AuthenticationOptions": {
-        "AllowedScopes": [],
-        "AuthenticationProviderKey": "ApiSecurity",
-        "AuthenticationProviderKeys": []
-      },
-      "ChangeDownstreamPathTemplate": {},
-      "DangerousAcceptAnyServerCertificateValidator": false,
-      "DelegatingHandlers": [],
-      "DownstreamHeaderTransform": {},
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5006
-        }
-      ],
-      "DownstreamHttpMethod": null,
-      "DownstreamHttpVersion": null,
-      "DownstreamPathTemplate": "/api/cities/{cityId}",
-      "DownstreamScheme": "https",
-      "FileCacheOptions": {
-        "TtlSeconds": 0,
-        "Region": "",
-        "Header": null
-      },
-      "HttpHandlerOptions": {
-        "AllowAutoRedirect": false,
-        "MaxConnectionsPerServer": 2147483647,
-        "UseCookieContainer": false,
-        "UseProxy": true,
-        "UseTracing": false,
-        "PooledConnectionLifetimeSeconds": null
-      },
-      "Key": null,
-      "LoadBalancerOptions": {
-        "Expiry": 2147483647,
-        "Key": "",
-        "Type": ""
-      },
-      "Priority": 1,
-      "QoSOptions": {
-        "DurationOfBreak": 1,
-        "ExceptionsAllowedBeforeBreaking": 0,
-        "TimeoutValue": 0
-      },
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": false,
-        "Period": null,
-        "PeriodTimespan": 0.0,
-        "Limit": 0
-      },
-      "RequestIdKey": null,
-      "RouteClaimsRequirement": {
-        "Role": "Admin"
-      },
-      "RouteIsCaseSensitive": false,
-      "SecurityOptions": {
-        "IPAllowedList": [],
-        "IPBlockedList": [],
-        "ExcludeAllowedFromBlocked": false
-      },
-      "ServiceName": null,
-      "ServiceNamespace": null,
-      "Timeout": 0,
-      "UpstreamHeaderTransform": {},
-      "UpstreamHost": null,
-      "UpstreamHttpMethod": [
-        "PUT",
-        "DELETE"
-      ],
-      "UpstreamPathTemplate": "/foodie/cities/{cityId}"
-    },
-    {
-      "AddClaimsToRequest": {},
-      "AddHeadersToRequest": {},
-      "AddQueriesToRequest": {},
-      "AuthenticationOptions": {
-        "AllowedScopes": [],
-        "AuthenticationProviderKey": null,
-        "AuthenticationProviderKeys": []
-      },
-      "ChangeDownstreamPathTemplate": {},
-      "DangerousAcceptAnyServerCertificateValidator": false,
-      "DelegatingHandlers": [],
-      "DownstreamHeaderTransform": {},
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5006
-        }
-      ],
-      "DownstreamHttpMethod": null,
-      "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/countries",
       "DownstreamScheme": "https",
       "FileCacheOptions": {
@@ -3067,14 +2916,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5006
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/restaurants",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -3140,14 +2989,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5006
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/restaurants/{restaurantId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -3213,14 +3062,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5006
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/restaurants",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",
@@ -3288,14 +3137,14 @@
       "DownstreamHeaderTransform": {},
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 5006
+          "Host": "foodie.identity.api",
+          "Port": 8080
         }
       ],
       "DownstreamHttpMethod": null,
       "DownstreamHttpVersion": null,
       "DownstreamPathTemplate": "/api/restaurants/{restaurantId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "FileCacheOptions": {
         "TtlSeconds": 0,
         "Region": "",

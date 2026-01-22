@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5055
+          "Port": 50551
         }
       ],
       "UpstreamPathTemplate": "/foodie/orders-service",
