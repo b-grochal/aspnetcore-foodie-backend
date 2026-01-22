@@ -8,8 +8,8 @@ ARG APP_GID=1000
 RUN groupadd -g $APP_GID appgroup || true \
  && useradd -m -u $APP_UID -g $APP_GID app || true
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
+EXPOSE 5000
+EXPOSE 5001
 
 
 # This stage is used to build the service project
