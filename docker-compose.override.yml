@@ -17,11 +17,11 @@ services:
   foodie.identity.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTP_PORTS=5005
       - ASPNETCORE_HTTPS_PORTS=8081
-      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_URLS=http://+:5005
     ports:
-      - "8082:8080"   # host 8082 -> container 8080 (changed to avoid port conflict)
+      - "5005:5005"   # host 8082 -> container 8080 (changed to avoid port conflict)
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "foodie.identity.api",
-          "Port": 8080
+          "Port": 5005
         }
       ],
       "UpstreamPathTemplate": "/foodie/identity-service",
