@@ -23,7 +23,7 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "environmentVariables": {
-        "ASPNETCORE_HTTPS_PORTS": "8081",
+        "ASPNETCORE_HTTPS_PORTS": "5004",
         "ASPNETCORE_HTTP_PORTS": "5005"
       },
       "publishAllPorts": true,
